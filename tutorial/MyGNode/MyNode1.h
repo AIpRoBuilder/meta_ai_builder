@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CMyGraphNode1.h
 @Time: 2021/5/4 3:57 下午
 @Desc: 

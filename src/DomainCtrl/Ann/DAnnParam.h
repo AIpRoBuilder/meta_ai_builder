@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: DAnnParam.h
 @Time: 2022/4/4 21:18
 @Desc: 

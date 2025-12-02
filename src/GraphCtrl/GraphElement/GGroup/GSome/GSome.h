@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GSome.h
 @Time: 2023/8/20 11:20
 @Desc: 

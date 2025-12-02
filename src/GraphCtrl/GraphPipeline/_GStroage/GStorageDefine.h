@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStorageDefine.h
 @Time: 2025/10/4 14:10
 @Desc: 

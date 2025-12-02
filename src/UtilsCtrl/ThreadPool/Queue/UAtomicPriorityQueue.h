@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UAtomicPriorityQueue.h
 @Time: 2022/10/1 21:40
 @Desc: 线程安全的优先队列。因为 priority_queue和queue的弹出方式不一致，故暂时不做合并

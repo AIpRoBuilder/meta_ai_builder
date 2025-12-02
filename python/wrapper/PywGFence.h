@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGFence.h
 @Time: 2025/4/11 00:05
 @Desc: 

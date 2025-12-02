@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyPrintEvent.h
 @Time: 2023/1/20 17:57
 @Desc: 

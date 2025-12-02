@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T22-Timeout
 @Time: 2025/3/30 13:53
 @Desc: 

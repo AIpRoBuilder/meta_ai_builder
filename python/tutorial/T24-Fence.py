@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T24-Fence
 @Time: 2025/4/10 00:17
 @Desc: 

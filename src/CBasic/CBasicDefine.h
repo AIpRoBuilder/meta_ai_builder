@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CBasicDefine.h
 @Time: 2021/4/26 8:15 下午
 @Desc:

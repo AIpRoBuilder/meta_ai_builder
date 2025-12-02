@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyReadParamNode.h
 @Time: 2021/6/13 3:23 下午
 @Desc: 

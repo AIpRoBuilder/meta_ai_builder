@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyMessageParam.h
 @Time: 2022/11/3 23:45
 @Desc: 

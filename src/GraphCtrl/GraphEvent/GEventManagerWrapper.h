@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GEventManagerWrapper.h
 @Time: 2023/5/17 22:02
 @Desc: 

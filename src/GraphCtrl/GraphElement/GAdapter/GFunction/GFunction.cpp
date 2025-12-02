@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GFunction.cpp
 @Time: 2023/7/1 00:13
 @Desc: 

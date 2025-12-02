@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: TestGParams.h
 @Time: 2024/1/1 16:58
 @Desc: 

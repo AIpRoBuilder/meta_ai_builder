@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UThreadBase.h
 @Time: 2021/7/2 11:24 下午
 @Desc:

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UQueueObject.h
 @Time: 2022/10/1 20:31
 @Desc: 

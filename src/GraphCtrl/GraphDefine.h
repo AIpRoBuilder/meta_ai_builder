@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GraphDefine.h
 @Time: 2023/2/22 23:32
 @Desc: 

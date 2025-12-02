@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: test-performance-04.cpp
 @Time: 2024/8/11 14:11
 @Desc: 

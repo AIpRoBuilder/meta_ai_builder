@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CException.h
 @Time: 2022/4/15 20:51
 @Desc: 异常处理类

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGEvent.h
 @Time: 2025/3/19 23:35
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GCoordinator.inl
 @Time: 2023/9/8 21:12
 @Desc:

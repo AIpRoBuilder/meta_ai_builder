@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyConnAspect.h
 @Time: 2021/10/4 12:12 下午
 @Desc: 

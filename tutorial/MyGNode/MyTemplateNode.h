@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTemplateNode.h
 @Time: 2021/9/18 9:52 下午
 @Desc:

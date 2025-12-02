@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GDaemonObject.inl
 @Time: 2022/12/18 9:36 下午
 @Desc:

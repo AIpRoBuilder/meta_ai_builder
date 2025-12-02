@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UThreadPool.inl
 @Time: 2021/7/4 1:34 下午
 @Desc:

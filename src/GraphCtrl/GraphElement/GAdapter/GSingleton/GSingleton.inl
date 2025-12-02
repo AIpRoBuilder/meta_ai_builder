@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GSingleton.cpp
 @Time: 2021/10/30 10:24 下午
 @Desc:

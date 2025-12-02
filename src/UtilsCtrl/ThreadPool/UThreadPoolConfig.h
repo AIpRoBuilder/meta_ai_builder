@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UThreadPoolConfig.h
 @Time: 2022/1/3 9:31 下午
 @Desc: 线程池配置信息

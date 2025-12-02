@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UtilsDefine.h
 @Time: 2021/4/30 8:52 下午
 @Desc: 

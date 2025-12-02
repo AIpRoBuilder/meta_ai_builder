@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGFunction.h
 @Time: 2025/4/13 18:38
 @Desc: 

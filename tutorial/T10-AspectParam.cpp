@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T10-AspectParam.cpp
 @Time: 2021/10/4 11:23 下午
 @Desc: 本例主要演示，在切面流程中加入自定义参数的逻辑

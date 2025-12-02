@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: HelloCGraphNode.h
 @Time: 2021/6/24 1:06 上午
 @Desc: 

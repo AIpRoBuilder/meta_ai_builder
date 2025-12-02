@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTimerAspect.h
 @Time: 2021/9/28 10:36 下午
 @Desc: 

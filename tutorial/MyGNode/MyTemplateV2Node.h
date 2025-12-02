@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTemplateV2Node.h
 @Time: 2024/2/1 21:51
 @Desc: 

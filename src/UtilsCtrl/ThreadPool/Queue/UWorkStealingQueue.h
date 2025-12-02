@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UWorkStealingQueue.h
 @Time: 2021/7/2 11:29 下午
 @Desc: 实现了一个包含盗取功能的安全队列

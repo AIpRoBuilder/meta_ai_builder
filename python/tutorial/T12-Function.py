@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T12-Function
 @Time: 2025/4/13 18:46
 @Desc: 

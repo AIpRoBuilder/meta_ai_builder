@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CInfoDefine.h
 @Time: 2022/4/16 14:01
 @Desc: 

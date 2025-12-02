@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T19-Cancel.cpp
 @Time: 2023/5/21 21:21
 @Desc: 本例子主要展示异步执行的逻辑，和取消执行的操作

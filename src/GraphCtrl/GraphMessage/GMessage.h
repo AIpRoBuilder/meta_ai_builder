@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMessage.h
 @Time: 2022/10/30 20:38
 @Desc: 

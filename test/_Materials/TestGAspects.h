@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: TestGAspects.h
 @Time: 2023/12/29 21:59
 @Desc: 

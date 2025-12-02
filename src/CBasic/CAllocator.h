@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CAllocator.h
 @Time: 2024/11/23 21:54
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGParallelMultiCondition.h
 @Time: 2025/4/8 00:09
 @Desc: 

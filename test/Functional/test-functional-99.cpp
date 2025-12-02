@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: test-functional-99.cpp
 @Time: 2024/1/6 16:45
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UTaskGroup.h
 @Time: 2022/1/2 2:17 下午
 @Desc: 任务组，用于批量提交

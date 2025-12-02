@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTemplateAspect.h
 @Time: 2022/12/23 22:44
 @Desc: 

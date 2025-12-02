@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T12-Function.cpp
 @Time: 2022/1/23 3:22 下午
 @Desc: 本例主要展示，通过GFunction实现节点和函数式混合编程的功能

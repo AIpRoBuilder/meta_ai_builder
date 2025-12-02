@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GraphManager.h
 @Time: 2022/2/1 5:18 下午
 @Desc: 

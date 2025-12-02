@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GFence.h
 @Time: 2023/9/6 21:54
 @Desc: 

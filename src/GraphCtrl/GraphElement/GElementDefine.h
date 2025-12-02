@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GElementDefine.h
 @Time: 2022/4/9 15:31
 @Desc: 

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T09-Aspect
 @Time: 2025/3/5 23:31
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: ThreadPoolDefine.h
 @Time: 2021/7/3 12:24 上午
 @Desc: 

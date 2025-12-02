@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: USingletonDefine.h
 @Time: 2021/10/30 5:58 下午
 @Desc: 

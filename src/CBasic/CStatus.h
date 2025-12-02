@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CStatus.h
 @Time: 2021/12/17 10:32 下午
 @Desc: 命名为 CSTATUS，直接对外提供的是 CStatus 类

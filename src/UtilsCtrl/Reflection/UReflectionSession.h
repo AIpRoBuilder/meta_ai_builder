@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UReflectionSession.h
 @Time: 2025/10/6 12:17
 @Desc: 

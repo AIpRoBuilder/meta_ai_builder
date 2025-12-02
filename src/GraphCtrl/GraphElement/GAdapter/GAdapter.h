@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GAdapter.h
 @Time: 2021/10/30 10:22 下午
 @Desc:

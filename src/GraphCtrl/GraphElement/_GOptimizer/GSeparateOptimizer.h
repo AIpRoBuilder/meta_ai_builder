@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GSeparateOptimizer.h
 @Time: 2024/3/28 22:08
 @Desc: 

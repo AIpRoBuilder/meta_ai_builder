@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T09-Aspect.cpp
 @Time: 2021/9/28 10:40 下午
 @Desc: 本例主要演示，在element中添加切面的逻辑

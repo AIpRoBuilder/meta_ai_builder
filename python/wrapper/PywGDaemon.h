@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGDaemon.h
 @Time: 2025/3/30 00:13
 @Desc: 

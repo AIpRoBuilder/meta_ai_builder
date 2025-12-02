@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CStdEx.h
 @Time: 2023/1/31 23:15
 @Desc: 

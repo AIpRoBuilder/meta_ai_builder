@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GParamObject.h
 @Time: 2021/9/29 9:23 下午
 @Desc: 

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyReadParamNode
 @Time: 2025/2/27 23:42
 @Desc: 

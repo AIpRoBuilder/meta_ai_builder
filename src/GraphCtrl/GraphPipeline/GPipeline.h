@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPipeline.h
 @Time: 2021/6/2 10:15 下午
 @Desc:

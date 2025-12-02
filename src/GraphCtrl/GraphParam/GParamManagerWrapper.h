@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GParamManagerWrap.h
 @Time: 2022/12/18 18:39
 @Desc: 本类的子类型，有获取GParam的功能

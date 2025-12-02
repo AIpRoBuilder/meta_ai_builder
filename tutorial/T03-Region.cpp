@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T03-Region.cpp
 @Time: 2021/6/7 8:58 下午
 @Desc: 本例主要演示，GRegion的使用方法，插入的元素按依赖关系执行

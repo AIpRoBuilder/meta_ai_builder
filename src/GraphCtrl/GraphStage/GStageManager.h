@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStageManager.h
 @Time: 2024/12/13 20:01
 @Desc: 

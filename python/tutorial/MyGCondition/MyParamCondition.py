@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyParamCondition
 @Time: 2025/3/2 13:49
 @Desc: 

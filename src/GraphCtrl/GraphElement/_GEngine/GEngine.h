@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GEngine.h
 @Time: 2022/12/11 16:27
 @Desc: 

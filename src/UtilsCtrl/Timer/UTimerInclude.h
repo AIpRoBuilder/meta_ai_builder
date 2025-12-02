@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UTimerInclude.h
 @Time: 2023/12/3 17:50
 @Desc: 

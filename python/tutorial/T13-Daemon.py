@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T13-Daemon
 @Time: 2025/3/30 00:46
 @Desc: 

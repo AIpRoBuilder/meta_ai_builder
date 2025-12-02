@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyWriteParamNode.h
 @Time: 2021/6/13 3:22 下午
 @Desc: 

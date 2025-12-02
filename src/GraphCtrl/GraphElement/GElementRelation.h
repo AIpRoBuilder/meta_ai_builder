@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GElementRelation.h
 @Time: 2023/5/24 23:15
 @Desc: 

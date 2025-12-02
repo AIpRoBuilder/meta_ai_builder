@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMessageManager.h
 @Time: 2022/10/30 20:48
 @Desc: 信息管理类

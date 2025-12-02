@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyMutable.h
 @Time: 2023/11/15 21:22
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UTaskInclude.h
 @Time: 2022/1/12 9:34 下午
 @Desc: 

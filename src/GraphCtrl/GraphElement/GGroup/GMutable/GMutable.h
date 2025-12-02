@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMutable.h
 @Time: 2023/11/13 22:21
 @Desc: 

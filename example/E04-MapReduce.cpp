@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: E04-MapReduce.cpp
 @Time: 2024/1/26 22:58
 @Desc: 

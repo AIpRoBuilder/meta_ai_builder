@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CBasicInclude.h
 @Time: 2022/2/1 4:23 下午
 @Desc: 

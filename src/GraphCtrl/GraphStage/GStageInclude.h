@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStageInclude.h
 @Time: 2024/12/15 16:52
 @Desc: 

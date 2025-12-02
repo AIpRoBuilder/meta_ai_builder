@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T18-Event
 @Time: 2025/3/22 00:21
 @Desc: 

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyPyNode2
 @Time: 2025/2/21 23:48
 @Desc: 

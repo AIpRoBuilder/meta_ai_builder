@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: DAnnNode.cpp
 @Time: 2022/4/4 23:49
 @Desc: 

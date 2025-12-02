@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GScheduleInclude.h
 @Time: 2023/3/25 21:08
 @Desc: 

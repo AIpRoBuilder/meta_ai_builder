@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGSerialMultiCondition.h
 @Time: 2025/4/8 00:05
 @Desc: 

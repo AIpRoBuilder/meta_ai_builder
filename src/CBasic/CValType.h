@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CValTypes.h
 @Time: 2022/2/3 12:58 下午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T11-Singleton.cpp
 @Time: 2021/10/30 10:32 下午
 @Desc: 本例主要展示，通过添加GSingleton添加的节点，均是同一个节点（指针地址相同）

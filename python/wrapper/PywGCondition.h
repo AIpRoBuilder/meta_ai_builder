@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGConditiion.h
 @Time: 2025/1/30 21:38
 @Desc: 

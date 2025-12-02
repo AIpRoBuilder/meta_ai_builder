@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T14-Hold.cpp
 @Time: 2022/4/6 23:46
 @Desc: 本例子主要展示，在MyHoldNode添加isHold()方法，来决定当前节点是否继续执行

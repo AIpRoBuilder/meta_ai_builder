@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GAspectDefine.h
 @Time: 2021/10/3 9:44 上午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PyWrapperDefine.h
 @Time: 2025/4/6 14:48
 @Desc: 

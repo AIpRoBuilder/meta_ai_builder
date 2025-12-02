@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyNode2.h
 @Time: 2021/5/4 4:09 下午
 @Desc: 

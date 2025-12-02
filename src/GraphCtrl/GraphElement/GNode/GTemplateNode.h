@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GTemplateNode.h
 @Time: 2022/12/24 12:21
 @Desc: 

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T27-Trim
 @Time: 2025/5/1 20:32
 @Desc: 

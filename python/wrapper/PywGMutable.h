@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGMutable.h
 @Time: 2025/4/8 23:19
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GTrimOptimizer.h
 @Time: 2024/9/1 13:59
 @Desc: 

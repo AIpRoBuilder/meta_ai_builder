@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UCosineDistance.h
 @Time: 2023/1/25 23:17
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: E01-AutoPilot.cpp
 @Time: 2023/9/15 20:03
 @Desc: 本example主要展示，Camera 每隔1000ms，采集一张图片

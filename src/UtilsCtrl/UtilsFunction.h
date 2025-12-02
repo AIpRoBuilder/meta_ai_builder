@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UtilsFunction.h
 @Time: 2022/1/26 11:27 下午
 @Desc: 

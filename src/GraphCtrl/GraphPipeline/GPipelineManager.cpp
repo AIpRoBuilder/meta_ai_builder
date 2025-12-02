@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPipelineManager.cpp
 @Time: 2023/1/15 13:27
 @Desc: 

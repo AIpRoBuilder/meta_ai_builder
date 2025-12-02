@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GFunction.h
 @Time: 2022/1/22 11:45 下午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MySendMessageNode.h
 @Time: 2022/12/27 00:05
 @Desc: 

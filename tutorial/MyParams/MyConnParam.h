@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyConnParam.h
 @Time: 2021/10/4 11:58 上午
 @Desc: 

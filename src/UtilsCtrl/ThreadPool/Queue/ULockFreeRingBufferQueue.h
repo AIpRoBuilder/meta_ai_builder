@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: ULockFreeRingBufferQueue.h
 @Time: 2023/10/7 21:35
 @Desc: 

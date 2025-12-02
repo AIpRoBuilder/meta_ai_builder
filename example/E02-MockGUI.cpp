@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: E02-MockGUI.cpp
 @Time: 2023/9/16 21:22
 @Desc: 本example主要展示，在不修改之前任何功能（node中的逻辑）的情况下，

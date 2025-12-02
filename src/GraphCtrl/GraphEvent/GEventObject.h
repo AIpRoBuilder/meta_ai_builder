@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GEventObject.h
 @Time: 2023/1/20 23:09
 @Desc: 

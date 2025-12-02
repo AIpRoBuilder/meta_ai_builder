@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UtilsObject.h
 @Time: 2021/9/19 12:00 上午
 @Desc: 

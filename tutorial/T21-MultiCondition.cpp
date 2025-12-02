@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T21-MultiCondition.cpp
 @Time: 2023/8/18 21:57
 @Desc: 本例子主要展示 多条件(组) 的执行逻辑

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTemplateNode
 @Time: 2025/4/2 00:02
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CStruct.h
 @Time: 2023/7/16 11:36
 @Desc: 

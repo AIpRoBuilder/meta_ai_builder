@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UDistance.inl
 @Time: 2022/4/2 00:18
 @Desc:

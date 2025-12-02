@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GNodeInclude.h
 @Time: 2021/6/15 2:52 下午
 @Desc: 

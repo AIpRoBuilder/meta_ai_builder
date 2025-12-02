@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyEventNode.h
 @Time: 2023/1/20 18:31
 @Desc: 

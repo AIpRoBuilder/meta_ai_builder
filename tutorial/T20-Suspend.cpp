@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T20-Suspend.cpp
 @Time: 2023/6/24 15:08
 @Desc: 本例子主要展示异步执行的逻辑中，如何暂停和恢复执行pipeline的功能

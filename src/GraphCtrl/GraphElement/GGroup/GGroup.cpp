@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GGroup.cpp
 @Time: 2022/10/16 01:06
 @Desc: 

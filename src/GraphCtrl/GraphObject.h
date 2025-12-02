@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GraphObject.h
 @Time: 2021/10/2 9:58 下午
 @Desc: 

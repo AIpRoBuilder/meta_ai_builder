@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UQueueInclude.h
 @Time: 2022/1/12 11:09 下午
 @Desc: 

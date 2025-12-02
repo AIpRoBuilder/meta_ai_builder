@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStorageFactory.cpp
 @Time: 2025/10/4 22:09
 @Desc: 

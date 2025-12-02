@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UAtomicQueue.h
 @Time: 2021/7/2 11:28 下午
 @Desc: 设计了一个安全队列

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T19-Cancel
 @Time: 2025/3/28 22:57
 @Desc: 

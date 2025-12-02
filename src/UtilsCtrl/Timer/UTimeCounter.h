@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UTimeCounter.h
 @Time: 2023/12/3 17:49
 @Desc: 

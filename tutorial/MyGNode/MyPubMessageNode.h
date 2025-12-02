@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyPubMessageNode.h
 @Time: 2022/11/4 00:02
 @Desc: 

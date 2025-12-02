@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTimerAspect
 @Time: 2025/3/5 23:38
 @Desc: 

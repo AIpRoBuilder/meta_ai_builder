@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UThreadPrimary.h
 @Time: 2021/7/8 11:02 下午
 @Desc: 核心线程，处理任务中

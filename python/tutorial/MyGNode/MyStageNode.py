@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyStageNode
 @Time: 2025/4/4 01:16
 @Desc: 

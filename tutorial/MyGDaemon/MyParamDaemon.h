@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyParamDaemon.h
 @Time: 2022/2/3 5:13 下午
 @Desc: 

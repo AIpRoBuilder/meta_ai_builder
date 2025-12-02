@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GCondition.cpp
 @Time: 2021/6/19 5:00 下午
 @Desc: 

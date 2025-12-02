@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GEventManager.inl
 @Time: 2023/1/17 22:56
 @Desc:

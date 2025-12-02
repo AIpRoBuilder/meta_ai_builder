@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyShowAddressNode.h
 @Time: 2021/10/31 12:50 上午
 @Desc: 

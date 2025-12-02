@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: SingletonProc.h
 @Time: 2021/6/11 7:06 下午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UCvMutex.h
 @Time: 2024/12/13 20:27
 @Desc: 

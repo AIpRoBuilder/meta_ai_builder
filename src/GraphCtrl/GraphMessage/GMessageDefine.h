@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMessageDefine.h
 @Time: 2022/12/24 22:16
 @Desc: 

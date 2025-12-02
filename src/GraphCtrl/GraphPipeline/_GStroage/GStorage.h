@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStorage.h
 @Time: 2025/10/4 13:54
 @Desc: support cpp17 and upper only

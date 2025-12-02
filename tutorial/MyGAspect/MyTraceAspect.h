@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTraceAspect.h
 @Time: 2021/9/29 10:51 下午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyHoldNode.h
 @Time: 2022/4/6 21:19
 @Desc: 

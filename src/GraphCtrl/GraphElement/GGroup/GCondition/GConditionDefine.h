@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GConditionDefine.h
 @Time: 2023/6/17 19:24
 @Desc: 

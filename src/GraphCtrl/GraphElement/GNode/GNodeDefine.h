@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GNodeDefine.h
 @Time: 2022/1/24 9:56 下午
 @Desc: 

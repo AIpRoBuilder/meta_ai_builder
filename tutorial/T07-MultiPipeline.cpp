@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T07-MultiPipeline.cpp
 @Time: 2021/8/27 8:44 下午
 @Desc: 本例主要演示，多个pipeline同时执行的情况

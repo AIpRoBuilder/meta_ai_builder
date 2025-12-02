@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GTopoEngine.cpp
 @Time: 2024/1/20 21:56
 @Desc: 

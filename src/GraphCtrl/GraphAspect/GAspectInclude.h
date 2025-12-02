@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GAspectInclude.h
 @Time: 2021/10/2 9:48 下午
 @Desc: 

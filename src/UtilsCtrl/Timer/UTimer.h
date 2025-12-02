@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UTimer.h
 @Time: 2021/12/31 8:34 下午
 @Desc: 

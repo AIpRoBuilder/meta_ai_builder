@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PyWrapperInclude.h
 @Time: 2025/1/30 21:46
 @Desc: 

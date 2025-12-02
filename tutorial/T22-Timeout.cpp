@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T22-Timeout.cpp
 @Time: 2023/8/23 22:26
 @Desc: 本例主要演示，设定节点超时(timeout)逻辑，针对group同样可以设置

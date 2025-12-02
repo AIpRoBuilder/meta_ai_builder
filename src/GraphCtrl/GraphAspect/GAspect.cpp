@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GAspect.cpp
 @Time: 2023/9/2 17:40
 @Desc: 

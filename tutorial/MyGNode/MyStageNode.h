@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyStageNode.h
 @Time: 2024/12/15 18:46
 @Desc: 

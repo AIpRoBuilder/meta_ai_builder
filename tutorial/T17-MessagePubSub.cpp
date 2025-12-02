@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T17-Message-PubSub.cpp
 @Time: 2022/12/27 00:19
 @Desc: 本例子主要展示，通过 GMessageParam 在pipeline之间通过sub pub的方式传递

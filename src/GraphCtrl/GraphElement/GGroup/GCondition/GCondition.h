@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GCondition.h
 @Time: 2021/6/19 5:00 下午
 @Desc: 实现在多个element中，选择一个执行的功能

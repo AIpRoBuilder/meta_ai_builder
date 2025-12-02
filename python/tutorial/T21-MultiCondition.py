@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T21-MultiCondition
 @Time: 2025/3/7 23:52
 @Desc: 

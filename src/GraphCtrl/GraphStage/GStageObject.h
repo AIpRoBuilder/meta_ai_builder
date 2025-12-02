@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStageObject.h
 @Time: 2024/12/14 11:26
 @Desc: 

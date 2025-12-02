@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: ULockInclude.h
 @Time: 2023/2/21 22:19
 @Desc: 

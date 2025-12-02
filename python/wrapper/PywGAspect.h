@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGAspect.h
 @Time: 2025/3/5 23:06
 @Desc: 

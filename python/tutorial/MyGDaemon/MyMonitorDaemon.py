@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyMonitorDaemon
 @Time: 2025/3/30 00:49
 @Desc: 

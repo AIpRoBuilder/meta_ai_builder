@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPipelineFactory.cpp
 @Time: 2021/6/23 10:25 下午
 @Desc: 

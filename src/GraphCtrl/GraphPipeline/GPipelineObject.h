@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPipelineObject.h
 @Time: 2023/1/12 23:12
 @Desc: 

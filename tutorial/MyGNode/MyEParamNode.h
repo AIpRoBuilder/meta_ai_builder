@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyEParamNode.h
 @Time: 2022/5/29 22:37
 @Desc: 

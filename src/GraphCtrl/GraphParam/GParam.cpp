@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GParam.cpp
 @Time: 2023/2/20 22:11
 @Desc: 

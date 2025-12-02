@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GCluster.h
 @Time: 2021/6/1 10:14 下午
 @Desc: 实现多个element，线性执行的功能

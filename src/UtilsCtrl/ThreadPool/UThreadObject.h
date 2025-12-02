@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CThreadObject.h
 @Time: 2021/7/2 10:39 下午
 @Desc: 

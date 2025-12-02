@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: USemaphore.h
 @Time: 2023/10/9 22:01
 @Desc: 

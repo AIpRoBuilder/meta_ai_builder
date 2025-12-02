@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GElementSorter.h
 @Time: 2022/5/1 11:55
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GGroupInclude.h
 @Time: 2021/6/15 1:55 下午
 @Desc: 

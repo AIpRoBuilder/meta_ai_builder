@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPerf.cpp
 @Time: 2023/7/29 22:38
 @Desc: 

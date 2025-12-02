@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMultiCondition.h
 @Time: 2023/6/17 19:21
 @Desc: 

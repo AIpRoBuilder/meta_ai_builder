@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CDescInfo.h
 @Time: 2023/2/19 15:56
 @Desc: 通用描述信息

@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyConnApsect
 @Time: 2025/3/30 21:13
 @Desc: 

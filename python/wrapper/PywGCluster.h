@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGCluster.h
 @Time: 2025/4/6 19:00
 @Desc: 

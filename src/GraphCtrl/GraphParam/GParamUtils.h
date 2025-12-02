@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GParamUtils.h
 @Time: 2022/11/1 23:37
 @Desc:

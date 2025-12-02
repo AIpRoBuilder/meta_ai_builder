@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UThreadPool.cpp
 @Time: 2022/10/3 17:31
 @Desc: 

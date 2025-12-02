@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: E03-ThirdFlow.cpp
 @Time: 2023/9/22 20:35
 @Desc: 本example主要展示，常见的三流模型，使用CGraph如何表示

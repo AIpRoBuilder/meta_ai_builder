@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyTemplateDaemon.h
 @Time: 2022/12/24 00:14
 @Desc: 

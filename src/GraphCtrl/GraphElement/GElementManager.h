@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GElementManager.h
 @Time: 2021/6/2 10:33 下午
 @Desc:

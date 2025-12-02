@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGPipelineDeleter.h
 @Time: 2025/4/19 12:37
 @Desc: 

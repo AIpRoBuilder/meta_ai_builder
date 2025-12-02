@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyCondition.h
 @Time: 2021/6/19 10:17 下午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GNode.cpp
 @Time: 2022/3/28 23:14
 @Desc: 

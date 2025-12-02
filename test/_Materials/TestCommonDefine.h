@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: TestCommonDefine.h
 @Time: 2023/12/29 22:00
 @Desc: 

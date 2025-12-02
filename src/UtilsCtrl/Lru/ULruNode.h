@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: ULruNode.h
 @Time: 2021/9/19 12:17 上午
 @Desc: 

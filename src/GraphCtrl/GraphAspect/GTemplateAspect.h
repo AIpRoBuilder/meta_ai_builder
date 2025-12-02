@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GTemplateAspect.h
 @Time: 2022/12/23 22:01
 @Desc: 用于生成可变构造参数的切面

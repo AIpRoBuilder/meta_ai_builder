@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T18-Event.cpp
 @Time: 2023/1/20 17:55
 @Desc: 本例子主要展示触发Event功能

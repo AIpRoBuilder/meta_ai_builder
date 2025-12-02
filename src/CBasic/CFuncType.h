@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CFuncType.h
 @Time: 2022/2/3 1:05 下午
 @Desc: 

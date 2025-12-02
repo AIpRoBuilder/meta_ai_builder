@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: DAnnObject.h
 @Time: 2022/4/4 21:17
 @Desc: 所有的Ann抽象接口类

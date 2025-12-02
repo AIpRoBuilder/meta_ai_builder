@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyVersionParam.h
 @Time: 2022/5/29 22:29
 @Desc: 

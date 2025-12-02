@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T07-MultiPipeline
 @Time: 2025/4/1 23:37
 @Desc: 

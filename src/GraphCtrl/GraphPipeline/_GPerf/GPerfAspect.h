@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPerfAspect.h
 @Time: 2023/7/29 23:28
 @Desc: 

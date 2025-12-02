@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GStage.cpp
 @Time: 2024/12/28 23:02
 @Desc: 

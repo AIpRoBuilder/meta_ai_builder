@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UDistanceInclude.h
 @Time: 2022/4/2 00:18
 @Desc: 

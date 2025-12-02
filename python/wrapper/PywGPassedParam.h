@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PywGPassedParam.h
 @Time: 2025/3/22 13:22
 @Desc: 

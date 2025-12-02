@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: USmallVector.h
 @Time: 2024/8/4 10:20
 @Desc: 

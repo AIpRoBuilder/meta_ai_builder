@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GDaemonInclude.h
 @Time: 2022/2/2 10:09 下午
 @Desc: 

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GPassedParam.h
 @Time: 2021/10/4 1:47 下午
 @Desc: 

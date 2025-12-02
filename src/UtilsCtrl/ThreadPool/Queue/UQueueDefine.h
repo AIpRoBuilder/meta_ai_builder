@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UQueueDefine.h
 @Time: 2023/9/15 21:31
 @Desc: 

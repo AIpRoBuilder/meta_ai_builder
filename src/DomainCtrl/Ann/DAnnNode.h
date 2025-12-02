@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: DAnnNode.h
 @Time: 2022/4/4 21:17
 @Desc: ann领域算子模型抽象

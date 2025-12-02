@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMessageManagerSingleton.h
 @Time: 2023/9/23 00:47
 @Desc:

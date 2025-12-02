@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyMonitorDaemon.h
 @Time: 2022/2/3 12:08 下午
 @Desc: 

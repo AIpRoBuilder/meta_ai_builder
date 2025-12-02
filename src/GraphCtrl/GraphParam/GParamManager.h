@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GParamManager.h
 @Time: 2021/6/11 6:59 下午
 @Desc: 

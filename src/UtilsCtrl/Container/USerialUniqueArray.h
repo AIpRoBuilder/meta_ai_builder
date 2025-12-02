@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: USerialUniqueArray.h
 @Time: 2023/2/27 23:35
 @Desc: 

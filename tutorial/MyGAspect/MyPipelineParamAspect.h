@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: MyPipelineParamAspect.h
 @Time: 2021/10/5 11:48 上午
 @Desc: 

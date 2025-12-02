@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: DomainObject.h
 @Time: 2022/4/4 21:16
 @Desc: Domain类型通用方法，无实际逻辑意义

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: URandomDefine.h
 @Time: 2022/5/14 11:46
 @Desc: 

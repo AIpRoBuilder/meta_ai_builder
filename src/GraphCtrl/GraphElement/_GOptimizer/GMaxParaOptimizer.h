@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GMaxParaOptimizer.h
 @Time: 2023/5/12 23:58
 @Desc: 

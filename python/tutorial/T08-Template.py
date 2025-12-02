@@ -1,6 +1,5 @@
 """
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T08-Template
 @Time: 2025/4/2 00:01
 @Desc:

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GOptimizer.h
 @Time: 2024/4/7 21:27
 @Desc: 

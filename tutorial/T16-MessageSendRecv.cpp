@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T16-Message.cpp
 @Time: 2022/11/3 23:48
 @Desc: 本例子主要展示，通过 GMessageParam 在pipeline之间传递参数

@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T25-Coordinator.cpp
 @Time: 2023/9/8 22:01
 @Desc: 本例主要演示，通过 GCoordinator 在pipeline执行的过程中，修改辅助线程数

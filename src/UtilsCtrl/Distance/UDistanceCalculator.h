@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UDistanceCalculator.h
 @Time: 2022/4/1 23:48
 @Desc: 用于距离计算的类，支持自定义扩展

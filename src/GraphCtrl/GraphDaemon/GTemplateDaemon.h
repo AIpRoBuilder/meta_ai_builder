@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: GTemplateDaemon.h
 @Time: 2022/12/23 23:39
 @Desc: 

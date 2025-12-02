@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: UAtomicRingBufferQueue.h
 @Time: 2022/10/22 22:32
 @Desc: 本 queue 仅支持单入单出模式

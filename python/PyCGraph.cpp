@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: PyCGraph.cpp
 @Time: 2025/1/30 21:43
 @Desc:

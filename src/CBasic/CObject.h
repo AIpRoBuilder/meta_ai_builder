@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: CObject.h
 @Time: 2021/4/26 8:12 下午
 @Desc: 所有类型的父节点，其中run()方法必须实现

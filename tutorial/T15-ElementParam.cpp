@@ -1,6 +1,5 @@
 /***************************
-@Author: Chunel
-@Contact: chunel@foxmail.com
+
 @File: T15-EParam.cpp
 @Time: 2022/5/29 22:29
 @Desc: 本例子主要展示，向 MyEParamNode 节点中，传递特定参数，并在节点执行时候打印的逻辑
