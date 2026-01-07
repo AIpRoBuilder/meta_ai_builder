@@ -18,6 +18,15 @@ public:
     }
 
     ~PywGCluster() override = default;
+
+    CGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GCluster, clone);
+    }
+
+protected:
+    std::string getClassName() const override {
+        return this->getName();
+    }
 };
 
 PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGCluster, ;);

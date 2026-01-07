@@ -17,6 +17,15 @@ protected:
     CStatus run() override {
         PYBIND11_OVERLOAD_PURE(CStatus, GElement, run);
     }
+
+    std::string getClassName() const override {
+        return this->getName();
+    }
+
+public:
+    GElement* clone() const override {
+        PYBIND11_OVERLOAD(GElement*, GElement, clone);
+    }
 };
 
 #endif //CGRAPH_PYWGELEMENT_H

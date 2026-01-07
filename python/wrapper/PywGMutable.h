@@ -23,6 +23,15 @@ public:
     CStatus reshape(CGraph::GElementPtrArr& elements) override {
         PYBIND11_OVERLOAD_PURE(CStatus, PywGMutable, reshape, elements);
     }
+
+    CGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GMutable, clone);
+    }
+
+protected:
+    std::string getClassName() const override {
+        return this->getName();
+    }
 };
 
 PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGMutable,

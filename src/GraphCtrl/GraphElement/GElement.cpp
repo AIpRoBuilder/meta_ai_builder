@@ -203,6 +203,10 @@ CStatus GElement::addManagers(GParamManagerPtr paramManager,
     CGRAPH_FUNCTION_END
 }
 
+GElement* GElement::clone() const {
+    return nullptr;   // default: no factory-based cloning; override in subclasses if needed
+}
+
 
 CStatus GElement::doAspect(const internal::GAspectType& aspectType, const CStatus& curStatus) {
     CGRAPH_FUNCTION_BEGIN

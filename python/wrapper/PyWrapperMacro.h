@@ -9,6 +9,7 @@
 #define CGRAPH_PYWRAPPERDEFINE_H
 
 #include <pybind11/pybind11.h>
+#include <typeinfo>
 
 #include "CGraph.h"
 
@@ -27,6 +28,18 @@
                                                             \
     CStatus checkRunResult() override {                     \
         PYBIND11_OVERLOAD(CStatus, PCGE, checkRunResult);   \
+    }                                                       \
+                                                            \
+    std::string getClassName() const override {             \
+        const auto& n = this->getName();                    \
+        if (!n.empty()) {                                   \
+            return n;                                       \
+        }                                                   \
+        return std::string(typeid(*this).name());           \
+    }                                                       \
+                                                            \
+    CGraph::GElement* clone() const override {              \
+        PYBIND11_OVERLOAD(CGraph::GElement*, PCGE, clone);  \
     }                                                       \
                                                             \
 

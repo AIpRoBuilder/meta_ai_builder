@@ -16,6 +16,15 @@ public:
     explicit PywGFunction() = default;
 
     ~PywGFunction() override = default;
+
+    CGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GFunction, clone);
+    }
+
+protected:
+    std::string getClassName() const override {
+        return this->getName();
+    }
 };
 
 #endif //CGRAPH_PYWGFUNCTION_H

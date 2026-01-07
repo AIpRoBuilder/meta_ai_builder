@@ -9,6 +9,8 @@
 #include "_GPerf/GPerfInclude.h"
 #include "_GStroage/GStorageInclude.h"
 #include "../GraphElement/_GOptimizer/GOptimizerInclude.h"
+#include "../../nlohmann/json.hpp"
+#include <fstream>
 
 CGRAPH_NAMESPACE_BEGIN
 
@@ -155,6 +157,22 @@ CStatus GPipeline::registerGGroup(GElementPPtr groupRef, const GElementPtrSet &d
 }
 
 
+CStatus GPipeline::registerGElement(GElementPtr currentElement,
+                                    const GElementPtrSet& dependsSet,
+                                    const std::string& name,
+                                    CSize loop) {
+    CGRAPH_FUNCTION_BEGIN
+    CGRAPH_ASSERT_INIT(false)
+    CGRAPH_ASSERT_NOT_NULL(currentElement)
+
+    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(currentElement->isRegistered(), "element register duplicate")
+    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != currentElement->belong_, "element already has belong")
+
+    status = innerRegister(currentElement, dependsSet, name, loop);
+    CGRAPH_FUNCTION_END
+}
+
+
 std::future<CStatus> GPipeline::asyncRun(std::launch policy) {
     /**
      * 1. 确认当前pipeline已经初始化完毕
@@ -165,6 +183,92 @@ std::future<CStatus> GPipeline::asyncRun(std::launch policy) {
     return std::async(policy, [this] {
         return run();
     });
+}
+
+CStatus GPipeline::buildFromJson(const std::string& jsonPath) {
+    CStatus status;
+
+    // Read and parse the JSON file
+    std::ifstream jsonFile(jsonPath);
+    if (!jsonFile.is_open()) {
+        std::cerr << "Failed to open JSON file: " << jsonPath << std::endl;
+        return CStatus("Failed to open JSON file");
+    }
+
+    nlohmann::json graphJson;
+    try {
+        jsonFile >> graphJson;
+    } catch (const std::exception& e) {
+        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+        return CStatus("Error parsing JSON");
+    }
+
+    /**
+     * 支持的 JSON 结构示例：
+     * {
+     *   "nodes": [
+     *     {"name":"A", "type":"MyNode", "enable":true, "loop":1, "depends":["B","C"]},
+     *     {"name":"B", "type":"Other", "enable":true}
+     *   ]
+     * }
+     * type 对应 GElement 注册的类名，name 是实例名。
+     */
+
+    if (!graphJson.contains("nodes") || !graphJson["nodes"].is_array()) {
+        return CStatus("JSON must contain array 'nodes'");
+    }
+
+    std::unordered_map<std::string, GElementPtr> created;
+
+    // 1) 创建全部节点实例
+    for (const auto& node : graphJson["nodes"]) {
+
+        const std::string name = node.value("name", "");
+        const std::string type = node.value("type", "");
+        const CSize loop = node.value("loop", (CSize)1);
+
+        if (name.empty() || type.empty()) {
+            return CStatus("node missing name or type");
+        }
+
+        if (created.count(name)) {
+            return CStatus("duplicate node name: " + name);
+        }
+
+        GElementPtr element = GElement::create(type);
+        if (!element) {
+            return CStatus("factory create failed: " + type);
+        }
+
+        created[name] = element;
+        created[name]->setName(name)->setLoop(loop);
+    }
+
+    // 2) 注册到 pipeline，处理依赖
+    for (const auto& node : graphJson["nodes"]) {
+
+        const std::string name = node.value("name", "");
+        GElementPtr element = created[name];
+
+        GElementPtrSet depends;
+        if (node.contains("depends")) {
+            for (const auto& depName : node["depends"]) {
+                const std::string dep = depName.get<std::string>();
+                auto it = created.find(dep);
+                if (it == created.end()) {
+                    return CStatus("depend not found: " + dep);
+                }
+                depends.insert(it->second);
+            }
+        }
+
+        status = this->registerGElement(element, depends, name, element->getLoop());
+        if (status.isErr()) {
+            return status;
+        }
+    }
+
+    return status;
 }
 
 

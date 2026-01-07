@@ -1,0 +1,12 @@
+{
+    "nodes": [
+        {"name": "A",
+        "type": "MyNode", 
+        "enable": true, 
+        "loop": 1, 
+        "depends": ["B", "C"]
+        },
+        {"name": "C", "type": "MyNode", "enable": true, "loop": 2, "depends": ["B"]},
+        {"name": "B", "type": "OtherNode", "enable": true }
+  ]
+}

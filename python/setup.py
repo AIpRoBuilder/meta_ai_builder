@@ -50,6 +50,7 @@ setup(
     url=__PYCGRAPH_URL__,
     license=__PYCGRAPH_LICENSE__,
     ext_modules=_ext_modules,
+    packages=['pycgraph_tools'],
     zip_safe=False,
     long_description=__PYCGRAPH_LONG_DESCRIPTION__,
     long_description_content_type="text/markdown",

@@ -13,6 +13,12 @@
 #include <string>
 #include <atomic>
 #include <algorithm>
+#include <memory>
+#include <functional>
+#include <unordered_map>
+#include <mutex>
+#include <type_traits>
+#include <typeinfo>
 
 #include "GElementDefine.h"
 #include "GElementObject.h"
@@ -180,6 +186,52 @@ public:
     GElement& operator&(GElement* element);
     GElement& operator*(CSize loop) noexcept;
 
+public:  /*** 全局注册相关接口 ***/
+    using GElementCreator = std::function<GElement*()>;
+
+    /**
+     * 自动推导类名：优先使用子类的 staticClassName()，否则使用 typeid 名称
+     */
+    template<typename T>
+    static std::string defaultClassName();
+
+    /**
+     * 手动注册：传入类名和自定义构造器
+     */
+    static bool registerClass(const std::string& name, GElementCreator creator);
+
+    /**
+     * 模板注册：默认使用 defaultClassName 推导类名
+     */
+    template<typename T>
+    static bool registerClass(const std::string& name = defaultClassName<T>());
+
+    /**
+     * 根据类名创建实例
+     */
+    static GElement* create(const std::string& name);
+
+    /**
+     * 获取当前所有已注册的类名
+     */
+    static std::vector<std::string> registeredClasses();
+
+    /**
+     * 查询类名是否已注册
+     */
+    static bool isRegistered(const std::string& name);
+
+    /**
+     * 子类使用的自动注册助手（程序启动时注册）
+     */
+    template<typename T>
+    class AutoRegistrar {
+    public:
+        explicit AutoRegistrar(const std::string& name = GElement::defaultClassName<T>()) {
+            GElement::registerClass<T>(name);
+        }
+    };
+
 protected:
     /**
      * 构造函数
@@ -262,6 +314,20 @@ protected:
 /** 使用者请勿复写private中的函数 **/
 /********************************/
 private:
+    template<typename T>
+    struct HasStaticClassName {
+        template<typename X>
+        static auto test(int) -> decltype(std::string(X::staticClassName()), std::true_type{});
+        template<typename>
+        static std::false_type test(...);
+        static constexpr bool value = decltype(test<T>(0))::value;
+    };
+
+    using RegistryMap = std::unordered_map<std::string, GElementCreator>;
+
+    static RegistryMap& registry();
+    static std::mutex& registryMutex();
+
     /**
      * 恢复运行最初的信息
      * @return
@@ -511,11 +577,66 @@ private:
     CGRAPH_DECLARE_GSTAGE_MANAGER_WRAPPER_WITH_MEMBER
 
 public:
+    virtual std::string getClassName() const = 0;
+    /**
+     * 创建同类型的新实例（默认不支持，需子类自行覆盖）
+     */
+    virtual GElement* clone() const;
     GElement* __addGAspect_4py(GAspectPtr aspect);
     CStatus __enterStage_4py(const std::string& key);
     CBool __isTimeout_4py();
     std::string __str_4py();
 };
+
+template<typename T>
+std::string GElement::defaultClassName() {
+    if constexpr (HasStaticClassName<T>::value) {
+        return std::string(T::staticClassName());
+    }
+    return std::string(typeid(T).name());
+}
+
+inline GElement::RegistryMap& GElement::registry() {
+    static RegistryMap registry;
+    return registry;
+}
+
+inline std::mutex& GElement::registryMutex() {
+    static std::mutex mutex;
+    return mutex;
+}
+
+inline bool GElement::registerClass(const std::string& name, GElementCreator creator) {
+    std::lock_guard<std::mutex> lock(registryMutex());
+    registry()[name] = std::move(creator);
+    return true;
+}
+
+template<typename T>
+bool GElement::registerClass(const std::string& name) {
+    return registerClass(name, [] { return new(std::nothrow) T(); });
+}
+
+inline GElement* GElement::create(const std::string& name) {
+    std::lock_guard<std::mutex> lock(registryMutex());
+    auto iter = registry().find(name);
+    return iter == registry().end() ? nullptr : iter->second();
+}
+
+inline std::vector<std::string> GElement::registeredClasses() {
+    std::lock_guard<std::mutex> lock(registryMutex());
+    std::vector<std::string> names;
+    names.reserve(registry().size());
+    for (const auto& item : registry()) {
+        names.emplace_back(item.first);
+    }
+    return names;
+}
+
+inline bool GElement::isRegistered(const std::string& name) {
+    std::lock_guard<std::mutex> lock(registryMutex());
+    return registry().find(name) != registry().end();
+}
 
 using GElementRef = GElement &;
 using GElementCRef = const GElement &;
@@ -525,6 +646,9 @@ using GElementPPtr = GElementPtr *;
 using GElementPtrArr = std::vector<GElementPtr>;
 using GElementPtrMat2D = std::vector<GElementPtrArr>;
 using GElementPtrSet = std::set<GElementPtr>;
+
+#define CGRAPH_AUTO_REGISTER_GELEMENT(Derived) \
+    namespace { ::CGraph::GElement::AutoRegistrar<Derived> _cgraph_auto_registrar_##Derived; }
 
 CGRAPH_NAMESPACE_END
 

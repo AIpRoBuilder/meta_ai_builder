@@ -144,11 +144,11 @@ public:
      * @param info
      * @return
      */
-    CSTATUS* setInfo(int code, const std::string& info) {
-        error_code_ = code;
-        error_info_ = (STATUS_OK == error_code_) ? CGRAPH_EMPTY : info;
-        return this;
-    }
+    // CSTATUS* setInfo(int code, const std::string& info) {
+    //     error_code_ = code;
+    //     error_info_ = (STATUS_OK == error_code_) ? CGRAPH_EMPTY : info;
+    //     return this;
+    // }
 
     /**
      * 设置异常信息

@@ -11,6 +11,7 @@
 #include "CBasic/CBasicInclude.h"
 #include "GraphCtrl/GraphInclude.h"
 #include "UtilsCtrl/UtilsInclude.h"
+#include "nlohmann/json.hpp"
 #include "DomainCtrl/DomainInclude.h"
 
 #endif //CGRAPH_CGRAPH_H

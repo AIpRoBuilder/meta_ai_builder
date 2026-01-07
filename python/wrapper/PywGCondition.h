@@ -23,6 +23,15 @@ public:
     CIndex choose() override {
         PYBIND11_OVERLOAD_PURE(CIndex, PywGCondition, choose);
     }
+
+    CGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GCondition, clone);
+    }
+
+protected:
+    std::string getClassName() const override {
+        return this->getName();
+    }
 };
 
 PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGCondition,

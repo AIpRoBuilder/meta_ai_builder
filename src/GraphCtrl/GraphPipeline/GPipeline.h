@@ -211,6 +211,8 @@ public:
                           const std::string &name = CGRAPH_EMPTY,
                           CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
 
+    CStatus buildFromJson(const std::string& jsonPath);
+
     /**
      * 注册一个组信息（推荐使用）
      * @param groupRef
@@ -223,6 +225,14 @@ public:
                            const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
                            const std::string &name = CGRAPH_EMPTY,
                            CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+
+        /**
+         * 直接传入已创建的 element 指针注册
+         */
+        CStatus registerGElement(GElementPtr currentElement,
+                                                         const GElementPtrSet& dependsSet = std::initializer_list<GElementPtr>(),
+                                                         const std::string& name = CGRAPH_EMPTY,
+                                                         CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 注册function类型的内容，模板特化

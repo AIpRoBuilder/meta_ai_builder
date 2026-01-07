@@ -18,6 +18,15 @@ public:
     };
 
     ~PywGParallelMultiCondition() override = default;
+
+    CGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GMultiCondition<CGraph::GMultiConditionType::PARALLEL>, clone);
+    }
+
+protected:
+    std::string getClassName() const override {
+        return this->getName();
+    }
 };
 
 PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGParallelMultiCondition, ;);

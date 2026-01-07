@@ -16,8 +16,7 @@ using namespace CGraph;
 namespace py = pybind11;
 
 PYBIND11_MODULE(pycgraph, cg) {
-    cg.doc() = "CGraph with python api, github: https://github.com/ChunelFeng/CGraph";
-
+    cg.doc() = "CGraph with python api";
     py::class_<UThreadPoolConfig>(cg, "UThreadPoolConfig")
         .def(py::init<>())
         .def_readwrite("default_thread_size", &UThreadPoolConfig::default_thread_size_)
@@ -181,6 +180,9 @@ PYBIND11_MODULE(pycgraph, cg) {
              py::arg("ptr"),
              py::call_guard<py::gil_scoped_release>(),
              py::keep_alive<1, 2>())
+        .def("buildFromJson", &GPipeline::buildFromJson,
+             py::arg("jsonPath"),
+             py::call_guard<py::gil_scoped_release>())
         .def("setGEngineType", &GPipeline::setGEngineType,
              py::arg("type"))
         .def("run", &GPipeline::run,
@@ -253,9 +255,28 @@ PYBIND11_MODULE(pycgraph, cg) {
              py::arg("ptr"),
              py::call_guard<py::gil_scoped_release>());
 
-    py::class_<GElement, PywGElement, std::unique_ptr<GElement, py::nodelete> >(cg, "GElement")
+    py::class_<GElement, PywGElement, std::unique_ptr<GElement, py::nodelete> > gElementPy(cg, "GElement");
+    gElementPy
         .def(py::init<>())
+        .def("run", &GElement::run,
+             py::call_guard<py::gil_scoped_release>())
         .def("__str__", &GElement::__str_4py)
+        .def_static("registerClass", [](const std::string& name, py::function creator) {
+            // Store the creator function, prevent GC
+            creator.inc_ref();
+            return GElement::registerClass(name, [creator]() -> GElement* {
+                py::gil_scoped_acquire acquire;
+                py::object obj = creator();
+                GElement* ptr = obj.cast<GElement*>();
+                // prevent python garbage collection of the returned object
+                obj.inc_ref();
+                return ptr;
+            });
+        }, py::arg("name"), py::arg("creator"))
+        .def_static("create", &GElement::create,
+             py::arg("name"),
+             py::return_value_policy::reference)
+        .def_static("registeredClasses", &GElement::registeredClasses)
         .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GElement)
         .PYCGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GElement)
         .def("enterStage", &GElement::__enterStage_4py,
@@ -289,7 +310,9 @@ PYBIND11_MODULE(pycgraph, cg) {
         .def("addDependGElements", &GElement::addDependGElements,
              py::arg("elements"))
         .def("removeDepend", &GElement::removeDepend,
-             py::arg("element"));
+             py::arg("element"))
+        .def("clone", &GElement::clone,
+             py::return_value_policy::take_ownership);
 
     py::class_<GNode, PywGNode, GElement, std::unique_ptr<GNode, py::nodelete> >(cg, "GNode")
         .def(py::init<const std::string&, int>(),
@@ -298,7 +321,9 @@ PYBIND11_MODULE(pycgraph, cg) {
         .def(py::init<const GElementPtrSet&, const std::string&, int>(),
              py::arg("depends") = GElementPtrSet{},
              py::arg("name") = CGRAPH_EMPTY,
-             py::arg("loop") = CGRAPH_DEFAULT_LOOP_TIMES);
+             py::arg("loop") = CGRAPH_DEFAULT_LOOP_TIMES)
+        .def("run", &GNode::run,
+             py::call_guard<py::gil_scoped_release>());
 
     py::class_<GFence, PywGFence, GElement, std::unique_ptr<GFence, py::nodelete> >(cg, "GFence")
         .def(py::init<>())
