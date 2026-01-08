@@ -620,7 +620,7 @@ bool GElement::registerClass(const std::string& name) {
 inline GElement* GElement::create(const std::string& name) {
     std::lock_guard<std::mutex> lock(registryMutex());
     auto iter = registry().find(name);
-    return iter == registry().end() ? nullptr : iter->second();
+    return iter == registry().end() ? nullptr : iter->second()->clone();
 }
 
 inline std::vector<std::string> GElement::registeredClasses() {

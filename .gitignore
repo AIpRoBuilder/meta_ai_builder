@@ -1,0 +1,7 @@
+*.o
+*.so
+bazel*
+*.pyc
+python/pycgraph*
+python/dist/
+python/build/*
