@@ -6,17 +6,17 @@
 """
 
 import glob
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 import pybind11
 
 __PYCGRAPH_NAME__ = "pycgraph"
-__PYCGRAPH_VERSION__ = "3.2.2"
-__PYCGRAPH_AUTHOR__ = "Chunel"
-__PYCGRAPH_AUTHOR_EMAIL__ = "chunel@foxmail.com"
+__PYCGRAPH_VERSION__ = "3.5.1"
+__PYCGRAPH_AUTHOR__ = "peterxie"
+__PYCGRAPH_AUTHOR_EMAIL__ = "peterxcx@gmail.com"
 __PYCGRAPH_DESCRIPTION__ = "CGraph with python api wrapper by pybind11"
-__PYCGRAPH_URL__ = "https://github.com/ChunelFeng/CGraph"
+__PYCGRAPH_URL__ = "https://github.com/peterxie/CGraph"
 __PYCGRAPH_LICENSE__ = "MIT"
-__PYCGRAPH_LONG_DESCRIPTION__ = 'You can get everything in CGraph github main page : [CGraph](https://github.com/ChunelFeng/CGraph)'
+__PYCGRAPH_LONG_DESCRIPTION__ = 'You can get everything in CGraph github main page : [CGraph](https://github.com/peterxie/CGraph)'
 __PYCGRAPH_KEYWORDS__ = [__PYCGRAPH_NAME__,
                          "CGraph",
                          "dag",
@@ -34,12 +34,16 @@ _include_dirs = [pybind11.get_include(),
                  "../src"]
 _ext_modules = [
     Extension(
-        name=__PYCGRAPH_NAME__,
+        name=f"{__PYCGRAPH_NAME__}._core",
         sources=_sources,
         extra_compile_args=_extra_compile_args,
         include_dirs=_include_dirs,
     ),
 ]
+
+_packages = find_packages(where=".",
+                          include=["pycgraph", "pycgraph.*", "pycgraph_tools"],
+                          exclude=["build*", "dist*", "*.egg-info", "__pycache__"])
 
 setup(
     name=__PYCGRAPH_NAME__,
@@ -50,7 +54,8 @@ setup(
     url=__PYCGRAPH_URL__,
     license=__PYCGRAPH_LICENSE__,
     ext_modules=_ext_modules,
-    packages=['pycgraph_tools'],
+    packages=_packages,
+    package_dir={"": "."},
     zip_safe=False,
     long_description=__PYCGRAPH_LONG_DESCRIPTION__,
     long_description_content_type="text/markdown",

@@ -2,6 +2,6 @@
 *.so
 bazel*
 *.pyc
-python/pycgraph*
+python/pycgraph.egg-info/
 python/dist/
 python/build/*

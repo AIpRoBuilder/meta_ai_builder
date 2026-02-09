@@ -129,6 +129,17 @@ if __name__ == '__main__':
     pipeline.process()
 ```
 
+JSON-based pipeline building (Python helper)
+-------------------------------------------
+You can build a pipeline using a JSON file describing elements and dependencies. See `python/tutorial/json_examples/example1.json` and `python/tutorial/T30-JSON.py` for a small example.
+
+Example usage (from `python` dir):
+```bash
+python tutorial/T30-JSON.py
+```
+
+Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`, `belong`, and `children`).
+
 > <b>其他版本</b>
 
 * [CsCGraph](https://github.com/ChunelFeng/CsCGraph) : A CSharp native, CGraph-API-liked DAG project

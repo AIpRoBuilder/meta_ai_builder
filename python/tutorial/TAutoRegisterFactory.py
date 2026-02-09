@@ -1,5 +1,4 @@
-from pycgraph import GElement, GNode,GPipeline, CStatus
-from pycgraph_tools.auto_register import register, register_class
+from pycgraph import GElement, GNode, GPipeline, CStatus, register, register_class
 import copy
 
 
