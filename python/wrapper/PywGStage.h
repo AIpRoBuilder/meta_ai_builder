@@ -5,22 +5,22 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGSTAGE_H
-#define CGRAPH_PYWGSTAGE_H
+#ifndef DAOGRAPH_PYWGSTAGE_H
+#define DAOGRAPH_PYWGSTAGE_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGStage : public CGraph::GStage {
+class PywGStage : public DaoGraph::GStage {
 public:
     explicit PywGStage() = default;
     ~PywGStage() override = default;
 
 protected:
-    CVoid launch(CGraph::GStageParamPtr param) override {
+    CVoid launch(DaoGraph::GStageParamPtr param) override {
         PYBIND11_OVERLOAD(CVoid, GStage, launch, param);
     }
 };
 
-#endif //CGRAPH_PYWGSTAGE_H
+#endif //DAOGRAPH_PYWGSTAGE_H

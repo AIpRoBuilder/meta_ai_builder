@@ -5,23 +5,23 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GMULTICONDITION_INL
-#define CGRAPH_GMULTICONDITION_INL
+#ifndef DAOGRAPH_GMULTICONDITION_INL
+#define DAOGRAPH_GMULTICONDITION_INL
 
 #include "GMultiCondition.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<GMultiConditionType type>
 GMultiCondition<type>::GMultiCondition() {
     element_type_ = GElementType::MULTI_CONDITION;
-    session_ = URandom<>::generateSession(CGRAPH_STR_MULTI_CONDITION);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_MULTI_CONDITION);
 }
 
 
 template<GMultiConditionType type>
 CStatus GMultiCondition<type>::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     switch (type) {
         case GMultiConditionType::SERIAL:
@@ -31,32 +31,32 @@ CStatus GMultiCondition<type>::run() {
             status = parallelRun();
             break;
         default:
-            CGRAPH_RETURN_ERROR_STATUS("unknown multi condition type")
+            DAOGRAPH_RETURN_ERROR_STATUS("unknown multi condition type")
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 template<GMultiConditionType type>
 CStatus GMultiCondition<type>::serialRun() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (auto cur: this->group_elements_arr_) {
         if (cur->isMatch()) {
             // 仅依次执行 match 的逻辑
             status = cur->fatProcessor(CFunctionType::RUN);
-            CGRAPH_FUNCTION_CHECK_STATUS
+            DAOGRAPH_FUNCTION_CHECK_STATUS
         }
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 template<GMultiConditionType type>
 CStatus GMultiCondition<type>::parallelRun() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     std::vector<std::future<CStatus> > futures;
     for (GElementPtr cur : this->group_elements_arr_) {
         if (!cur->isMatch()) {
@@ -76,14 +76,14 @@ CStatus GMultiCondition<type>::parallelRun() {
         status += fut.get();
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 template<GMultiConditionType type>
 CIndex GMultiCondition<type>::choose() {
     // GMultiCondition 是不可能执行到 choose()方法的。这里直接抛出异常好了
-    CGRAPH_THROW_EXCEPTION("GMultiCondition no need choose function")
+    DAOGRAPH_THROW_EXCEPTION("GMultiCondition no need choose function")
     return 0;
 }
 
@@ -115,11 +115,11 @@ CBool GMultiCondition<type>::isSeparate(GElementCPtr a, GElementCPtr b) const {
             result = false;
             break;
         default:
-            CGRAPH_THROW_EXCEPTION("unknown multi condition type in isSeparateWith function")
+            DAOGRAPH_THROW_EXCEPTION("unknown multi condition type in isSeparateWith function")
     }
     return result;
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMULTICONDITION_INL
+#endif //DAOGRAPH_GMULTICONDITION_INL

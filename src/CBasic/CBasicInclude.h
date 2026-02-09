@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_CBASICINCLUDE_H
-#define CGRAPH_CBASICINCLUDE_H
+#ifndef DAOGRAPH_CBASICINCLUDE_H
+#define DAOGRAPH_CBASICINCLUDE_H
 
 #include "CObject.h"
 #include "CValType.h"
@@ -20,4 +20,4 @@
 #include "CStruct.h"
 #include "CAllocator.h"
 
-#endif //CGRAPH_CBASICINCLUDE_H
+#endif //DAOGRAPH_CBASICINCLUDE_H

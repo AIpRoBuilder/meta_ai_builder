@@ -5,13 +5,13 @@
 @Desc: ann领域算子模型抽象
 ***************************/
 
-#ifndef CGRAPH_DANNNODE_H
-#define CGRAPH_DANNNODE_H
+#ifndef DAOGRAPH_DANNNODE_H
+#define DAOGRAPH_DANNNODE_H
 
 #include "DAnnDefine.h"
 #include "DAnnObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class DAnnNode : public DAnnObject, public GNode {
 protected:
@@ -80,7 +80,7 @@ protected:
      */
     explicit DAnnNode();
 
-    CGRAPH_NO_ALLOWED_COPY(DAnnNode)
+    DAOGRAPH_NO_ALLOWED_COPY(DAnnNode)
 
     /**
      * 分拆执行函数
@@ -93,6 +93,6 @@ private:
     DAnnNodeFuncPtr ann_func_arr_[static_cast<CUInt>(DAnnFuncType::ANN_MAX_SIZE)]{};    // ann函数映射关系
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_DANNNODE_H
+#endif //DAOGRAPH_DANNNODE_H

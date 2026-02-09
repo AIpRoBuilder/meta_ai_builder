@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GELEMENT_H
-#define CGRAPH_GELEMENT_H
+#ifndef DAOGRAPH_GELEMENT_H
+#define DAOGRAPH_GELEMENT_H
 
 #include <set>
 #include <vector>
@@ -24,7 +24,7 @@
 #include "GElementObject.h"
 #include "GElementRelation.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 enum class GMultiConditionType;
 struct GPerfInfo;
@@ -291,7 +291,7 @@ protected:
     /**
      * 获取执行线程对应的信息
      * @return
-     * @notice 启动线程返回-1（CGRAPH_MAIN_THREAD_ID），辅助线程返回-2（CGRAPH_SECONDARY_THREAD_COMMON_ID），主线程返回 线程index
+     * @notice 启动线程返回-1（DAOGRAPH_MAIN_THREAD_ID），辅助线程返回-2（DAOGRAPH_SECONDARY_THREAD_COMMON_ID），主线程返回 线程index
      */
     CIndex getThreadIndex();
 
@@ -308,7 +308,7 @@ protected:
      */
     CIndex getBindingIndex() const;
 
-    CGRAPH_NO_ALLOWED_COPY(GElement);
+    DAOGRAPH_NO_ALLOWED_COPY(GElement);
 
 /********************************/
 /** 使用者请勿复写private中的函数 **/
@@ -424,7 +424,7 @@ private:
      * @return
     */
     CVoid dumpEdge(std::ostream& oss, GElement* src, GElement* dst,
-                   const std::string& label = CGRAPH_EMPTY);
+                   const std::string& label = DAOGRAPH_EMPTY);
 
     /**
      * graphviz dump 点逻辑
@@ -518,10 +518,10 @@ private:
     internal::GElementShape shape_ { internal::GElementShape::NORMAL };       // 元素位置类型
 
     /** 配置相关信息 */
-    CSize loop_ { CGRAPH_DEFAULT_LOOP_TIMES };                                // 元素执行次数
-    CLevel level_ { CGRAPH_DEFAULT_ELEMENT_LEVEL };                           // 用于设定init的执行顺序(值小的，优先init，可以为负数)
-    CIndex binding_index_ { CGRAPH_DEFAULT_BINDING_INDEX };                   // 用于设定绑定线程id
-    CMSec timeout_ { CGRAPH_DEFAULT_ELEMENT_TIMEOUT };                        // 超时时间信息（0表示不计算超时）
+    CSize loop_ { DAOGRAPH_DEFAULT_LOOP_TIMES };                                // 元素执行次数
+    CLevel level_ { DAOGRAPH_DEFAULT_ELEMENT_LEVEL };                           // 用于设定init的执行顺序(值小的，优先init，可以为负数)
+    CIndex binding_index_ { DAOGRAPH_DEFAULT_BINDING_INDEX };                   // 用于设定绑定线程id
+    CMSec timeout_ { DAOGRAPH_DEFAULT_ELEMENT_TIMEOUT };                        // 超时时间信息（0表示不计算超时）
     GElementTimeoutStrategy timeout_strategy_ { GElementTimeoutStrategy::AS_ERROR };    // 判定超时的情况下，是否返回错误
     CBool is_marco_ { false };                                                // 微任务
 
@@ -572,9 +572,9 @@ private:
     friend class GStorage;
     friend struct _GElementStorage;
 
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER_WITH_MEMBER
-    CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER_WITH_MEMBER
-    CGRAPH_DECLARE_GSTAGE_MANAGER_WRAPPER_WITH_MEMBER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER_WITH_MEMBER
+    DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER_WITH_MEMBER
+    DAOGRAPH_DECLARE_GSTAGE_MANAGER_WRAPPER_WITH_MEMBER
 
 public:
     virtual std::string getClassName() const = 0;
@@ -647,11 +647,11 @@ using GElementPtrArr = std::vector<GElementPtr>;
 using GElementPtrMat2D = std::vector<GElementPtrArr>;
 using GElementPtrSet = std::set<GElementPtr>;
 
-#define CGRAPH_AUTO_REGISTER_GELEMENT(Derived) \
-    namespace { ::CGraph::GElement::AutoRegistrar<Derived> _cgraph_auto_registrar_##Derived; }
+#define DAOGRAPH_AUTO_REGISTER_GELEMENT(Derived) \
+    namespace { ::DaoGraph::GElement::AutoRegistrar<Derived> _daograph_auto_registrar_##Derived; }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GElement.inl"
 
-#endif //CGRAPH_GELEMENT_H
+#endif //DAOGRAPH_GELEMENT_H

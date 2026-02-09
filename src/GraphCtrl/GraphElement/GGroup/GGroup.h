@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GGROUP_H
-#define CGRAPH_GGROUP_H
+#ifndef DAOGRAPH_GGROUP_H
+#define DAOGRAPH_GGROUP_H
 
 #include <vector>
 
 #include "GGroupDefine.h"
 #include "../GElement.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 /* 所有节点组合的基类，所有节点组合功能，均继承自此类 */
 class GGroup : public GElement {
@@ -89,6 +89,6 @@ public:
 
 using GGroupPtr = GGroup *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GGROUP_H
+#endif //DAOGRAPH_GGROUP_H

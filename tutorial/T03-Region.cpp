@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_region() {
     CStatus status;
@@ -34,7 +34,7 @@ void tutorial_region() {
     }
 
     status = pipeline->process();
-    CGRAPH_ECHO("pipeline process status is : [%d]", status.getCode());
+    DAOGRAPH_ECHO("pipeline process status is : [%d]", status.getCode());
 
     /**
      * 如果想查看pipeline内部，各部分(element)的运行耗时情况，

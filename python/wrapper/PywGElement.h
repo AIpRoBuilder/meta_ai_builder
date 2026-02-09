@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGELEMENT_H
-#define CGRAPH_PYWGELEMENT_H
+#ifndef DAOGRAPH_PYWGELEMENT_H
+#define DAOGRAPH_PYWGELEMENT_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGElement : public CGraph::GElement {
+class PywGElement : public DaoGraph::GElement {
 protected:
     CStatus run() override {
         PYBIND11_OVERLOAD_PURE(CStatus, GElement, run);
@@ -28,4 +28,4 @@ public:
     }
 };
 
-#endif //CGRAPH_PYWGELEMENT_H
+#endif //DAOGRAPH_PYWGELEMENT_H

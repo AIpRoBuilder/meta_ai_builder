@@ -5,14 +5,14 @@
 @Desc: 线程安全的优先队列。因为 priority_queue和queue的弹出方式不一致，故暂时不做合并
 ***************************/
 
-#ifndef CGRAPH_UATOMICPRIORITYQUEUE_H
-#define CGRAPH_UATOMICPRIORITYQUEUE_H
+#ifndef DAOGRAPH_UATOMICPRIORITYQUEUE_H
+#define DAOGRAPH_UATOMICPRIORITYQUEUE_H
 
 #include <queue>
 
 #include "UQueueObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T>
 class UAtomicPriorityQueue : public UQueueObject {
@@ -68,7 +68,7 @@ public:
      */
     CVoid push(T&& value, int priority) {
         std::unique_ptr<T> task(c_make_unique<T>(std::move(value), priority));
-        CGRAPH_LOCK_GUARD lk(mutex_);
+        DAOGRAPH_LOCK_GUARD lk(mutex_);
         priority_queue_.push(std::move(task));
     }
 
@@ -78,16 +78,16 @@ public:
      * @return
      */
     CBool empty() {
-        CGRAPH_LOCK_GUARD lk(mutex_);
+        DAOGRAPH_LOCK_GUARD lk(mutex_);
         return priority_queue_.empty();
     }
 
-    CGRAPH_NO_ALLOWED_COPY(UAtomicPriorityQueue)
+    DAOGRAPH_NO_ALLOWED_COPY(UAtomicPriorityQueue)
 
 private:
     std::priority_queue<std::unique_ptr<T> > priority_queue_;    // 优先队列信息，根据重要级别决定先后执行顺序
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UATOMICPRIORITYQUEUE_H
+#endif //DAOGRAPH_UATOMICPRIORITYQUEUE_H

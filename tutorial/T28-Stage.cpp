@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyStageNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_stage() {
     GPipelinePtr pipeline = GPipelineFactory::create();

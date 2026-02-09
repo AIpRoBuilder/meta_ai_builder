@@ -7,7 +7,7 @@
 
 #include "GAspectManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GAspectManager::GAspectManager() {
     aspect_arr_ = {};
@@ -21,7 +21,7 @@ GAspectManager::~GAspectManager() {
 
 CStatus GAspectManager::reflect(const internal::GAspectType &type,
                                 const CStatus &curStatus) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (GAspectPtr aspect : aspect_arr_) {
         switch (type) {
@@ -57,18 +57,18 @@ CStatus GAspectManager::reflect(const internal::GAspectType &type,
                 status = CStatus("unknown aspect type");
         }
 
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GAspectManager::add(GAspectPtr aspect) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(aspect)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(aspect)
     aspect_arr_.emplace_back(aspect);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -79,29 +79,29 @@ CSize GAspectManager::getSize() const {
 
 
 CStatus GAspectManager::clear() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     for (GAspectPtr aspect: aspect_arr_) {
-        CGRAPH_DELETE_PTR(aspect)
+        DAOGRAPH_DELETE_PTR(aspect)
     }
 
     aspect_arr_.clear();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GAspectManager::popLast() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(0 == getSize(), "no aspect to pop")
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(0 == getSize(), "no aspect to pop")
 
     auto *last = aspect_arr_.back();
-    CGRAPH_DELETE_PTR(last);
+    DAOGRAPH_DELETE_PTR(last);
     aspect_arr_.pop_back();    // 弹出最后一个
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CVoidPtr GAspectManager::setGParamManager(GParamManagerPtr pm) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(pm)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(pm)
     for (auto *cur: aspect_arr_) {
         cur->setGParamManager(pm);
     }
@@ -110,7 +110,7 @@ CVoidPtr GAspectManager::setGParamManager(GParamManagerPtr pm) {
 
 
 CVoidPtr GAspectManager::setGEventManager(GEventManagerPtr em) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(em)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(em)
     for (auto *cur : aspect_arr_) {
         cur->setGEventManager(em);
     }
@@ -118,11 +118,11 @@ CVoidPtr GAspectManager::setGEventManager(GEventManagerPtr em) {
 }
 
 CVoidPtr GAspectManager::setBelong(GElement* belong) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(belong)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(belong)
     for (auto *cur : aspect_arr_) {
         cur->belong_ = belong;
     }
     return this;
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

@@ -13,7 +13,7 @@
 #include "MyGAspect/MyTimerAspect.h"
 #include "MyGAspect/MyPipelineParamAspect.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_aspect_param() {
     GPipelinePtr pipeline = GPipelineFactory::create();

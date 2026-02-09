@@ -5,33 +5,33 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGPARAM_H
-#define CGRAPH_PYWGPARAM_H
+#ifndef DAOGRAPH_PYWGPARAM_H
+#define DAOGRAPH_PYWGPARAM_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGParam : public CGraph::GParam {
+class PywGParam : public DaoGraph::GParam {
 public:
     ~PywGParam() override = default;
 
 protected:
     CStatus init() override {
-        PYBIND11_OVERLOAD(CStatus, CGraph::GParam, init);
+        PYBIND11_OVERLOAD(CStatus, DaoGraph::GParam, init);
     }
 
     CStatus destroy() override {
-        PYBIND11_OVERLOAD(CStatus, CGraph::GParam, destroy);
+        PYBIND11_OVERLOAD(CStatus, DaoGraph::GParam, destroy);
     }
 
     CStatus setup() override {
-        PYBIND11_OVERLOAD(CStatus, CGraph::GParam, setup);
+        PYBIND11_OVERLOAD(CStatus, DaoGraph::GParam, setup);
     }
 
     CVoid reset(const CStatus& curStatus) override {
-        PYBIND11_OVERLOAD(CVoid, CGraph::GParam, reset, curStatus);
+        PYBIND11_OVERLOAD(CVoid, DaoGraph::GParam, reset, curStatus);
     }
 };
 
-#endif //CGRAPH_PYWGPARAM_H
+#endif //DAOGRAPH_PYWGPARAM_H

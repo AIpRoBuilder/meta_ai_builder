@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GEVENTMANAGER_H
-#define CGRAPH_GEVENTMANAGER_H
+#ifndef DAOGRAPH_GEVENTMANAGER_H
+#define DAOGRAPH_GEVENTMANAGER_H
 
 #include <string>
 #include <unordered_map>
@@ -15,7 +15,7 @@
 #include "GEvent.h"
 #include "../GraphManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GEventManager : public GEventObject,
                       public GraphManager<GEvent> {
@@ -65,7 +65,7 @@ protected:
 
     CStatus reset() final;
 
-    CGRAPH_NO_ALLOWED_COPY(GEventManager)
+    DAOGRAPH_NO_ALLOWED_COPY(GEventManager)
 
 private:
     std::unordered_map<std::string, GEventPtr> events_map_ {};    // event 管理类
@@ -80,8 +80,8 @@ private:
 
 using GEventManagerPtr = GEventManager *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GEventManager.inl"
 
-#endif //CGRAPH_GEVENTMANAGER_H
+#endif //DAOGRAPH_GEVENTMANAGER_H

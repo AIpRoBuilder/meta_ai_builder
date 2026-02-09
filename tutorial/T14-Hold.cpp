@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyHoldNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_hold() {
     GPipelinePtr pipeline = GPipelineFactory::create();

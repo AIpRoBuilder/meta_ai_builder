@@ -5,21 +5,21 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_URANDOMDEFINE_H
-#define CGRAPH_URANDOMDEFINE_H
+#ifndef DAOGRAPH_URANDOMDEFINE_H
+#define DAOGRAPH_URANDOMDEFINE_H
 
 #include <random>
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-using CGRAPH_RANDOM_MT19937 = std::mt19937;                // 梅森旋转法
-using CGRAPH_RANDOM_MINSTD_RAND = std::minstd_rand;        // 线性同余法
-using CGRAPH_RANDOM_RANLUX24_BASE = std::ranlux24_base;    // 滞后Fibonacci
+using DAOGRAPH_RANDOM_MT19937 = std::mt19937;                // 梅森旋转法
+using DAOGRAPH_RANDOM_MINSTD_RAND = std::minstd_rand;        // 线性同余法
+using DAOGRAPH_RANDOM_RANLUX24_BASE = std::ranlux24_base;    // 滞后Fibonacci
 
-const static CInt CGRAPH_REAL_RANDOM = 0;
+const static CInt DAOGRAPH_REAL_RANDOM = 0;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_URANDOMDEFINE_H
+#endif //DAOGRAPH_URANDOMDEFINE_H

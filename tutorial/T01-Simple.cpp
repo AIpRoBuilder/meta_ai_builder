@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_simple() {
     /* 创建图对应的pipeline */
@@ -26,7 +26,7 @@ void tutorial_simple() {
     status += pipeline->registerGElement<MyNode1>(&c, {a}, "nodeC");
     status += pipeline->registerGElement<MyNode2>(&d, {b, c}, "nodeD");    // 将名为nodeD，依赖{b,c}执行的node信息，注册入pipeline中
     if (!status.isOK()) {
-        return;    // 使用时，请对所有CGraph接口的返回值做判定。今后tutorial例子中省略该操作。
+        return;    // 使用时，请对所有DaoGraph接口的返回值做判定。今后tutorial例子中省略该操作。
     }
 
     /**
@@ -42,7 +42,7 @@ void tutorial_simple() {
     /* 运行流图信息。初始化后，支持多次循环计算 */
     for (int i = 0; i < 3; i++) {
         status += pipeline->run();
-        CGRAPH_ECHO("==== tutorial_simple, loop : [%d], and run status = [%d].", i + 1, status.getCode());
+        DAOGRAPH_ECHO("==== tutorial_simple, loop : [%d], and run status = [%d].", i + 1, status.getCode());
     }
 
     /* 图信息逆初始化，准备结束计算 */

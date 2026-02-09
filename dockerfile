@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 LABEL maintainer=woodx<woodx9@163.com>
 
-ENV CGRAPH_PATH /home/CGraph
-WORKDIR $CGRAPH_PATH
+ENV DAOGRAPH_PATH /home/DaoGraph
+WORKDIR $DAOGRAPH_PATH
 
 RUN apt-get -y upgrade
 RUN apt-get -y update

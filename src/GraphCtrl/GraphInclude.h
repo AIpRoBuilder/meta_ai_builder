@@ -5,8 +5,8 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GRAPHINCLUDE_H
-#define CGRAPH_GRAPHINCLUDE_H
+#ifndef DAOGRAPH_GRAPHINCLUDE_H
+#define DAOGRAPH_GRAPHINCLUDE_H
 
 #include "GraphElement/GElementInclude.h"
 #include "GraphPipeline/GPipelineInclude.h"
@@ -17,4 +17,4 @@
 #include "GraphStage/GStageInclude.h"
 #include "GraphMessage/GMessageInclude.h"
 
-#endif //CGRAPH_GRAPHINCLUDE_H
+#endif //DAOGRAPH_GRAPHINCLUDE_H

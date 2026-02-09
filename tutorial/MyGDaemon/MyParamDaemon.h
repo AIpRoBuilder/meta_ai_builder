@@ -5,23 +5,23 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYPARAMDAEMON_H
-#define CGRAPH_MYPARAMDAEMON_H
+#ifndef DAOGRAPH_MYPARAMDAEMON_H
+#define DAOGRAPH_MYPARAMDAEMON_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "../MyParams/MyParam.h"
 #include "../MyParams/MyConnParam.h"
 
-class MyParamDaemon : public CGraph::GDaemon {
+class MyParamDaemon : public DaoGraph::GDaemon {
 public:
-    CVoid daemonTask(CGraph::GDaemonParamPtr param) override {
+    CVoid daemonTask(DaoGraph::GDaemonParamPtr param) override {
         /**
          * 从注册的pipeline中获取参数信息
          * 注意，这里是GParam类型
          */
-        auto* myParam = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(MyParam, "param1")
+        auto* myParam = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(MyParam, "param1")
         // 根据实际情况，选择不上锁，或者上读/写锁
-        CGraph::CGRAPH_ECHO("----> [MyParamDaemon] iCount is [%d], just suppose this value is show on dashboard every [%ld] ms",
+        DaoGraph::DAOGRAPH_ECHO("----> [MyParamDaemon] iCount is [%d], just suppose this value is show on dashboard every [%ld] ms",
                             myParam->iCount, this->getInterval());
 
         /**
@@ -31,14 +31,14 @@ public:
         auto connParam = dynamic_cast<MyConnParam *>(param);
         if (connParam) {
             // 对应有参数传入的分支
-            CGraph::CGRAPH_ECHO("----> [MyParamDaemon] input param, address is [%s : %d]",
+            DaoGraph::DAOGRAPH_ECHO("----> [MyParamDaemon] input param, address is [%s : %d]",
                                 connParam->ip_.c_str(), connParam->port_);
         } else {
             // 对应无参数传入的分支
-            CGraph::CGRAPH_ECHO("----> [MyParamDaemon] no input param info.");
+            DaoGraph::DAOGRAPH_ECHO("----> [MyParamDaemon] no input param info.");
         }
     }
 };
 
 
-#endif //CGRAPH_MYPARAMDAEMON_H
+#endif //DAOGRAPH_MYPARAMDAEMON_H

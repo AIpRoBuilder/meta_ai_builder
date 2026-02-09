@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSCHEDULE_H
-#define CGRAPH_GSCHEDULE_H
+#ifndef DAOGRAPH_GSCHEDULE_H
+#define DAOGRAPH_GSCHEDULE_H
 
 #include "../../GraphObject.h"
 #include "GScheduleDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GSchedule : public GraphObject {
 private:
@@ -48,6 +48,6 @@ private:
     friend class GStorage;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSCHEDULE_H
+#endif //DAOGRAPH_GSCHEDULE_H

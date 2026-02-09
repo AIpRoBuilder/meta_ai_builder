@@ -7,7 +7,7 @@
 
 #include "../_Materials/TestInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void test_performance_03() {
     // 简单dag场景，对应第三个例子，2thread，dag，100w次

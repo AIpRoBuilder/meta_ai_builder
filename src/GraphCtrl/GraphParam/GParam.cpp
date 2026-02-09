@@ -7,10 +7,10 @@
 
 #include "GParam.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 std::vector<std::string> GParam::getBacktrace() {
-    CGRAPH_THROW_EXCEPTION_BY_CONDITION(!backtrace_enable_,    \
+    DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(!backtrace_enable_,    \
                                         "no enable backtrace for [" + key_ + "] param")
 
     std::vector<std::string> traces;
@@ -23,8 +23,8 @@ std::vector<std::string> GParam::getBacktrace() {
 
 
 CStatus GParam::addBacktrace(const std::string& trace) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!backtrace_enable_,    \
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!backtrace_enable_,    \
                                             "no enable backtrace for [" + key_ + "] param")
 
     // 如果name不为空，则添加name信息。如果name为空，则添加session信息
@@ -32,7 +32,7 @@ CStatus GParam::addBacktrace(const std::string& trace) {
     backtrace_.uniqueAdd(trace);
     backtrace_lock_.unlock();
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -53,7 +53,7 @@ std::string GParam::getKey() const {
 
 
 CStatus GParam::setup() {
-    CGRAPH_EMPTY_FUNCTION
+    DAOGRAPH_EMPTY_FUNCTION
 }
 
 
@@ -75,4 +75,4 @@ CBool GParam::tryLock() {
     return _param_shared_lock_.try_lock();
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

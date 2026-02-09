@@ -6,14 +6,14 @@
 ***************************/
 
 
-#ifndef CGRAPH_UWORKSTEALINGQUEUE_H
-#define CGRAPH_UWORKSTEALINGQUEUE_H
+#ifndef DAOGRAPH_UWORKSTEALINGQUEUE_H
+#define DAOGRAPH_UWORKSTEALINGQUEUE_H
 
 #include <deque>
 
 #include "UQueueObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T>
 class UWorkStealingQueue : public UQueueObject {
@@ -29,7 +29,7 @@ public:
                 mutex_.unlock();
                 break;
             } else {
-                CGRAPH_YIELD();
+                DAOGRAPH_YIELD();
             }
         }
     }
@@ -82,7 +82,7 @@ public:
                 mutex_.unlock();
                 break;
             } else {
-                CGRAPH_YIELD();
+                DAOGRAPH_YIELD();
             }
         }
     }
@@ -171,12 +171,12 @@ public:
 
     UWorkStealingQueue() = default;
 
-    CGRAPH_NO_ALLOWED_COPY(UWorkStealingQueue)
+    DAOGRAPH_NO_ALLOWED_COPY(UWorkStealingQueue)
 
 private:
     std::deque<T> deque_;            // 存放任务的双向队列
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UWORKSTEALINGQUEUE_H
+#endif //DAOGRAPH_UWORKSTEALINGQUEUE_H

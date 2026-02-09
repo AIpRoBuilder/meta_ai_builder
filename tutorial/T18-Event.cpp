@@ -10,7 +10,7 @@
 #include "MyGNode/MyEventNode.h"
 #include "MyGEvent/MyPrintEvent.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_event() {
     GPipelinePtr pipeline = GPipelineFactory::create();

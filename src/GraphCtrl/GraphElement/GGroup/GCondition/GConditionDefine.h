@@ -5,18 +5,18 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GCONDITIONDEFINE_H
-#define CGRAPH_GCONDITIONDEFINE_H
+#ifndef DAOGRAPH_GCONDITIONDEFINE_H
+#define DAOGRAPH_GCONDITIONDEFINE_H
 
 #include "../GGroupDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 enum class GMultiConditionType {
     SERIAL = 0,        // 串行执行
     PARALLEL = 1,      // 并行执行
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GCONDITIONDEFINE_H
+#endif //DAOGRAPH_GCONDITIONDEFINE_H

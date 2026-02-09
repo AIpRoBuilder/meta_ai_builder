@@ -11,7 +11,7 @@
 #include "MyGAspect/MyTraceAspect.h"
 #include "MyGAspect/MyTemplateAspect.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_aspect() {
     GPipelinePtr pipeline = GPipelineFactory::create();

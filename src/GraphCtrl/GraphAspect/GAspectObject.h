@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GASPECTOBJECT_H
-#define CGRAPH_GASPECTOBJECT_H
+#ifndef DAOGRAPH_GASPECTOBJECT_H
+#define DAOGRAPH_GASPECTOBJECT_H
 
 #include <string>
 
@@ -15,7 +15,7 @@
 #include "../GraphParam/GParamInclude.h"
 #include "../GraphEvent/GEventInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElement;
 
@@ -44,11 +44,11 @@ protected:
 
     const std::string& getName() const override;
 
-    CGRAPH_NO_ALLOWED_COPY(GAspectObject)
+    DAOGRAPH_NO_ALLOWED_COPY(GAspectObject)
 
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
 
-    CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER
 
 private:
     /**
@@ -56,7 +56,7 @@ private:
      * @return
      */
     CStatus run() final {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
 private:
@@ -77,8 +77,8 @@ public:
 
 using GAspectObjectPtr = GAspectObject *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GAspectObject.inl"
 
-#endif //CGRAPH_GASPECTOBJECT_H
+#endif //DAOGRAPH_GASPECTOBJECT_H

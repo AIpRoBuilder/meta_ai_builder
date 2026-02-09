@@ -5,25 +5,25 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTAGEOBJECT_H
-#define CGRAPH_GSTAGEOBJECT_H
+#ifndef DAOGRAPH_GSTAGEOBJECT_H
+#define DAOGRAPH_GSTAGEOBJECT_H
 
 #include <atomic>
 
 #include "../GraphObject.h"
 #include "../GraphParam/GParamInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GStageObject : public GraphObject,
                      public CDescInfo {
 private:
     CStatus run() final {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 
-#endif //CGRAPH_GSTAGEOBJECT_H
+#endif //DAOGRAPH_GSTAGEOBJECT_H

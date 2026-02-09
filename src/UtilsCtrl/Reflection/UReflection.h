@@ -5,16 +5,16 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UREFLECTION_H
-#define CGRAPH_UREFLECTION_H
+#ifndef DAOGRAPH_UREFLECTION_H
+#define DAOGRAPH_UREFLECTION_H
 
 #include "../UtilsObject.h"
 #include "UReflectionDefine.h"
 #include "UReflectionSession.h"
 #include "UReflectionType.h"
 
-CGRAPH_NAMESPACE_BEGIN
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 template<class T>
 class UReflection : public UtilsObject {
@@ -41,7 +41,7 @@ public:
     }
 };
 
-CGRAPH_INTERNAL_NAMESPACE_END
-CGRAPH_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UREFLECTION_H
+#endif //DAOGRAPH_UREFLECTION_H

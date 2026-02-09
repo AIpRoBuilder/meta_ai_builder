@@ -9,22 +9,22 @@
 #include "GNode/GNodeInclude.h"
 #include "GGroup/GGroupInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CVoid GElementRepository::insert(GElementPtr ptr) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
     elements_.insert(ptr);
 }
 
 
 CBool GElementRepository::find(GElementPtr ptr) const {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
     return elements_.find(ptr) != elements_.end();
 }
 
 
 GElementRepositoryPtr GElementRepository::setThreadPool(UThreadPoolPtr ptr) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
     for (auto& cur : this->elements_) {
         cur->setThreadPool(ptr);
     }
@@ -33,15 +33,15 @@ GElementRepositoryPtr GElementRepository::setThreadPool(UThreadPoolPtr ptr) {
 
 
 CStatus GElementRepository::setup() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     // 一旦执行，全部设置为 normal状态
     status = pushAllState(GElementState::NORMAL);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementRepository::reset() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     for (auto& cur : async_elements_) {
         if (GElementTimeoutStrategy::HOLD_BY_PIPELINE == cur->timeout_strategy_) {
             // 强烈建议，在这里等待执行完成
@@ -54,12 +54,12 @@ CStatus GElementRepository::reset() {
         }
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementRepository::pushAllState(const GElementState& state) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     if (cur_state_ == state) {
         return status;    // 避免重复赋值
     }
@@ -72,12 +72,12 @@ CStatus GElementRepository::pushAllState(const GElementState& state) {
         }
     }
     cur_state_ = state;    // 记录当前的状态信息
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CVoid GElementRepository::fetchAll(GElementManagerCPtr em) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(em)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(em)
     for (GElementPtr cur : em->manager_elements_) {
         /**
          * 从 pipeline 的 element manager 中，逐层添加查询
@@ -93,7 +93,7 @@ CVoid GElementRepository::fetch(GElementPtr element) {
     elements_.insert(element);
     if (element->isGGroup()) {
         auto group = dynamic_cast<GGroupPtr>(element);
-        CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(group)
+        DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(group)
         for (auto* cur : group->group_elements_arr_) {
             fetch(cur);
         }
@@ -112,7 +112,7 @@ CBool GElementRepository::isCancelState() const {
 
 
 CStatus GElementRepository::init() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     async_elements_.clear();    // 每次记得清空这里。因为每次init之后，都可能不一样
     for (auto& element : elements_) {
         /**
@@ -120,9 +120,9 @@ CStatus GElementRepository::init() {
          * 2. 查验配置信息是否正确
          * 3. 记录异步节点的信息
          */
-        CGRAPH_ASSERT_NOT_NULL(element, element->thread_pool_)
+        DAOGRAPH_ASSERT_NOT_NULL(element, element->thread_pool_)
         status = element->checkSuitable();
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
         element->updateAspectInfo();
 
         if (element->isAsync()) {
@@ -132,33 +132,33 @@ CStatus GElementRepository::init() {
 
     // 每次初始化之后，所有的状态，都可以恢复了
     status = pushAllState(GElementState::NORMAL);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementRepository::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     /**
      * destroy的时候，恢复create的状态，确保再次轮训的时候正常
      * 理论上，cancel状态仅会出现在极短的时间段之内，
      * 当程序 cancel完成之后，就会重新恢复 CREATE的状态
-     * 问题详见: https://github.com/ChunelFeng/CGraph/issues/153
+     * 问题详见: https://github.com/ChunelFeng/DaoGraph/issues/153
      */
     status = pushAllState(GElementState::NORMAL);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementRepository::run() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 GElementRepository::~GElementRepository() {
     // 删除所有内部的element信息
     for (GElementPtr element : elements_) {
-        CGRAPH_DELETE_PTR(element)
+        DAOGRAPH_DELETE_PTR(element)
     }
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

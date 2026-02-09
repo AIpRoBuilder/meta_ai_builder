@@ -5,19 +5,19 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYNODE1_H
-#define CGRAPH_MYNODE1_H
+#ifndef DAOGRAPH_MYNODE1_H
+#define DAOGRAPH_MYNODE1_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class MyNode1 : public CGraph::GNode {
+class MyNode1 : public DaoGraph::GNode {
 public:
     CStatus run() override {
         CStatus status;
-        CGraph::CGRAPH_ECHO("[%s], enter MyNode1 run function. Sleep for 1 second ... ", this->getName().c_str());
-        CGRAPH_SLEEP_SECOND(1)
+        DaoGraph::DAOGRAPH_ECHO("[%s], enter MyNode1 run function. Sleep for 1 second ... ", this->getName().c_str());
+        DAOGRAPH_SLEEP_SECOND(1)
         return status;
     }
 };
 
-#endif //CGRAPH_MYNODE1_H
+#endif //DAOGRAPH_MYNODE1_H

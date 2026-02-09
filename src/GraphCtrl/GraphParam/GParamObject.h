@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPARAMOBJECT_H
-#define CGRAPH_GPARAMOBJECT_H
+#ifndef DAOGRAPH_GPARAMOBJECT_H
+#define DAOGRAPH_GPARAMOBJECT_H
 
 #include "../GraphObject.h"
 #include "../../UtilsCtrl/UtilsInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GParamObject : public GraphObject {
 protected:
@@ -20,10 +20,10 @@ protected:
      * @return
      */
     CStatus run() final {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPARAMOBJECT_H
+#endif //DAOGRAPH_GPARAMOBJECT_H

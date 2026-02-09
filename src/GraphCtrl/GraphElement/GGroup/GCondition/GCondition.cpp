@@ -7,19 +7,19 @@
 
 #include "GCondition.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GCondition::GCondition() {
     element_type_ = GElementType::CONDITION;
-    session_ = URandom<>::generateSession(CGRAPH_STR_CONDITION);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_CONDITION);
 }
 
 
 CStatus GCondition::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     CIndex index = this->choose();
-    if (internal::CGRAPH_CONDITION_LAST_INDEX == index
+    if (internal::DAOGRAPH_CONDITION_LAST_INDEX == index
         && !this->group_elements_arr_.empty()) {
         // 如果返回-1，则直接执行最后一个条件（模仿default功能）
         auto element = group_elements_arr_.back();
@@ -30,7 +30,7 @@ CStatus GCondition::run() {
         status = element->fatProcessor(CFunctionType::RUN);
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -60,4 +60,4 @@ CBool GCondition::isSeparate(GElementCPtr a, GElementCPtr b) const {
     return true;
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

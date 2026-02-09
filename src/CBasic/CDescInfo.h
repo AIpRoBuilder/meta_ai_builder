@@ -5,14 +5,14 @@
 @Desc: 通用描述信息
 ***************************/
 
-#ifndef CGRAPH_CDESCINFO_H
-#define CGRAPH_CDESCINFO_H
+#ifndef DAOGRAPH_CDESCINFO_H
+#define DAOGRAPH_CDESCINFO_H
 
 #include <string>
 
 #include "CBasicDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class CDescInfo {
 public:
@@ -74,6 +74,6 @@ protected:
     std::string description_;                        // 描述信息
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_CDESCINFO_H
+#endif //DAOGRAPH_CDESCINFO_H

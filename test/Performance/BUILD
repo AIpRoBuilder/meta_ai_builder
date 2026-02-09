@@ -1,4 +1,4 @@
-CGRAPH_PERFORMANCE_LIST = [
+DAOGRAPH_PERFORMANCE_LIST = [
         "test-performance-01",
         "test-performance-02",
         "test-performance-03",
@@ -10,8 +10,8 @@ CGRAPH_PERFORMANCE_LIST = [
         name = "%s" % perf_name,
         srcs = ["%s.cpp" % perf_name],
         copts = ["-Isrc/"],
-        deps = ["//src:CGraph",
+        deps = ["//src:DaoGraph",
                 "//test/_Materials:test_materials",],
     )
-    for perf_name in CGRAPH_PERFORMANCE_LIST
+    for perf_name in DAOGRAPH_PERFORMANCE_LIST
 ]

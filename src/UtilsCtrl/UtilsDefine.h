@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTILSDEFINE_H
-#define CGRAPH_UTILSDEFINE_H
+#ifndef DAOGRAPH_UTILSDEFINE_H
+#define DAOGRAPH_UTILSDEFINE_H
 
 #include <iostream>
 #include <string>
@@ -21,7 +21,7 @@
 #include "../CBasic/CBasicInclude.h"
 #include "UtilsFunction.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 #ifdef _ENABLE_LIKELY_
     #define likely(x)   __builtin_expect(!!(x), 1)
@@ -31,15 +31,15 @@ CGRAPH_NAMESPACE_BEGIN
     #define unlikely
 #endif
 
-using CGRAPH_LOCK_GUARD = std::lock_guard<std::mutex>;
-using CGRAPH_UNIQUE_LOCK = std::unique_lock<std::mutex>;
+using DAOGRAPH_LOCK_GUARD = std::lock_guard<std::mutex>;
+using DAOGRAPH_UNIQUE_LOCK = std::unique_lock<std::mutex>;
 
-#if __cplusplus >= 201703L && _CGRAPH_GPARAM_RWLOCK_ENABLE_
-    using CGRAPH_READ_LOCK = std::shared_lock<std::shared_mutex>;
-    using CGRAPH_WRITE_LOCK = std::unique_lock<std::shared_mutex>;
+#if __cplusplus >= 201703L && _DAOGRAPH_GPARAM_RWLOCK_ENABLE_
+    using DAOGRAPH_READ_LOCK = std::shared_lock<std::shared_mutex>;
+    using DAOGRAPH_WRITE_LOCK = std::unique_lock<std::shared_mutex>;
 #else
-    using CGRAPH_READ_LOCK = std::lock_guard<std::recursive_mutex>;    // C++11和14不支持读写锁，使用 recursive_mutex 替代
-    using CGRAPH_WRITE_LOCK = std::lock_guard<std::recursive_mutex>;
+    using DAOGRAPH_READ_LOCK = std::lock_guard<std::recursive_mutex>;    // C++11和14不支持读写锁，使用 recursive_mutex 替代
+    using DAOGRAPH_WRITE_LOCK = std::lock_guard<std::recursive_mutex>;
 #endif
 
 
@@ -47,7 +47,7 @@ using CGRAPH_UNIQUE_LOCK = std::unique_lock<std::mutex>;
 
 template<typename T>
 CStatus __ASSERT_NOT_NULL(T t) {
-    return __IS_NULLPTR(t) ? CStatus(CGRAPH_INPUT_IS_NULL) : CStatus();
+    return __IS_NULLPTR(t) ? CStatus(DAOGRAPH_INPUT_IS_NULL) : CStatus();
 }
 
 template<typename T, typename... Args>
@@ -62,7 +62,7 @@ CStatus __ASSERT_NOT_NULL(T t, Args... args) {
 template<typename T>
 CVoid __ASSERT_NOT_NULL_THROW_EXCEPTION(T t) {
     if (__IS_NULLPTR(t)) {
-        CGRAPH_THROW_EXCEPTION("[CException] " + std::string(CGRAPH_INPUT_IS_NULL))
+        DAOGRAPH_THROW_EXCEPTION("[CException] " + std::string(DAOGRAPH_INPUT_IS_NULL))
     }
 }
 
@@ -76,53 +76,53 @@ CVoid __ASSERT_NOT_NULL_THROW_EXCEPTION(T t, Args... args) {
 }
 
 /** 判断传入的多个指针信息，是否为空 */
-#define CGRAPH_ASSERT_NOT_NULL(ptr, ...)                                                     \
+#define DAOGRAPH_ASSERT_NOT_NULL(ptr, ...)                                                     \
     {                                                                                        \
         const CStatus& __cur_status__ = __ASSERT_NOT_NULL(ptr, ##__VA_ARGS__);               \
         if (unlikely(__cur_status__.isErr())) { return __cur_status__; }                     \
     }                                                                                        \
 
 /** 判断传入的多个指针，是否为空。如果为空，则抛出异常信息 */
-#define CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr, ...)                                         \
+#define DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr, ...)                                         \
     __ASSERT_NOT_NULL_THROW_EXCEPTION(ptr, ##__VA_ARGS__);                                   \
 
 /* 删除资源信息 */
-#define CGRAPH_DELETE_PTR(ptr)                                                  \
+#define DAOGRAPH_DELETE_PTR(ptr)                                                  \
     if (likely((ptr) != nullptr)) {                                             \
         delete (ptr);                                                           \
         (ptr) = nullptr;                                                        \
     }                                                                           \
 
-#define CGRAPH_DELETE_PTR_ARRAY(arr)                                            \
+#define DAOGRAPH_DELETE_PTR_ARRAY(arr)                                            \
     if (likely((arr) != nullptr)) {                                             \
         delete[] (arr);                                                         \
         (arr) = nullptr;                                                        \
     }                                                                           \
                                                                                 \
 
-#define CGRAPH_ASSERT_INIT(isInit)                                              \
+#define DAOGRAPH_ASSERT_INIT(isInit)                                              \
     if (unlikely((isInit) != is_init_)) {                                       \
-        CGRAPH_RETURN_ERROR_STATUS("init status is not suitable")               \
+        DAOGRAPH_RETURN_ERROR_STATUS("init status is not suitable")               \
     }                                                                           \
 
-#define CGRAPH_ASSERT_INIT_THROW_ERROR(isInit)                                  \
+#define DAOGRAPH_ASSERT_INIT_THROW_ERROR(isInit)                                  \
     if (unlikely((isInit) != is_init_)) {                                       \
-        CGRAPH_THROW_EXCEPTION("[CException] init status is not suitable") }    \
+        DAOGRAPH_THROW_EXCEPTION("[CException] init status is not suitable") }    \
 
-#define CGRAPH_ASSERT_MUTABLE_INIT_THROW_ERROR(isInit)                                  \
+#define DAOGRAPH_ASSERT_MUTABLE_INIT_THROW_ERROR(isInit)                                  \
     if (unlikely((isInit) != is_init_) && !isMutable()) {                               \
-        CGRAPH_THROW_EXCEPTION("[CException] mutable init status is not suitable") }    \
+        DAOGRAPH_THROW_EXCEPTION("[CException] mutable init status is not suitable") }    \
 
-#define CGRAPH_SLEEP_SECOND(s)                                                  \
+#define DAOGRAPH_SLEEP_SECOND(s)                                                  \
     std::this_thread::sleep_for(std::chrono::seconds(s));                       \
 
-#define CGRAPH_SLEEP_MILLISECOND(ms)                                            \
+#define DAOGRAPH_SLEEP_MILLISECOND(ms)                                            \
     std::this_thread::sleep_for(std::chrono::milliseconds(ms));                 \
 
-#define CGRAPH_FUNCTION_CHECK_STATUS                                            \
+#define DAOGRAPH_FUNCTION_CHECK_STATUS                                            \
     if (unlikely(status.isErr())) {                                             \
         if (status.isCrash()) { throw CException(status.getInfo()); }           \
-        CGRAPH_ECHO("errorCode = [%d], errorInfo = [%s].",                      \
+        DAOGRAPH_ECHO("errorCode = [%d], errorInfo = [%s].",                      \
             status.getCode(), status.getInfo().c_str());                        \
         return status;                                                          \
     }                                                                           \
@@ -133,8 +133,8 @@ CVoid __ASSERT_NOT_NULL_THROW_EXCEPTION(T t, Args... args) {
 * @param ...
 * 注：内部包含全局锁，不建议正式上线的时候使用
 */
-inline CVoid CGRAPH_ECHO(const char *cmd, ...) {
-#ifdef _CGRAPH_SILENCE_
+inline CVoid DAOGRAPH_ECHO(const char *cmd, ...) {
+#ifdef _DAOGRAPH_SILENCE_
     return;
 #endif
 
@@ -153,6 +153,6 @@ inline CVoid CGRAPH_ECHO(const char *cmd, ...) {
     std::cout << "\n";
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTILSDEFINE_H
+#endif //DAOGRAPH_UTILSDEFINE_H

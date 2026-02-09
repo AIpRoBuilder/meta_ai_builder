@@ -1,4 +1,4 @@
-CGRAPH_FUNCTIONAL_LIST = [
+DAOGRAPH_FUNCTIONAL_LIST = [
         "test-functional-01",
         "test-functional-02",
         "test-functional-03",
@@ -11,8 +11,8 @@ CGRAPH_FUNCTIONAL_LIST = [
         name = "%s" % fun_name,
         srcs = ["%s.cpp" % fun_name],
         copts = ["-Isrc/"],
-        deps = ["//src:CGraph",
+        deps = ["//src:DaoGraph",
                 "//test/_Materials:test_materials",],
     )
-    for fun_name in CGRAPH_FUNCTIONAL_LIST
+    for fun_name in DAOGRAPH_FUNCTIONAL_LIST
 ]

@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_suspend() {
     GPipelinePtr pipeline = GPipelineFactory::create();
@@ -20,20 +20,20 @@ void tutorial_suspend() {
     status += pipeline->registerGElement<MyNode2>(&d, {b, c}, "nodeD");
     if (!status.isOK()) {
         std::cout << status.getInfo() << std::endl;
-        return;    // 使用时，请对所有CGraph接口的返回值做判定。今后tutorial例子中省略该操作。
+        return;    // 使用时，请对所有DaoGraph接口的返回值做判定。今后tutorial例子中省略该操作。
     }
 
     status += pipeline->init();
 
-    CGRAPH_ECHO("pipeline async run, BEGIN.");
+    DAOGRAPH_ECHO("pipeline async run, BEGIN.");
     auto result = pipeline->asyncRun();
-    CGRAPH_SLEEP_MILLISECOND(2600)
+    DAOGRAPH_SLEEP_MILLISECOND(2600)
 
-    CGRAPH_ECHO("pipeline async run, SUSPEND.");
+    DAOGRAPH_ECHO("pipeline async run, SUSPEND.");
     status += pipeline->suspend();    // 暂停执行，保留当前pipeline内部所有参数信息和状态信息
 
-    CGRAPH_SLEEP_MILLISECOND(7200)
-    CGRAPH_ECHO("pipeline async run, RESUME after 7200ms.");
+    DAOGRAPH_SLEEP_MILLISECOND(7200)
+    DAOGRAPH_ECHO("pipeline async run, RESUME after 7200ms.");
     status += pipeline->resume();     // 暂停一段时间后，恢复执行
 
     result.wait();    // 等待pipeline异步执行结束

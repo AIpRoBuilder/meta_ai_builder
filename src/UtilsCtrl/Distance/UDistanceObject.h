@@ -5,16 +5,16 @@
 @Desc: Distance的通用类信息
 ***************************/
 
-#ifndef CGRAPH_UDISTANCEOBJECT_H
-#define CGRAPH_UDISTANCEOBJECT_H
+#ifndef DAOGRAPH_UDISTANCEOBJECT_H
+#define DAOGRAPH_UDISTANCEOBJECT_H
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UDistanceObject : public UtilsObject {
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UDISTANCEOBJECT_H
+#endif //DAOGRAPH_UDISTANCEOBJECT_H

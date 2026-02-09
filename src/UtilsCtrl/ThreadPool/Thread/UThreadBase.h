@@ -5,8 +5,8 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_UTHREADBASE_H
-#define CGRAPH_UTHREADBASE_H
+#ifndef DAOGRAPH_UTHREADBASE_H
+#define DAOGRAPH_UTHREADBASE_H
 
 #include <thread>
 
@@ -15,7 +15,7 @@
 #include "../Task/UTaskInclude.h"
 
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UThreadBase : public UThreadObject {
 protected:
@@ -36,11 +36,11 @@ protected:
 
 
     CStatus destroy() override {
-        CGRAPH_FUNCTION_BEGIN
-        CGRAPH_ASSERT_INIT(true)
+        DAOGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_ASSERT_INIT(true)
 
         reset();
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
 
@@ -51,7 +51,7 @@ protected:
      */
     virtual CBool popPoolTask(UTaskRef task) {
         CBool result = pool_task_queue_->tryPop(task);
-        if (!result && CGRAPH_THREAD_TYPE_SECONDARY == type_) {
+        if (!result && DAOGRAPH_THREAD_TYPE_SECONDARY == type_) {
             // 如果辅助线程没有获取到的话，还需要再尝试从长时间任务队列中，获取一次
             result = pool_priority_task_queue_->tryPop(task);
         }
@@ -66,7 +66,7 @@ protected:
      */
     virtual CBool popPoolTask(UTaskArrRef tasks) {
         CBool result = pool_task_queue_->tryPop(tasks, config_->max_pool_batch_size_);
-        if (!result && CGRAPH_THREAD_TYPE_SECONDARY == type_) {
+        if (!result && DAOGRAPH_THREAD_TYPE_SECONDARY == type_) {
             result = pool_priority_task_queue_->tryPop(tasks, 1);    // 从优先队列里，最多pop出来一个
         }
 
@@ -147,7 +147,7 @@ protected:
      * @return
      */
     CVoid loopProcess() {
-        CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(config_)
+        DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(config_)
         if (config_->batch_task_enable_) {
             while (done_) {
                 processTasks();    // 批量任务获取执行接口
@@ -165,12 +165,12 @@ protected:
     */
     CVoid setSchedParam() {
 #ifndef _WIN32
-        int priority = CGRAPH_THREAD_SCHED_OTHER;
-        int policy = CGRAPH_THREAD_MIN_PRIORITY;
-        if (type_ == CGRAPH_THREAD_TYPE_PRIMARY) {
+        int priority = DAOGRAPH_THREAD_SCHED_OTHER;
+        int policy = DAOGRAPH_THREAD_MIN_PRIORITY;
+        if (type_ == DAOGRAPH_THREAD_TYPE_PRIMARY) {
             priority = config_->primary_thread_priority_;
             policy = config_->primary_thread_policy_;
-        } else if (type_ == CGRAPH_THREAD_TYPE_SECONDARY) {
+        } else if (type_ == DAOGRAPH_THREAD_TYPE_SECONDARY) {
             priority = config_->secondary_thread_priority_;
             policy = config_->secondary_thread_policy_;
         }
@@ -179,7 +179,7 @@ protected:
         sched_param param = { calcPriority(priority) };
         int ret = pthread_setschedparam(handle, calcPolicy(policy), &param);
         if (0 != ret) {
-            CGRAPH_ECHO("warning : set thread sched param failed, system error code is [%d]", ret);
+            DAOGRAPH_ECHO("warning : set thread sched param failed, system error code is [%d]", ret);
         }
 #endif
     }
@@ -189,18 +189,18 @@ protected:
      */
     CVoid setAffinity(int index) {
 #if defined(__linux__) && !defined(__ANDROID__)
-        if (!config_->bind_cpu_enable_ || CGRAPH_CPU_NUM == 0 || index < 0) {
+        if (!config_->bind_cpu_enable_ || DAOGRAPH_CPU_NUM == 0 || index < 0) {
             return;
         }
 
         cpu_set_t mask;
         CPU_ZERO(&mask);
-        CPU_SET(index % CGRAPH_CPU_NUM, &mask);
+        CPU_SET(index % DAOGRAPH_CPU_NUM, &mask);
 
         auto handle = thread_.native_handle();
         int ret = pthread_setaffinity_np(handle, sizeof(cpu_set_t), &mask);
         if (0 != ret) {
-            CGRAPH_ECHO("warning : set thread affinity failed, system error code is [%d]", ret);
+            DAOGRAPH_ECHO("warning : set thread affinity failed, system error code is [%d]", ret);
         }
 #endif
     }
@@ -214,10 +214,10 @@ private:
      * @return
      */
     static CInt calcPolicy(int policy) {
-        return (CGRAPH_THREAD_SCHED_OTHER == policy
-                || CGRAPH_THREAD_SCHED_RR == policy
-                || CGRAPH_THREAD_SCHED_FIFO == policy)
-               ? policy : CGRAPH_THREAD_SCHED_OTHER;
+        return (DAOGRAPH_THREAD_SCHED_OTHER == policy
+                || DAOGRAPH_THREAD_SCHED_RR == policy
+                || DAOGRAPH_THREAD_SCHED_FIFO == policy)
+               ? policy : DAOGRAPH_THREAD_SCHED_OTHER;
     }
 
 
@@ -228,9 +228,9 @@ private:
      * @return
      */
     static CInt calcPriority(int priority) {
-        return (priority >= CGRAPH_THREAD_MIN_PRIORITY
-                && priority <= CGRAPH_THREAD_MAX_PRIORITY)
-               ? priority : CGRAPH_THREAD_MIN_PRIORITY;
+        return (priority >= DAOGRAPH_THREAD_MIN_PRIORITY
+                && priority <= DAOGRAPH_THREAD_MAX_PRIORITY)
+               ? priority : DAOGRAPH_THREAD_MIN_PRIORITY;
     }
 
 
@@ -250,6 +250,6 @@ protected:
     std::condition_variable cv_;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTHREADBASE_H
+#endif //DAOGRAPH_UTHREADBASE_H

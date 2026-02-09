@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTHREADPOOLINCLUDE_H
-#define CGRAPH_UTHREADPOOLINCLUDE_H
+#ifndef DAOGRAPH_UTHREADPOOLINCLUDE_H
+#define DAOGRAPH_UTHREADPOOLINCLUDE_H
 
 #include "UThreadObject.h"
 #include "UThreadPool.h"
@@ -18,4 +18,4 @@
 #include "Lock/ULockInclude.h"
 #include "Semaphore/USemaphore.h"
 
-#endif //CGRAPH_UTHREADPOOLINCLUDE_H
+#endif //DAOGRAPH_UTHREADPOOLINCLUDE_H

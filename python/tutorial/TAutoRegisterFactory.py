@@ -1,4 +1,4 @@
-from pycgraph import GElement, GNode, GPipeline, CStatus, register, register_class
+from pydaograph import GElement, GNode, GPipeline, CStatus, register, register_class
 import copy
 
 

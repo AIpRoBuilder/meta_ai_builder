@@ -8,7 +8,7 @@
 #include "MyGNode/MyTemplateNode.h"
 #include "MyGNode/MyTemplateV2Node.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_template() {
     GPipelinePtr pipeline = GPipelineFactory::create();

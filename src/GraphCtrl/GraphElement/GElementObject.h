@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GELEMENTOBJECT_H
-#define CGRAPH_GELEMENTOBJECT_H
+#ifndef DAOGRAPH_GELEMENTOBJECT_H
+#define DAOGRAPH_GELEMENTOBJECT_H
 
 #include "../GraphObject.h"
 #include "../GraphParam/GParamInclude.h"
@@ -14,11 +14,11 @@
 #include "../GraphEvent/GEventInclude.h"
 #include "../GraphStage/GStageInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElementObject : public GraphObject {
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GELEMENTOBJECT_H
+#endif //DAOGRAPH_GELEMENTOBJECT_H

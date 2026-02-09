@@ -5,13 +5,13 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_MYTEMPLATENODE_H
-#define CGRAPH_MYTEMPLATENODE_H
+#ifndef DAOGRAPH_MYTEMPLATENODE_H
+#define DAOGRAPH_MYTEMPLATENODE_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 template <typename ...Args>
-class MyTemplateNode : public CGraph::GTemplateNode<Args ...> {
+class MyTemplateNode : public DaoGraph::GTemplateNode<Args ...> {
 public:
     // 通过两种不同的方式，实现构造函数，可以在pipeline中通过不同的方式 register 进来
     explicit MyTemplateNode(int num, float score) {
@@ -25,7 +25,7 @@ public:
     }
 
     CStatus run () override {
-        CGraph::CGRAPH_ECHO("[MyTemplateNode] num = [%d], score = [%f]", num_, score_);
+        DaoGraph::DAOGRAPH_ECHO("[MyTemplateNode] num = [%d], score = [%f]", num_, score_);
         return CStatus();
     }
 
@@ -34,4 +34,4 @@ private:
     float score_;
 };
 
-#endif //CGRAPH_MYTEMPLATENODE_H
+#endif //DAOGRAPH_MYTEMPLATENODE_H

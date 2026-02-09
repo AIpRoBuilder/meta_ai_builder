@@ -5,17 +5,17 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYMONITORDAEMON_H
-#define CGRAPH_MYMONITORDAEMON_H
+#ifndef DAOGRAPH_MYMONITORDAEMON_H
+#define DAOGRAPH_MYMONITORDAEMON_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class MyMonitorDaemon : public CGraph::GDaemon {
+class MyMonitorDaemon : public DaoGraph::GDaemon {
 public:
-    CVoid daemonTask(CGraph::GDaemonParamPtr param) override {
-        CGraph::CGRAPH_ECHO("----> [MyMonitorDaemon] this monitor is still running, monitor span is [%ld] ms...",
+    CVoid daemonTask(DaoGraph::GDaemonParamPtr param) override {
+        DaoGraph::DAOGRAPH_ECHO("----> [MyMonitorDaemon] this monitor is still running, monitor span is [%ld] ms...",
                             getInterval());
     }
 };
 
-#endif //CGRAPH_MYMONITORDAEMON_H
+#endif //DAOGRAPH_MYMONITORDAEMON_H

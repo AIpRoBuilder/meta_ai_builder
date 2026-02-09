@@ -5,12 +5,12 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GSINGLETON_INL
-#define CGRAPH_GSINGLETON_INL
+#ifndef DAOGRAPH_GSINGLETON_INL
+#define DAOGRAPH_GSINGLETON_INL
 
 #include "GSingleton.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template <typename T>
 USingleton<T> GSingleton<T>::s_singleton_;
@@ -22,16 +22,16 @@ std::atomic<CBool> GSingleton<T>::s_is_init_(false);
 template <typename T>
 GSingleton<T>::GSingleton() {
     this->element_type_ = GElementType::SINGLETON;
-    session_ = URandom<>::generateSession(CGRAPH_STR_SINGLETON);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_SINGLETON);
 }
 
 
 template <typename T>
 CStatus GSingleton<T>::init() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     /* 确保仅 GSingletonNode 类型内容，init一次 */
     if (s_is_init_) {
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /* 因为采取的是饥汉模式，不需要判断ptr是否为空了 */
@@ -41,25 +41,25 @@ CStatus GSingleton<T>::init() {
         s_is_init_ = true;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 template <typename T>
 CStatus GSingleton<T>::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     auto element = dynamic_cast<T *>(s_singleton_.get());
     status = element->run();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 template <typename T>
 CStatus GSingleton<T>::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     if (!s_is_init_) {
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     auto element = dynamic_cast<T *>(s_singleton_.get());
@@ -68,18 +68,18 @@ CStatus GSingleton<T>::destroy() {
         s_is_init_ = false;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 template <typename T>
 CStatus GSingleton<T>::addElementInfo(const std::set<GElementPtr> &depends,
                                       const std::string &name, CSize loop) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
 
     status = this->addDependGElements(depends);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     // 这里，内部和外部均需要设定name信息
     this->setName(name);
@@ -87,7 +87,7 @@ CStatus GSingleton<T>::addElementInfo(const std::set<GElementPtr> &depends,
     // 获取单例信息，然后将信息node中信息
     auto element = dynamic_cast<T *>(s_singleton_.get());
     element->name_ = name;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -95,14 +95,14 @@ template <typename T>
 CStatus GSingleton<T>::addManagers(GParamManagerPtr paramManager,
                                    GEventManagerPtr eventManager,
                                    GStageManagerPtr stageManager) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
-    CGRAPH_ASSERT_INIT(false)
-    CGRAPH_ASSERT_NOT_NULL(paramManager, eventManager, stageManager)
+    DAOGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_ASSERT_NOT_NULL(paramManager, eventManager, stageManager)
     auto element = dynamic_cast<T *>(s_singleton_.get());
     status = element->addManagers(paramManager, eventManager, stageManager);
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -133,6 +133,6 @@ const std::string& GSingleton<T>::getName() const {
     return element->getName();
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSINGLETON_INL
+#endif //DAOGRAPH_GSINGLETON_INL

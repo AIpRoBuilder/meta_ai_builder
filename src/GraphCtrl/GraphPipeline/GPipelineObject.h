@@ -5,18 +5,18 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPIPELINEOBJECT_H
-#define CGRAPH_GPIPELINEOBJECT_H
+#ifndef DAOGRAPH_GPIPELINEOBJECT_H
+#define DAOGRAPH_GPIPELINEOBJECT_H
 
 #include "../GraphObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPipelineObject : public GraphObject {
 protected:
     CBool is_init_ = false;                          // 判断是否init
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPIPELINEOBJECT_H
+#endif //DAOGRAPH_GPIPELINEOBJECT_H

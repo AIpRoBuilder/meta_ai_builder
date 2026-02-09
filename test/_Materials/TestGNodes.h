@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_TESTGNODES_H
-#define CGRAPH_TESTGNODES_H
+#ifndef DAOGRAPH_TESTGNODES_H
+#define DAOGRAPH_TESTGNODES_H
 
 #include <memory>
 
 #include "TestCommonDefine.h"
 #include "TestGParams.h"
 
-class TestAdd1GNode : public CGraph::GNode {
+class TestAdd1GNode : public DaoGraph::GNode {
 public:
     CStatus init() override {
         g_test_node_cnt = 0;
@@ -27,19 +27,19 @@ public:
 };
 
 
-class TestReturnErrorGNode : public CGraph::GNode {
+class TestReturnErrorGNode : public DaoGraph::GNode {
 public:
     CStatus run() override {
         return CStatus("test error return, no real problem");
     }
 };
 
-class TestAdd1ByParamGNode : public CGraph::GNode {
+class TestAdd1ByParamGNode : public DaoGraph::GNode {
 public:
     CStatus run() override {
         auto p = getGParamWithNoEmpty<TestAdd1GParam>(g_add1_by_param_key);
         {
-            CGRAPH_PARAM_WRITE_CODE_BLOCK(p)
+            DAOGRAPH_PARAM_WRITE_CODE_BLOCK(p)
             p->cnt_++;
         }
         return CStatus();
@@ -47,20 +47,20 @@ public:
 };
 
 
-class TestRecvMessageGNode : public CGraph::GNode {
+class TestRecvMessageGNode : public DaoGraph::GNode {
 public:
     CStatus run() override {
         std::shared_ptr<TestGMessageParam> mp = nullptr;
-        CStatus status = CGRAPH_RECV_MPARAM_WITH_TIMEOUT(TestGMessageParam, g_test_message_key, mp, 200);
+        CStatus status = DAOGRAPH_RECV_MPARAM_WITH_TIMEOUT(TestGMessageParam, g_test_message_key, mp, 200);
         if (status.isErr()) {
-            CGraph::CGRAPH_ECHO("error message is [%s]",  status.getInfo().c_str());
+            DaoGraph::DAOGRAPH_ECHO("error message is [%s]",  status.getInfo().c_str());
             return status;
         }
 
         mp->num_++;
-        CGRAPH_SEND_MPARAM(TestGMessageParam, g_test_message_key, mp, CGraph::GMessagePushStrategy::WAIT)
+        DAOGRAPH_SEND_MPARAM(TestGMessageParam, g_test_message_key, mp, DaoGraph::GMessagePushStrategy::WAIT)
         return status;
     }
 };
 
-#endif //CGRAPH_TESTGNODES_H
+#endif //DAOGRAPH_TESTGNODES_H

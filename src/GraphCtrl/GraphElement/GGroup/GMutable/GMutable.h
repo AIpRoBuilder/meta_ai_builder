@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GMUTABLE_H
-#define CGRAPH_GMUTABLE_H
+#ifndef DAOGRAPH_GMUTABLE_H
+#define DAOGRAPH_GMUTABLE_H
 
 #include "../GGroup.h"
 #include "../../GElementManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GMutable : public GGroup {
 protected:
@@ -53,6 +53,6 @@ private:
 
 using GMutablePtr = GMutable *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMUTABLE_H
+#endif //DAOGRAPH_GMUTABLE_H

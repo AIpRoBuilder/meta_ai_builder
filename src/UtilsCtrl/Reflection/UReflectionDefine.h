@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UREFLECTIONDEFINE_H
-#define CGRAPH_UREFLECTIONDEFINE_H
+#ifndef DAOGRAPH_UREFLECTIONDEFINE_H
+#define DAOGRAPH_UREFLECTIONDEFINE_H
 
 #include <type_traits>
 #include <utility>
@@ -19,8 +19,8 @@
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 using UReflIdType = CUChar;
 
@@ -43,7 +43,7 @@ template <>                                                    \
 inline constexpr decltype(auto) createTrait<_STRUCT>() {       \
     return std::make_tuple(__VA_ARGS__); }                     \
 
-CGRAPH_INTERNAL_NAMESPACE_END
-CGRAPH_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UREFLECTIONDEFINE_H
+#endif //DAOGRAPH_UREFLECTIONDEFINE_H

@@ -5,10 +5,10 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_ULOCKINCLUDE_H
-#define CGRAPH_ULOCKINCLUDE_H
+#ifndef DAOGRAPH_ULOCKINCLUDE_H
+#define DAOGRAPH_ULOCKINCLUDE_H
 
 #include "USpinLock.h"
 #include "UCvMutex.h"
 
-#endif //CGRAPH_ULOCKINCLUDE_H
+#endif //DAOGRAPH_ULOCKINCLUDE_H

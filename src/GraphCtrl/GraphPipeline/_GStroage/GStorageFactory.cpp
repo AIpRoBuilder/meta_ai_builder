@@ -7,7 +7,7 @@
 
 #include "GStorageFactory.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 std::map<std::string, std::function<GraphObject*()>> GStorageFactory::meta_types_ {};
 
@@ -16,5 +16,5 @@ GraphObject* GStorageFactory::createByType(const std::string& typeName) {
     return (it == meta_types_.end()) ? nullptr : it->second();
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 

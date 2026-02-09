@@ -5,23 +5,23 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYCONNPARAM_H
-#define CGRAPH_MYCONNPARAM_H
+#ifndef DAOGRAPH_MYCONNPARAM_H
+#define DAOGRAPH_MYCONNPARAM_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 const static char* CONN_PARAM_KEY = "conn";
 
-struct MyConnParam : public CGraph::GPassedParam {
+struct MyConnParam : public DaoGraph::GPassedParam {
     /**
      * 必须实现 clone 函数
      * GAspectParam 和 GDaemonParam 均为 GPassedParam的同名内容
      * 继承自GPassedParam的参数，可以用于在 aspect 或 daemon 之间传递
      * 本例中，MyConnParam既用于GAspectParam(T10)传递，有用于GDaemonParam(T13)传递
-     * 故写法为 `: public CGraph::GPassedParam`
+     * 故写法为 `: public DaoGraph::GPassedParam`
      * @param param
      */
-    CVoid clone(CGraph::GPassedParamPtr param) override {
+    CVoid clone(DaoGraph::GPassedParamPtr param) override {
         if (nullptr == param) {
             return;    // 异常判断，理论不可能出现此情况
         }
@@ -35,4 +35,4 @@ struct MyConnParam : public CGraph::GPassedParam {
     short port_ { 0 };
 };
 
-#endif //CGRAPH_MYCONNPARAM_H
+#endif //DAOGRAPH_MYCONNPARAM_H

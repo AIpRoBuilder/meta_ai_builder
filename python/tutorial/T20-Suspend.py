@@ -7,7 +7,7 @@
 
 import time
 
-from pycgraph import GPipeline, StdFutureCStatus
+from pydaograph import GPipeline, StdFutureCStatus
 
 from MyGNode.MyNode1 import MyNode1
 from MyGNode.MyNode2 import MyNode2

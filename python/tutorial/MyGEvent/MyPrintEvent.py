@@ -7,7 +7,7 @@
 
 import time
 
-from pycgraph import GEvent
+from pydaograph import GEvent
 
 class MyPrintEvent(GEvent):
     _times: int = 0

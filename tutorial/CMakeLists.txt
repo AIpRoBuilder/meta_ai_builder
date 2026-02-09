@@ -1,7 +1,7 @@
 
 # 对应tutorial中的内容
-set(CGRAPH_TUTORIAL_LIST
-         T00-HelloCGraph
+set(DAOGRAPH_TUTORIAL_LIST
+         T00-HelloDaoGraph
          T01-Simple
          T02-Cluster
          T03-Region
@@ -34,10 +34,10 @@ set(CGRAPH_TUTORIAL_LIST
         )
 
 
-foreach(tut ${CGRAPH_TUTORIAL_LIST})
+foreach(tut ${DAOGRAPH_TUTORIAL_LIST})
     add_executable(${tut}
-            # 在自己的工程中引入CGraph功能，仅需引入 CGraph-env-include.cmake 后，加入这一句话即可
-            $<TARGET_OBJECTS:CGraph>
+            # 在自己的工程中引入DaoGraph功能，仅需引入 DaoGraph-env-include.cmake 后，加入这一句话即可
+            $<TARGET_OBJECTS:DaoGraph>
             ${tut}.cpp
             )
 endforeach()

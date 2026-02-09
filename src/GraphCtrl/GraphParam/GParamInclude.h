@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPARAMINCLUDE_H
-#define CGRAPH_GPARAMINCLUDE_H
+#ifndef DAOGRAPH_GPARAMINCLUDE_H
+#define DAOGRAPH_GPARAMINCLUDE_H
 
 #include "GParam.h"
 #include "GPassedParam.h"
@@ -16,4 +16,4 @@
 #include "GParamUtils.h"
 #include "GParamManagerWrapper.h"
 
-#endif //CGRAPH_GPARAMINCLUDE_H
+#endif //DAOGRAPH_GPARAMINCLUDE_H

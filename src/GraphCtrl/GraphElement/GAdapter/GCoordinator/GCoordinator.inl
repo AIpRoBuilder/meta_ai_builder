@@ -5,28 +5,28 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GCOORDINATOR_INL
-#define CGRAPH_GCOORDINATOR_INL
+#ifndef DAOGRAPH_GCOORDINATOR_INL
+#define DAOGRAPH_GCOORDINATOR_INL
 
 #include "GCoordinator.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<CInt SIZE>
 GCoordinator<SIZE>::GCoordinator() {
     element_type_ = GElementType::COORDINATOR;
-    session_ = URandom<>::generateSession(CGRAPH_STR_COORDINATOR);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_COORDINATOR);
 }
 
 
 template<CInt SIZE>
 CStatus GCoordinator<SIZE>::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     status = (SIZE >= 0)
              ? thread_pool_->createSecondaryThread(SIZE)
              : thread_pool_->releaseSecondaryThread((-1) * SIZE);
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -40,13 +40,13 @@ CVoid GCoordinator<SIZE>::dumpElement(std::ostream& oss) {
 
 template<CInt SIZE>
 CStatus GCoordinator<SIZE>::checkSuitable() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(loop_ > 1,    \
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(loop_ > 1,    \
     "cannot set GCoordinator loop > 1")
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GCOORDINATOR_INL
+#endif //DAOGRAPH_GCOORDINATOR_INL

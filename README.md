@@ -1,61 +1,61 @@
 <p align="left">
-  <a href="https://github.com/ChunelFeng/CGraph"><img src="https://badgen.net/badge/langs/C++,Python/cyan?list=1" alt="languages"></a>
-  <a href="https://github.com/ChunelFeng/CGraph"><img src="https://badgen.net/badge/os/MacOS,Linux,Windows/cyan?list=1" alt="os"></a>
-  <a href="https://github.com/ChunelFeng/CGraph/stargazers"><img src="https://badgen.net/github/stars/ChunelFeng/CGraph?color=cyan" alt="stars"></a>
-  <a href="https://github.com/ChunelFeng/CGraph/network/members"><img src="https://badgen.net/github/forks/ChunelFeng/CGraph?color=cyan" alt="forks"></a>
-  <a href="https://badge.fury.io/py/pycgraph"><img src="https://badge.fury.io/py/pycgraph.svg" alt="pypi"></a>
-  <a href="https://pepy.tech/projects/pycgraph"><img src="https://static.pepy.tech/personalized-badge/pycgraph?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=pypi+downloads" alt="PyPI Downloads"></a>
-  <a href="https://www.codefactor.io/repository/github/chunelfeng/cgraph/overview/main"><img src="https://www.codefactor.io/repository/github/chunelfeng/cgraph/badge/main" alt="CodeFactor" /></a>
+  <a href="https://github.com/ChunelFeng/DaoGraph"><img src="https://badgen.net/badge/langs/C++,Python/cyan?list=1" alt="languages"></a>
+  <a href="https://github.com/ChunelFeng/DaoGraph"><img src="https://badgen.net/badge/os/MacOS,Linux,Windows/cyan?list=1" alt="os"></a>
+  <a href="https://github.com/ChunelFeng/DaoGraph/stargazers"><img src="https://badgen.net/github/stars/ChunelFeng/DaoGraph?color=cyan" alt="stars"></a>
+  <a href="https://github.com/ChunelFeng/DaoGraph/network/members"><img src="https://badgen.net/github/forks/ChunelFeng/DaoGraph?color=cyan" alt="forks"></a>
+  <a href="https://badge.fury.io/py/pydaograph"><img src="https://badge.fury.io/py/pydaograph.svg" alt="pypi"></a>
+  <a href="https://pepy.tech/projects/pydaograph"><img src="https://static.pepy.tech/personalized-badge/pydaograph?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=pypi+downloads" alt="PyPI Downloads"></a>
+  <a href="https://www.codefactor.io/repository/github/chunelfeng/daograph/overview/main"><img src="https://www.codefactor.io/repository/github/chunelfeng/daograph/badge/main" alt="CodeFactor" /></a>
 </p>
 
 [![awesome-cpp](https://badgen.net/badge/icon/awesome-cpp/purple?icon=awesome&label&color)](https://github.com/fffaraz/awesome-cpp)
 [![HelloGithub](https://badgen.net/badge/icon/HelloGithub/purple?icon=awesome&label&color)](https://github.com/521xueweihan/HelloGitHub/blob/master/content/HelloGitHub70.md)
 
-中文 | [English Readme](README_en.md) | [deepwiki](https://deepwiki.com/ChunelFeng/CGraph)
+中文 | [English Readme](README_en.md) | [deepwiki](https://deepwiki.com/ChunelFeng/DaoGraph)
 
-<h1 align="center"> CGraph 说明文档 </h1>
+<h1 align="center"> DaoGraph 说明文档 </h1>
 
-<img align="right" src="https://github.com/ChunelFeng/CGraph/blob/main/doc/image/CGraph%20Author.jpg" width="256px">
+<img align="right" src="https://github.com/ChunelFeng/DaoGraph/blob/main/doc/image/DaoGraph%20Author.jpg" width="256px">
 
-><b>CGraph</b> is a cross-platform <b>D</b>irected <b>A</b>cyclic <b>G</b>raph framework based on pure C++ without any 3rd-party dependencies.</br></br>
+><b>DaoGraph</b> is a cross-platform <b>D</b>irected <b>A</b>cyclic <b>G</b>raph framework based on pure C++ without any 3rd-party dependencies.</br></br>
 >You, with it, can <b>build your own operators simply, and describe any running schedules</b> as you need, such as dependence, parallelling, aggregation, conditional and so on. <b>Python APIs</b> are also supported to build your pipeline.</br></br>
 >Tutorials and contact information are shown as follows. Please <b>get in touch with us for free</b> if you need more about this repository.
 
 ## 一. 简介
 
-`CGraph`中文名为【色丶图】，是一套无任何第三方依赖的跨平台图流程执行框架。通过`GPipeline`(流水线)底层调度，提供了包含依赖元素依次执行、非依赖元素并发执行，支持暂停、恢复、超时设定的 `eDAG` 调度功能。
+`DaoGraph`中文名为【色丶图】，是一套无任何第三方依赖的跨平台图流程执行框架。通过`GPipeline`(流水线)底层调度，提供了包含依赖元素依次执行、非依赖元素并发执行，支持暂停、恢复、超时设定的 `eDAG` 调度功能。
 
 使用者只需继承`GNode`(节点)类，实现子类的`run()`方法，并根据需要设定依赖关系，即可实现任务的图化执行或流水线执行。还可以通过设定各种包含多节点信息的`GGroup`(组)，自行控制图的条件判断、循环和并发执行逻辑。
 
-![CGraph Skeleton](https://github.com/ChunelFeng/CGraph/blob/main/doc/image/CGraph%20Skeleton.jpg)
+![DaoGraph Skeleton](https://github.com/ChunelFeng/DaoGraph/blob/main/doc/image/DaoGraph%20Skeleton.jpg)
 <br>
 
-本工程使用纯C++11标准库编写，无任何第三方依赖，兼容`MacOS`、`Linux`、`Windows`和`Android`系统。支持本地编译和二次开发，并且提供`Python`版本：`pycgraph`。编译和安装方法，请参考 [CGraph 编译说明](https://github.com/ChunelFeng/CGraph/blob/main/COMPILE.md ) <br>
+本工程使用纯C++11标准库编写，无任何第三方依赖，兼容`MacOS`、`Linux`、`Windows`和`Android`系统。支持本地编译和二次开发，并且提供`Python`版本：`pydaograph`。编译和安装方法，请参考 [DaoGraph 编译说明](https://github.com/ChunelFeng/DaoGraph/blob/main/COMPILE.md ) <br>
 
 详细功能介绍和用法，请参考 [一面之猿网](http://www.chunel.cn/) 中的文章内容。相关视频在B站持续更新中，欢迎观看和交流：<br>
-* [【B站视频】CGraph 入门篇](https://www.bilibili.com/video/BV1mk4y1v7XJ) <br>
-* [【B站视频】CGraph 功能篇](https://www.bilibili.com/cheese/play/ss22264) <br>
-  * 全面介绍CGraph项目中，所有的名词术语和功能模块
+* [【B站视频】DaoGraph 入门篇](https://www.bilibili.com/video/BV1mk4y1v7XJ) <br>
+* [【B站视频】DaoGraph 功能篇](https://www.bilibili.com/cheese/play/ss22264) <br>
+  * 全面介绍DaoGraph项目中，所有的名词术语和功能模块
   * 结合实际coding过程，详细介绍了每个功能的具体的使用场景、用法、以及解决的问题
-  * 适合想要全面了解功能和快速上手使用CGraph的童鞋
+  * 适合想要全面了解功能和快速上手使用DaoGraph的童鞋
   * 适合对多线程编程感兴趣的童鞋
-* [【B站视频】CGraph 应用篇](https://www.bilibili.com/video/BV1B84y1D7Hs) <br>
-* [【B站视频】CGraph 分享篇](https://www.bilibili.com/video/BV1ofLdz5EzX) <br>
+* [【B站视频】DaoGraph 应用篇](https://www.bilibili.com/video/BV1B84y1D7Hs) <br>
+* [【B站视频】DaoGraph 分享篇](https://www.bilibili.com/video/BV1ofLdz5EzX) <br>
 
 ----
 
 ## 二. 入门Demo
 > <b>C++ 版本</b>
 ```cpp
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 class MyNode1 : public GNode {
 public:
     CStatus run() override {
         printf("[%s], sleep for 1 second ...\n", this->getName().c_str());
-        CGRAPH_SLEEP_SECOND(1)
+        DAOGRAPH_SLEEP_SECOND(1)
         return CStatus();
     }
 };
@@ -64,7 +64,7 @@ class MyNode2 : public GNode {
 public:
     CStatus run() override {
         printf("[%s], sleep for 2 second ...\n", this->getName().c_str());
-        CGRAPH_SLEEP_SECOND(2)
+        DAOGRAPH_SLEEP_SECOND(2)
         return CStatus();
     }
 };
@@ -91,7 +91,7 @@ int main() {
 }
 ```
 
-![CGraph Demo](https://github.com/ChunelFeng/CGraph/blob/main/doc/image/CGraph%20Demo.jpg)
+![DaoGraph Demo](https://github.com/ChunelFeng/DaoGraph/blob/main/doc/image/DaoGraph%20Demo.jpg)
 <br>
 如上图所示，图结构执行的时候，首先执行`a`节点。`a`节点执行完毕后，并行执行`b`和`c`节点。`b`和`c`节点全部执行完毕后，再执行`d`节点。
 
@@ -101,7 +101,7 @@ int main() {
 import time
 from datetime import datetime
 
-from pycgraph import GNode, GPipeline, CStatus
+from pydaograph import GNode, GPipeline, CStatus
 
 
 class MyNode1(GNode):
@@ -142,56 +142,56 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 
 > <b>其他版本</b>
 
-* [CsCGraph](https://github.com/ChunelFeng/CsCGraph) : A CSharp native, CGraph-API-liked DAG project
-* [JaCGraph](https://github.com/ChunelFeng/JaCGraph) : A Java native, CGraph-API-liked DAG project
-* [GoCGraph](https://github.com/AsunaU2/GoCGraph) : A Go native, CGraph-API-liked DAG project
-* [CGraph-lite](https://github.com/ChunelFeng/CGraph-lite) : A one-header-only, CGraph-API-liked DAG project, lite version by C++
+* [CsDaoGraph](https://github.com/ChunelFeng/CsDaoGraph) : A CSharp native, DaoGraph-API-liked DAG project
+* [JaDaoGraph](https://github.com/ChunelFeng/JaDaoGraph) : A Java native, DaoGraph-API-liked DAG project
+* [GoDaoGraph](https://github.com/AsunaU2/GoDaoGraph) : A Go native, DaoGraph-API-liked DAG project
+* [DaoGraph-lite](https://github.com/ChunelFeng/DaoGraph-lite) : A one-header-only, DaoGraph-API-liked DAG project, lite version by C++
 
 ----
 
 ## 三. 推荐阅读
 
-* [纯序员给你介绍图化框架的简单实现——执行逻辑](http://www.chunel.cn/archives/cgraph-run-introduce)
-* [纯序员给你介绍图化框架的简单实现——循环逻辑](http://www.chunel.cn/archives/cgraph-loop-introduce)
-* [纯序员给你介绍图化框架的简单实现——参数传递](http://www.chunel.cn/archives/cgraph-param-introduce)
-* [纯序员给你介绍图化框架的简单实现——条件判断](http://www.chunel.cn/archives/cgraph-condition-introduce)
-* [纯序员给你介绍图化框架的简单实现——面向切面](http://www.chunel.cn/archives/cgraph-aspect-introduce)
-* [纯序员给你介绍图化框架的简单实现——函数注入](http://www.chunel.cn/archives/cgraph-function-introduce)
-* [纯序员给你介绍图化框架的简单实现——消息机制](http://www.chunel.cn/archives/cgraph-message-introduce)
-* [纯序员给你介绍图化框架的简单实现——事件触发](http://www.chunel.cn/archives/cgraph-event-introduce)
-* [纯序员给你介绍图化框架的简单实现——超时机制](http://www.chunel.cn/archives/cgraph-timeout-introduce)
-* [纯序员给你介绍图化框架的简单实现——线程池优化（一）](http://www.chunel.cn/archives/cgraph-threadpool-1-introduce)
-* [纯序员给你介绍图化框架的简单实现——线程池优化（二）](http://www.chunel.cn/archives/cgraph-threadpool-2-introduce)
-* [纯序员给你介绍图化框架的简单实现——线程池优化（三）](http://www.chunel.cn/archives/cgraph-threadpool-3-introduce)
-* [纯序员给你介绍图化框架的简单实现——线程池优化（四）](http://www.chunel.cn/archives/cgraph-threadpool-4-introduce)
-* [纯序员给你介绍图化框架的简单实现——线程池优化（五）](http://www.chunel.cn/archives/cgraph-threadpool-5-introduce)
-* [纯序员给你介绍图化框架的简单实现——线程池优化（六）](http://www.chunel.cn/archives/cgraph-threadpool-6-introduce)
-* [纯序员给你介绍图化框架的简单实现——性能优化（一）](http://www.chunel.cn/archives/cgraph-performance-1)
-* [纯序员给你介绍图化框架的简单实现——性能优化（二）](http://www.chunel.cn/archives/cgraph-performance-2)
-* [纯序员给你介绍图化框架的简单实现——距离计算](http://www.chunel.cn/archives/cgraph-distance-introduce)
+* [纯序员给你介绍图化框架的简单实现——执行逻辑](http://www.chunel.cn/archives/daograph-run-introduce)
+* [纯序员给你介绍图化框架的简单实现——循环逻辑](http://www.chunel.cn/archives/daograph-loop-introduce)
+* [纯序员给你介绍图化框架的简单实现——参数传递](http://www.chunel.cn/archives/daograph-param-introduce)
+* [纯序员给你介绍图化框架的简单实现——条件判断](http://www.chunel.cn/archives/daograph-condition-introduce)
+* [纯序员给你介绍图化框架的简单实现——面向切面](http://www.chunel.cn/archives/daograph-aspect-introduce)
+* [纯序员给你介绍图化框架的简单实现——函数注入](http://www.chunel.cn/archives/daograph-function-introduce)
+* [纯序员给你介绍图化框架的简单实现——消息机制](http://www.chunel.cn/archives/daograph-message-introduce)
+* [纯序员给你介绍图化框架的简单实现——事件触发](http://www.chunel.cn/archives/daograph-event-introduce)
+* [纯序员给你介绍图化框架的简单实现——超时机制](http://www.chunel.cn/archives/daograph-timeout-introduce)
+* [纯序员给你介绍图化框架的简单实现——线程池优化（一）](http://www.chunel.cn/archives/daograph-threadpool-1-introduce)
+* [纯序员给你介绍图化框架的简单实现——线程池优化（二）](http://www.chunel.cn/archives/daograph-threadpool-2-introduce)
+* [纯序员给你介绍图化框架的简单实现——线程池优化（三）](http://www.chunel.cn/archives/daograph-threadpool-3-introduce)
+* [纯序员给你介绍图化框架的简单实现——线程池优化（四）](http://www.chunel.cn/archives/daograph-threadpool-4-introduce)
+* [纯序员给你介绍图化框架的简单实现——线程池优化（五）](http://www.chunel.cn/archives/daograph-threadpool-5-introduce)
+* [纯序员给你介绍图化框架的简单实现——线程池优化（六）](http://www.chunel.cn/archives/daograph-threadpool-6-introduce)
+* [纯序员给你介绍图化框架的简单实现——性能优化（一）](http://www.chunel.cn/archives/daograph-performance-1)
+* [纯序员给你介绍图化框架的简单实现——性能优化（二）](http://www.chunel.cn/archives/daograph-performance-2)
+* [纯序员给你介绍图化框架的简单实现——距离计算](http://www.chunel.cn/archives/daograph-distance-introduce)
   <br><br>
-* [CGraph 主打歌——《听码农的话》](http://www.chunel.cn/archives/listen-to-coder)
-* [聊聊我写CGraph的这一年](http://www.chunel.cn/archives/cgraph-anniversary-introduce)
-* [从零开始主导一款收录于awesome-cpp的项目，是一种怎样的体验?](http://www.chunel.cn/archives/cgraph-awesome-cpp)
-* [炸裂！CGraph性能全面超越taskflow之后，作者却说他更想...](http://www.chunel.cn/archives/cgraph-compare-taskflow-v1)
-* [以图优图：CGraph中计算dag最大并发度思路总结](http://www.chunel.cn/archives/cgraph-max-para-size)
-* [一文带你了解练习时长两年半的CGraph](http://www.chunel.cn/archives/cgraph-kunanniversary-introduce)
-* [CGraph作者想知道，您是否需要一款eDAG调度框架](http://www.chunel.cn/archives/cgraph-extended-dag)
-* [降边增效：CGraph中冗余边剪裁思路总结](http://www.chunel.cn/archives/cgraph-remove-redundancy-link)
-* [最新码坛爽文：重生之我在国外写CGraph(python版本)](http://www.chunel.cn/archives/cgraph-pycgraph-v1)
+* [DaoGraph 主打歌——《听码农的话》](http://www.chunel.cn/archives/listen-to-coder)
+* [聊聊我写DaoGraph的这一年](http://www.chunel.cn/archives/daograph-anniversary-introduce)
+* [从零开始主导一款收录于awesome-cpp的项目，是一种怎样的体验?](http://www.chunel.cn/archives/daograph-awesome-cpp)
+* [炸裂！DaoGraph性能全面超越taskflow之后，作者却说他更想...](http://www.chunel.cn/archives/daograph-compare-taskflow-v1)
+* [以图优图：DaoGraph中计算dag最大并发度思路总结](http://www.chunel.cn/archives/daograph-max-para-size)
+* [一文带你了解练习时长两年半的DaoGraph](http://www.chunel.cn/archives/daograph-kunanniversary-introduce)
+* [DaoGraph作者想知道，您是否需要一款eDAG调度框架](http://www.chunel.cn/archives/daograph-extended-dag)
+* [降边增效：DaoGraph中冗余边剪裁思路总结](http://www.chunel.cn/archives/daograph-remove-redundancy-link)
+* [最新码坛爽文：重生之我在国外写DaoGraph(python版本)](http://www.chunel.cn/archives/daograph-pydaograph-v1)
   <br>
 
 ----
 
 ## 四. 关联项目
 
-* [GraphANNS](https://github.com/whenever5225/GraphANNS) : Graph-based Approximate Nearest Neighbor Search Working off CGraph
+* [GraphANNS](https://github.com/whenever5225/GraphANNS) : Graph-based Approximate Nearest Neighbor Search Working off DaoGraph
 * [CThreadPool](https://github.com/ChunelFeng/CThreadPool) : 一个简单好用、功能强大、性能优异、跨平台的C++线程池
-* [PyCGraph-example](https://github.com/ChunelFeng/PyCGraph-example) : A useful list of how cool to use PyCGraph
+* [pydaograph-example](https://github.com/ChunelFeng/pydaograph-example) : A useful list of how cool to use pydaograph
 * [awesome-cpp](https://github.com/fffaraz/awesome-cpp) : A curated list of awesome C++ (or C) frameworks, libraries, resources, and shiny things. Inspired by awesome-... stuff.
 * [awesome-workflow-engines](https://github.com/meirwah/awesome-workflow-engines) : A curated list of awesome open source workflow engines
 * [taskflow](https://github.com/taskflow/taskflow) : A General-purpose Parallel and Heterogeneous Task Programming System
-  * [【B站视频】CGraph 和 taskflow 性能对比实测](https://www.bilibili.com/video/BV1gwWAekEAy/?spm_id_from=333.337.search-card.all.click&vd_source=2c7baed805c6cb33d630d5d4546cf0be) <br>
+  * [【B站视频】DaoGraph 和 taskflow 性能对比实测](https://www.bilibili.com/video/BV1gwWAekEAy/?spm_id_from=333.337.search-card.all.click&vd_source=2c7baed805c6cb33d630d5d4546cf0be) <br>
 * [torchpipe](https://github.com/torchpipe/torchpipe) : Serving Inside Pytorch
   * [【B站视频】开源项目torchpipe - ai引擎在线高并发经验和实战](https://www.bilibili.com/video/BV1Zm411X7k1/)
 * [nndeploy](https://github.com/DeployAI/nndeploy) : Easy-to-use, high-performance, multi-platform inference deployment framework
@@ -203,10 +203,10 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 * [incubator-hugegraph-ai](https://github.com/apache/incubator-hugegraph-ai) : The integration of HugeGraph with AI/LLM & GraphRAG
 * [pybind11](https://github.com/pybind/pybind11) : Seamless operability between C++11 and Python
   * 本项目Python接口绑定功能，使用pybind11实现
-  * [【B站视频】pybind11落地实战——PyCGraph是怎样练成的](https://www.bilibili.com/video/BV1ofLdz5EzX) | [飞书文档链接](https://ilyryn6yei.feishu.cn/docx/YDfHdU9mfoTlnqxaTkscRob6nGe)
+  * [【B站视频】pybind11落地实战——PyDaoGraph是怎样练成的](https://www.bilibili.com/video/BV1ofLdz5EzX) | [飞书文档链接](https://ilyryn6yei.feishu.cn/docx/YDfHdU9mfoTlnqxaTkscRob6nGe)
 
 
-[![Star History Chart](https://api.star-history.com/svg?repos=ChunelFeng/CGraph&type=Date)](https://star-history.com/#ChunelFeng/CGraph&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=ChunelFeng/DaoGraph&type=Date)](https://star-history.com/#ChunelFeng/DaoGraph&Date)
 
 ------------
 <details>
@@ -329,7 +329,7 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 
 [2023.01.21 - v2.3.0 - Chunel]
 * 提供`event`(事件)功能
-* 提供`CGraph Intro.xmind`文件，通过脑图的方式，介绍了CGraph的整体逻辑
+* 提供`DaoGraph Intro.xmind`文件，通过脑图的方式，介绍了DaoGraph的整体逻辑
 
 [2023.01.25 - v2.3.1 - Chunel]
 * 提供针对C++11版本的支持。感谢 [MirrorYuChen](https://github.com/MirrorYuChen) 提供相关解决方案
@@ -396,7 +396,7 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 * 提供`pipeline`剪裁功能，用于删除`element`之间重复的依赖
 * 提供`element`删除依赖的方法
 * 优化`event`(事件)机制，异步事件可以等待结束
-* 发布 [CGraph-lite](https://github.com/ChunelFeng/CGraph-lite) 项目，提供简单DAG构图和参数传递功能。接口完全兼容，可无缝切换至本项目
+* 发布 [DaoGraph-lite](https://github.com/ChunelFeng/DaoGraph-lite) 项目，提供简单DAG构图和参数传递功能。接口完全兼容，可无缝切换至本项目
 
 [2024.11.16 - v2.6.2 - Chunel]
 * 优化参数互斥机制和获取性能
@@ -411,7 +411,7 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 [2025.05.04 - v3.1.0 - Chunel]
 * 提供 全量功能 Python 版本
 * 提供 Python 和 C++ 混合编程功能
-* 提供 Python 打包功能，支持 `pip3 install PyCGraph` 安装
+* 提供 Python 打包功能，支持 `pip3 install pydaograph` 安装
 
 [2025.06.15 - v3.1.1 - Chunel]
 * 提供 C# 和 Java 版本
@@ -424,7 +424,7 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 
 [2025.11.08 - v3.2.2 - Chunel]
 * 提供 本地保存和加载 功能
-* 修改 `PyCGraph` 为 `pycgraph`，支持 `pip3 install pycgraph` 安装
+* 修改 `PyDaoGraph` 为 `pydaograph`，支持 `pip3 install pydaograph` 安装
 
 </details>
 
@@ -435,13 +435,13 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 * 感谢 [Doocs 微信公众号](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzIxNjA5ODQ0OQ==&action=getalbum&album_id=1989460124624551937&scene=173&from_msgid=2654703194&from_itemidx=1&count=3&nolastread=1#wechat_redirect) 刊登相关介绍文档，欢迎加入 [Doocs 开源社区](https://github.com/doocs)
 * 感谢《HelloGithub》期刊介绍和推荐：[HelloGithub 第70期](https://github.com/521xueweihan/HelloGitHub/blob/master/content/HelloGitHub70.md)
 
-<p align="center"><img src="https://github.com/ChunelFeng/CGraph/blob/main/doc/image/HelloGithub%20Logo.gif"/></p>
+<p align="center"><img src="https://github.com/ChunelFeng/DaoGraph/blob/main/doc/image/HelloGithub%20Logo.gif"/></p>
 
 * Thanks to the recommendation from [awesome-cpp](https://github.com/fffaraz/awesome-cpp), we all know, it is the most authoritative recommendation list for cpp project in the world
 * Thanks to the recommendation from `Taskflow Group`: [awesome-parallel-computing](https://github.com/taskflow/awesome-parallel-computing), and we always treat [taskflow](https://github.com/taskflow/taskflow) as a role model
 * Thanks to the recommendation from [awesome-workflow-engines](https://github.com/meirwah/awesome-workflow-engines)
-* 感谢各位开发者 [CONTRIBUTORS](https://github.com/ChunelFeng/CGraph/blob/main/CONTRIBUTORS.md) 为项目做出的贡献
-* 感谢所有为`CGraph`项目提出的意见和建议的朋友，在此不一一提及。随时欢迎大家加入，一起共建
+* 感谢各位开发者 [CONTRIBUTORS](https://github.com/ChunelFeng/DaoGraph/blob/main/CONTRIBUTORS.md) 为项目做出的贡献
+* 感谢所有为`DaoGraph`项目提出的意见和建议的朋友，在此不一一提及。随时欢迎大家加入，一起共建
 
 </details>
 
@@ -451,7 +451,7 @@ Supported JSON fields: `elements` (containing `name`, `type`, `loop`, `depends`,
 
 * 微信： ChunelFeng (欢迎扫描上方二维码，添加作者为好友。请简单备注个人信息^_^)
 * 邮箱： chunel@foxmail.com
-* 源码： https://github.com/ChunelFeng/CGraph
+* 源码： https://github.com/ChunelFeng/DaoGraph
 * 论坛： www.chunel.cn
 
 </details>

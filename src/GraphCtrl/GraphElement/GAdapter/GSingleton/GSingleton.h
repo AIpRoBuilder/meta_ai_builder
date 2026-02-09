@@ -5,12 +5,12 @@
 @Desc: 本功能，仅在C++17或以上版本生效
 ***************************/
 
-#ifndef CGRAPH_GSINGLETON_H
-#define CGRAPH_GSINGLETON_H
+#ifndef DAOGRAPH_GSINGLETON_H
+#define DAOGRAPH_GSINGLETON_H
 
 #include "../GAdapter.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T>
 class GSingleton : public GAdapter {
@@ -46,8 +46,8 @@ private:
 template<typename T>
 using GSingletonPtr = GSingleton<T> *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GSingleton.inl"
 
-#endif //CGRAPH_GSINGLETON_H
+#endif //DAOGRAPH_GSINGLETON_H

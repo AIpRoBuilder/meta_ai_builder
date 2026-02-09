@@ -1,11 +1,11 @@
 
-# 本cmake文件，供三方引入CGraph引用，用于屏蔽系统和C++版本的区别
+# 本cmake文件，供三方引入DaoGraph引用，用于屏蔽系统和C++版本的区别
 
-# 根据当前 CGraph-env-include.cmake 文件的位置，定位CGraph整体工程的路径
+# 根据当前 DaoGraph-env-include.cmake 文件的位置，定位DaoGraph整体工程的路径
 # 从而解决并兼容了直接引入和三方库引入的路径不匹配问题
-get_filename_component(CGRAPH_PROJECT_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
-set(CGRAPH_PROJECT_ROOT_DIR "${CGRAPH_PROJECT_CMAKE_DIR}/../")
-file(GLOB_RECURSE CGRAPH_PROJECT_SRC_LIST "${CGRAPH_PROJECT_ROOT_DIR}/src/*.cpp")
+get_filename_component(DAOGRAPH_PROJECT_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
+set(DAOGRAPH_PROJECT_ROOT_DIR "${DAOGRAPH_PROJECT_CMAKE_DIR}/../")
+file(GLOB_RECURSE DAOGRAPH_PROJECT_SRC_LIST "${DAOGRAPH_PROJECT_ROOT_DIR}/src/*.cpp")
 
 IF(APPLE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -O2 \
@@ -30,9 +30,14 @@ ELSEIF(WIN32)
     # 本工程也支持在windows平台上的mingw环境使用
 ENDIF()
 
-include_directories(${CGRAPH_PROJECT_ROOT_DIR}/src/)    # 直接加入"CGraph.h"文件对应的位置
+include_directories(${DAOGRAPH_PROJECT_ROOT_DIR}/src/)    # 直接加入"DaoGraph.h"文件对应的位置
 
 # 以下三选一，本地编译执行，推荐OBJECT方式
-add_library(CGraph OBJECT ${CGRAPH_PROJECT_SRC_LIST})      # 通过代码编译
-# add_library(CGraph SHARED ${CGRAPH_PROJECT_SRC_LIST})    # 编译libCGraph动态库
-# add_library(CGraph STATIC ${CGRAPH_PROJECT_SRC_LIST})    # 编译libCGraph静态库
+add_library(DaoGraph OBJECT ${DAOGRAPH_PROJECT_SRC_LIST})      # 通过代码编译
+# add_library(DaoGraph SHARED ${DAOGRAPH_PROJECT_SRC_LIST})    # 编译libDaoGraph动态库
+# add_library(DaoGraph STATIC ${DAOGRAPH_PROJECT_SRC_LIST})    # 编译libDaoGraph静态库
+
+if (DAOGRAPH_USE_NLOHMANN_JSON)
+    target_link_libraries(DaoGraph PUBLIC nlohmann_json::nlohmann_json)
+    target_compile_definitions(DaoGraph PUBLIC DAOGRAPH_USE_NLOHMANN_JSON)
+endif()

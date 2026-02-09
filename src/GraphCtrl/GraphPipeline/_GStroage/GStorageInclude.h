@@ -5,11 +5,11 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTORAGEINCLUDE_H
-#define CGRAPH_GSTORAGEINCLUDE_H
+#ifndef DAOGRAPH_GSTORAGEINCLUDE_H
+#define DAOGRAPH_GSTORAGEINCLUDE_H
 
 #include "GStorageDefine.h"
 #include "GStorage.h"
 #include "GStorageFactory.h"
 
-#endif //CGRAPH_GSTORAGEINCLUDE_H
+#endif //DAOGRAPH_GSTORAGEINCLUDE_H

@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYVERSIONPARAM_H
-#define CGRAPH_MYVERSIONPARAM_H
+#ifndef DAOGRAPH_MYVERSIONPARAM_H
+#define DAOGRAPH_MYVERSIONPARAM_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 const static char* VERSION_PARAM_KEY = "version";
 
-struct MyVersionParam : public CGraph::GElementParam {
-    CVoid clone(CGraph::GPassedParamPtr param) override {
+struct MyVersionParam : public DaoGraph::GElementParam {
+    CVoid clone(DaoGraph::GPassedParamPtr param) override {
         auto* ptr = dynamic_cast<MyVersionParam *>(param);
         if (nullptr == ptr) {
             return;    // 理论不存在的情况
@@ -28,4 +28,4 @@ struct MyVersionParam : public CGraph::GElementParam {
 };
 
 
-#endif //CGRAPH_MYVERSIONPARAM_H
+#endif //DAOGRAPH_MYVERSIONPARAM_H

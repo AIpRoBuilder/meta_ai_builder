@@ -8,73 +8,73 @@
 #include "GRegion.h"
 #include "../../_GOptimizer/GOptimizerInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GRegion::GRegion() : GGroup() {
     is_init_ = false;
-    manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
+    manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
     element_type_ = GElementType::REGION;
-    session_ = URandom<>::generateSession(CGRAPH_STR_REGION);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_REGION);
 }
 
 
 GRegion::~GRegion() {
-    CGRAPH_DELETE_PTR(manager_)
+    DAOGRAPH_DELETE_PTR(manager_)
 }
 
 
 CStatus GRegion::init() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     // 在这里将初始化所有的节点信息，并且实现分析，联通等功能
-    CGRAPH_ASSERT_NOT_NULL(manager_)
+    DAOGRAPH_ASSERT_NOT_NULL(manager_)
 
     status = this->manager_->init();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     is_init_ = true;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GRegion::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     status = manager_->destroy();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     is_init_ = false;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GRegion::run() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(true)
-    CGRAPH_ASSERT_NOT_NULL(manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_ASSERT_NOT_NULL(manager_)
 
     status = manager_->run();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GRegion::addElementEx(GElementPtr element) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element, manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element, manager_)
 
     manager_->manager_elements_.emplace(element);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 GElementPtr GRegion::setThreadPoolEx(UThreadPoolPtr ptr) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(manager_, ptr)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(manager_, ptr)
     manager_->setThreadPool(ptr);
     return this;
 }
 
 
 GRegionPtr GRegion::setGEngineType(GEngineType type) {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(manager_)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(manager_)
 
     this->manager_->setEngineType(type);
     return this;
@@ -114,7 +114,7 @@ CBool GRegion::isSeparate(GElementCPtr a, GElementCPtr b) const {
 
 
 CSize GRegion::trim() {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
     CSize result = 0;
     if (manager_) {
         result = GTrimOptimizer::trim(manager_->manager_elements_);
@@ -122,4 +122,4 @@ CSize GRegion::trim() {
     return result;
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

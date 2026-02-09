@@ -5,8 +5,8 @@
 @Desc: 信息管理类
 ***************************/
 
-#ifndef CGRAPH_GMESSAGEMANAGER_H
-#define CGRAPH_GMESSAGEMANAGER_H
+#ifndef DAOGRAPH_GMESSAGEMANAGER_H
+#define DAOGRAPH_GMESSAGEMANAGER_H
 
 #include <string>
 #include <set>
@@ -16,7 +16,7 @@
 #include "GMessage.h"
 #include "GMessageDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T = GMessageParam,
         c_enable_if_t<std::is_base_of<GMessageParam, T>::value, int> = 0>
@@ -33,10 +33,10 @@ public:
     template<typename TImpl,
             c_enable_if_t<std::is_base_of<T, TImpl>::value, int> = 0>
     CStatus createTopic(const std::string& topic, CUInt size) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
 
         auto innerTopic = internal::SEND_RECV_PREFIX + topic;    // 中间做一层映射，用来区分是 PubSub的，还是SendRecv的
-        CGRAPH_LOCK_GUARD lk(send_recv_mutex_);
+        DAOGRAPH_LOCK_GUARD lk(send_recv_mutex_);
         auto result = send_recv_message_map_.find(innerTopic);
         if (result != send_recv_message_map_.end()) {
             // 如果类型和size完全匹配的话，则直接返回创建成功。否则返回错误
@@ -49,7 +49,7 @@ public:
             send_recv_message_map_.insert(std::pair<const std::string&, GMessagePtr<T> >(innerTopic, GMessagePtr<T>(message)));
         }
 
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -58,18 +58,18 @@ public:
      * @return
      */
     CStatus removeTopic(const std::string& topic) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         auto innerTopic = internal::SEND_RECV_PREFIX + topic;
-        CGRAPH_LOCK_GUARD lk(send_recv_mutex_);
+        DAOGRAPH_LOCK_GUARD lk(send_recv_mutex_);
         auto result = send_recv_message_map_.find(innerTopic);
         if (result == send_recv_message_map_.end()) {
-            CGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
+            DAOGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
         }
 
-        CGRAPH_DELETE_PTR(result->second);
+        DAOGRAPH_DELETE_PTR(result->second);
         send_recv_message_map_.erase(result);
 
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -86,19 +86,19 @@ public:
             c_enable_if_t<std::is_base_of<T, TImpl>::value, int> = 0>
     CStatus recvTopicValue(const std::string& topic,
                            std::shared_ptr<TImpl>& value,
-                           CMSec timeout = CGRAPH_MAX_BLOCK_TTL) {
-        CGRAPH_FUNCTION_BEGIN
+                           CMSec timeout = DAOGRAPH_MAX_BLOCK_TTL) {
+        DAOGRAPH_FUNCTION_BEGIN
         auto innerTopic = internal::SEND_RECV_PREFIX + topic;
         auto result = send_recv_message_map_.find(innerTopic);
         if (result == send_recv_message_map_.end()) {
-            CGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
+            DAOGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
         }
 
         auto message = (GMessagePtr<TImpl>)(result->second);
-        CGRAPH_ASSERT_NOT_NULL(message);
+        DAOGRAPH_ASSERT_NOT_NULL(message);
 
         status = message->recv(value, timeout);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -114,18 +114,18 @@ public:
     CStatus sendTopicValue(const std::string& topic,
                            const std::shared_ptr<TImpl>& value,
                            GMessagePushStrategy strategy) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         auto innerTopic = internal::SEND_RECV_PREFIX + topic;
         auto result = send_recv_message_map_.find(innerTopic);
         if (result == send_recv_message_map_.end()) {
-            CGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
+            DAOGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
         }
 
         auto message = static_cast<GMessagePtr<T> >(result->second);
-        CGRAPH_ASSERT_NOT_NULL(message);
+        DAOGRAPH_ASSERT_NOT_NULL(message);
 
         message->send(value, strategy);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -140,7 +140,7 @@ public:
     CIndex bindTopic(const std::string& topic, CUInt size) {
         auto innerTopic = internal::PUB_SUB_PREFIX + topic;
 
-        CGRAPH_LOCK_GUARD lk(pub_sub_mutex_);
+        DAOGRAPH_LOCK_GUARD lk(pub_sub_mutex_);
         auto message = CAllocator::safeMallocTemplateCObject<GMessage<TImpl>>(size);
         CIndex connId = (++cur_conn_id_);
         auto result = pub_sub_message_map_.find(innerTopic);
@@ -171,18 +171,18 @@ public:
     CStatus pubTopicValue(const std::string& topic,
                           const std::shared_ptr<TImpl>& value,
                           GMessagePushStrategy strategy) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         auto innerTopic = internal::PUB_SUB_PREFIX + topic;
         auto result = pub_sub_message_map_.find(innerTopic);
         if (result == pub_sub_message_map_.end()) {
-            CGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
+            DAOGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
         }
 
         auto& messageSet = result->second;
         for (auto msg : messageSet) {
             msg->send(value, strategy);    // 给所有订阅的信息，一次发送消息
         }
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -195,15 +195,15 @@ public:
      */
     template<typename TImpl,
             c_enable_if_t<std::is_base_of<T, TImpl>::value, int> = 0>
-    CStatus subTopicValue(CIndex connId, std::shared_ptr<TImpl>& value, CMSec timeout = CGRAPH_MAX_BLOCK_TTL) {
-        CGRAPH_FUNCTION_BEGIN
+    CStatus subTopicValue(CIndex connId, std::shared_ptr<TImpl>& value, CMSec timeout = DAOGRAPH_MAX_BLOCK_TTL) {
+        DAOGRAPH_FUNCTION_BEGIN
         if (conn_message_map_.end() == conn_message_map_.find(connId)) {
-            CGRAPH_RETURN_ERROR_STATUS("no find [" + std::to_string(connId) + "] connect");
+            DAOGRAPH_RETURN_ERROR_STATUS("no find [" + std::to_string(connId) + "] connect");
         }
 
         auto message = (GMessagePtr<TImpl>)(conn_message_map_[connId]);
         status = message->recv(value, timeout);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -212,20 +212,20 @@ public:
      * @return
      */
     CStatus dropTopic(const std::string& topic) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         auto innerTopic = internal::PUB_SUB_PREFIX + topic;
-        CGRAPH_LOCK_GUARD lk(pub_sub_mutex_);
+        DAOGRAPH_LOCK_GUARD lk(pub_sub_mutex_);
         auto result = pub_sub_message_map_.find(innerTopic);
         if (result == pub_sub_message_map_.end()) {
-            CGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
+            DAOGRAPH_RETURN_ERROR_STATUS("no find [" + topic + "] topic");
         }
 
         auto& messageSet = result->second;
         for (auto msg : messageSet) {
-            CGRAPH_DELETE_PTR(msg)
+            DAOGRAPH_DELETE_PTR(msg)
         }
         pub_sub_message_map_.erase(innerTopic);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -233,27 +233,27 @@ public:
      * @return
      */
     CStatus clear() final {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         {
-            CGRAPH_LOCK_GUARD lk(send_recv_mutex_);
+            DAOGRAPH_LOCK_GUARD lk(send_recv_mutex_);
             for (auto& cur : send_recv_message_map_) {
-                CGRAPH_DELETE_PTR(cur.second)
+                DAOGRAPH_DELETE_PTR(cur.second)
             }
             send_recv_message_map_.clear();
         }
 
         {
-            CGRAPH_LOCK_GUARD lk(pub_sub_mutex_);
+            DAOGRAPH_LOCK_GUARD lk(pub_sub_mutex_);
             for (auto& cur : pub_sub_message_map_) {
                 for (auto iter : cur.second) {
-                    CGRAPH_DELETE_PTR(iter);
+                    DAOGRAPH_DELETE_PTR(iter);
                 }
             }
             pub_sub_message_map_.clear();
             cur_conn_id_ = 0;
         }
 
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
 
@@ -263,11 +263,11 @@ protected:
          * 仅可能被 USingleton 类调用，自动构造时候使用
          * 防止菱形引用的奇异
          */
-        CGRAPH_EMPTY_FUNCTION
+        DAOGRAPH_EMPTY_FUNCTION
     }
 
     CStatus destroy() final {
-        CGRAPH_EMPTY_FUNCTION
+        DAOGRAPH_EMPTY_FUNCTION
     }
 
     ~GMessageManager() override {
@@ -286,6 +286,6 @@ private:
     template<typename U, USingletonType, CBool> friend class USingleton;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMESSAGEMANAGER_H
+#endif //DAOGRAPH_GMESSAGEMANAGER_H

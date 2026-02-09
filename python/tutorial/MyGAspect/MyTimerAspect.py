@@ -7,7 +7,7 @@
 
 import time
 
-from pycgraph import GAspect, CStatus
+from pydaograph import GAspect, CStatus
 
 class MyTimerAspect(GAspect):
     _start_time = None

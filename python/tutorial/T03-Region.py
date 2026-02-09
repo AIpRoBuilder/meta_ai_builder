@@ -5,7 +5,7 @@
 @Desc: 
 """
 
-from pycgraph import GPipeline, GRegion
+from pydaograph import GPipeline, GRegion
 
 from MyGNode.MyNode1 import MyNode1
 from MyGNode.MyNode2 import MyNode2

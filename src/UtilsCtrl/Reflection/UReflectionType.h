@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UREFLECTIONTYPE_H
-#define CGRAPH_UREFLECTIONTYPE_H
+#ifndef DAOGRAPH_UREFLECTIONTYPE_H
+#define DAOGRAPH_UREFLECTIONTYPE_H
 
 #include "UReflectionDefine.h"
 #include "UReflectionSession.h"
 
-CGRAPH_NAMESPACE_BEGIN
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 template<typename T>
 constexpr static decltype(auto) createTrait();
@@ -201,7 +201,7 @@ void reflRead(UReflSession &session, T &value) {
     }
 }
 
-CGRAPH_INTERNAL_NAMESPACE_END
-CGRAPH_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UREFLECTIONTYPE_H
+#endif //DAOGRAPH_UREFLECTIONTYPE_H

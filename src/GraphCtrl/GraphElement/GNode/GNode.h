@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GNODE_H
-#define CGRAPH_GNODE_H
+#ifndef DAOGRAPH_GNODE_H
+#define DAOGRAPH_GNODE_H
 
 #include "GNodeDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GNode : public GElement {
 protected:
@@ -32,7 +32,7 @@ protected:
      * @param ttl
      * @return
      */
-    CStatus spawn(const UTaskGroup& tasks, CMSec ttl = CGRAPH_MAX_BLOCK_TTL);
+    CStatus spawn(const UTaskGroup& tasks, CMSec ttl = DAOGRAPH_MAX_BLOCK_TTL);
 
 private:
     GNodeType node_type_ { GNodeType::BASIC };                    // 节点类型
@@ -41,6 +41,6 @@ private:
 using GNodePtr = GNode *;
 using GNodePtrArr = std::vector<GNodePtr>;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GNODE_H
+#endif //DAOGRAPH_GNODE_H

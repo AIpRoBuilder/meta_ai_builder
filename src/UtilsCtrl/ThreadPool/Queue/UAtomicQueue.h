@@ -5,8 +5,8 @@
 @Desc: 设计了一个安全队列
 ***************************/
 
-#ifndef CGRAPH_UATOMICQUEUE_H
-#define CGRAPH_UATOMICQUEUE_H
+#ifndef DAOGRAPH_UATOMICQUEUE_H
+#define DAOGRAPH_UATOMICQUEUE_H
 
 #include <memory>
 #include <mutex>
@@ -16,7 +16,7 @@
 #include "../UThreadPoolDefine.h"
 #include "UQueueObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T>
 class UAtomicQueue : public UQueueObject {
@@ -28,7 +28,7 @@ public:
      * @param value
      */
     CVoid waitPop(T& value) {
-        CGRAPH_UNIQUE_LOCK lk(mutex_);
+        DAOGRAPH_UNIQUE_LOCK lk(mutex_);
         cv_.wait(lk, [this] { return !queue_.empty(); });
         value = std::move(*queue_.front());
         queue_.pop();
@@ -81,7 +81,7 @@ public:
      * @return
      */
     std::unique_ptr<T> popWithTimeout(CMSec ms) {
-        CGRAPH_UNIQUE_LOCK lk(mutex_);
+        DAOGRAPH_UNIQUE_LOCK lk(mutex_);
         if (!cv_.wait_for(lk, std::chrono::milliseconds(ms),
                           [this] { return (!queue_.empty()) || (!ready_flag_); })) {
             return nullptr;
@@ -102,7 +102,7 @@ public:
      * @return
      */
     std::unique_ptr<T> tryPop() {
-        CGRAPH_LOCK_GUARD lk(mutex_);
+        DAOGRAPH_LOCK_GUARD lk(mutex_);
         if (queue_.empty()) { return std::unique_ptr<T>(); }
         std::unique_ptr<T> ptr = std::move(queue_.front());
         queue_.pop();
@@ -123,7 +123,7 @@ public:
                 mutex_.unlock();
                 break;
             } else {
-                CGRAPH_YIELD();
+                DAOGRAPH_YIELD();
             }
         }
         cv_.notify_one();
@@ -135,7 +135,7 @@ public:
      * @return
      */
     CBool empty() {
-        CGRAPH_LOCK_GUARD lk(mutex_);
+        DAOGRAPH_LOCK_GUARD lk(mutex_);
         return queue_.empty();
     }
 
@@ -159,13 +159,13 @@ public:
         queue_ = {};
     }
 
-    CGRAPH_NO_ALLOWED_COPY(UAtomicQueue)
+    DAOGRAPH_NO_ALLOWED_COPY(UAtomicQueue)
 
 private:
     std::queue<std::unique_ptr<T>> queue_ {};    // 任务队列
     CBool ready_flag_ { true };                  // 执行标记，主要用于快速释放 destroy 逻辑中，多个辅助线程等待的状态
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UATOMICQUEUE_H
+#endif //DAOGRAPH_UATOMICQUEUE_H

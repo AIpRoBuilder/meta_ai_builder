@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GDAEMON_H
-#define CGRAPH_GDAEMON_H
+#ifndef DAOGRAPH_GDAEMON_H
+#define DAOGRAPH_GDAEMON_H
 
 #include <set>
 
 #include "GDaemonObject.h"
 #include "../GraphParam/GParamInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GDaemon : public GDaemonObject {
 protected:
@@ -57,8 +57,8 @@ public:
 using GDaemonPtr = GDaemon *;
 using GDaemonSet = std::set<GDaemonPtr>;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GDaemonObject.inl"
 
-#endif //CGRAPH_GDAEMON_H
+#endif //DAOGRAPH_GDAEMON_H

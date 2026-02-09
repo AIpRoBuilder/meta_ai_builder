@@ -13,8 +13,8 @@
 #include "GStorageDefine.h"
 #include "../GPipeline.h"
 
-CGRAPH_NAMESPACE_BEGIN
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 UREFL_CREATE_STRUCT_TRAIT_INFO(_GEventStorage,
     UREFL_DECLARE_FIELD(_GEventStorage, key_, 1),
@@ -96,7 +96,7 @@ UREFL_CREATE_STRUCT_TRAIT_INFO(_GPipelineStorage,
     UREFL_DECLARE_FIELD(_GPipelineStorage, thread_pool_config_, 6)
 )
 
-CGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
 
 
 /**
@@ -106,15 +106,15 @@ CGRAPH_INTERNAL_NAMESPACE_END
  * @return
  */
 CStatus GStorage::save(GPipelinePtr pipeline, const std::string& path) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline)
 
     _GPipelineStorage storage {};
     status += buildPipelineStorage(pipeline, storage);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status += saveBuffer(storage, path);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -125,8 +125,8 @@ CStatus GStorage::save(GPipelinePtr pipeline, const std::string& path) {
  * @return
  */
 CStatus GStorage::load(GPipelinePtr pipeline, const std::string& path) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline)
     std::ifstream ifd(path, std::ios::binary);
     if (!ifd) {
         return CStatus("Failed read open file: " + path);
@@ -137,7 +137,7 @@ CStatus GStorage::load(GPipelinePtr pipeline, const std::string& path) {
     ifd.seekg(0, std::ios::beg);
 
     char* buffer = new (std::nothrow) char[size];
-    CGRAPH_ASSERT_NOT_NULL(buffer)
+    DAOGRAPH_ASSERT_NOT_NULL(buffer)
     memset(buffer, 0, size);
 
     status = ifd.read(buffer, size)
@@ -145,14 +145,14 @@ CStatus GStorage::load(GPipelinePtr pipeline, const std::string& path) {
             : CStatus("Failed to read file: " + path);
 
     ifd.close();
-    CGRAPH_DELETE_PTR_ARRAY(buffer)
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_DELETE_PTR_ARRAY(buffer)
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::buildPipelineStorage(GPipeline* pipeline, _GPipelineStorage& storage) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline,
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline,
                            pipeline->event_manager_,
                            pipeline->param_manager_,
                            pipeline->daemon_manager_,
@@ -184,17 +184,17 @@ CStatus GStorage::buildPipelineStorage(GPipeline* pipeline, _GPipelineStorage& s
         storage.stage_storages_.emplace_back(key, threshold, clz);
     }
     storage.thread_pool_config_ = pipeline->schedule_.config_;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::saveBuffer(const _GPipelineStorage& storage, const std::string& path) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     auto refl = internal::UReflection<_GPipelineStorage>();
     auto size = refl.getSize(storage);
     auto* buffer = new (std::nothrow) char [size];
-    CGRAPH_ASSERT_NOT_NULL(buffer)
+    DAOGRAPH_ASSERT_NOT_NULL(buffer)
     memset(buffer, 0, size);
 
     std::ofstream ofd(path, std::ios::binary);
@@ -214,49 +214,49 @@ CStatus GStorage::saveBuffer(const _GPipelineStorage& storage, const std::string
     } while (0);
 
     ofd.close();
-    CGRAPH_DELETE_PTR_ARRAY(buffer)
+    DAOGRAPH_DELETE_PTR_ARRAY(buffer)
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadBuffer(GPipelinePtr pipeline, char* buffer, CSize size) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline, buffer)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline, buffer)
 
     _GPipelineStorage storage {};
     auto refl = internal::UReflection<_GPipelineStorage>();
     refl.read(storage, (CUCharPtr)buffer, size);
 
     status += loadElement(pipeline, storage);    // element 中间包含校验。如果校验失败，立刻退出即可
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status += loadEvent(pipeline, storage);
     status += loadParam(pipeline, storage);
     status += loadDaemon(pipeline, storage);
     status += loadStage(pipeline, storage);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     pipeline->setUniqueThreadPoolConfig(storage.thread_pool_config_);
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadElement(GPipelinePtr pipeline, const _GPipelineStorage& storage) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline)
 
     std::map<std::string, GElementPtr> eleCache{};    // 用于存放所有的构建好的 element 信息
     // 恢复所有的 element 的信息
     for (const auto& cur : storage.element_storages_) {
         auto element = dynamic_cast<GElementPtr>(GStorageFactory::createByType(cur.clz_name_));
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!element,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!element,
                                                 cur.name_ + " element do not register, please check")
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(element->element_type_ != cur.element_type_,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(element->element_type_ != cur.element_type_,
                                                 cur.name_ + " check type failed when load");
         status = cur.recover(element);
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
 
         eleCache[cur.session_] = element;
     }
@@ -272,7 +272,7 @@ CStatus GStorage::loadElement(GPipelinePtr pipeline, const _GPipelineStorage& st
 
         status += loadAspect(element, cur.aspect_storages_);
         status += loadEParam(element, cur.eparam_storages_);
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
     }
 
     // 设定依赖关系
@@ -284,66 +284,66 @@ CStatus GStorage::loadElement(GPipelinePtr pipeline, const _GPipelineStorage& st
                 depSet.insert(eleCache[dep]);
             }
             status += element->addDependGElements(depSet);
-            CGRAPH_FUNCTION_CHECK_STATUS
+            DAOGRAPH_FUNCTION_CHECK_STATUS
         }
 
         if (!cur.children_.empty()) {
             GGroupPtr group = dynamic_cast<GGroupPtr>(eleCache[cur.session_]);
-            CGRAPH_ASSERT_NOT_NULL(group)
+            DAOGRAPH_ASSERT_NOT_NULL(group)
             for (const auto& child : cur.children_) {
                 group->addElement(eleCache[child.session_]);
             }
         }
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadEvent(GPipelinePtr pipeline, const _GPipelineStorage& storage) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline, pipeline->event_manager_, pipeline->param_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline, pipeline->event_manager_, pipeline->param_manager_)
 
     // 为了确保每个 event 中都可以获取参数信息
     pipeline->event_manager_->param_manager_ = pipeline->param_manager_;
     for (const auto& ges : storage.event_storages_) {
         GEventPtr event = dynamic_cast<GEventPtr>(GStorageFactory::createByType(ges.clz_name_));
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!event,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!event,
                                                 ges.key_ + " event type do not register, please check");
         pipeline->event_manager_->events_map_[ges.key_] = event;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadParam(GPipelinePtr pipeline, const _GPipelineStorage& storage) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline, pipeline->param_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline, pipeline->param_manager_)
 
     for (const auto& gps : storage.param_storages_) {
         GParamPtr param = dynamic_cast<GParamPtr>(GStorageFactory::createByType(gps.clz_name_));
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!param,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!param,
                                                 gps.key_ + " param type do not register, please check");
         param->key_ = gps.key_;
         param->backtrace_enable_ = gps.backtrace_;
         pipeline->param_manager_->params_map_[gps.key_] = param;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadDaemon(GPipelinePtr pipeline, const _GPipelineStorage& storage) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline,
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline,
                            pipeline->daemon_manager_,
                            pipeline->event_manager_,
                            pipeline->param_manager_)
 
     for (const auto& gds : storage.daemon_storages_) {
         GDaemonPtr daemon = dynamic_cast<GDaemonPtr>(GStorageFactory::createByType(gds.clz_name_));
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!daemon,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!daemon,
                                                 gds.clz_name_ + " daemon type do not register, please check");
         daemon->setInterval(gds.msec_);
         daemon->setGEventManager(pipeline->event_manager_);
@@ -351,62 +351,62 @@ CStatus GStorage::loadDaemon(GPipelinePtr pipeline, const _GPipelineStorage& sto
         pipeline->daemon_manager_->daemons_.insert(daemon);
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadStage(GPipelinePtr pipeline, const _GPipelineStorage& storage) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(pipeline,
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(pipeline,
                            pipeline->stage_manager_,
                            pipeline->event_manager_,
                            pipeline->param_manager_);
 
     for (const auto& gss : storage.stage_storages_) {
         GStagePtr stage = dynamic_cast<GStagePtr>(GStorageFactory::createByType(gss.clz_name_));
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!stage,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!stage,
                                                 gss.key_ + " stage type do not register, please check");
         stage->threshold_ = gss.threshold_;
         stage->param_manager_ = pipeline->param_manager_;
         pipeline->stage_manager_->stage_map_[gss.key_] = stage;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadAspect(GElementPtr element, const std::vector<_GAspectStorage>& aspStorages) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element)
 
     if (!aspStorages.empty()) {
         element->aspect_manager_ = CAllocator::safeMallocCObject<GAspectManager>();
         for (const auto &gas: aspStorages) {
             GAspectPtr aspect = dynamic_cast<GAspectPtr>(GStorageFactory::createByType(gas.clz_name_));
-            CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!aspect,
+            DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!aspect,
                                                     gas.clz_name_ + " type create aspect failed.");
             element->aspect_manager_->add(aspect);
         }
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStorage::loadEParam(GElementPtr element, const std::vector<_GPassedParamStorage>& psdParamStorages) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element)
 
     for (const auto& pps : psdParamStorages) {
         GPassedParamPtr ep = dynamic_cast<GPassedParamPtr>(GStorageFactory::createByType(pps.clz_name_));
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!ep,
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!ep,
                                                 pps.clz_name_ + " type create passed param failed.");
         element->local_params_[pps.key_] = ep;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #endif

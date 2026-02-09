@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 std::future<CStatus> async_pipeline_1(GPipelinePtr pipeline_1) {
     GElementPtr node1A, node1B, node1C = nullptr;

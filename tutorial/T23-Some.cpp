@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_some() {
     GPipelinePtr pipeline = GPipelineFactory::create();
@@ -36,7 +36,7 @@ void tutorial_some() {
     }
 
     status += pipeline->process();
-    CGRAPH_ECHO("pipeline run finished, error code is [%d]", status.getCode());
+    DAOGRAPH_ECHO("pipeline run finished, error code is [%d]", status.getCode());
 
     GPipelineFactory::clear();
 }

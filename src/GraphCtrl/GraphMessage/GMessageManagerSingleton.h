@@ -5,13 +5,13 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GMESSAGEMANAGERSINGLETON_H
-#define CGRAPH_GMESSAGEMANAGERSINGLETON_H
+#ifndef DAOGRAPH_GMESSAGEMANAGERSINGLETON_H
+#define DAOGRAPH_GMESSAGEMANAGERSINGLETON_H
 
 #include "GMessageObject.h"
 #include "GMessageManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GMessageManagerSingleton : public GMessageObject {
 public:
@@ -27,6 +27,6 @@ private:
     static USingleton<GMessageManager<>, USingletonType::LAZY, false> singleton_;    // message管理类。注意：这个单例，是不需要被init()的
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMESSAGEMANAGERSINGLETON_H
+#endif //DAOGRAPH_GMESSAGEMANAGERSINGLETON_H

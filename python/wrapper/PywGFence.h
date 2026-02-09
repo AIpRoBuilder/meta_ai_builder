@@ -5,20 +5,20 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGFENCE_H
-#define CGRAPH_PYWGFENCE_H
+#ifndef DAOGRAPH_PYWGFENCE_H
+#define DAOGRAPH_PYWGFENCE_H
 
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGFence : public CGraph::GFence {
+class PywGFence : public DaoGraph::GFence {
 public:
     explicit PywGFence() = default;
 
     ~PywGFence() override = default;
 
-    CGraph::GElement* clone() const override {
-        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GFence, clone);
+    DaoGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, DaoGraph::GFence, clone);
     }
 
 protected:
@@ -27,4 +27,4 @@ protected:
     }
 };
 
-#endif //CGRAPH_PYWGFENCE_H
+#endif //DAOGRAPH_PYWGFENCE_H

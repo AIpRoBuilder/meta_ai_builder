@@ -8,22 +8,22 @@
 
 #include "GDynamicEngine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CStatus GDynamicEngine::setup(const GSortedGElementPtrSet& elements) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     /**
      * 1. 判断是否是 dag 结构
      * 2. 标记数据，比如有多少个结束element等
      * 3. 计算element的结构类型
      * 4. 分析当前dag类型信息
      */
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!GEngine::isDag(elements),
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!GEngine::isDag(elements),
                                             "it is not a dag struct");
     mark(elements);
     calcShape(elements);
     analysisDagType();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -41,7 +41,7 @@ CStatus GDynamicEngine::run() {
             parallelRunAll();
             break;
         default:
-            CGRAPH_RETURN_ERROR_STATUS("unknown engine dag type");
+            DAOGRAPH_RETURN_ERROR_STATUS("unknown engine dag type");
     }
 
     return cur_status_;
@@ -103,17 +103,17 @@ CVoid GDynamicEngine::analysisParallelMatrix() {
     parallel_element_matrix_.clear();
     const auto& config = thread_pool_ ? thread_pool_->getConfig() : UThreadPoolConfig();
     CSize thdSize = config.default_thread_size_ + config.secondary_thread_size_;
-    CGRAPH_THROW_EXCEPTION_BY_CONDITION(thdSize <= 0,
+    DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(thdSize <= 0,
                                         "default thread size cannot smaller than 1");
     CSize taskNumPerThd = total_end_size_ / thdSize + (CSize)(0 != total_end_size_ % thdSize);
-    CGRAPH_THROW_EXCEPTION_BY_CONDITION(taskNumPerThd == 0,
+    DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(taskNumPerThd == 0,
                                         "task number per thread is 0");
 
     CSize curIndex = 0;
     while (curIndex < total_end_size_) {
         CSize curEnd = curIndex + taskNumPerThd < total_end_size_ ? curIndex + taskNumPerThd : total_end_size_ ;
         GElementPtrArr curArr(total_element_arr_.data() + curIndex, total_element_arr_.data() + curEnd);
-        CGRAPH_THROW_EXCEPTION_BY_CONDITION(curArr.empty(),
+        DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(curArr.empty(),
                                             "current elements array cannot be empty");
         parallel_element_matrix_.push_back(curArr);
         curIndex += taskNumPerThd;
@@ -143,7 +143,7 @@ CVoid GDynamicEngine::innerExec(GElementPtr element) {
         afterElementRun(element);
     } else {
         // 遇到异常情况，结束整体逻辑
-        CGRAPH_LOCK_GUARD lk(status_lock_);
+        DAOGRAPH_LOCK_GUARD lk(status_lock_);
         cur_status_ += curStatus;
         locker_.cv_.notify_one();
     }
@@ -183,14 +183,14 @@ CVoid GDynamicEngine::afterElementRun(GElementPtr element) {
             break;
         case internal::GElementShape::TAIL:
             {
-                CGRAPH_LOCK_GUARD lock(locker_.mtx_);
+                DAOGRAPH_LOCK_GUARD lock(locker_.mtx_);
                 if ((++finished_end_size_ >= total_end_size_)) {
                     locker_.cv_.notify_one();
                 }
             }
             break;
         default:
-            CGRAPH_LOCK_GUARD lk(status_lock_);
+            DAOGRAPH_LOCK_GUARD lk(status_lock_);
             cur_status_.setErrorInfo("element shape type error");
             break;
     }
@@ -198,7 +198,7 @@ CVoid GDynamicEngine::afterElementRun(GElementPtr element) {
 
 
 CVoid GDynamicEngine::fatWait() {
-    CGRAPH_UNIQUE_LOCK lock(locker_.mtx_);
+    DAOGRAPH_UNIQUE_LOCK lock(locker_.mtx_);
     locker_.cv_.wait(lock, [this] {
         /**
          * 遇到以下条件之一，结束执行：
@@ -210,18 +210,18 @@ CVoid GDynamicEngine::fatWait() {
 }
 
 
-#ifdef _CGRAPH_PARALLEL_MICRO_BATCH_ENABLE_
+#ifdef _DAOGRAPH_PARALLEL_MICRO_BATCH_ENABLE_
 CVoid GDynamicEngine::parallelRunAll() {
     // 微任务模式，主要用于性能测试的场景下
     std::vector<std::future<CStatus>> futures;
     for (auto& elements : parallel_element_matrix_) {
         auto curFut = thread_pool_->commit([elements] {
-            CGRAPH_FUNCTION_BEGIN
+            DAOGRAPH_FUNCTION_BEGIN
             for (auto* element : elements) {
                 status += element->fatProcessor(CFunctionType::RUN);
-                CGRAPH_FUNCTION_CHECK_STATUS
+                DAOGRAPH_FUNCTION_CHECK_STATUS
             }
-            CGRAPH_FUNCTION_END;
+            DAOGRAPH_FUNCTION_END;
         });
         futures.emplace_back(std::move(curFut));
     }
@@ -255,7 +255,7 @@ CVoid GDynamicEngine::parallelRunAll() {
     }
 
     {
-        CGRAPH_UNIQUE_LOCK lock(locker_.mtx_);
+        DAOGRAPH_UNIQUE_LOCK lock(locker_.mtx_);
         locker_.cv_.wait(lock, [this] {
             return (parallel_run_num_ >= total_end_size_ || cur_status_.isErr());
         });
@@ -272,14 +272,14 @@ CVoid GDynamicEngine::parallelRunOne(GElementPtr element) {
     auto status = element->fatProcessor(CFunctionType::RUN);
     if (unlikely(status.isErr())) {
         {
-            CGRAPH_LOCK_GUARD lk(status_lock_);
+            DAOGRAPH_LOCK_GUARD lk(status_lock_);
             cur_status_ += status;
         }
     }
 
     auto finishedSize = parallel_run_num_.fetch_add(1, std::memory_order_release) + 1;
     if (finishedSize >= total_end_size_ || cur_status_.isErr()) {
-        CGRAPH_UNIQUE_LOCK lock(locker_.mtx_);
+        DAOGRAPH_UNIQUE_LOCK lock(locker_.mtx_);
         locker_.cv_.notify_one();
     }
 }
@@ -311,4 +311,4 @@ CVoid GDynamicEngine::prepareRun() {
     }
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

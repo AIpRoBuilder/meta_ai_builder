@@ -5,10 +5,10 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSCHEDULEINCLUDE_H
-#define CGRAPH_GSCHEDULEINCLUDE_H
+#ifndef DAOGRAPH_GSCHEDULEINCLUDE_H
+#define DAOGRAPH_GSCHEDULEINCLUDE_H
 
 #include "GScheduleDefine.h"
 #include "GSchedule.h"
 
-#endif //CGRAPH_GSCHEDULEINCLUDE_H
+#endif //DAOGRAPH_GSCHEDULEINCLUDE_H

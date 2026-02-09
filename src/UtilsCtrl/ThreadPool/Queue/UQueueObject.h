@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UQUEUEOBJECT_H
-#define CGRAPH_UQUEUEOBJECT_H
+#ifndef DAOGRAPH_UQUEUEOBJECT_H
+#define DAOGRAPH_UQUEUEOBJECT_H
 
 #include <mutex>
 
 #include "../UThreadObject.h"
 #include "UQueueDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UQueueObject : public UThreadObject {
 protected:
@@ -21,6 +21,6 @@ protected:
     std::condition_variable cv_;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UQUEUEOBJECT_H
+#endif //DAOGRAPH_UQUEUEOBJECT_H

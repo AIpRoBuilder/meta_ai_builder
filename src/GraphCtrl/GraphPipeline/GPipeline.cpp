@@ -12,51 +12,51 @@
 #include "../../nlohmann/json.hpp"
 #include <fstream>
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GPipeline::GPipeline() {
-    session_ = URandom<>::generateSession(CGRAPH_STR_PIPELINE);
-    element_manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
-    param_manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GParamManager)
-    daemon_manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GDaemonManager)
-    event_manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GEventManager)
-    stage_manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GStageManager)
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_PIPELINE);
+    element_manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
+    param_manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GParamManager)
+    daemon_manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GDaemonManager)
+    event_manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GEventManager)
+    stage_manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GStageManager)
 }
 
 
 GPipeline::~GPipeline() {
     // 结束的时候，会自动释放所有的element信息
-    CGRAPH_DELETE_PTR(daemon_manager_)
-    CGRAPH_DELETE_PTR(element_manager_)
-    CGRAPH_DELETE_PTR(param_manager_)
-    CGRAPH_DELETE_PTR(event_manager_)
-    CGRAPH_DELETE_PTR(stage_manager_)
+    DAOGRAPH_DELETE_PTR(daemon_manager_)
+    DAOGRAPH_DELETE_PTR(element_manager_)
+    DAOGRAPH_DELETE_PTR(param_manager_)
+    DAOGRAPH_DELETE_PTR(event_manager_)
+    DAOGRAPH_DELETE_PTR(stage_manager_)
 }
 
 
 CStatus GPipeline::init() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)    // 必须是非初始化的状态下，才可以初始化。反之同理
-    CGRAPH_ASSERT_NOT_NULL(element_manager_, param_manager_, daemon_manager_, event_manager_, stage_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)    // 必须是非初始化的状态下，才可以初始化。反之同理
+    DAOGRAPH_ASSERT_NOT_NULL(element_manager_, param_manager_, daemon_manager_, event_manager_, stage_manager_)
 
     status += initEnv();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status += param_manager_->init();
     status += event_manager_->init();
     status += element_manager_->init();
     status += stage_manager_->init();
     status += daemon_manager_->init();    // daemon的初始化，需要晚于所有element的初始化
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     is_init_ = true;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::run() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(true)
 
     /**
      * 1. 将所有 GElement 的状态设定为 NORMAL
@@ -68,21 +68,21 @@ CStatus GPipeline::run() {
      */
     status += repository_.setup();
     status += param_manager_->setup();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status = element_manager_->run();
     status += repository_.reset();    // 等异步的逻辑执行，并且获取异步执行的结果信息
     status += event_manager_->reset();    // 所有的事件（特指异步事件）执行结束
     param_manager_->resetWithStatus(status);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
-    CGRAPH_ASSERT_INIT(true)
-    CGRAPH_ASSERT_NOT_NULL(element_manager_, param_manager_, daemon_manager_, event_manager_, stage_manager_)
+    DAOGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_ASSERT_NOT_NULL(element_manager_, param_manager_, daemon_manager_, event_manager_, stage_manager_)
 
     /**
      * 需要先将线程池相关内容析构，然后再做destroy。
@@ -90,24 +90,24 @@ CStatus GPipeline::destroy() {
      */
     status += repository_.destroy();
     status += schedule_.destroy();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status += event_manager_->destroy();
     status += daemon_manager_->destroy();
     status += element_manager_->destroy();
     status += stage_manager_->destroy();
     status += param_manager_->destroy();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     is_init_ = false;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::process(CSize runTimes) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     status = init();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     while (runTimes-- > 0
            && !status.isErr()
@@ -121,39 +121,39 @@ CStatus GPipeline::process(CSize runTimes) {
     }
 
     status += destroy();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::registerGNode(GElementPPtr nodeRef, const GElementPtrSet &depends,
                                  const std::string &name, CSize loop) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
-    CGRAPH_ASSERT_NOT_NULL(*nodeRef)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_ASSERT_NOT_NULL(*nodeRef)
 
     auto node = dynamic_cast<GNodePtr>(*nodeRef);
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr == node,  "[" + (*nodeRef)->getName() + "] is not based on GNode")
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != node->belong_, "[" + node->getName() + "] can not register to pipeline for its belong to [" + node->belong_->getName() + "]")
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(node->isRegistered(), "[" + node->getName() + "] register duplicate")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr == node,  "[" + (*nodeRef)->getName() + "] is not based on GNode")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != node->belong_, "[" + node->getName() + "] can not register to pipeline for its belong to [" + node->belong_->getName() + "]")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(node->isRegistered(), "[" + node->getName() + "] register duplicate")
 
     status = innerRegister(node, depends, name, loop);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::registerGGroup(GElementPPtr groupRef, const GElementPtrSet &depends,
                                   const std::string &name, CSize loop) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
-    CGRAPH_ASSERT_NOT_NULL(*groupRef)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_ASSERT_NOT_NULL(*groupRef)
 
     auto group = dynamic_cast<GGroupPtr>(*groupRef);
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr == group, "[" + (*groupRef)->getName() + "] is not based on GGroup")
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != group->belong_, "[" + group->getName() + "] can not register to pipeline for its belong to [" + group->belong_->getName() + "]")
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(group->isRegistered(), "[" + group->getName() + "] register duplicate")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr == group, "[" + (*groupRef)->getName() + "] is not based on GGroup")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != group->belong_, "[" + group->getName() + "] can not register to pipeline for its belong to [" + group->belong_->getName() + "]")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(group->isRegistered(), "[" + group->getName() + "] register duplicate")
 
     status = innerRegister(group, depends, name, loop);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -161,15 +161,15 @@ CStatus GPipeline::registerGElement(GElementPtr currentElement,
                                     const GElementPtrSet& dependsSet,
                                     const std::string& name,
                                     CSize loop) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
-    CGRAPH_ASSERT_NOT_NULL(currentElement)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_ASSERT_NOT_NULL(currentElement)
 
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(currentElement->isRegistered(), "element register duplicate")
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != currentElement->belong_, "element already has belong")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(currentElement->isRegistered(), "element register duplicate")
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(nullptr != currentElement->belong_, "element already has belong")
 
     status = innerRegister(currentElement, dependsSet, name, loop);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -178,7 +178,7 @@ std::future<CStatus> GPipeline::asyncRun(std::launch policy) {
      * 1. 确认当前pipeline已经初始化完毕
      * 2. 异步的执行 run() 方法，并且返回执行结果的 future 信息
      */
-    CGRAPH_ASSERT_INIT_THROW_ERROR(true)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(true)
 
     return std::async(policy, [this] {
         return run();
@@ -273,7 +273,7 @@ CStatus GPipeline::buildFromJson(const std::string& jsonPath) {
 
 
 std::future<CStatus> GPipeline::asyncProcess(CSize runTimes, std::launch policy) {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
 
     return std::async(policy, [runTimes, this] {
         return process(runTimes);
@@ -282,56 +282,56 @@ std::future<CStatus> GPipeline::asyncProcess(CSize runTimes, std::launch policy)
 
 
 CStatus GPipeline::cancel() {
-    CGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_ASSERT_INIT(true)
     return repository_.pushAllState(GElementState::CANCEL);
 }
 
 
 CStatus GPipeline::suspend() {
-    CGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_ASSERT_INIT(true)
     return repository_.pushAllState(GElementState::SUSPEND);
 }
 
 
 CStatus GPipeline::resume() {
     // 直接恢复正常状态好了
-    CGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_ASSERT_INIT(true)
     return repository_.pushAllState(GElementState::NORMAL);
 }
 
 
 CStatus GPipeline::dump(std::ostream& oss) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element_manager_)
     oss << std::fixed << std::setprecision(2);    // 小数点最多展示2位数字
 
-    oss << "\ndigraph CGraph {\n";
+    oss << "\ndigraph DaoGraph {\n";
     oss << "compound=true;\n";
 
     for (const auto& element : element_manager_->manager_elements_) {
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_ASSERT_NOT_NULL(element)
         element->dump(oss);
     }
 
     oss << "}\n\n";
     std::cout.unsetf(std::ios::fixed);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::perf(std::ostream& oss) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
 
     status = GPerf::perf(this, oss);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 
 GPipelinePtr GPipeline::setGEngineType(GEngineType type) {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(element_manager_)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(element_manager_)
 
     element_manager_->setEngineType(type);
     return this;
@@ -339,9 +339,9 @@ GPipelinePtr GPipeline::setGEngineType(GEngineType type) {
 
 
 GPipelinePtr GPipeline::setUniqueThreadPoolConfig(const UThreadPoolConfig& config) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_THROW_EXCEPTION_BY_STATUS(config.check())
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_THROW_EXCEPTION_BY_STATUS(config.check())
 
     /**
      * 实际是将信息传递给 schedule中，如果是unique的话，就使用这个参数
@@ -353,36 +353,36 @@ GPipelinePtr GPipeline::setUniqueThreadPoolConfig(const UThreadPoolConfig& confi
 
 
 GPipelinePtr GPipeline::setSharedThreadPool(UThreadPoolPtr ptr) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_THROW_EXCEPTION_BY_STATUS(schedule_.makeType(ptr))
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_THROW_EXCEPTION_BY_STATUS(schedule_.makeType(ptr))
     return this;
 }
 
 
 CSize GPipeline::getMaxPara() {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(element_manager_)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(element_manager_)
     return element_manager_->calcMaxParaSize();
 }
 
 
 CSize GPipeline::trim() {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(element_manager_)
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(element_manager_)
     return element_manager_->trim();
 }
 
 
 CStatus GPipeline::makeSerial() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
-    CGRAPH_ASSERT_NOT_NULL(element_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_ASSERT_NOT_NULL(element_manager_)
 
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION((schedule_.type_ != internal::GScheduleType::UNIQUE),    \
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION((schedule_.type_ != internal::GScheduleType::UNIQUE),    \
                                             "cannot set serial config without UNIQUE schedule")
 
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!element_manager_->checkSerializable(),    \
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!element_manager_->checkSerializable(),    \
                                        "cannot set serial config for this pipeline")
 
     UThreadPoolConfig config;
@@ -392,7 +392,7 @@ CStatus GPipeline::makeSerial() {
     config.monitor_enable_ = false;
     config.batch_task_enable_ = false;
     schedule_.config_ = config;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -414,7 +414,7 @@ CBool GPipeline::checkSeparate(GElementPtr fst, GElementPtr snd) const {
         result = true;
     } else if (ancestor) {
         // 两个同属于一个 group 的情况，则根据 group 的属性来决定
-        CGRAPH_THROW_EXCEPTION_BY_CONDITION(!ancestor->isGGroup(), "calculate ancestor failed, not a group.")
+        DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(!ancestor->isGGroup(), "calculate ancestor failed, not a group.")
         result = (dynamic_cast<GGroupPtr>(ancestor))->isSeparate(fstPatch, sndPatch);
     } else {
         // ancestor == nullptr，则认定fst 和 snd 的 ancestor 是pipeline
@@ -426,13 +426,13 @@ CBool GPipeline::checkSeparate(GElementPtr fst, GElementPtr snd) const {
 
 
 CStatus GPipeline::save(const std::string& path) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
 
     // 不允许有同名的 element 被存储
     for (const auto* element : repository_.elements_) {
-        CGRAPH_ASSERT_NOT_NULL(element)
-        CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(element->isGAdaptor(),
+        DAOGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(element->isGAdaptor(),
                                                 element->name_ + " is GAdaptor, cannot be saved.")
     }
 
@@ -441,13 +441,13 @@ CStatus GPipeline::save(const std::string& path) {
 #else
     status = CStatus("save function support cpp17+ only");
 #endif
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::load(const std::string& path) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
 
 #if __cplusplus >= 201703L
     status = GStorage::load(this, path);
@@ -455,16 +455,16 @@ CStatus GPipeline::load(const std::string& path) {
     status = CStatus("load function support cpp17+ only");
 #endif
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::initEnv() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(event_manager_, element_manager_, stage_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(event_manager_, element_manager_, stage_manager_)
 
     status = schedule_.init();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     auto tp = schedule_.getThreadPool();
     event_manager_->setThreadPool(tp);
@@ -475,62 +475,62 @@ CStatus GPipeline::initEnv() {
     repository_.fetchAll(element_manager_);
     repository_.setThreadPool(tp);
     status += repository_.init();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GPipeline::innerRegister(GElementPtr element, const GElementPtrSet &depends,
                                  const std::string &name, CSize loop) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element)
-    CGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element)
+    DAOGRAPH_ASSERT_INIT(false)
 
     const std::string& curName = name.empty() ? element->getName() : name;
     status = element->addElementInfo(depends, curName, loop);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status = element->addManagers(param_manager_, event_manager_, stage_manager_);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
     status = element_manager_->add(element);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
     repository_.insert(element);
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
-CStatus GPipeline::__registerGElement_4py(CGraph::GElementPtr element, const CGraph::GElementPtrSet &depends,
+CStatus GPipeline::__registerGElement_4py(DaoGraph::GElementPtr element, const DaoGraph::GElementPtrSet &depends,
                                          const std::string &name, CSize loop) {
     return innerRegister(element, depends, name, loop);
 }
 
 
 GPipelinePtr GPipeline::__addGEvent_4py(GEventPtr event, const std::string& key) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(event, event_manager_, param_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(event, event_manager_, param_manager_)
     event_manager_->param_manager_ = this->param_manager_;
     status = event_manager_->__create_4py(event, key);
-    CGRAPH_THROW_EXCEPTION_BY_STATUS(status)
+    DAOGRAPH_THROW_EXCEPTION_BY_STATUS(status)
 
     return this;
 }
 
 
 GPipelinePtr GPipeline::__addGDaemon_4py(GDaemonPtr daemon, CMSec ms) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(daemon, param_manager_, event_manager_, daemon_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(daemon, param_manager_, event_manager_, daemon_manager_)
     daemon->setGParamManager(this->param_manager_);
     daemon->setGEventManager(this->event_manager_);
     daemon->setInterval(ms);
     status = daemon_manager_->add(daemon);
-    CGRAPH_THROW_EXCEPTION_BY_STATUS(status)
+    DAOGRAPH_THROW_EXCEPTION_BY_STATUS(status)
     return this;
 }
 
 
 GPipelinePtr GPipeline::__addGStage_4py(GStagePtr stage, const std::string& key, CInt threshold) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(stage, param_manager_, stage_manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(stage, param_manager_, stage_manager_)
     stage_manager_->setGParamManager(param_manager_);
     stage_manager_->__create_4py(stage, key, threshold);
     return this;
@@ -540,7 +540,7 @@ GPipelinePtr GPipeline::__addGStage_4py(GStagePtr stage, const std::string& key,
 std::string GPipeline::__dump_4py() {
     std::ostringstream oss;
     auto status = this->dump(oss);
-    CGRAPH_THROW_EXCEPTION_BY_STATUS(status);
+    DAOGRAPH_THROW_EXCEPTION_BY_STATUS(status);
     return oss.str();
 }
 
@@ -548,8 +548,8 @@ std::string GPipeline::__dump_4py() {
 std::string GPipeline::__perf_4py() {
     std::ostringstream oss;
     auto status = this->perf(oss);
-    CGRAPH_THROW_EXCEPTION_BY_STATUS(status);
+    DAOGRAPH_THROW_EXCEPTION_BY_STATUS(status);
     return oss.str();
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

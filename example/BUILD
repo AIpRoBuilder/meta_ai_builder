@@ -3,7 +3,7 @@
 #     name = "E01-AutoPilot",
 #     srcs = ["E01-AutoPilot.cpp"],
 #     copts = ["-Isrc/"],
-#     deps = ["//src:CGraph",],
+#     deps = ["//src:DaoGraph",],
 # )
 
 # # test-2: E02-MockGUI
@@ -11,7 +11,7 @@
 #     name = "E02-MockGUI",
 #     srcs = ["E02-MockGUI.cpp"],
 #     copts = ["-Isrc/"],
-#     deps = ["//src:CGraph",],
+#     deps = ["//src:DaoGraph",],
 # )
 
 # # test-3: E03-ThirdFlow
@@ -19,7 +19,7 @@
 #     name = "E03-ThirdFlow",
 #     srcs = ["E03-ThirdFlow.cpp"],
 #     copts = ["-Isrc/"],
-#     deps = ["//src:CGraph",],
+#     deps = ["//src:DaoGraph",],
 # )
 
 # # test-4: E04-MapReduce
@@ -27,7 +27,7 @@
 #     name = "E04-MapReduce",
 #     srcs = ["E04-MapReduce.cpp"],
 #     copts = ["-Isrc/"],
-#     deps = ["//src:CGraph",],
+#     deps = ["//src:DaoGraph",],
 # )
 
 # test-5: E05-AutoRegister
@@ -35,5 +35,5 @@ cc_binary (
     name = "E05-AutoRegister",
     srcs = ["E05-AutoRegister.cpp"],
     copts = ["-Isrc/"],
-    deps = ["//src:CGraph",],
+    deps = ["//src:DaoGraph",],
 )

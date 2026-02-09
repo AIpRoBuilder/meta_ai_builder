@@ -1,5 +1,5 @@
 # 对应 example 中的内容
-set(CGRAPH_EXAMPLE_LIST
+set(DAOGRAPH_EXAMPLE_LIST
         E01-AutoPilot
         E02-MockGUI
         E03-ThirdFlow
@@ -7,9 +7,9 @@ set(CGRAPH_EXAMPLE_LIST
         E05-JsonGraph
         )
 
-foreach(example ${CGRAPH_EXAMPLE_LIST})
+foreach(example ${DAOGRAPH_EXAMPLE_LIST})
     add_executable(${example}
-            $<TARGET_OBJECTS:CGraph>
+            $<TARGET_OBJECTS:DaoGraph>
             ${example}.cpp
             )
 endforeach()

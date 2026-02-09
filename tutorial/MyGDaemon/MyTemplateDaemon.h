@@ -5,26 +5,26 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYTEMPLATEDAEMON_H
-#define CGRAPH_MYTEMPLATEDAEMON_H
+#ifndef DAOGRAPH_MYTEMPLATEDAEMON_H
+#define DAOGRAPH_MYTEMPLATEDAEMON_H
 
 #include <string>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 template<class ...Args>
-class MyTemplateDaemon : public CGraph::GTemplateDaemon<Args...> {
+class MyTemplateDaemon : public DaoGraph::GTemplateDaemon<Args...> {
 public:
     explicit MyTemplateDaemon(int index) {
         index_ = index;
     }
 
-    void daemonTask(CGraph::GDaemonParamPtr param) override {
-        CGraph::CGRAPH_ECHO("----> [MyTemplateDaemon] template input index is [%d]", index_);
+    void daemonTask(DaoGraph::GDaemonParamPtr param) override {
+        DaoGraph::DAOGRAPH_ECHO("----> [MyTemplateDaemon] template input index is [%d]", index_);
     }
 
 private:
     int index_ = 0;
 };
 
-#endif //CGRAPH_MYTEMPLATEDAEMON_H
+#endif //DAOGRAPH_MYTEMPLATEDAEMON_H

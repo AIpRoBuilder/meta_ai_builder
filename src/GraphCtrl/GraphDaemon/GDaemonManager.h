@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GDAEMONMANAGER_H
-#define CGRAPH_GDAEMONMANAGER_H
+#ifndef DAOGRAPH_GDAEMONMANAGER_H
+#define DAOGRAPH_GDAEMONMANAGER_H
 
 #include "GDaemon.h"
 #include "../GraphManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GDaemonManager : public GDaemonObject,
                        public GraphManager<GDaemon> {
@@ -35,7 +35,7 @@ protected:
     friend class GPipeline;
     friend class CAllocator;
     friend class GStorage;
-    CGRAPH_NO_ALLOWED_COPY(GDaemonManager)
+    DAOGRAPH_NO_ALLOWED_COPY(GDaemonManager)
 
 private:
     GDaemonSet daemons_ {};                    // daemon信息集合
@@ -43,6 +43,6 @@ private:
 
 using GDaemonManagerPtr = GDaemonManager *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GDAEMONMANAGER_H
+#endif //DAOGRAPH_GDAEMONMANAGER_H

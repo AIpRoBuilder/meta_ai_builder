@@ -5,17 +5,17 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GELEMENTDEFINE_H
-#define CGRAPH_GELEMENTDEFINE_H
+#ifndef DAOGRAPH_GELEMENTDEFINE_H
+#define DAOGRAPH_GELEMENTDEFINE_H
 
 #include "../GraphObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-const static CSize CGRAPH_DEFAULT_LOOP_TIMES = 1;               // 默认循环次数信息
-const static CLevel CGRAPH_DEFAULT_ELEMENT_LEVEL = 0;           // 默认的element级别，用于控制init函数
-const static CIndex CGRAPH_DEFAULT_BINDING_INDEX = -1;          // 默认绑定线程id，-1表示不绑定
-const static CMSec CGRAPH_DEFAULT_ELEMENT_TIMEOUT = 0;          // 默认element的超时时间
+const static CSize DAOGRAPH_DEFAULT_LOOP_TIMES = 1;               // 默认循环次数信息
+const static CLevel DAOGRAPH_DEFAULT_ELEMENT_LEVEL = 0;           // 默认的element级别，用于控制init函数
+const static CIndex DAOGRAPH_DEFAULT_BINDING_INDEX = -1;          // 默认绑定线程id，-1表示不绑定
+const static CMSec DAOGRAPH_DEFAULT_ELEMENT_TIMEOUT = 0;          // 默认element的超时时间
 
 enum class GElementType {
     ELEMENT = 0x00000000,                    // 元素
@@ -51,15 +51,15 @@ enum class GElementTimeoutStrategy {
 };
 
 
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 enum class GElementShape {
     NORMAL = 0,                               // 普通的元素
     LINKABLE = 1,                             // 后继是唯一元素的情况（类似 list）
     ROOT = 2,                                 // 所有后继元素，只有一个前驱的情况（类似tree root）
     TAIL = 3,                                 // 尾部节点
 };
-CGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GELEMENTDEFINE_H
+#endif //DAOGRAPH_GELEMENTDEFINE_H

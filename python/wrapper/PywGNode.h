@@ -5,25 +5,25 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGNODE_H
-#define CGRAPH_PYWGNODE_H
+#ifndef DAOGRAPH_PYWGNODE_H
+#define DAOGRAPH_PYWGNODE_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "PyWrapperMacro.h"
 
-class PywGNode : public CGraph::GNode {
+class PywGNode : public DaoGraph::GNode {
 public:
     explicit PywGNode(const std::string& name,
-                      int loop = CGraph::CGRAPH_DEFAULT_LOOP_TIMES) {
+                      int loop = DaoGraph::DAOGRAPH_DEFAULT_LOOP_TIMES) {
         setName(name);
         setLoop(loop);
     }
 
-    explicit PywGNode(const CGraph::GElementPtrSet& depends = CGraph::GElementPtrSet{},
-                      const std::string& name = CGraph::CGRAPH_EMPTY,
-                      int loop = CGraph::CGRAPH_DEFAULT_LOOP_TIMES) {
+    explicit PywGNode(const DaoGraph::GElementPtrSet& depends = DaoGraph::GElementPtrSet{},
+                      const std::string& name = DaoGraph::DAOGRAPH_EMPTY,
+                      int loop = DaoGraph::DAOGRAPH_DEFAULT_LOOP_TIMES) {
         addDependGElements(depends);
         setLoop(loop);
         setName(name);
@@ -44,7 +44,7 @@ protected:
         PYBIND11_OVERLOAD(CStatus, GNode, destroy);
     }
 
-    PYCGRAPH_DECLARE_GELEMENT_COMMON_FUNCTIONS(CGraph::GNode)
+    PYDAOGRAPH_DECLARE_GELEMENT_COMMON_FUNCTIONS(DaoGraph::GNode)
 };
 
-#endif //CGRAPH_PYWGNODE_H
+#endif //DAOGRAPH_PYWGNODE_H

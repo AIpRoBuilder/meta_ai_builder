@@ -5,16 +5,16 @@
 @Desc: 命名为 CSTATUS，直接对外提供的是 CStatus 类
 ***************************/
 
-#ifndef CGRAPH_CSTATUS_H
-#define CGRAPH_CSTATUS_H
+#ifndef DAOGRAPH_CSTATUS_H
+#define DAOGRAPH_CSTATUS_H
 
 #include <string>
 
 #include "CBasicDefine.h"
 #include "CStrDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 /**
  * 说明：
@@ -146,7 +146,7 @@ public:
      */
     // CSTATUS* setInfo(int code, const std::string& info) {
     //     error_code_ = code;
-    //     error_info_ = (STATUS_OK == error_code_) ? CGRAPH_EMPTY : info;
+    //     error_info_ = (STATUS_OK == error_code_) ? DAOGRAPH_EMPTY : info;
     //     return this;
     // }
 
@@ -166,7 +166,7 @@ private:
     std::string error_info_;                         // 错误信息描述
 };
 
-CGRAPH_INTERNAL_NAMESPACE_END
-CGRAPH_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_CSTATUS_H
+#endif //DAOGRAPH_CSTATUS_H

@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GNODEDEFINE_H
-#define CGRAPH_GNODEDEFINE_H
+#ifndef DAOGRAPH_GNODEDEFINE_H
+#define DAOGRAPH_GNODEDEFINE_H
 
 #include <utility>
 #include <string>
@@ -14,7 +14,7 @@
 
 #include "../GElement.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 enum class GNodeType {
     BASIC = 0,          // 默认情况
@@ -31,26 +31,26 @@ enum class GNodeType {
  */
 struct GNodeInfo : public CStruct {
     std::string name_;                                   // 名称
-    CSize loop_ { CGRAPH_DEFAULT_LOOP_TIMES } ;          // 循环次数
+    CSize loop_ { DAOGRAPH_DEFAULT_LOOP_TIMES } ;          // 循环次数
     GElementPtrSet dependence_;                          // 依赖节点
 
     // 无依赖版本，适用于cluster创建
-    explicit GNodeInfo(const std::string& name = CGRAPH_EMPTY,
-                       CSize loop = CGRAPH_DEFAULT_LOOP_TIMES) {
+    explicit GNodeInfo(const std::string& name = DAOGRAPH_EMPTY,
+                       CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES) {
         this->name_ = name;
         this->loop_ = loop;
     }
 
     // 有依赖版本，适用于region创建
     explicit GNodeInfo(const GElementPtrSet& dependence = std::initializer_list<GElementPtr>(),
-                       const std::string& name = CGRAPH_EMPTY,
-                       CSize loop = CGRAPH_DEFAULT_LOOP_TIMES) {
+                       const std::string& name = DAOGRAPH_EMPTY,
+                       CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES) {
         this->name_ = name;
         this->loop_ = loop;
         this->dependence_ = dependence;
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GNODEDEFINE_H
+#endif //DAOGRAPH_GNODEDEFINE_H

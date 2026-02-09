@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GFENCE_H
-#define CGRAPH_GFENCE_H
+#ifndef DAOGRAPH_GFENCE_H
+#define DAOGRAPH_GFENCE_H
 
 #include <set>
 
 #include "../GAdapter.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GFence : public GAdapter {
 public:
@@ -45,9 +45,9 @@ protected:
 
     CVoid dumpElement(std::ostream& oss) final;
 
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
 
-    CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER
 
     CStatus run() final;
 
@@ -60,6 +60,6 @@ private:
 using GFencePtr = GFence *;
 using GFencePPtr = GFencePtr *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GFENCE_H
+#endif //DAOGRAPH_GFENCE_H

@@ -5,7 +5,7 @@
 @Desc: 
 """
 
-from pycgraph import GAspect, CStatus
+from pydaograph import GAspect, CStatus
 
 class MyConnAspect(GAspect):
     def __init__(self, ip: str, port: int):

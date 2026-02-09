@@ -5,11 +5,11 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GASPECTINCLUDE_H
-#define CGRAPH_GASPECTINCLUDE_H
+#ifndef DAOGRAPH_GASPECTINCLUDE_H
+#define DAOGRAPH_GASPECTINCLUDE_H
 
 #include "GAspect.h"
 #include "GTemplateAspect.h"
 #include "GAspectManager.h"
 
-#endif //CGRAPH_GASPECTINCLUDE_H
+#endif //DAOGRAPH_GASPECTINCLUDE_H

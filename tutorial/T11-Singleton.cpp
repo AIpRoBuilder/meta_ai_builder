@@ -8,7 +8,7 @@
 #include "MyGNode/MyShowAddressNode.h"
 #include "MyGNode/MyNode1.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_singleton() {
     GPipelinePtr pipeline = GPipelineFactory::create();

@@ -5,24 +5,24 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GDAEMONOBJECT_H
-#define CGRAPH_GDAEMONOBJECT_H
+#ifndef DAOGRAPH_GDAEMONOBJECT_H
+#define DAOGRAPH_GDAEMONOBJECT_H
 
 #include "../GraphObject.h"
 #include "../GraphParam/GParamInclude.h"
 #include "../GraphEvent/GEventInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GDaemonObject : public GraphObject,
                       public CDescInfo {
 protected:
     explicit GDaemonObject() {
-        session_ = URandom<>::generateSession(CGRAPH_STR_DAEMON);
+        session_ = URandom<>::generateSession(DAOGRAPH_STR_DAEMON);
     }
 
     ~GDaemonObject() override {
-        CGRAPH_DELETE_PTR(param_)
+        DAOGRAPH_DELETE_PTR(param_)
     }
 
     /**
@@ -48,9 +48,9 @@ protected:
             c_enable_if_t<std::is_base_of<GDaemonParam, DParam>::value, int> = 0>
     GDaemonObject* setDParam(DParam* param);
 
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
 
-    CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER
 
 private:
     /**
@@ -58,10 +58,10 @@ private:
      * @return
      */
     CStatus run() final {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
-    CGRAPH_NO_ALLOWED_COPY(GDaemonObject)
+    DAOGRAPH_NO_ALLOWED_COPY(GDaemonObject)
 
     friend class GDaemon;
     friend class GDaemonManager;
@@ -77,8 +77,8 @@ private:
 
 using GDaemonObjectPtr = GDaemonObject *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GDaemonObject.inl"
 
-#endif //CGRAPH_GDAEMONOBJECT_H
+#endif //DAOGRAPH_GDAEMONOBJECT_H

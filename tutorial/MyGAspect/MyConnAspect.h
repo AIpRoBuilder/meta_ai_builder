@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYCONNASPECT_H
-#define CGRAPH_MYCONNASPECT_H
+#ifndef DAOGRAPH_MYCONNASPECT_H
+#define DAOGRAPH_MYCONNASPECT_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "../MyParams/MyConnParam.h"
 
-class MyConnAspect : public CGraph::GAspect {
+class MyConnAspect : public DaoGraph::GAspect {
 public:
     CStatus beginInit() override {
         auto* param = this->getAParam<MyConnParam>();    // 注意，这里是AParam，表示的是切面自己的参数，不是GParam
@@ -33,17 +33,17 @@ public:
 protected:
     /** 模拟连接功能 */
     CVoid mockConnect(const std::string& ip, short port) {
-        CGraph::CGRAPH_ECHO("----> [MyConnAspect] [%s : %d] has been connected ...", ip.c_str(), port);
+        DaoGraph::DAOGRAPH_ECHO("----> [MyConnAspect] [%s : %d] has been connected ...", ip.c_str(), port);
         conn_status_ = true;
     }
 
     /** 模拟断开连接功能 */
     CVoid mockDisconnect(const std::string& ip, short port) {
         if (conn_status_) {
-            CGraph::CGRAPH_ECHO("----> [MyConnAspect] [%s : %d] has been disconnected ...", ip.c_str(), port);
+            DaoGraph::DAOGRAPH_ECHO("----> [MyConnAspect] [%s : %d] has been disconnected ...", ip.c_str(), port);
             conn_status_ = false;
         } else {
-            CGraph::CGRAPH_ECHO("----> [MyConnAspect] [%s : %d] is already been disconnected ...", ip.c_str(), port);
+            DaoGraph::DAOGRAPH_ECHO("----> [MyConnAspect] [%s : %d] is already been disconnected ...", ip.c_str(), port);
         }
     }
 
@@ -51,4 +51,4 @@ private:
     bool conn_status_ { false };                    // 表示连接状态
 };
 
-#endif //CGRAPH_MYCONNASPECT_H
+#endif //DAOGRAPH_MYCONNASPECT_H

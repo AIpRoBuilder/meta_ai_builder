@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGASPECT_H
-#define CGRAPH_PYWGASPECT_H
+#ifndef DAOGRAPH_PYWGASPECT_H
+#define DAOGRAPH_PYWGASPECT_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGAspect : public CGraph::GAspect {
+class PywGAspect : public DaoGraph::GAspect {
 public:
     explicit PywGAspect() = default;
     ~PywGAspect() override = default;
@@ -51,4 +51,4 @@ protected:
     }
 };
 
-#endif //CGRAPH_PYWGASPECT_H
+#endif //DAOGRAPH_PYWGASPECT_H

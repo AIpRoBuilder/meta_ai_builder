@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GMAXPARAOPTIMIZER_H
-#define CGRAPH_GMAXPARAOPTIMIZER_H
+#ifndef DAOGRAPH_GMAXPARAOPTIMIZER_H
+#define DAOGRAPH_GMAXPARAOPTIMIZER_H
 
 #include <algorithm>
 #include <vector>
 
 #include "GOptimizer.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GMaxParaOptimizer : public GOptimizer {
 protected:
@@ -80,6 +80,6 @@ protected:
     friend class GElementManager;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMAXPARAOPTIMIZER_H
+#endif //DAOGRAPH_GMAXPARAOPTIMIZER_H

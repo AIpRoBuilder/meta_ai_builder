@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GELEMENTREPOSITORY_H
-#define CGRAPH_GELEMENTREPOSITORY_H
+#ifndef DAOGRAPH_GELEMENTREPOSITORY_H
+#define DAOGRAPH_GELEMENTREPOSITORY_H
 
 #include "GElementObject.h"
 #include "GElement.h"
 #include "GElementManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElementRepository : public GElementObject {
 private:
@@ -99,6 +99,6 @@ private:
 using GElementRepositoryPtr = GElementRepository *;
 using GElementRepositoryRef = GElementRepository &;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GELEMENTREPOSITORY_H
+#endif //DAOGRAPH_GELEMENTREPOSITORY_H

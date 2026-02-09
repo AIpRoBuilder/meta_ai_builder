@@ -11,7 +11,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
     #if __cplusplus >= 201703L
 void tutorial_storage_save(const std::string& path) {
@@ -34,8 +34,8 @@ void tutorial_storage_save(const std::string& path) {
 
 void tutorial_storage_load(const std::string& path) {
     // 需要通过如下方式，提前注册所有的使用到的 meta 信息
-    CGRAPH_REGISTER_META_TYPE(MyNode1);
-    CGRAPH_REGISTER_META_TYPE(MyNode2);
+    DAOGRAPH_REGISTER_META_TYPE(MyNode1);
+    DAOGRAPH_REGISTER_META_TYPE(MyNode2);
 
     GPipelinePtr pipeline = GPipelineFactory::create();    // 创建一个新的pipeline，用于加载
     std::cout << "create another pipeline, and load pipeline for path : " << path << std::endl;
@@ -53,13 +53,13 @@ void tutorial_storage_load(const std::string& path) {
 }
 
 void tutorial_storage() {
-    const std::string& path = "storage.cgraph";
+    const std::string& path = "storage.daograph";
     tutorial_storage_save(path);
     tutorial_storage_load(path);
 }
     #else
 void tutorial_storage() {
-    std::cout << "CGraph storage support cpp17 and upper only \n";
+    std::cout << "DaoGraph storage support cpp17 and upper only \n";
 }
     #endif
 

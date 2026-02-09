@@ -5,16 +5,16 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYEVENTNODE_H
-#define CGRAPH_MYEVENTNODE_H
+#ifndef DAOGRAPH_MYEVENTNODE_H
+#define DAOGRAPH_MYEVENTNODE_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class MyEventNode : public CGraph::GNode {
+class MyEventNode : public DaoGraph::GNode {
 public:
     CStatus run () override {
         CStatus status;
-        CGraph::CGRAPH_ECHO("[%s], before event notify", this->getName().c_str());
+        DaoGraph::DAOGRAPH_ECHO("[%s], before event notify", this->getName().c_str());
         /**
          * 模拟在这里，触发一个 trigger信息，同名的事件被异步执行
          * 从打印结果可以看出，after event send 这条信息，提前执行
@@ -22,9 +22,9 @@ public:
          */
         notify("my-print-event", GEventType::SYNC);
 
-        CGraph::CGRAPH_ECHO("[%s], after event notify", this->getName().c_str());
+        DaoGraph::DAOGRAPH_ECHO("[%s], after event notify", this->getName().c_str());
         return status;
     }
 };
 
-#endif //CGRAPH_MYEVENTNODE_H
+#endif //DAOGRAPH_MYEVENTNODE_H

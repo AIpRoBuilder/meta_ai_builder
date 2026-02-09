@@ -5,11 +5,11 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTAGEINCLUDE_H
-#define CGRAPH_GSTAGEINCLUDE_H
+#ifndef DAOGRAPH_GSTAGEINCLUDE_H
+#define DAOGRAPH_GSTAGEINCLUDE_H
 
 #include "GStage.h"
 #include "GStageManager.h"
 #include "GStageManagerWrapper.h"
 
-#endif //CGRAPH_GSTAGEINCLUDE_H
+#endif //DAOGRAPH_GSTAGEINCLUDE_H

@@ -5,25 +5,25 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GSTAGE_INL
-#define CGRAPH_GSTAGE_INL
+#ifndef DAOGRAPH_GSTAGE_INL
+#define DAOGRAPH_GSTAGE_INL
 
 #include "GStage.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template <typename T,
         c_enable_if_t<std::is_base_of<GStageParam, T>::value, int>>
 GStagePtr GStage::setSParam(T* param) {
     if (param) {
-        CGRAPH_DELETE_PTR(param_);
-        param_ = CGRAPH_SAFE_MALLOC_COBJECT(T);
+        DAOGRAPH_DELETE_PTR(param_);
+        param_ = DAOGRAPH_SAFE_MALLOC_COBJECT(T);
         param_->clone(static_cast<T *>(param));
     }
 
     return this;
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSTAGE_INL
+#endif //DAOGRAPH_GSTAGE_INL

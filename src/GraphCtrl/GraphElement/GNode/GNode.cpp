@@ -7,11 +7,11 @@
 
 #include "GNode.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GNode::GNode() : GElement() {
     element_type_ = GElementType::NODE;
-    session_ = URandom<>::generateSession(CGRAPH_STR_NODE);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_NODE);
 }
 
 
@@ -22,12 +22,12 @@ GNodePtr GNode::setType(const GNodeType& type) {
 
 
 CStatus GNode::spawn(const UTaskGroup& tasks, CMSec ttl) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(true)
-    CGRAPH_ASSERT_NOT_NULL(thread_pool_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(true)
+    DAOGRAPH_ASSERT_NOT_NULL(thread_pool_)
 
     status = thread_pool_->submit(tasks, ttl);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

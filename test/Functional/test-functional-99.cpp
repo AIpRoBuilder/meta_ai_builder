@@ -8,7 +8,7 @@
 
 #include "../_Materials/TestInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void test_functional_99() {
     GPipelinePtr pipeline = GPipelineFactory::create();
@@ -25,7 +25,7 @@ void test_functional_99() {
         for (int i = 0; i < 10; i++) {
             status = pipeline->run();
             if (!status.isOK()) {
-                CGRAPH_ECHO("%s", status.getInfo().c_str());
+                DAOGRAPH_ECHO("%s", status.getInfo().c_str());
             }
         }
     }

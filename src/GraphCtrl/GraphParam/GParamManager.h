@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPARAMMANAGER_H
-#define CGRAPH_GPARAMMANAGER_H
+#ifndef DAOGRAPH_GPARAMMANAGER_H
+#define DAOGRAPH_GPARAMMANAGER_H
 
 #include <unordered_map>
 #include <vector>
@@ -17,7 +17,7 @@
 #include "../GraphManager.h"
 #include "GParam.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GParamManager : public GParamObject,
                       public GraphManager<GParam> {
@@ -75,7 +75,7 @@ protected:
      */
     CVoid resetWithStatus(const CStatus& curStatus);
 
-    CGRAPH_NO_ALLOWED_COPY(GParamManager)
+    DAOGRAPH_NO_ALLOWED_COPY(GParamManager)
 
 private:
     std::unordered_map<std::string, GParamPtr> params_map_;           // 记录param信息的hash表
@@ -95,8 +95,8 @@ public:
 
 using GParamManagerPtr = GParamManager *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GParamManager.inl"
 
-#endif //CGRAPH_GPARAMMANAGER_H
+#endif //DAOGRAPH_GPARAMMANAGER_H

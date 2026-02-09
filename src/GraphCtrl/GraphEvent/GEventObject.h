@@ -5,19 +5,19 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GEVENTOBJECT_H
-#define CGRAPH_GEVENTOBJECT_H
+#ifndef DAOGRAPH_GEVENTOBJECT_H
+#define DAOGRAPH_GEVENTOBJECT_H
 
 #include "../GraphObject.h"
 #include "../GraphParam/GParamInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GEventObject : public GraphObject,
                      public CDescInfo {
 protected:
     CStatus run() final {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
     virtual GEventObject* setThreadPool(UThreadPoolPtr ptr) {
@@ -32,6 +32,6 @@ protected:
 
 using GEventObjectPtr = GEventObject *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GEVENTOBJECT_H
+#endif //DAOGRAPH_GEVENTOBJECT_H

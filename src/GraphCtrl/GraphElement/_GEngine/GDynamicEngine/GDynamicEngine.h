@@ -6,14 +6,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GDYNAMICENGINE_H
-#define CGRAPH_GDYNAMICENGINE_H
+#ifndef DAOGRAPH_GDYNAMICENGINE_H
+#define DAOGRAPH_GDYNAMICENGINE_H
 
 #include <mutex>
 
 #include "../GEngine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GDynamicEngine : public GEngine {
 protected:
@@ -120,6 +120,6 @@ private:
     friend class CAllocator;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif // CGRAPH_GDYNAMICENGINE_H
+#endif // DAOGRAPH_GDYNAMICENGINE_H

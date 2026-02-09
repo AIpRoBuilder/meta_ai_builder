@@ -8,7 +8,7 @@
 
 #include "../_Materials/TestInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void test_functional_03() {
     CStatus status;

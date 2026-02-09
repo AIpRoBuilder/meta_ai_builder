@@ -5,18 +5,18 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYTEMPLATEV2NODE_H
-#define CGRAPH_MYTEMPLATEV2NODE_H
+#ifndef DAOGRAPH_MYTEMPLATEV2NODE_H
+#define DAOGRAPH_MYTEMPLATEV2NODE_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 template<int TID>
-class MyTemplateV2Node : public CGraph::GNode {
+class MyTemplateV2Node : public DaoGraph::GNode {
 public:
     CStatus run() override {
-        CGraph::CGRAPH_ECHO("[MyTemplateV2Node] template id = [%d] ", TID);
+        DaoGraph::DAOGRAPH_ECHO("[MyTemplateV2Node] template id = [%d] ", TID);
         return CStatus();
     }
 };
 
-#endif //CGRAPH_MYTEMPLATEV2NODE_H
+#endif //DAOGRAPH_MYTEMPLATEV2NODE_H

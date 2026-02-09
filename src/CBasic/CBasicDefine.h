@@ -5,26 +5,26 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_CBASICDEFINE_H
-#define CGRAPH_CBASICDEFINE_H
+#ifndef DAOGRAPH_CBASICDEFINE_H
+#define DAOGRAPH_CBASICDEFINE_H
 
 #include <cstddef>
 
-#define CGRAPH_NAMESPACE_BEGIN                                          \
-namespace CGraph {                                                      \
+#define DAOGRAPH_NAMESPACE_BEGIN                                          \
+namespace DaoGraph {                                                      \
 
-#define CGRAPH_NAMESPACE_END                                            \
-} /* end of namespace CGraph */                                         \
+#define DAOGRAPH_NAMESPACE_END                                            \
+} /* end of namespace DaoGraph */                                         \
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-#define CGRAPH_INTERNAL_NAMESPACE_BEGIN                                 \
+#define DAOGRAPH_INTERNAL_NAMESPACE_BEGIN                                 \
 namespace internal {                                                    \
 
-#define CGRAPH_INTERNAL_NAMESPACE_END                                   \
+#define DAOGRAPH_INTERNAL_NAMESPACE_END                                   \
 } /* end of namespace internal */                                       \
 
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 using CCHAR = char;
 using CUCHAR = unsigned char;
@@ -40,7 +40,7 @@ using CDOUBLE = double;
 using CCONSTR = const char*;
 using CSIZE = size_t;
 
-CGRAPH_INTERNAL_NAMESPACE_END
-CGRAPH_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_CBASICDEFINE_H
+#endif //DAOGRAPH_CBASICDEFINE_H

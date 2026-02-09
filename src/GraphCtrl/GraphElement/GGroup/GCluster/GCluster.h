@@ -5,14 +5,14 @@
 @Desc: 实现多个element，线性执行的功能
 ***************************/
 
-#ifndef CGRAPH_GCLUSTER_H
-#define CGRAPH_GCLUSTER_H
+#ifndef DAOGRAPH_GCLUSTER_H
+#define DAOGRAPH_GCLUSTER_H
 
 #include <vector>
 
 #include "../GGroup.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GCluster : public GGroup {
 protected:
@@ -31,6 +31,6 @@ private:
     friend class GStorageFactory;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GCLUSTER_H
+#endif //DAOGRAPH_GCLUSTER_H

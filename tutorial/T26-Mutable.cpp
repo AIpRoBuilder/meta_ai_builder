@@ -10,7 +10,7 @@
 #include "MyGNode/MyNode2.h"
 #include "MyGNode/MyWriteParamNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_mutable() {
     GPipelinePtr pipeline = GPipelineFactory::create();

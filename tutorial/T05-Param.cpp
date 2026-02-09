@@ -8,7 +8,7 @@
 #include "MyGNode/MyWriteParamNode.h"
 #include "MyGNode/MyReadParamNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_param() {
     GPipelinePtr pipeline = GPipelineFactory::create();
@@ -22,19 +22,19 @@ void tutorial_param() {
     status += pipeline->registerGElement<MyReadParamNode>(&e, {a}, "readNodeE");
     status += pipeline->registerGElement<MyWriteParamNode>(&f, {b, c, d, e}, "writeNodeF");
     if (!status.isOK()) {
-        return;    // 使用时，请对所有CGraph接口的返回值做判定。本例子中省略
+        return;    // 使用时，请对所有DaoGraph接口的返回值做判定。本例子中省略
     }
 
     status += pipeline->init();
 
     for (int i = 0; i < 3; i++) {
         status += pipeline->run();
-        std::cout << "[CGraph] tutorial_param, loop : " << i + 1 << ", and run status = " << status.getCode() << std::endl;
+        std::cout << "[DaoGraph] tutorial_param, loop : " << i + 1 << ", and run status = " << status.getCode() << std::endl;
     }
 
     /**
     auto param = pipeline->getGParam<MyParam>("param1");    // 可以获取pipeline内部的参数内容。但是需要考虑param的setup()和reset()的时机
-    std::cout << "[CGraph] get param from pipeline, iCount = " << param->iCount << std::endl;
+    std::cout << "[DaoGraph] get param from pipeline, iCount = " << param->iCount << std::endl;
     */
 
     status += pipeline->destroy();

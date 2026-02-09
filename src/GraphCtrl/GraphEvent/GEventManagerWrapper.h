@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GEVENTMANAGERWRAPPER_H
-#define CGRAPH_GEVENTMANAGERWRAPPER_H
+#ifndef DAOGRAPH_GEVENTMANAGERWRAPPER_H
+#define DAOGRAPH_GEVENTMANAGERWRAPPER_H
 
 #include "GEvent.h"
 #include "GEventManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-#define CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER                                                     \
+#define DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER                                                     \
     /**
      * 设置统一管控信号类
      * @param em
@@ -33,10 +33,10 @@ CGRAPH_NAMESPACE_BEGIN
      */                                                                                           \
     CStatus notify(const std::string& key, GEventType type,                                       \
                    GEventAsyncStrategy strategy = GEventAsyncStrategy::PIPELINE_RUN_FINISH) {     \
-        CGRAPH_FUNCTION_BEGIN                                                                     \
-        CGRAPH_ASSERT_NOT_NULL(this->event_manager_)                                              \
+        DAOGRAPH_FUNCTION_BEGIN                                                                     \
+        DAOGRAPH_ASSERT_NOT_NULL(this->event_manager_)                                              \
         status = this->event_manager_->trigger(key, type, strategy);                              \
-        CGRAPH_FUNCTION_END                                                                       \
+        DAOGRAPH_FUNCTION_END                                                                       \
     }                                                                                             \
                                                                                                   \
     /**
@@ -47,7 +47,7 @@ CGRAPH_NAMESPACE_BEGIN
      */                                                                                                                 \
     std::shared_future<CVoid> asyncNotify(const std::string& key,                                                       \
                                           GEventAsyncStrategy strategy = GEventAsyncStrategy::PIPELINE_RUN_FINISH) {    \
-        CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(this->event_manager_);                                                       \
+        DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(this->event_manager_);                                                       \
         return this->event_manager_->asyncTrigger(key, strategy);                                                       \
     }                                                                                                                   \
                                                                                                   \
@@ -65,13 +65,13 @@ public:                                                                         
 private:                                                                                          \
                                                                                                   \
 
-#define CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER_WITH_MEMBER                                         \
+#define DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER_WITH_MEMBER                                         \
 private:                                                                                          \
     GEventManagerPtr event_manager_ = nullptr;                                                    \
 protected:                                                                                        \
-    CGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER                                                         \
+    DAOGRAPH_DECLARE_GEVENT_MANAGER_WRAPPER                                                         \
                                                                                                   \
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GEVENTMANAGERWRAPPER_H
+#endif //DAOGRAPH_GEVENTMANAGERWRAPPER_H

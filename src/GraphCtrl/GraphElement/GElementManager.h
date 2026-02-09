@@ -5,21 +5,21 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GELEMENTMANAGER_H
-#define CGRAPH_GELEMENTMANAGER_H
+#ifndef DAOGRAPH_GELEMENTMANAGER_H
+#define DAOGRAPH_GELEMENTMANAGER_H
 
 #include "GElement.h"
 #include "GElementSorter.h"
 #include "_GEngine/GEngineInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElementManager : public GElementObject,
                         public GraphManager<GElement> {
 protected:
     explicit GElementManager() = default;
     ~GElementManager() override;
-    CGRAPH_NO_ALLOWED_COPY(GElementManager);
+    DAOGRAPH_NO_ALLOWED_COPY(GElementManager);
 
     CStatus init() final;
     CStatus run() final;
@@ -114,6 +114,6 @@ private:
 using GElementManagerPtr = GElementManager *;
 using GElementManagerCPtr = const GElementManagerPtr;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GELEMENTMANAGER_H
+#endif //DAOGRAPH_GELEMENTMANAGER_H

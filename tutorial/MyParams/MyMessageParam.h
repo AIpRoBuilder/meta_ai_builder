@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYMESSAGEPARAM_H
-#define CGRAPH_MYMESSAGEPARAM_H
+#ifndef DAOGRAPH_MYMESSAGEPARAM_H
+#define DAOGRAPH_MYMESSAGEPARAM_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-struct MyMessageParam : public CGraph::GMessageParam {
+struct MyMessageParam : public DaoGraph::GMessageParam {
     int num = 0;
     std::string info;
 
@@ -21,7 +21,7 @@ struct MyMessageParam : public CGraph::GMessageParam {
      * 使用 GMessageParam 类型参数的时候，建议实现构造拷贝 和 赋值拷贝函数
      * 否则，针对指针类型变量，可能会出现深浅拷贝的问题
      */
-    MyMessageParam(const MyMessageParam& param) : CGraph::GMessageParam(param) {
+    MyMessageParam(const MyMessageParam& param) : DaoGraph::GMessageParam(param) {
         /** 针对通过 unique_ptr<value> 获取的方式，推荐实现构造拷贝函数 */
         this->info = param.info;
         this->num = param.num;
@@ -39,4 +39,4 @@ struct MyMessageParam : public CGraph::GMessageParam {
     }
 };
 
-#endif //CGRAPH_MYMESSAGEPARAM_H
+#endif //DAOGRAPH_MYMESSAGEPARAM_H

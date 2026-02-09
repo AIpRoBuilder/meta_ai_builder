@@ -5,7 +5,7 @@
 @Desc: 
 """
 
-from pycgraph import GNode, GPipeline
+from pydaograph import GNode, GPipeline
 
 from MyGNode.MyWriteParamNode import MyWriteParamNode
 from MyGNode.MyReadParamNode import MyReadParamNode

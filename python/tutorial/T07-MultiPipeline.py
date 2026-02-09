@@ -5,7 +5,7 @@
 @Desc: 
 """
 
-from pycgraph import GPipeline, UThreadPoolConfig, UThreadPool
+from pydaograph import GPipeline, UThreadPoolConfig, UThreadPool
 
 from MyGNode.MyNode1 import MyNode1
 from MyGNode.MyNode2 import MyNode2

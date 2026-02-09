@@ -5,22 +5,22 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGPARALLELMULTICONDITION_H
-#define CGRAPH_PYWGPARALLELMULTICONDITION_H
+#ifndef DAOGRAPH_PYWGPARALLELMULTICONDITION_H
+#define DAOGRAPH_PYWGPARALLELMULTICONDITION_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "PyWrapperMacro.h"
 
-class PywGParallelMultiCondition : public CGraph::GMultiCondition<CGraph::GMultiConditionType::PARALLEL> {
+class PywGParallelMultiCondition : public DaoGraph::GMultiCondition<DaoGraph::GMultiConditionType::PARALLEL> {
 public:
-    explicit PywGParallelMultiCondition(const CGraph::GElementPtrArr& elements = CGraph::GElementPtrArr{}) {
-        CGraph::GMultiCondition<CGraph::GMultiConditionType::PARALLEL>::__addGElements_4py(elements);
+    explicit PywGParallelMultiCondition(const DaoGraph::GElementPtrArr& elements = DaoGraph::GElementPtrArr{}) {
+        DaoGraph::GMultiCondition<DaoGraph::GMultiConditionType::PARALLEL>::__addGElements_4py(elements);
     };
 
     ~PywGParallelMultiCondition() override = default;
 
-    CGraph::GElement* clone() const override {
-        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GMultiCondition<CGraph::GMultiConditionType::PARALLEL>, clone);
+    DaoGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, DaoGraph::GMultiCondition<DaoGraph::GMultiConditionType::PARALLEL>, clone);
     }
 
 protected:
@@ -29,6 +29,6 @@ protected:
     }
 };
 
-PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGParallelMultiCondition, ;);
+PYDAOGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGParallelMultiCondition, ;);
 
-#endif //CGRAPH_PYWGPARALLELMULTICONDITION_H
+#endif //DAOGRAPH_PYWGPARALLELMULTICONDITION_H

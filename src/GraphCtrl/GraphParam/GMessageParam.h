@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GMESSAGEPARAM_H
-#define CGRAPH_GMESSAGEPARAM_H
+#ifndef DAOGRAPH_GMESSAGEPARAM_H
+#define DAOGRAPH_GMESSAGEPARAM_H
 
 #include "GParamObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GMessageParam : public GParamObject {
     /**
@@ -21,6 +21,6 @@ class GMessageParam : public GParamObject {
      */
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMESSAGEPARAM_H
+#endif //DAOGRAPH_GMESSAGEPARAM_H

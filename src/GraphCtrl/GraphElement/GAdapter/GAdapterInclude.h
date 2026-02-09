@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GADAPTERINCLUDE_H
-#define CGRAPH_GADAPTERINCLUDE_H
+#ifndef DAOGRAPH_GADAPTERINCLUDE_H
+#define DAOGRAPH_GADAPTERINCLUDE_H
 
 #include "GAdapter.h"
 #include "GSingleton/GSingleton.h"
@@ -14,4 +14,4 @@
 #include "GFence/GFence.h"
 #include "GCoordinator/GCoordinator.h"
 
-#endif //CGRAPH_GADAPTERINCLUDE_H
+#endif //DAOGRAPH_GADAPTERINCLUDE_H

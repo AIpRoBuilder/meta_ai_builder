@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_CSTRUCT_H
-#define CGRAPH_CSTRUCT_H
+#ifndef DAOGRAPH_CSTRUCT_H
+#define DAOGRAPH_CSTRUCT_H
 
 #include "CBasicDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 /**
  * 所有框架内部结构体定义的基类
@@ -20,6 +20,6 @@ struct CStruct {
     virtual ~CStruct() = default;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_CSTRUCT_H
+#endif //DAOGRAPH_CSTRUCT_H

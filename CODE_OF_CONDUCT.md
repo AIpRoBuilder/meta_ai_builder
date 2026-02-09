@@ -1,10 +1,10 @@
 
-# CGraph Code of Conduct
+# DaoGraph Code of Conduct
 
 ## Coding Guidelines
 
 ### C++
-Please ensure your code follows the CGraph coding guidelines. Consistent coding style helps maintain the codebase.
+Please ensure your code follows the DaoGraph coding guidelines. Consistent coding style helps maintain the codebase.
 
 Based on Google style guide, with some differences(perhaps):
 

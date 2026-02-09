@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_ULRU_H
-#define CGRAPH_ULRU_H
+#ifndef DAOGRAPH_ULRU_H
+#define DAOGRAPH_ULRU_H
 
 #include <list>
 #include <unordered_map>
@@ -14,7 +14,7 @@
 #include "../UtilsObject.h"
 #include "ULruNode.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename K, typename V, CSize DefaultCapacity = 16>
 class ULru : public UtilsObject {
@@ -96,6 +96,6 @@ private:
     std::list<ULruNode<K, V>> nodes_;                                                // 节点链表
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_ULRU_H
+#endif //DAOGRAPH_ULRU_H

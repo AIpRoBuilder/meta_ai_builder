@@ -5,12 +5,12 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GPASSEDDEFAULTPARAM_H
-#define CGRAPH_GPASSEDDEFAULTPARAM_H
+#ifndef DAOGRAPH_GPASSEDDEFAULTPARAM_H
+#define DAOGRAPH_GPASSEDDEFAULTPARAM_H
 
 #include "GPassedParam.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPassedDefaultParam final : public GPassedParam {
 protected:
@@ -28,6 +28,6 @@ using GDaemonDefaultParam = GPassedDefaultParam;
 using GEventDefaultParam = GPassedDefaultParam;
 using GStageDefaultParam = GPassedDefaultParam;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPASSEDDEFAULTPARAM_H
+#endif //DAOGRAPH_GPASSEDDEFAULTPARAM_H

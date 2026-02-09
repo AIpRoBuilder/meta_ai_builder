@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWRAPPERDEFINE_H
-#define CGRAPH_PYWRAPPERDEFINE_H
+#ifndef DAOGRAPH_PYWRAPPERDEFINE_H
+#define DAOGRAPH_PYWRAPPERDEFINE_H
 
 #include <pybind11/pybind11.h>
 #include <typeinfo>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-#define PYCGRAPH_DECLARE_GELEMENT_COMMON_FUNCTIONS(PCGE)    \
+#define PYDAOGRAPH_DECLARE_GELEMENT_COMMON_FUNCTIONS(PCGE)    \
     CBool isHold() override {                               \
         PYBIND11_OVERLOAD(CBool, PCGE, isHold);             \
     }                                                       \
@@ -38,25 +38,25 @@
         return std::string(typeid(*this).name());           \
     }                                                       \
                                                             \
-    CGraph::GElement* clone() const override {              \
-        PYBIND11_OVERLOAD(CGraph::GElement*, PCGE, clone);  \
+    DaoGraph::GElement* clone() const override {              \
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, PCGE, clone);  \
     }                                                       \
                                                             \
 
 
-#define PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PCGG, PVFunc)                             \
+#define PYDAOGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PCGG, PVFunc)                             \
 class PCGG##Interface : public PCGG {                                                     \
 public:                                                                                   \
-    explicit PCGG##Interface(const CGraph::GElementPtrArr& elements = CGraph::GElementPtrArr{}) : PCGG(elements) {}; \
+    explicit PCGG##Interface(const DaoGraph::GElementPtrArr& elements = DaoGraph::GElementPtrArr{}) : PCGG(elements) {}; \
     ~PCGG##Interface() override = default;                                                \
 protected:                                                                                \
-    PYCGRAPH_DECLARE_GELEMENT_COMMON_FUNCTIONS(PCGG##Interface)                           \
+    PYDAOGRAPH_DECLARE_GELEMENT_COMMON_FUNCTIONS(PCGG##Interface)                           \
     PVFunc                                                                                \
 };                                                                                        \
                                                                                           \
 
 
-#define PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(PCGG)                                  \
+#define PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(PCGG)                                  \
     py::class_<Pyw##PCGG, GElement, std::unique_ptr<Pyw##PCGG, py::nodelete> >(cg, #PCGG) \
         .def(py::init<const GElementPtrArr&>(),                                           \
             py::arg("elements") = GElementPtrArr{},                                       \
@@ -67,7 +67,7 @@ protected:                                                                      
                                                                                           \
 
 
-#define PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(PCGO)                                      \
+#define PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(PCGO)                                      \
     def("createGParam", &PCGO::__createGParam_4py,                                        \
          py::arg("param"),                                                                \
          py::arg("key"),                                                                  \
@@ -86,7 +86,7 @@ protected:                                                                      
                                                                                           \
 
 
-#define PYCGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(PCGO)                                      \
+#define PYDAOGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(PCGO)                                      \
     def("notify", &PCGO::__notify_4py,                                                    \
         py::arg("key"),                                                                   \
         py::arg("type"),                                                                  \
@@ -98,4 +98,4 @@ protected:                                                                      
         py::call_guard<py::gil_scoped_release>())                                         \
                                                                                           \
 
-#endif //CGRAPH_PYWRAPPERDEFINE_H
+#endif //DAOGRAPH_PYWRAPPERDEFINE_H

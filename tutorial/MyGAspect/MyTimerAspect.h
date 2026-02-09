@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYTIMERASPECT_H
-#define CGRAPH_MYTIMERASPECT_H
+#ifndef DAOGRAPH_MYTIMERASPECT_H
+#define DAOGRAPH_MYTIMERASPECT_H
 
 #include <chrono>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class MyTimerAspect : public CGraph::GAspect {
+class MyTimerAspect : public DaoGraph::GAspect {
 public:
     /**
      * 实现计时切面逻辑，记录 run() 方法的执行耗时信息
@@ -24,7 +24,7 @@ public:
 
     CVoid finishRun(const CStatus& curStatus) override {
         std::chrono::duration<double, std::milli> span = std::chrono::steady_clock::now() - start_ts_;
-        CGraph::CGRAPH_ECHO("----> [MyTimerAspect] [%s] time cost is : [%0.2lf] ms",
+        DaoGraph::DAOGRAPH_ECHO("----> [MyTimerAspect] [%s] time cost is : [%0.2lf] ms",
                             this->getName().c_str(), span.count());
     }
 
@@ -32,4 +32,4 @@ private:
     std::chrono::steady_clock::time_point start_ts_;
 };
 
-#endif //CGRAPH_MYTIMERASPECT_H
+#endif //DAOGRAPH_MYTIMERASPECT_H

@@ -7,19 +7,19 @@
 
 #include "GStage.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CVoid GStage::launch(GStageParamPtr param) {
 }
 
 
 GStage::GStage() {
-    session_ = URandom<>::generateSession(CGRAPH_STR_STAGE);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_STAGE);
 }
 
 
 GStage::~GStage() {
-    CGRAPH_DELETE_PTR(param_);
+    DAOGRAPH_DELETE_PTR(param_);
 }
 
 
@@ -31,7 +31,7 @@ GStagePtr GStage::setThreshold(CInt threshold) {
 
 CVoid GStage::waiting() {
     {
-        CGRAPH_LOCK_GUARD wm(waiting_mutex_);
+        DAOGRAPH_LOCK_GUARD wm(waiting_mutex_);
         cur_value_++;
         if (cur_value_ >= threshold_) {
             // 如果超过了 threshold，则打开全部
@@ -42,10 +42,10 @@ CVoid GStage::waiting() {
         }
     }
 
-    CGRAPH_UNIQUE_LOCK lk(locker_.mtx_);
+    DAOGRAPH_UNIQUE_LOCK lk(locker_.mtx_);
     locker_.cv_.wait(lk, [this] {
         return 0 == cur_value_ || cur_value_ >= threshold_;
     });
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

@@ -5,15 +5,15 @@
 @Desc: 用于距离计算的类，支持自定义扩展
 ***************************/
 
-#ifndef CGRAPH_UDISTANCECALCULATOR_H
-#define CGRAPH_UDISTANCECALCULATOR_H
+#ifndef DAOGRAPH_UDISTANCECALCULATOR_H
+#define DAOGRAPH_UDISTANCECALCULATOR_H
 
 #include <vector>
 
 #include "UDistanceObject.h"
 #include "UDistance.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename TSrc, typename TRes, typename UDist,
         const CBool needCheck = false,
@@ -34,12 +34,12 @@ public:
                       CSize dim1, CSize dim2,
                       TRes& result,
                       CVoidPtr ext = nullptr) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         status = needCheck ? distance_.check(v1, v2, dim1, dim2, ext) : CStatus();
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
 
         status = distance_.calc(v1, v2, dim1, dim2, result, ext);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -69,7 +69,7 @@ public:
                       const std::vector<std::vector<TSrc> >& nodes,
                       std::vector<TRes>& results,
                       CVoidPtr ext = nullptr) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         results.clear();
         results.reserve(nodes.size());    // 预分配空间信息
         for (const std::vector<TSrc>& node : nodes) {
@@ -77,7 +77,7 @@ public:
             status += calculate(query, node, result, ext);
             results.emplace_back(result);
         }
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -88,13 +88,13 @@ public:
      * @return
      */
     CStatus normalize(TSrc* v, CSize dim, CVoidPtr ext = nullptr) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         // 这里强行将一个向量copy一份传入判断，目的是为了是的 normalize 和 calculate 的判断逻辑，保持一致
         status = needCheck ? distance_.check(v, v, dim, dim, ext) : CStatus();
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
 
         status = distance_.normalize(v, dim, ext);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -112,6 +112,6 @@ private:
     UDist distance_;        // 具体的距离计算类
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UDISTANCECALCULATOR_H
+#endif //DAOGRAPH_UDISTANCECALCULATOR_H

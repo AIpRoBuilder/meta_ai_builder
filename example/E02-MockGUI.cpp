@@ -11,9 +11,9 @@
 #include <cmath>
 #include <set>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 const static char* EXAMPLE_PARAM_KEY = "example-param-key";
 const static char* EXAMPLE_EVENT_KEY = "example-event-key";
@@ -42,8 +42,8 @@ protected:
 
 class ShowGEvent : public GEvent {
     CVoid trigger(GEventParamPtr param) override {
-        auto p = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
-        CGRAPH_PARAM_READ_CODE_BLOCK(p);
+        auto p = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
+        DAOGRAPH_PARAM_READ_CODE_BLOCK(p);
         p->print();
     }
 };
@@ -52,9 +52,9 @@ class ShowGEvent : public GEvent {
 class SwitchGAspect : public GAspect {
 public:
     CStatus beginRun() override {
-        auto p = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
+        auto p = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
         {
-            CGRAPH_PARAM_WRITE_CODE_BLOCK(p)
+            DAOGRAPH_PARAM_WRITE_CODE_BLOCK(p)
             p->change(this->getName(), true);
         }
 
@@ -63,9 +63,9 @@ public:
     }
 
     CVoid finishRun(const CStatus& curStatus) override {
-        auto p = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
+        auto p = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(ProcessGParam, EXAMPLE_PARAM_KEY);
         {
-            CGRAPH_PARAM_WRITE_CODE_BLOCK(p)
+            DAOGRAPH_PARAM_WRITE_CODE_BLOCK(p)
             p->change(this->getName(), false);
         }
 
@@ -77,7 +77,7 @@ public:
 class ActionGNode : public GNode {
     CStatus run() override {
         int ms = std::abs((int)std::random_device{}()) % 4000 + 1000;
-        CGRAPH_SLEEP_MILLISECOND(ms);    // 一个算子，随机休息一段时间，时长 1000~5000 ms
+        DAOGRAPH_SLEEP_MILLISECOND(ms);    // 一个算子，随机休息一段时间，时长 1000~5000 ms
         return CStatus();
     }
 };

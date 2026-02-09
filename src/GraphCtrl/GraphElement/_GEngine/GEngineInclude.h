@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GENGINEINCLUDE_H
-#define CGRAPH_GENGINEINCLUDE_H
+#ifndef DAOGRAPH_GENGINEINCLUDE_H
+#define DAOGRAPH_GENGINEINCLUDE_H
 
 #include "GEngine.h"
 #include "GEngineDefine.h"
@@ -14,4 +14,4 @@
 #include "GTopoEngine/GTopoEngine.h"
 #include "GStaticEngine/GStaticEngine.h"
 
-#endif //CGRAPH_GENGINEINCLUDE_H
+#endif //DAOGRAPH_GENGINEINCLUDE_H

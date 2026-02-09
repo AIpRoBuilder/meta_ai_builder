@@ -7,12 +7,12 @@
 
 #include "GFunction.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GFunctionPtr GFunction::setFunction(const CFunctionType& type,
-                                    CGRAPH_CSTATUS_CONST_FUNCTION_REF func) {
-    CGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(func)
+                                    DAOGRAPH_CSTATUS_CONST_FUNCTION_REF func) {
+    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(func)
 
     switch (type) {
         case CFunctionType::INIT: init_function_ = func; break;
@@ -27,7 +27,7 @@ GFunctionPtr GFunction::setFunction(const CFunctionType& type,
 
 GFunction::GFunction() {
     this->element_type_ = GElementType::FUNCTION;
-    session_ = URandom<>::generateSession(CGRAPH_STR_FUNCTION);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_FUNCTION);
 }
 
 
@@ -45,4 +45,4 @@ CStatus GFunction::destroy() {
     return destroy_function_ ? destroy_function_() : CStatus();
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

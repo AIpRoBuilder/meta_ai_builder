@@ -7,26 +7,26 @@
 
 #include "GTopoEngine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CStatus GTopoEngine::setup(const GSortedGElementPtrSet& elements) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     topo_elements_ = GEngine::getTopo(elements);
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(topo_elements_.size() != elements.size(),     \
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(topo_elements_.size() != elements.size(),     \
                                             "topo engine parse size is not right")
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GTopoEngine::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     for (auto* element : topo_elements_) {
         status += element->fatProcessor(CFunctionType::RUN);
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
     }
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

@@ -12,7 +12,7 @@
 #include "MyGNode/MyWriteParamNode.h"
 #include "MyParams/MyConnParam.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_daemon() {
     GPipelinePtr pipeline = GPipelineFactory::create();    // 创建一个pipeline，用于执行图框架信息

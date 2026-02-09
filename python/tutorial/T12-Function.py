@@ -7,7 +7,7 @@
 
 import time
 
-from pycgraph import GPipeline, GFunction, CFunctionType, CStatus
+from pydaograph import GPipeline, GFunction, CFunctionType, CStatus
 
 from MyGNode.MyNode1 import MyNode1
 from MyGNode.MyWriteParamNode import MyWriteParamNode

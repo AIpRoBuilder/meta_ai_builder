@@ -7,43 +7,43 @@
 
 #include "GGroup.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GGroup::GGroup() {
     element_type_ = GElementType::GROUP;
 }
 
 CStatus GGroup::init() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (GElementPtr element : group_elements_arr_) {
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_ASSERT_NOT_NULL(element)
         status += element->fatProcessor(CFunctionType::INIT);
     }
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     is_init_ = true;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GGroup::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (GElementPtr element : group_elements_arr_) {
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_ASSERT_NOT_NULL(element)
         status += element->fatProcessor(CFunctionType::DESTROY);
     }
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     is_init_ = false;
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GGroup::addElement(GElementPtr element) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element)
 
     this->group_elements_arr_.emplace_back(element);
     element->belong_ = this;
@@ -51,12 +51,12 @@ CStatus GGroup::addElement(GElementPtr element) {
     element->addManagers(param_manager_, event_manager_, stage_manager_);
 
     status = addElementEx(element);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GGroup::addElementEx(GElementPtr element) {
-    CGRAPH_EMPTY_FUNCTION
+    DAOGRAPH_EMPTY_FUNCTION
 }
 
 
@@ -67,7 +67,7 @@ GElementPtrArr GGroup::getChildren() const {
 
 CVoid GGroup::dumpGroupLabelBegin(std::ostream& oss) {
     oss << "subgraph ";
-    oss << "cluster_p" << this;    // cluster_ 是 graphviz的关键字，和CGraph中GCluster逻辑无关
+    oss << "cluster_p" << this;    // cluster_ 是 graphviz的关键字，和DaoGraph中GCluster逻辑无关
     oss << " {\nlabel=\"";
 
     if (name_.empty()) {
@@ -106,19 +106,19 @@ CBool GGroup::isSerializable() const {
 CStatus GGroup::addManagers(GParamManagerPtr paramManager,
                             GEventManagerPtr eventManager,
                             GStageManagerPtr stageManager) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(paramManager, eventManager, stageManager)
-    CGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(paramManager, eventManager, stageManager)
+    DAOGRAPH_ASSERT_INIT(false)
 
     status = GElement::addManagers(paramManager, eventManager, stageManager);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     for (GElementPtr element : group_elements_arr_) {
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_ASSERT_NOT_NULL(element)
         status += element->addManagers(paramManager, eventManager, stageManager);
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -128,12 +128,12 @@ CBool GGroup::isSeparate(GElementCPtr a, GElementCPtr b) const {
 
 
 CStatus GGroup::__addGElements_4py(const GElementPtrArr& elements) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_INIT(false)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_INIT(false)
     for (GElementPtr element : elements) {
         status += addElement(element);
     }
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

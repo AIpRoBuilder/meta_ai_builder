@@ -5,24 +5,24 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGDAEMON_H
-#define CGRAPH_PYWGDAEMON_H
+#ifndef DAOGRAPH_PYWGDAEMON_H
+#define DAOGRAPH_PYWGDAEMON_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGDaemon : public CGraph::GDaemon {
+class PywGDaemon : public DaoGraph::GDaemon {
 public:
     explicit PywGDaemon() = default;
     ~PywGDaemon() override = default;
 
 protected:
-    CVoid daemonTask(CGraph::GDaemonParamPtr param) override {
+    CVoid daemonTask(DaoGraph::GDaemonParamPtr param) override {
         PYBIND11_OVERLOAD_PURE(CVoid, GDaemon, daemonTask, param);
     }
 
-    CMSec modify(CGraph::GDaemonParamPtr param) override {
+    CMSec modify(DaoGraph::GDaemonParamPtr param) override {
         PYBIND11_OVERLOAD(CMSec, GDaemon, modify, param);
     }
 };
 
-#endif //CGRAPH_PYWGDAEMON_H
+#endif //DAOGRAPH_PYWGDAEMON_H

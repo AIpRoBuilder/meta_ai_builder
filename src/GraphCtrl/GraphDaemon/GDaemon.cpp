@@ -7,23 +7,23 @@
 
 #include "GDaemon.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CStatus GDaemon::init() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     timer_.start(interval_, [this] {
         daemonTask(param_);
     }, [this] {
         return modify(param_);
     });
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GDaemon::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     timer_.stop();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -41,4 +41,4 @@ CMSec GDaemon::__getInterval_4py() const {
     return getInterval();
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

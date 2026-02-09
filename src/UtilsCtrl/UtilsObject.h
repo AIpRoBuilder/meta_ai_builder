@@ -5,20 +5,20 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTILSOBJECT_H
-#define CGRAPH_UTILSOBJECT_H
+#ifndef DAOGRAPH_UTILSOBJECT_H
+#define DAOGRAPH_UTILSOBJECT_H
 
 #include "UtilsDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UtilsObject : public CObject {
 protected:
     CStatus run() override {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTILSOBJECT_H
+#endif //DAOGRAPH_UTILSOBJECT_H

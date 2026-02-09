@@ -5,17 +5,17 @@
 @Desc: 用于生成可变构造参数的切面
 ***************************/
 
-#ifndef CGRAPH_GTEMPLATEASPECT_H
-#define CGRAPH_GTEMPLATEASPECT_H
+#ifndef DAOGRAPH_GTEMPLATEASPECT_H
+#define DAOGRAPH_GTEMPLATEASPECT_H
 
 #include "GAspect.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<class ...Args>
 class GTemplateAspect : public GAspect {
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GTEMPLATEASPECT_H
+#endif //DAOGRAPH_GTEMPLATEASPECT_H

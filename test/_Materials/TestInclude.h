@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_TESTINCLUDE_H
-#define CGRAPH_TESTINCLUDE_H
+#ifndef DAOGRAPH_TESTINCLUDE_H
+#define DAOGRAPH_TESTINCLUDE_H
 
 #include "TestCommonDefine.h"
 #include "TestGNodes.h"
 #include "TestGAspects.h"
 #include "TestGParams.h"
 
-#endif //CGRAPH_TESTINCLUDE_H
+#endif //DAOGRAPH_TESTINCLUDE_H

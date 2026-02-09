@@ -9,7 +9,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyWriteParamNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_multi_condition() {
     GPipelinePtr pipeline = GPipelineFactory::create();    // 创建一个pipeline，用于执行图框架信息

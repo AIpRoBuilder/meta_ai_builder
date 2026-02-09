@@ -1,5 +1,5 @@
 -- project
-set_project("CGraph")
+set_project("DaoGraph")
 
 -- set project version
 set_version("3.2.2")
@@ -16,7 +16,7 @@ elseif is_plat("linux") then
 end
 
 tutorial_list = {
-    "T00-HelloCGraph",
+    "T00-HelloDaoGraph",
     "T01-Simple",
     "T02-Cluster",
     "T03-Region",
@@ -53,6 +53,6 @@ for _, v in pairs(tutorial_list) do
     target(v)
         set_kind("binary")
         add_includedirs("src")
-        add_headerfiles("src/CGraph.h")
+        add_headerfiles("src/DaoGraph.h")
         add_files("src/**.cpp", string.format("tutorial/%s.cpp", v))
 end

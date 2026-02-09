@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GOPTIMIZERINCLUDE_H
-#define CGRAPH_GOPTIMIZERINCLUDE_H
+#ifndef DAOGRAPH_GOPTIMIZERINCLUDE_H
+#define DAOGRAPH_GOPTIMIZERINCLUDE_H
 
 #include "GOptimizer.h"
 #include "GMaxParaOptimizer.h"
 #include "GSeparateOptimizer.h"
 #include "GTrimOptimizer.h"
 
-#endif //CGRAPH_GOPTIMIZERINCLUDE_H
+#endif //DAOGRAPH_GOPTIMIZERINCLUDE_H

@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GTOPOENGINE_H
-#define CGRAPH_GTOPOENGINE_H
+#ifndef DAOGRAPH_GTOPOENGINE_H
+#define DAOGRAPH_GTOPOENGINE_H
 
 #include <vector>
 #include <set>
 
 #include "../GEngine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GTopoEngine : public GEngine {
 protected:
@@ -30,6 +30,6 @@ private:
     friend class GElementManager;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GTOPOENGINE_H
+#endif //DAOGRAPH_GTOPOENGINE_H

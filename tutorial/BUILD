@@ -10,8 +10,8 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
-CGRAPH_TUTORIAL_LIST = [
-         "T00-HelloCGraph",
+DAOGRAPH_TUTORIAL_LIST = [
+         "T00-HelloDaoGraph",
          "T01-Simple",
          "T02-Cluster",
          "T03-Region",
@@ -47,7 +47,7 @@ CGRAPH_TUTORIAL_LIST = [
         name = "%s" % tutorial_name,
         srcs = ["%s.cpp" % tutorial_name],
         copts = ["-Isrc/"],
-        deps = [":tutorial_header","//src:CGraph"],
+        deps = [":tutorial_header","//src:DaoGraph"],
     )
-    for tutorial_name in CGRAPH_TUTORIAL_LIST
+    for tutorial_name in DAOGRAPH_TUTORIAL_LIST
 ]

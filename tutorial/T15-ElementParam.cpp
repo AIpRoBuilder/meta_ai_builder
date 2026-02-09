@@ -9,7 +9,7 @@
 #include "MyGNode/MyEParamNode.h"
 #include "MyParams/MyConnParam.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_element_param() {
     GPipelinePtr pipeline = GPipelineFactory::create();

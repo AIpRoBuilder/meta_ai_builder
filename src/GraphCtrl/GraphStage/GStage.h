@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTAGE_H
-#define CGRAPH_GSTAGE_H
+#ifndef DAOGRAPH_GSTAGE_H
+#define DAOGRAPH_GSTAGE_H
 
 #include <atomic>
 #include <mutex>
@@ -14,7 +14,7 @@
 
 #include "GStageObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GStage : public GStageObject {
 protected:
@@ -53,9 +53,9 @@ private:
      */
     CVoid waiting();
 
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER_WITH_MEMBER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER_WITH_MEMBER
 
-    CGRAPH_NO_ALLOWED_COPY(GStage)
+    DAOGRAPH_NO_ALLOWED_COPY(GStage)
 
 private:
     CInt threshold_ { 0 };                // 阈值信息
@@ -72,8 +72,8 @@ private:
 
 using GStagePtr = GStage *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GStage.inl"
 
-#endif //CGRAPH_GSTAGE_H
+#endif //DAOGRAPH_GSTAGE_H

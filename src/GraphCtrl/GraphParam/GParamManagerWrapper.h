@@ -5,8 +5,8 @@
 @Desc: 本类的子类型，有获取GParam的功能
 ***************************/
 
-#ifndef CGRAPH_GPARAMMANAGERWRAPPER_H
-#define CGRAPH_GPARAMMANAGERWRAPPER_H
+#ifndef DAOGRAPH_GPARAMMANAGERWRAPPER_H
+#define DAOGRAPH_GPARAMMANAGERWRAPPER_H
 
 #include <string>
 #include <vector>
@@ -14,9 +14,9 @@
 #include "GParam.h"
 #include "GParamManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-#define CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER                                           \
+#define DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER                                           \
     /**
      * 创建param信息，如果创建成功，则直接返回ok
      * @tparam TGParam
@@ -27,7 +27,7 @@ CGRAPH_NAMESPACE_BEGIN
     template<typename TGParam,                                                          \
              c_enable_if_t<std::is_base_of<GParam, TGParam>::value, int> = 0>           \
     CStatus createGParam(const std::string& key, CBool backtrace = false) {             \
-        CGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
+        DAOGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
         return param_manager_->create<TGParam>(key, backtrace);                         \
     }                                                                                   \
                                                                                         \
@@ -40,7 +40,7 @@ CGRAPH_NAMESPACE_BEGIN
     template<typename TGParam,                                                          \
              c_enable_if_t<std::is_base_of<GParam, TGParam>::value, int> = 0>           \
     TGParam* getGParam(const std::string& key) {                                        \
-        CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_manager_)                              \
+        DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_manager_)                              \
         auto param = param_manager_->get<TGParam>(key);                                 \
         if (nullptr != param) {                                                         \
             concerned_params_.insert(param);                                            \
@@ -60,7 +60,7 @@ CGRAPH_NAMESPACE_BEGIN
     TGParam* getGParamWithNoEmpty(const std::string& key) {                             \
         auto* param = getGParam<TGParam>(key);                                          \
         if (nullptr == param) {                                                         \
-            CGRAPH_THROW_EXCEPTION("param [" + key + "] is null")                       \
+            DAOGRAPH_THROW_EXCEPTION("param [" + key + "] is null")                       \
         }                                                                               \
         return param;                                                                   \
     }                                                                                   \
@@ -71,7 +71,7 @@ CGRAPH_NAMESPACE_BEGIN
      * @return
      */                                                                                 \
     CStatus removeGParam(const std::string& key) {                                      \
-        CGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
+        DAOGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
         return param_manager_->removeByKey(key);                                        \
     }                                                                                   \
                                                                                         \
@@ -80,7 +80,7 @@ CGRAPH_NAMESPACE_BEGIN
      * @return
      */                                                                                 \
     std::vector<std::string> getGParamKeys() {                                          \
-        CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_manager_)                              \
+        DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_manager_)                              \
         return param_manager_->getKeys();                                               \
     }                                                                                   \
                                                                                         \
@@ -102,19 +102,19 @@ public:                                                                         
     }                                                                                   \
                                                                                         \
     GParamPtr __getGParamWithNoEmpty_4py(const std::string& key) {                      \
-        CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_manager_);                             \
+        DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(param_manager_);                             \
         auto param = param_manager_->__get_4py(key);                                    \
-        CGRAPH_THROW_EXCEPTION_BY_CONDITION(!param, "param [" + key + "] is null");     \
+        DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(!param, "param [" + key + "] is null");     \
         return param;                                                                   \
     }                                                                                   \
                                                                                         \
     CStatus __createGParam_4py(GParamPtr param, const std::string& key) {               \
-        CGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
+        DAOGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
         return param_manager_->__create_4py(param, key);                                \
     }                                                                                   \
                                                                                         \
     CStatus __removeGParam_4py(const std::string& key) {                                \
-        CGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
+        DAOGRAPH_ASSERT_NOT_NULL(param_manager_)                                          \
         return param_manager_->__remove_4py(key);                                       \
     }                                                                                   \
                                                                                         \
@@ -138,13 +138,13 @@ private:                                                                        
 protected:                                                                              \
                                                                                         \
 
-#define CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER_WITH_MEMBER                               \
+#define DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER_WITH_MEMBER                               \
 private:                                                                                \
     GParamManagerPtr param_manager_ = nullptr;                                          \
 protected:                                                                              \
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER                                               \
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER                                               \
                                                                                         \
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPARAMMANAGERWRAPPER_H
+#endif //DAOGRAPH_GPARAMMANAGERWRAPPER_H

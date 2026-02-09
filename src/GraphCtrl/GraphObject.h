@@ -5,18 +5,18 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GRAPHOBJECT_H
-#define CGRAPH_GRAPHOBJECT_H
+#ifndef DAOGRAPH_GRAPHOBJECT_H
+#define DAOGRAPH_GRAPHOBJECT_H
 
 #include "../CBasic/CBasicInclude.h"
 #include "../UtilsCtrl/UtilsInclude.h"
 #include "GraphDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GraphObject : public CObject {
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GRAPHOBJECT_H
+#endif //DAOGRAPH_GRAPHOBJECT_H

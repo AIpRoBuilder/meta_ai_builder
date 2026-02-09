@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPIPELINEMANAGER_H
-#define CGRAPH_GPIPELINEMANAGER_H
+#ifndef DAOGRAPH_GPIPELINEMANAGER_H
+#define DAOGRAPH_GPIPELINEMANAGER_H
 
 #include <list>
 #include <mutex>
@@ -14,7 +14,7 @@
 #include "GPipelineObject.h"
 #include "GPipeline.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPipelineManager : public GPipelineObject,
                          public GraphManager<GPipeline> {
@@ -57,6 +57,6 @@ private:
     std::mutex mutex_;                          // 控制 free 和 used 之间转移的互斥量
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPIPELINEMANAGER_H
+#endif //DAOGRAPH_GPIPELINEMANAGER_H

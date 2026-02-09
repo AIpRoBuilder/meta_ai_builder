@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "__hash_table": "cpp",
+        "__tree": "cpp",
+        "__tuple": "cpp",
+        "array": "cpp",
+        "limits": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "variant": "cpp",
+        "chrono": "cpp",
+        "compare": "cpp",
+        "cstddef": "cpp",
+        "random": "cpp",
+        "functional": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "utility": "cpp"
+    },
+    "python.analysis.extraPaths": [
+        "./python/llm/gpt_"
+    ]
+}

@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GASPECT_H
-#define CGRAPH_GASPECT_H
+#ifndef DAOGRAPH_GASPECT_H
+#define DAOGRAPH_GASPECT_H
 
 #include <vector>
 
 #include "GAspectObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GAspect : public GAspectObject {
 public:
@@ -65,6 +65,6 @@ public:
 using GAspectPtr = GAspect *;
 using GAspectPtrArr = std::vector<GAspectPtr>;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GASPECT_H
+#endif //DAOGRAPH_GASPECT_H

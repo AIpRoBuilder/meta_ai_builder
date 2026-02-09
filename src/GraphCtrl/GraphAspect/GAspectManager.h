@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GASPECTMANAGER_H
-#define CGRAPH_GASPECTMANAGER_H
+#ifndef DAOGRAPH_GASPECTMANAGER_H
+#define DAOGRAPH_GASPECTMANAGER_H
 
 #include "../GraphManager.h"
 #include "GAspectObject.h"
 #include "GAspect.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GAspectManager : public GAspectObject,
                        public GraphManager<GAspect> {
@@ -48,7 +48,7 @@ protected:
 
     CVoidPtr setBelong(GElement* belong);
 
-    CGRAPH_NO_ALLOWED_COPY(GAspectManager)
+    DAOGRAPH_NO_ALLOWED_COPY(GAspectManager)
 
 private:
     GAspectPtrArr aspect_arr_ {};     // 存储aspect的容器
@@ -62,6 +62,6 @@ private:
 
 using GAspectManagerPtr = GAspectManager *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GASPECTMANAGER_H
+#endif //DAOGRAPH_GASPECTMANAGER_H

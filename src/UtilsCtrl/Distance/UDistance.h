@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UDISTANCE_H
-#define CGRAPH_UDISTANCE_H
+#ifndef DAOGRAPH_UDISTANCE_H
+#define DAOGRAPH_UDISTANCE_H
 
 #include "UDistanceObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 /** 传入的类型和计算结果的类型，可能不同。一般默认相同 */
 template<typename TSrc, typename TRes = TSrc>
@@ -49,8 +49,8 @@ public:
     virtual CStatus normalize(TSrc* v, CSize dim, CVoidPtr ext);
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "UDistance.inl"
 
-#endif //CGRAPH_UDISTANCE_H
+#endif //DAOGRAPH_UDISTANCE_H

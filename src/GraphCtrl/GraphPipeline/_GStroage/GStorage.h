@@ -5,15 +5,15 @@
 @Desc: support cpp17 and upper only
 ***************************/
 
-#ifndef CGRAPH_GSTORAGE_H
-#define CGRAPH_GSTORAGE_H
+#ifndef DAOGRAPH_GSTORAGE_H
+#define DAOGRAPH_GSTORAGE_H
 
 #if __cplusplus >= 201703L
 
 #include "GStorageDefine.h"
 #include "../../GraphObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPipeline;
 
@@ -38,7 +38,7 @@ protected:
      */
     static CStatus load(GPipeline* pipeline, const std::string& path);
 
-    CGRAPH_NO_ALLOWED_COPY(GStorage)
+    DAOGRAPH_NO_ALLOWED_COPY(GStorage)
 
 private:
     /**
@@ -125,8 +125,8 @@ private:
     friend class GPipeline;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSTORAGE_H
+#endif //DAOGRAPH_GSTORAGE_H
 
 #endif

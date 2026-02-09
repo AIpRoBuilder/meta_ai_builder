@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_cluster() {
     CStatus status;
@@ -39,7 +39,7 @@ void tutorial_cluster() {
 
     /* process函数，相当于 init(),run()*n,destroy()函数，同时调用 */
     status = pipeline->process();
-    CGRAPH_ECHO("pipeline process status is : [%d]", status.getCode());
+    DAOGRAPH_ECHO("pipeline process status is : [%d]", status.getCode());
 
     GPipelineFactory::clear();    // clear表示清空所有的pipeline信息
 }

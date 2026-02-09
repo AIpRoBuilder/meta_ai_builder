@@ -5,22 +5,22 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGREGION_H
-#define CGRAPH_PYWGREGION_H
+#ifndef DAOGRAPH_PYWGREGION_H
+#define DAOGRAPH_PYWGREGION_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "PyWrapperMacro.h"
 
-class PywGRegion : public CGraph::GRegion {
+class PywGRegion : public DaoGraph::GRegion {
 public:
-    explicit PywGRegion(const CGraph::GElementPtrArr& elements = CGraph::GElementPtrArr{}) {
+    explicit PywGRegion(const DaoGraph::GElementPtrArr& elements = DaoGraph::GElementPtrArr{}) {
         __addGElements_4py(elements);
     };
 
     ~PywGRegion() override = default;
 
-    CGraph::GElement* clone() const override {
-        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GRegion, clone);
+    DaoGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, DaoGraph::GRegion, clone);
     }
 
 protected:
@@ -29,6 +29,6 @@ protected:
     }
 };
 
-PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGRegion, ;);
+PYDAOGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGRegion, ;);
 
-#endif //CGRAPH_PYWGREGION_H
+#endif //DAOGRAPH_PYWGREGION_H

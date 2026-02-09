@@ -5,11 +5,11 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GDAEMONINCLUDE_H
-#define CGRAPH_GDAEMONINCLUDE_H
+#ifndef DAOGRAPH_GDAEMONINCLUDE_H
+#define DAOGRAPH_GDAEMONINCLUDE_H
 
 #include "GDaemon.h"
 #include "GTemplateDaemon.h"
 #include "GDaemonManager.h"
 
-#endif //CGRAPH_GDAEMONINCLUDE_H
+#endif //DAOGRAPH_GDAEMONINCLUDE_H

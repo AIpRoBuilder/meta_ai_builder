@@ -1,5 +1,5 @@
 
-set(CGRAPH_FUNCTIONAL_LIST
+set(DAOGRAPH_FUNCTIONAL_LIST
         test-functional-01
         test-functional-02
         test-functional-03
@@ -8,9 +8,9 @@ set(CGRAPH_FUNCTIONAL_LIST
         test-functional-99
         )
 
-foreach(func ${CGRAPH_FUNCTIONAL_LIST})
+foreach(func ${DAOGRAPH_FUNCTIONAL_LIST})
     add_executable(${func}
-            $<TARGET_OBJECTS:CGraph>
+            $<TARGET_OBJECTS:DaoGraph>
             ${func}.cpp
             )
 endforeach()

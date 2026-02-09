@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_DANNPARAM_H
-#define CGRAPH_DANNPARAM_H
+#ifndef DAOGRAPH_DANNPARAM_H
+#define DAOGRAPH_DANNPARAM_H
 
 #include <string>
 
 #include "DAnnObject.h"
 #include "DAnnDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 struct DAnnParam : public DAnnObject, public GParam {
     CSize dim_ = 0;                                             // 维度信息
@@ -24,6 +24,6 @@ struct DAnnParam : public DAnnObject, public GParam {
     std::string train_file_path_;                               // 读取待训练数据文件的位置
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_DANNPARAM_H
+#endif //DAOGRAPH_DANNPARAM_H

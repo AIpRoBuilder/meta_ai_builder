@@ -7,7 +7,7 @@
 
 #include "DAnnNode.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 DAnnNode::DAnnNode() {
     setType(GNodeType::CPU);    // 计算密集型算子
@@ -31,63 +31,63 @@ CStatus DAnnNode::run() {
      * 2，执行具体功能函数
      * 3，如有参数修改，将最终的参数同步回主流程
      */
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     const DAnnFuncType& funcType = prepareParam();
     if (unlikely(funcType <= DAnnFuncType::ANN_PREPARE_ERROR
         || funcType >= DAnnFuncType::ANN_MAX_SIZE)) {
-        CGRAPH_RETURN_ERROR_STATUS("error ann function type")
+        DAOGRAPH_RETURN_ERROR_STATUS("error ann function type")
     }
 
     status = (this->*ann_func_arr_[static_cast<CUInt>(funcType)])();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status = refreshParam();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus DAnnNode::train() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::search() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::insert() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::update() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::remove() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::loadModel() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::saveModel() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::edition() {
-    CGRAPH_NO_SUPPORT
+    DAOGRAPH_NO_SUPPORT
 }
 
 
 CStatus DAnnNode::refreshParam() {
-    CGRAPH_EMPTY_FUNCTION
+    DAOGRAPH_EMPTY_FUNCTION
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

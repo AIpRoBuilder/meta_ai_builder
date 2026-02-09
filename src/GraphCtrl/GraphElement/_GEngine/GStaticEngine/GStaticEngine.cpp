@@ -7,16 +7,16 @@
 
 #include "GStaticEngine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CStatus GStaticEngine::setup(const GSortedGElementPtrSet& elements) {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     element_mat_.clear();
 
     GElementPtrArr curArr;
     CSize totalSize = 0;
     for (auto element : elements) {
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_ASSERT_NOT_NULL(element)
         element->refresh();
         if (element->dependence_.empty()) {
             curArr.push_back(element);
@@ -38,14 +38,14 @@ CStatus GStaticEngine::setup(const GSortedGElementPtrSet& elements) {
         }
     }
 
-    CGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(totalSize != elements.size(),
+    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(totalSize != elements.size(),
                                             "static engine parse error");
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GStaticEngine::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (const auto& arr : element_mat_) {
         std::vector<std::future<CStatus>> futures;
@@ -69,10 +69,10 @@ CStatus GStaticEngine::run() {
         for (auto& future : futures) {
             status += future.get();
         }
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

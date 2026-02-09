@@ -8,7 +8,7 @@
 #include "MyGNode/MyNode1.h"
 #include "MyGNode/MyNode2.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_fence() {
     CStatus status;
@@ -25,9 +25,9 @@ void tutorial_fence() {
 
     CSec sec = 5;
     a_function->setFunction(CFunctionType::RUN, [a_function, sec] {
-        CGRAPH_ECHO("[%s] begin sleep for [%ld]s", a_function->getName().c_str(), sec);
-        CGRAPH_SLEEP_SECOND(sec)
-        CGRAPH_ECHO("[%s] run finished.", a_function->getName().c_str());
+        DAOGRAPH_ECHO("[%s] begin sleep for [%ld]s", a_function->getName().c_str(), sec);
+        DAOGRAPH_SLEEP_SECOND(sec)
+        DAOGRAPH_ECHO("[%s] run finished.", a_function->getName().c_str());
         return CStatus();
     });
 

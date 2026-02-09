@@ -5,37 +5,37 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_CVALTYPE_H
-#define CGRAPH_CVALTYPE_H
+#ifndef DAOGRAPH_CVALTYPE_H
+#define DAOGRAPH_CVALTYPE_H
 
 #include "CBasicDefine.h"
 #include "CStatus.h"
 #include "CException.h"
 
-using CChar = CGraph::internal::CCHAR;
-using CCharPtr = CGraph::internal::CCHAR *;
-using CUChar = CGraph::internal::CUCHAR;
-using CUCharPtr = CGraph::internal::CUCHAR *;
-using CUInt = CGraph::internal::CUINT;
-using CSize = CGraph::internal::CSIZE;
-using CVoid = CGraph::internal::CVOID;
-using CVoidPtr = CGraph::internal::CVOID *;
-using CInt = CGraph::internal::CINT;
-using CLong = CGraph::internal::CLONG;
-using CULong = CGraph::internal::CULONG;
-using CBool = CGraph::internal::CBOOL;
-using CIndex = CGraph::internal::CINT;                // 表示标识信息，可以为负数
-using CFloat = CGraph::internal::CFLOAT;
-using CDouble = CGraph::internal::CDOUBLE;
-using CConStr = CGraph::internal::CCONSTR;             // 表示 const char*
-using CBigBool = CGraph::internal::CBIGBOOL;
+using CChar = DaoGraph::internal::CCHAR;
+using CCharPtr = DaoGraph::internal::CCHAR *;
+using CUChar = DaoGraph::internal::CUCHAR;
+using CUCharPtr = DaoGraph::internal::CUCHAR *;
+using CUInt = DaoGraph::internal::CUINT;
+using CSize = DaoGraph::internal::CSIZE;
+using CVoid = DaoGraph::internal::CVOID;
+using CVoidPtr = DaoGraph::internal::CVOID *;
+using CInt = DaoGraph::internal::CINT;
+using CLong = DaoGraph::internal::CLONG;
+using CULong = DaoGraph::internal::CULONG;
+using CBool = DaoGraph::internal::CBOOL;
+using CIndex = DaoGraph::internal::CINT;                // 表示标识信息，可以为负数
+using CFloat = DaoGraph::internal::CFLOAT;
+using CDouble = DaoGraph::internal::CDOUBLE;
+using CConStr = DaoGraph::internal::CCONSTR;             // 表示 const char*
+using CBigBool = DaoGraph::internal::CBIGBOOL;
 
-using CLevel = CGraph::internal::CINT;
-using CSec = CGraph::internal::CLONG;                  // 表示秒信息, for second
-using CMSec = CGraph::internal::CLONG;                 // 表示毫秒信息, for millisecond
-using CFMSec = CGraph::internal::CDOUBLE;              // 表示毫秒信息，包含小数点信息
+using CLevel = DaoGraph::internal::CINT;
+using CSec = DaoGraph::internal::CLONG;                  // 表示秒信息, for second
+using CMSec = DaoGraph::internal::CLONG;                 // 表示毫秒信息, for millisecond
+using CFMSec = DaoGraph::internal::CDOUBLE;              // 表示毫秒信息，包含小数点信息
 
-using CStatus = CGraph::internal::CSTATUS;
-using CException = CGraph::internal::CEXCEPTION;
+using CStatus = DaoGraph::internal::CSTATUS;
+using CException = DaoGraph::internal::CEXCEPTION;
 
-#endif //CGRAPH_CVALTYPE_H
+#endif //DAOGRAPH_CVALTYPE_H

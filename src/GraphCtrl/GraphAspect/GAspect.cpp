@@ -7,10 +7,10 @@
 
 #include "GAspect.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 CStatus GAspect::beginInit() {
-    CGRAPH_EMPTY_FUNCTION
+    DAOGRAPH_EMPTY_FUNCTION
 }
 
 
@@ -19,7 +19,7 @@ CVoid GAspect::finishInit(const CStatus& curStatus) {
 
 
 CStatus GAspect::beginRun() {
-    CGRAPH_EMPTY_FUNCTION
+    DAOGRAPH_EMPTY_FUNCTION
 }
 
 
@@ -28,7 +28,7 @@ CVoid GAspect::finishRun(const CStatus& curStatus) {
 
 
 CStatus GAspect::beginDestroy() {
-    CGRAPH_EMPTY_FUNCTION
+    DAOGRAPH_EMPTY_FUNCTION
 }
 
 
@@ -43,4 +43,4 @@ CVoid GAspect::enterCrashed() {
 CVoid GAspect::enterTimeout() {
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

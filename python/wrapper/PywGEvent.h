@@ -5,19 +5,19 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGEVENT_H
-#define CGRAPH_PYWGEVENT_H
+#ifndef DAOGRAPH_PYWGEVENT_H
+#define DAOGRAPH_PYWGEVENT_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGEvent : public CGraph::GEvent {
+class PywGEvent : public DaoGraph::GEvent {
 public:
     explicit PywGEvent() = default;
 
 protected:
-    CVoid trigger(CGraph::GEventParamPtr param) override {
+    CVoid trigger(DaoGraph::GEventParamPtr param) override {
         PYBIND11_OVERLOAD_PURE(CVoid, GEvent, trigger, param);
     }
 
@@ -30,4 +30,4 @@ protected:
     }
 };
 
-#endif //CGRAPH_PYWGEVENT_H
+#endif //DAOGRAPH_PYWGEVENT_H

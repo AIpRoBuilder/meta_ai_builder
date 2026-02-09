@@ -10,7 +10,7 @@
 #include "MyGNode/MySendMessageNode.h"
 #include "MyGNode/MyRecvMessageNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void send_message() {
     CStatus status;
@@ -39,14 +39,14 @@ void recv_message() {
 
 
 void tutorial_message_send_recv() {
-    CGRAPH_CREATE_MESSAGE_TOPIC(MyMessageParam, "send-recv", 48)    // 创建一个topic，也可以在算子中进行创建
+    DAOGRAPH_CREATE_MESSAGE_TOPIC(MyMessageParam, "send-recv", 48)    // 创建一个topic，也可以在算子中进行创建
 
     std::thread sendThd = std::thread(send_message);
     std::thread recvThd = std::thread(recv_message);
     sendThd.join();
     recvThd.join();
 
-    CGRAPH_CLEAR_MESSAGES();
+    DAOGRAPH_CLEAR_MESSAGES();
     GPipelineFactory::clear();
 }
 

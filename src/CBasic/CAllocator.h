@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_CALLOCATOR_H
-#define CGRAPH_CALLOCATOR_H
+#ifndef DAOGRAPH_CALLOCATOR_H
+#define DAOGRAPH_CALLOCATOR_H
 
 
 #include <new>
@@ -17,7 +17,7 @@
 #include "CStruct.h"
 #include "CStdEx.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class CAllocator {
 public:
@@ -88,13 +88,13 @@ private:
 };
 
 
-#define CGRAPH_SAFE_MALLOC_COBJECT(Type)                         \
+#define DAOGRAPH_SAFE_MALLOC_COBJECT(Type)                         \
     CAllocator::safeMallocCObject<Type>();                       \
 
-#define CGRAPH_MAKE_UNIQUE_COBJECT(Type)                         \
+#define DAOGRAPH_MAKE_UNIQUE_COBJECT(Type)                         \
     CAllocator::makeUniqueCObject<Type>();                       \
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 
-#endif //CGRAPH_CALLOCATOR_H
+#endif //DAOGRAPH_CALLOCATOR_H

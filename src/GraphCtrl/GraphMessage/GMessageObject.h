@@ -5,21 +5,21 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GMESSAGEOBJECT_H
-#define CGRAPH_GMESSAGEOBJECT_H
+#ifndef DAOGRAPH_GMESSAGEOBJECT_H
+#define DAOGRAPH_GMESSAGEOBJECT_H
 
 #include "../GraphObject.h"
 #include "../GraphParam/GParamInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GMessageObject : public GraphObject {
 public:
     CStatus run() final {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMESSAGEOBJECT_H
+#endif //DAOGRAPH_GMESSAGEOBJECT_H

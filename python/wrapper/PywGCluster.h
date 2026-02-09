@@ -5,22 +5,22 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGCLUSTER_H
-#define CGRAPH_PYWGCLUSTER_H
+#ifndef DAOGRAPH_PYWGCLUSTER_H
+#define DAOGRAPH_PYWGCLUSTER_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "PyWrapperMacro.h"
 
-class PywGCluster : public CGraph::GCluster {
+class PywGCluster : public DaoGraph::GCluster {
 public:
-    explicit PywGCluster(const CGraph::GElementPtrArr& elements = CGraph::GElementPtrArr{}) {
+    explicit PywGCluster(const DaoGraph::GElementPtrArr& elements = DaoGraph::GElementPtrArr{}) {
         __addGElements_4py(elements);
     }
 
     ~PywGCluster() override = default;
 
-    CGraph::GElement* clone() const override {
-        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GCluster, clone);
+    DaoGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, DaoGraph::GCluster, clone);
     }
 
 protected:
@@ -29,6 +29,6 @@ protected:
     }
 };
 
-PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGCluster, ;);
+PYDAOGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGCluster, ;);
 
-#endif //CGRAPH_PYWGCLUSTER_H
+#endif //DAOGRAPH_PYWGCLUSTER_H

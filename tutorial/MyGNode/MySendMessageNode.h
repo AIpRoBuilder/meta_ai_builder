@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYSENDMESSAGENODE_H
-#define CGRAPH_MYSENDMESSAGENODE_H
+#ifndef DAOGRAPH_MYSENDMESSAGENODE_H
+#define DAOGRAPH_MYSENDMESSAGENODE_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "../MyParams/MyMessageParam.h"
 
-class MySendMessageNode : public CGraph::GNode {
+class MySendMessageNode : public DaoGraph::GNode {
 public:
     CStatus run() override {
         /**
@@ -24,10 +24,10 @@ public:
         mp->info = "this is a test send info, num = " + std::to_string(mp->num);
         /**
          * 在v2.5.1版本，增加了 GMessagePushStrategy 策略，不兼容之前版本
-         * 如果需要跟之前逻辑保持一致，直接设定 CGraph::GMessagePushStrategy::WAIT 即可
+         * 如果需要跟之前逻辑保持一致，直接设定 DaoGraph::GMessagePushStrategy::WAIT 即可
          * 其他的选项功能，参考 URingBufferPushStrategy(GMessagePushStrategy的别名) 的说明
          */
-        CStatus status = CGRAPH_SEND_MPARAM(MyMessageParam, "send-recv", mp, CGraph::GMessagePushStrategy::WAIT)
+        CStatus status = DAOGRAPH_SEND_MPARAM(MyMessageParam, "send-recv", mp, DaoGraph::GMessagePushStrategy::WAIT)
         return status;
     }
 
@@ -36,4 +36,4 @@ private:
 };
 
 
-#endif //CGRAPH_MYSENDMESSAGENODE_H
+#endif //DAOGRAPH_MYSENDMESSAGENODE_H

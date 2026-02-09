@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPIPELINEFACTORY_H
-#define CGRAPH_GPIPELINEFACTORY_H
+#ifndef DAOGRAPH_GPIPELINEFACTORY_H
+#define DAOGRAPH_GPIPELINEFACTORY_H
 
 #include <mutex>
 #include <list>
@@ -15,7 +15,7 @@
 #include "GPipeline.h"
 #include "GPipelineObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPipelineFactory : public GPipelineObject {
 public:
@@ -42,6 +42,6 @@ private:
     static std::mutex s_lock_;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPIPELINEFACTORY_H
+#endif //DAOGRAPH_GPIPELINEFACTORY_H

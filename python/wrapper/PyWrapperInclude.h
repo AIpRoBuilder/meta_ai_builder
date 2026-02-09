@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWRAPPERINCLUDE_H
-#define CGRAPH_PYWRAPPERINCLUDE_H
+#ifndef DAOGRAPH_PYWRAPPERINCLUDE_H
+#define DAOGRAPH_PYWRAPPERINCLUDE_H
 
 #include "PywGFence.h"
 #include "PywGFunction.h"
@@ -26,4 +26,4 @@
 #include "PywGPassedParam.h"
 #include "PywGPipelineDeleter.h"
 
-#endif //CGRAPH_PYWRAPPERINCLUDE_H
+#endif //DAOGRAPH_PYWRAPPERINCLUDE_H

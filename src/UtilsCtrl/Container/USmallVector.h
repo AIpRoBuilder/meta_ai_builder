@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_USMALLVECTOR_H
-#define CGRAPH_USMALLVECTOR_H
+#ifndef DAOGRAPH_USMALLVECTOR_H
+#define DAOGRAPH_USMALLVECTOR_H
 
 #include <vector>
 #include <memory>
@@ -14,7 +14,7 @@
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<class T, CSize CAPACITY=8>
 class USmallVector : public UtilsObject {
@@ -25,7 +25,7 @@ public:
     }
 
     ~USmallVector() override {
-        CGRAPH_DELETE_PTR_ARRAY(data_)
+        DAOGRAPH_DELETE_PTR_ARRAY(data_)
     }
 
     /**
@@ -43,10 +43,10 @@ public:
             // 插入超限的时候，开始扩容
             const CSize curCapacity = capacity_ + CAPACITY;
             T* curData = new T[curCapacity];
-            CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(curData)
+            DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(curData)
 
             std::move(data_, data_ + capacity_, curData);
-            CGRAPH_DELETE_PTR_ARRAY(data_)
+            DAOGRAPH_DELETE_PTR_ARRAY(data_)
             data_ = curData;
             capacity_ = curCapacity;
         }
@@ -146,6 +146,6 @@ private:
     CSize capacity_ { 0 };         // 数组容量
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_USMALLVECTOR_H
+#endif //DAOGRAPH_USMALLVECTOR_H

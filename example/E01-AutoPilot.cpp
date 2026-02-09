@@ -11,9 +11,9 @@
 #include <cstring>
 #include <memory>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 static const int DEFAULT_IMAGE_SIZE = 64;
 static const int DEFAULT_MESSAGE_BUF_SIZE = 16;
@@ -60,7 +60,7 @@ public:
         memcpy(image->image_buf_, info.c_str(), info.length());
         cur_index_++;
 
-        CGRAPH_PUB_MPARAM(ImageMParam, EXAMPLE_IMAGE_TOPIC, image, GMessagePushStrategy::WAIT);
+        DAOGRAPH_PUB_MPARAM(ImageMParam, EXAMPLE_IMAGE_TOPIC, image, GMessagePushStrategy::WAIT);
     }
 
 private:
@@ -72,20 +72,20 @@ class LaneDetectorGNode : public GNode {
 public:
     CStatus init() override {
         // 订阅 EXAMPLE_IMAGE_TOPIC 消息。每次 bind的返回值，是不一样的，用于区分
-        conn_id_ = CGRAPH_BIND_MESSAGE_TOPIC(ImageMParam, EXAMPLE_IMAGE_TOPIC, DEFAULT_MESSAGE_BUF_SIZE)
+        conn_id_ = DAOGRAPH_BIND_MESSAGE_TOPIC(ImageMParam, EXAMPLE_IMAGE_TOPIC, DEFAULT_MESSAGE_BUF_SIZE)
         return CStatus();
     }
 
     CStatus run() override {
         std::shared_ptr<ImageMParam> image = nullptr;
-        auto status = CGRAPH_SUB_MPARAM(ImageMParam, conn_id_, image);
+        auto status = DAOGRAPH_SUB_MPARAM(ImageMParam, conn_id_, image);
         if (status.isErr()) {
             return status;
         }
 
-        auto param = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(DetectResultGParam, EXAMPLE_PARAM_KEY)
+        auto param = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(DetectResultGParam, EXAMPLE_PARAM_KEY)
         // detector lane in image.image_buf_ ...
-        CGRAPH_ECHO("detecting lane in frame [%d], info is [%s]", image->frame_id_, image->image_buf_);
+        DAOGRAPH_ECHO("detecting lane in frame [%d], info is [%s]", image->frame_id_, image->image_buf_);
         param->frame_id_ = image->frame_id_;
         param->lane_num_ = std::abs((int)std::random_device{}()) % 10;
         return CStatus();
@@ -99,19 +99,19 @@ private:
 class CarDetectorGNode : public GNode {
 public:
     CStatus init() override {
-        conn_id_ = CGRAPH_BIND_MESSAGE_TOPIC(ImageMParam, EXAMPLE_IMAGE_TOPIC, DEFAULT_MESSAGE_BUF_SIZE)
+        conn_id_ = DAOGRAPH_BIND_MESSAGE_TOPIC(ImageMParam, EXAMPLE_IMAGE_TOPIC, DEFAULT_MESSAGE_BUF_SIZE)
         return CStatus();
     }
 
     CStatus run() override {
         std::shared_ptr<ImageMParam> image = nullptr;
-        auto status = CGRAPH_SUB_MPARAM(ImageMParam, conn_id_, image);
+        auto status = DAOGRAPH_SUB_MPARAM(ImageMParam, conn_id_, image);
         if (status.isErr()) {
             return status;
         }
 
-        auto param = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(DetectResultGParam, EXAMPLE_PARAM_KEY);
-        CGRAPH_ECHO("finding car in frame [%d], info is [%s]", image->frame_id_, image->image_buf_);
+        auto param = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(DetectResultGParam, EXAMPLE_PARAM_KEY);
+        DAOGRAPH_ECHO("finding car in frame [%d], info is [%s]", image->frame_id_, image->image_buf_);
         // find car in image.image_buf_ ...
         param->car_num_ = std::abs((int)std::random_device{}()) % 5;
         return CStatus();
@@ -124,8 +124,8 @@ private:
 
 class ShowGNode : public GNode {
     CStatus run() override {
-        auto param = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(DetectResultGParam, EXAMPLE_PARAM_KEY);
-        CGRAPH_ECHO("find [%d] car and [%d] lane in frame [%d] \n", param->car_num_, param->lane_num_, param->frame_id_);
+        auto param = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(DetectResultGParam, EXAMPLE_PARAM_KEY);
+        DAOGRAPH_ECHO("find [%d] car and [%d] lane in frame [%d] \n", param->car_num_, param->lane_num_, param->frame_id_);
         return CStatus();
     }
 };
@@ -144,7 +144,7 @@ void example_auto_pilot() {
 
     pipeline->process(10);
     GPipelineFactory::clear();
-    CGRAPH_CLEAR_MESSAGES()
+    DAOGRAPH_CLEAR_MESSAGES()
 }
 
 

@@ -1,6 +1,6 @@
 /***************************
 
-@File: PyCGraph.cpp
+@File: PyDaoGraph.cpp
 @Time: 2025/1/30 21:43
 @Desc:
 ***************************/
@@ -9,14 +9,14 @@
 #include <pybind11/stl.h>
 #include <pybind11/functional.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "wrapper/PyWrapperInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 namespace py = pybind11;
 
 PYBIND11_MODULE(_core, cg) {
-    cg.doc() = "CGraph with python api";
+    cg.doc() = "DaoGraph with python api";
     py::class_<UThreadPoolConfig>(cg, "UThreadPoolConfig")
         .def(py::init<>())
         .def_readwrite("default_thread_size", &UThreadPoolConfig::default_thread_size_)
@@ -137,22 +137,22 @@ PYBIND11_MODULE(_core, cg) {
     py::class_<GAspect, PywGAspect, std::unique_ptr<GAspect, py::nodelete> >(cg, "GAspect")
         .def(py::init<>())
         .def("getName", &GAspect::__getName_4py)
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GAspect)
-        .PYCGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GAspect);
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GAspect)
+        .PYDAOGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GAspect);
 
     py::class_<GDaemon, PywGDaemon, std::unique_ptr<GDaemon, py::nodelete> >(cg, "GDaemon")
         .def(py::init<>())
         .def("getInterval", &GDaemon::__getInterval_4py)
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GDaemon)
-        .PYCGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GDaemon);
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GDaemon)
+        .PYDAOGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GDaemon);
 
     py::class_<GEvent, PywGEvent, std::unique_ptr<GEvent, py::nodelete> >(cg, "GEvent")
         .def(py::init<>())
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GEvent);
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GEvent);
 
     py::class_<GStage, PywGStage, std::unique_ptr<GStage, py::nodelete> >(cg, "GStage")
         .def(py::init<>())
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GStage);
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GStage);
 
     py::class_<GParam, PywGParam, std::unique_ptr<GParam, py::nodelete> >(cg, "GParam")
         .def(py::init<>())
@@ -173,7 +173,7 @@ PYBIND11_MODULE(_core, cg) {
     py::class_<GPipeline, std::unique_ptr<GPipeline, PywGPipelineDeleter> >(cg, "GPipeline")
         .def(py::init<>([]() { return GPipelineFactory::create(); }))
         .def("init", &GPipeline::init)
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GPipeline)
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GPipeline)
         .def("setUniqueThreadPoolConfig", &GPipeline::setUniqueThreadPoolConfig,
              py::arg("config"))
         .def("setSharedThreadPool", &GPipeline::setSharedThreadPool,
@@ -208,7 +208,7 @@ PYBIND11_MODULE(_core, cg) {
              py::arg("policy") = std::launch::async,
              py::call_guard<py::gil_scoped_release>())
         .def("asyncProcess", &GPipeline::asyncProcess,
-             py::arg("runTimes") = CGRAPH_DEFAULT_LOOP_TIMES,
+             py::arg("runTimes") = DAOGRAPH_DEFAULT_LOOP_TIMES,
              py::arg("policy") = std::launch::async,
              py::call_guard<py::gil_scoped_release>())
         .def("cancel", &GPipeline::cancel,
@@ -230,8 +230,8 @@ PYBIND11_MODULE(_core, cg) {
         .def("registerGElement", &GPipeline::__registerGElement_4py,
              py::arg("element"),
              py::arg("depends") = GElementPtrSet{},
-             py::arg("name") = CGRAPH_EMPTY,
-             py::arg("loop") = CGRAPH_DEFAULT_LOOP_TIMES,
+             py::arg("name") = DAOGRAPH_EMPTY,
+             py::arg("loop") = DAOGRAPH_DEFAULT_LOOP_TIMES,
              py::keep_alive<1, 2>());
 
     py::class_<GPipelineManager>(cg, "GPipelineManager")
@@ -277,8 +277,8 @@ PYBIND11_MODULE(_core, cg) {
              py::arg("name"),
              py::return_value_policy::reference)
         .def_static("registeredClasses", &GElement::registeredClasses)
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GElement)
-        .PYCGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GElement)
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GElement)
+        .PYDAOGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GElement)
         .def("enterStage", &GElement::__enterStage_4py,
              py::arg("key"),
              py::call_guard<py::gil_scoped_release>())
@@ -317,17 +317,17 @@ PYBIND11_MODULE(_core, cg) {
     py::class_<GNode, PywGNode, GElement, std::unique_ptr<GNode, py::nodelete> >(cg, "GNode")
         .def(py::init<const std::string&, int>(),
              py::arg("name"),
-             py::arg("loop") = CGRAPH_DEFAULT_LOOP_TIMES)
+             py::arg("loop") = DAOGRAPH_DEFAULT_LOOP_TIMES)
         .def(py::init<const GElementPtrSet&, const std::string&, int>(),
              py::arg("depends") = GElementPtrSet{},
-             py::arg("name") = CGRAPH_EMPTY,
-             py::arg("loop") = CGRAPH_DEFAULT_LOOP_TIMES)
+             py::arg("name") = DAOGRAPH_EMPTY,
+             py::arg("loop") = DAOGRAPH_DEFAULT_LOOP_TIMES)
         .def("run", &GNode::run,
              py::call_guard<py::gil_scoped_release>());
 
     py::class_<GFence, PywGFence, GElement, std::unique_ptr<GFence, py::nodelete> >(cg, "GFence")
         .def(py::init<>())
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GFence)
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GFence)
         .def("waitGElement", &GFence::waitGElement,
              py::arg("element"))
         .def("waitGElements", &GFence::waitGElements,
@@ -336,27 +336,27 @@ PYBIND11_MODULE(_core, cg) {
 
     py::class_<GFunction, PywGFunction, GElement, std::unique_ptr<GFunction, py::nodelete> >(cg, "GFunction")
         .def(py::init<>())
-        .PYCGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GFunction)
-        .PYCGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GFunction)
+        .PYDAOGRAPH_DEF_GPARAM_PYBIND11_FUNCTIONS(GFunction)
+        .PYDAOGRAPH_DEF_GEVENT_PYBIND11_FUNCTIONS(GFunction)
         .def("setFunction", &GFunction::setFunction,
              py::arg("type"),
              py::arg("func"));
 
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GCluster);
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GClusterInterface);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GCluster);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GClusterInterface);
 
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GRegion);
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GRegionInterface);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GRegion);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GRegionInterface);
 
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GCondition);
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GConditionInterface);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GCondition);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GConditionInterface);
 
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GSerialMultiCondition);
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GSerialMultiConditionInterface);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GSerialMultiCondition);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GSerialMultiConditionInterface);
 
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GParallelMultiCondition);
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GParallelMultiConditionInterface);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GParallelMultiCondition);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GParallelMultiConditionInterface);
 
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GMutable);
-    PYCGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GMutableInterface);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GMutable);
+    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GMutableInterface);
 }

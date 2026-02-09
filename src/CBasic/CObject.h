@@ -5,14 +5,14 @@
 @Desc: 所有类型的父节点，其中run()方法必须实现
 ***************************/
 
-#ifndef CGRAPH_COBJECT_H
-#define CGRAPH_COBJECT_H
+#ifndef DAOGRAPH_COBJECT_H
+#define DAOGRAPH_COBJECT_H
 
 #include "CBasicDefine.h"
 #include "CValType.h"
 #include "CFuncType.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class CObject {
 public:
@@ -25,7 +25,7 @@ public:
      * 初始化函数
      */
     virtual CStatus init() {
-        CGRAPH_EMPTY_FUNCTION
+        DAOGRAPH_EMPTY_FUNCTION
     }
 
     /**
@@ -37,7 +37,7 @@ public:
      * 释放函数
      */
     virtual CStatus destroy() {
-        CGRAPH_EMPTY_FUNCTION
+        DAOGRAPH_EMPTY_FUNCTION
     }
 
     /**
@@ -46,6 +46,6 @@ public:
     virtual ~CObject() = default;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_COBJECT_H
+#endif //DAOGRAPH_COBJECT_H

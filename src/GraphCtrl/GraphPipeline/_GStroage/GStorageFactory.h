@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTORAGEFACTORY_H
-#define CGRAPH_GSTORAGEFACTORY_H
+#ifndef DAOGRAPH_GSTORAGEFACTORY_H
+#define DAOGRAPH_GSTORAGEFACTORY_H
 
 #include <map>
 
 #include "../../GraphObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElement;
 class GEvent;
@@ -59,9 +59,9 @@ private:
     friend class GStorage;
 };
 
-#define CGRAPH_REGISTER_META_TYPE(...) \
+#define DAOGRAPH_REGISTER_META_TYPE(...) \
     do { GStorageFactory::registerMetaType<__VA_ARGS__>(); } while (0) \
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSTORAGEFACTORY_H
+#endif //DAOGRAPH_GSTORAGEFACTORY_H

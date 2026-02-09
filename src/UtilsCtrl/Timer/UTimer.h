@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTIMER_H
-#define CGRAPH_UTIMER_H
+#ifndef DAOGRAPH_UTIMER_H
+#define DAOGRAPH_UTIMER_H
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UTimer : public UtilsObject {
 public:
@@ -43,10 +43,10 @@ public:
          */
         future_ = std::async(std::launch::async, [this, task, modify]() {
              while (!is_stop_) {
-                 CGRAPH_UNIQUE_LOCK lk(mutex_);
+                 DAOGRAPH_UNIQUE_LOCK lk(mutex_);
                  auto result = cv_.wait_for(lk, std::chrono::milliseconds(left_interval_));
                  if (std::cv_status::timeout == result && !is_stop_) {
-                     CMSec start = CGRAPH_GET_CURRENT_MS();
+                     CMSec start = DAOGRAPH_GET_CURRENT_MS();
                      task();
                      CMSec ms = modify();
                      if (ms > 0) {
@@ -56,7 +56,7 @@ public:
                           */
                          left_interval_ = ms;
                      } else {
-                         CMSec span = CGRAPH_GET_CURRENT_MS() - start;
+                         CMSec span = DAOGRAPH_GET_CURRENT_MS() - start;
                          /**
                           * 如果任务执行时间 < 设定的时间，则消除任务耗时影响
                           * 如果任务执行时间 > 设定的时间，则继续sleep设定时长
@@ -91,6 +91,6 @@ private:
     CMSec left_interval_ = 0;                   // 除去task运行的时间，还剩下的时间
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTIMER_H
+#endif //DAOGRAPH_UTIMER_H

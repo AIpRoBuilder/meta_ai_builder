@@ -7,33 +7,33 @@
 
 #include "GMutable.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GMutable::GMutable() {
     element_type_ = GElementType::MUTABLE;
-    session_ = URandom<>::generateSession(CGRAPH_STR_MUTABLE);
-    manager_ = CGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_MUTABLE);
+    manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
 }
 
 
 GMutable::~GMutable() {
-    CGRAPH_DELETE_PTR(manager_)
+    DAOGRAPH_DELETE_PTR(manager_)
 }
 
 
 CStatus GMutable::init() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(manager_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(manager_)
     status = manager_->initEngine();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status = GGroup::init();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GMutable::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     /**
      * 1. 初始化内容
@@ -42,22 +42,22 @@ CStatus GMutable::run() {
      */
     setup();
     status = reshape(group_elements_arr_);
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     status = manager_->process({group_elements_arr_.begin(), group_elements_arr_.end()});
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GMutable::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     for (auto* element : group_elements_arr_) {
         // 链路中，可能会将部分内容设置为 visible 的信息。这里统一恢复一下
         element->setVisible(true);
     }
 
     status = GGroup::destroy();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -68,7 +68,7 @@ CBool GMutable::isSerializable() const {
 
 
 GElementPtr GMutable::setThreadPoolEx(UThreadPoolPtr ptr) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(manager_, ptr)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(manager_, ptr)
     manager_->setThreadPool(ptr);
     return this;
 }
@@ -83,4 +83,4 @@ CVoid GMutable::setup() {
     }
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

@@ -6,7 +6,7 @@
 """
 
 
-from pycgraph import GCondition, GElementRelation
+from pydaograph import GCondition, GElementRelation
 
 from MyParams.MyParam import MyParam
 

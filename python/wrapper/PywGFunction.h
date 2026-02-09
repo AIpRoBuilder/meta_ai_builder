@@ -5,20 +5,20 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGFUNCTION_H
-#define CGRAPH_PYWGFUNCTION_H
+#ifndef DAOGRAPH_PYWGFUNCTION_H
+#define DAOGRAPH_PYWGFUNCTION_H
 
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGFunction : public CGraph::GFunction {
+class PywGFunction : public DaoGraph::GFunction {
 public:
     explicit PywGFunction() = default;
 
     ~PywGFunction() override = default;
 
-    CGraph::GElement* clone() const override {
-        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GFunction, clone);
+    DaoGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, DaoGraph::GFunction, clone);
     }
 
 protected:
@@ -27,4 +27,4 @@ protected:
     }
 };
 
-#endif //CGRAPH_PYWGFUNCTION_H
+#endif //DAOGRAPH_PYWGFUNCTION_H

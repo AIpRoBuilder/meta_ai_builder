@@ -2,15 +2,15 @@
 
 @File: E03-ThirdFlow.cpp
 @Time: 2023/9/22 20:35
-@Desc: 本example主要展示，常见的三流模型，使用CGraph如何表示
+@Desc: 本example主要展示，常见的三流模型，使用DaoGraph如何表示
 ***************************/
 
 #include <cmath>
 #include <memory>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 static const char* INPUT_TOPIC_NAME = "example/input/topic";
 static const char* RESULT_TOPIC_NAME = "example/result/topic";
@@ -18,7 +18,7 @@ static const char* RESULT_TOPIC_NAME = "example/result/topic";
 int randomSleep(int start, int range) {
     // 随机休息一下，模拟处理的耗时
     int ms = std::abs((int)std::random_device{}()) % range + start;
-    CGRAPH_SLEEP_MILLISECOND(ms);
+    DAOGRAPH_SLEEP_MILLISECOND(ms);
     return ms;
 }
 
@@ -39,10 +39,10 @@ public:
             std::shared_ptr<InputMParam> input(new InputMParam());
             randomSleep(1, 5);    // 间隔1~6ms，发送一次
             input->num_ = std::abs((int)std::random_device{}()) % 5 + 1;
-            CGRAPH_SEND_MPARAM(InputMParam, INPUT_TOPIC_NAME, input, GMessagePushStrategy::WAIT);
+            DAOGRAPH_SEND_MPARAM(InputMParam, INPUT_TOPIC_NAME, input, GMessagePushStrategy::WAIT);
         }
 
-        CGRAPH_ECHO("    ----> InputGNode run finished");
+        DAOGRAPH_ECHO("    ----> InputGNode run finished");
         return CStatus();
     }
 };
@@ -52,7 +52,7 @@ public:
     CStatus run() override {
         while (true) {
             std::shared_ptr<InputMParam> input = nullptr;
-            auto status = CGRAPH_RECV_MPARAM_WITH_TIMEOUT(InputMParam, INPUT_TOPIC_NAME, input, 1000);
+            auto status = DAOGRAPH_RECV_MPARAM_WITH_TIMEOUT(InputMParam, INPUT_TOPIC_NAME, input, 1000);
             if (status.isErr()) {
                 break;    // 一阵子收不到消息了，就自动停止好了
             }
@@ -68,10 +68,10 @@ public:
             result->negative_num_ = -1 * input->num_;
             result->process_ts_ = ms;
 
-            CGRAPH_SEND_MPARAM(ResultMParam, RESULT_TOPIC_NAME, result, GMessagePushStrategy::WAIT);
+            DAOGRAPH_SEND_MPARAM(ResultMParam, RESULT_TOPIC_NAME, result, GMessagePushStrategy::WAIT);
         }
 
-        CGRAPH_ECHO("    ----> ProcessGNode run finished");
+        DAOGRAPH_ECHO("    ----> ProcessGNode run finished");
         return CStatus();
     }
 };
@@ -82,24 +82,24 @@ public:
     CStatus run() override {
         while (true) {
             std::shared_ptr<ResultMParam> result = nullptr;
-            auto status = CGRAPH_RECV_MPARAM_WITH_TIMEOUT(ResultMParam, RESULT_TOPIC_NAME, result, 1000);
+            auto status = DAOGRAPH_RECV_MPARAM_WITH_TIMEOUT(ResultMParam, RESULT_TOPIC_NAME, result, 1000);
             if (status.isErr()) {
                 break;
             }
 
             randomSleep(1, 5);
-            CGRAPH_ECHO("negative num is [%d], english info is [%s], process time is [%d]ms",
+            DAOGRAPH_ECHO("negative num is [%d], english info is [%s], process time is [%d]ms",
                         result->negative_num_, result->eng_info_.c_str(), result->process_ts_);
         }
 
-        CGRAPH_ECHO("    ----> ResultGNode run finished");
+        DAOGRAPH_ECHO("    ----> ResultGNode run finished");
         return CStatus();
     }
 };
 
 void example_third_flow() {
-    CGRAPH_CREATE_MESSAGE_TOPIC(InputMParam, INPUT_TOPIC_NAME, 16);
-    CGRAPH_CREATE_MESSAGE_TOPIC(ResultMParam, RESULT_TOPIC_NAME, 16);
+    DAOGRAPH_CREATE_MESSAGE_TOPIC(InputMParam, INPUT_TOPIC_NAME, 16);
+    DAOGRAPH_CREATE_MESSAGE_TOPIC(ResultMParam, RESULT_TOPIC_NAME, 16);
 
     auto pipeline = GPipelineFactory::create();
     GElementPtr input, process, result = nullptr;
@@ -113,7 +113,7 @@ void example_third_flow() {
     pipeline->setUniqueThreadPoolConfig(config);    // 设置3个线程执行
 
     pipeline->process();
-    CGRAPH_CLEAR_MESSAGES()
+    DAOGRAPH_CLEAR_MESSAGES()
     GPipelineFactory::clear();
 }
 

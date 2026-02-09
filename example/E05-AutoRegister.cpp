@@ -1,12 +1,12 @@
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 class MyNode : public GNode {
 public:
     static const char* staticClassName() { return "MyNode"; } // optional
     CStatus run() override { 
-        CGRAPH_ECHO("Running MyNode");
+        DAOGRAPH_ECHO("Running MyNode");
         return CStatus(); 
     }
     std::string getClassName() const override { return staticClassName(); }
@@ -14,13 +14,13 @@ public:
 };
 
 // auto-register at load
-CGRAPH_AUTO_REGISTER_GELEMENT(MyNode);
+DAOGRAPH_AUTO_REGISTER_GELEMENT(MyNode);
 
 class OtherNode : public GNode {
 public:
     static const char* staticClassName() { return "OtherNode"; } // optional
     CStatus run() override { 
-        CGRAPH_ECHO("Running OtherNode");
+        DAOGRAPH_ECHO("Running OtherNode");
         return CStatus();
     }
     std::string getClassName() const override { return staticClassName(); }
@@ -28,7 +28,7 @@ public:
 };
 
 // auto-register at load
-CGRAPH_AUTO_REGISTER_GELEMENT(OtherNode);
+DAOGRAPH_AUTO_REGISTER_GELEMENT(OtherNode);
 
 int main() {
     auto pipeline = GPipelineFactory::create();
@@ -36,11 +36,11 @@ int main() {
     status += pipeline->buildFromJson("/Users/xiechuxi/Desktop/codes/meta_ai_builder/example/dag.json");
     status += pipeline->process();
     if (status.isErr()) {
-        CGRAPH_ECHO("Pipeline process failed: %s", status.getInfo().c_str());
+        DAOGRAPH_ECHO("Pipeline process failed: %s", status.getInfo().c_str());
         GPipelineFactory::remove(pipeline);
         return -1;
     }
-    CGRAPH_ECHO("Pipeline process succeeded: %s", status.getInfo().c_str());
+    DAOGRAPH_ECHO("Pipeline process succeeded: %s", status.getInfo().c_str());
 
     GPipelineFactory::remove(pipeline);
     return 0;

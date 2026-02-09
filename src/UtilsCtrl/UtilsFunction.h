@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTILSFUNCTION_H
-#define CGRAPH_UTILSFUNCTION_H
+#ifndef DAOGRAPH_UTILSFUNCTION_H
+#define DAOGRAPH_UTILSFUNCTION_H
 
 #include <mutex>
 #include <chrono>
@@ -19,13 +19,13 @@
 
 #include "../CBasic/CBasicInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 /**
  * 获取当前的ms信息
  * @return
  */
-inline CMSec CGRAPH_GET_CURRENT_MS() {
+inline CMSec DAOGRAPH_GET_CURRENT_MS() {
     // 获取当前的时间戳信息
     return (CMSec)std::chrono::time_point_cast<std::chrono::milliseconds>    \
         (std::chrono::steady_clock::now()).time_since_epoch().count();
@@ -36,7 +36,7 @@ inline CMSec CGRAPH_GET_CURRENT_MS() {
  * 获取当前的ms信息(包含小数)
  * @return
  */
-inline CFMSec CGRAPH_GET_CURRENT_ACCURATE_MS() {
+inline CFMSec DAOGRAPH_GET_CURRENT_ACCURATE_MS() {
     // 获取当前的时间戳信息
     return (CFMSec)std::chrono::time_point_cast<std::chrono::microseconds>    \
                 (std::chrono::steady_clock::now()).time_since_epoch().count() / (CFMSec)1000.0;
@@ -50,7 +50,7 @@ inline CFMSec CGRAPH_GET_CURRENT_ACCURATE_MS() {
  * @return
  */
 template<typename T>
-typename T::value_type CGRAPH_CONTAINER_SUM(const T& container) {
+typename T::value_type DAOGRAPH_CONTAINER_SUM(const T& container) {
     typename T::value_type result = 0;
     for (const auto& val : container) {
         result += val;
@@ -66,7 +66,7 @@ typename T::value_type CGRAPH_CONTAINER_SUM(const T& container) {
  * @return
  */
 template<typename T>
-typename T::value_type CGRAPH_CONTAINER_MULTIPLY(const T& container) {
+typename T::value_type DAOGRAPH_CONTAINER_MULTIPLY(const T& container) {
     typename T::value_type result = 1;
     for (const auto& val : container) {
         result *= val;
@@ -82,13 +82,13 @@ typename T::value_type CGRAPH_CONTAINER_MULTIPLY(const T& container) {
  * @return
  */
 template <typename T>
-T CGRAPH_MAX(T val) {
+T DAOGRAPH_MAX(T val) {
     return val;
 }
 
 template <typename T, typename... Args>
-T CGRAPH_MAX(T val, Args... args) {
-    return std::max(val, CGRAPH_MAX(args...));
+T DAOGRAPH_MAX(T val, Args... args) {
+    return std::max(val, DAOGRAPH_MAX(args...));
 }
 
 
@@ -99,13 +99,13 @@ T CGRAPH_MAX(T val, Args... args) {
  * @return
  */
 template<typename T>
-T CGRAPH_SUM(T t) {
+T DAOGRAPH_SUM(T t) {
     return t;
 }
 
 template<typename T, typename... Args>
-T CGRAPH_SUM(T val, Args... args) {
-    return val + CGRAPH_SUM(args...);
+T DAOGRAPH_SUM(T val, Args... args) {
+    return val + DAOGRAPH_SUM(args...);
 }
 
 
@@ -114,12 +114,12 @@ T CGRAPH_SUM(T val, Args... args) {
  * 考虑到yield 在不同的os中，会有不同的实现方式，提供不同实现版本的yield方法
  * @return
  */
-inline CVoid CGRAPH_YIELD() {
-#ifdef _CGRAPH_SLEEP_MS_AS_YIELD_
+inline CVoid DAOGRAPH_YIELD() {
+#ifdef _DAOGRAPH_SLEEP_MS_AS_YIELD_
     std::this_thread::sleep_for(std::chrono::milliseconds(1));
-#elif _CGRAPH_SLEEP_US_AS_YIELD_
+#elif _DAOGRAPH_SLEEP_US_AS_YIELD_
     std::this_thread::sleep_for(std::chrono::microseconds(1));
-#elif _CGRAPH_SLEEP_NS_AS_YIELD_
+#elif _DAOGRAPH_SLEEP_NS_AS_YIELD_
     std::this_thread::sleep_for(std::chrono::nanoseconds(1));
 #else
     // 默认情况下，还是直接调用系统的yield
@@ -127,6 +127,6 @@ inline CVoid CGRAPH_YIELD() {
 #endif
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTILSFUNCTION_H
+#endif //DAOGRAPH_UTILSFUNCTION_H

@@ -5,22 +5,22 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGSERIALMULTICONDITION_H
-#define CGRAPH_PYWGSERIALMULTICONDITION_H
+#ifndef DAOGRAPH_PYWGSERIALMULTICONDITION_H
+#define DAOGRAPH_PYWGSERIALMULTICONDITION_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "PyWrapperMacro.h"
 
-class PywGSerialMultiCondition : public CGraph::GMultiCondition<CGraph::GMultiConditionType::SERIAL> {
+class PywGSerialMultiCondition : public DaoGraph::GMultiCondition<DaoGraph::GMultiConditionType::SERIAL> {
 public:
-    explicit PywGSerialMultiCondition(const CGraph::GElementPtrArr& elements = CGraph::GElementPtrArr{}) {
-        CGraph::GMultiCondition<CGraph::GMultiConditionType::SERIAL>::__addGElements_4py(elements);
+    explicit PywGSerialMultiCondition(const DaoGraph::GElementPtrArr& elements = DaoGraph::GElementPtrArr{}) {
+        DaoGraph::GMultiCondition<DaoGraph::GMultiConditionType::SERIAL>::__addGElements_4py(elements);
     };
 
     ~PywGSerialMultiCondition() override = default;
 
-    CGraph::GElement* clone() const override {
-        PYBIND11_OVERLOAD(CGraph::GElement*, CGraph::GMultiCondition<CGraph::GMultiConditionType::SERIAL>, clone);
+    DaoGraph::GElement* clone() const override {
+        PYBIND11_OVERLOAD(DaoGraph::GElement*, DaoGraph::GMultiCondition<DaoGraph::GMultiConditionType::SERIAL>, clone);
     }
 
 protected:
@@ -29,6 +29,6 @@ protected:
     }
 };
 
-PYCGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGSerialMultiCondition, ;);
+PYDAOGRAPH_DECLARE_GGROUP_INTERFACE_CLASS(PywGSerialMultiCondition, ;);
 
-#endif //CGRAPH_PYWGSERIALMULTICONDITION_H
+#endif //DAOGRAPH_PYWGSERIALMULTICONDITION_H

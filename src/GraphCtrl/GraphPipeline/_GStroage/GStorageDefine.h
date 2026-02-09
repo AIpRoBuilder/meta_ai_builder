@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTORAGEDEFINE_H
-#define CGRAPH_GSTORAGEDEFINE_H
+#ifndef DAOGRAPH_GSTORAGEDEFINE_H
+#define DAOGRAPH_GSTORAGEDEFINE_H
 
 #include <string>
 #include <vector>
@@ -16,7 +16,7 @@
 #include "../../GraphElement/GElementInclude.h"
 #include "../../GraphEvent/GEventInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 struct _GStorageBasic : public CStruct {
     std::string clz_name_ {};
@@ -84,12 +84,12 @@ struct _GPassedParamStorage : public _GStorageBasic {
 
 struct _GElementStorage : public _GStorageBasic {
     std::string name_ {};
-    CSize loop_ { CGRAPH_DEFAULT_LOOP_TIMES };
+    CSize loop_ { DAOGRAPH_DEFAULT_LOOP_TIMES };
     std::string session_ {};
     CBool visible_ { true };
-    CIndex binding_index_ { CGRAPH_DEFAULT_BINDING_INDEX };
-    CLevel level_ { CGRAPH_DEFAULT_ELEMENT_LEVEL };
-    CMSec timeout_ { CGRAPH_DEFAULT_ELEMENT_TIMEOUT };
+    CIndex binding_index_ { DAOGRAPH_DEFAULT_BINDING_INDEX };
+    CLevel level_ { DAOGRAPH_DEFAULT_ELEMENT_LEVEL };
+    CMSec timeout_ { DAOGRAPH_DEFAULT_ELEMENT_TIMEOUT };
     GElementTimeoutStrategy timeout_strategy_ { GElementTimeoutStrategy::AS_ERROR };
     CBool is_marco_ { false };
     std::string belong_session_ {};
@@ -112,7 +112,7 @@ struct _GElementStorage : public _GStorageBasic {
         timeout_ = element->timeout_;
         timeout_strategy_ = element->timeout_strategy_;
         is_marco_ = element->is_marco_;
-        belong_session_ = element->belong_ ? element->belong_->getSession() : CGRAPH_EMPTY;
+        belong_session_ = element->belong_ ? element->belong_->getSession() : DAOGRAPH_EMPTY;
         element_type_ = element->element_type_;
         clz_name_ = typeid(*element).name();
         for (const auto* dep : element->dependence_) {
@@ -137,8 +137,8 @@ struct _GElementStorage : public _GStorageBasic {
      * @return
      */
     CStatus recover(GElementPtr element) const {
-        CGRAPH_FUNCTION_BEGIN
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_ASSERT_NOT_NULL(element)
         element->setName(name_);
         element->setLoop(loop_);
         element->setBindingIndex(binding_index_);
@@ -150,7 +150,7 @@ struct _GElementStorage : public _GStorageBasic {
             element->setMacro(is_marco_);
         }
 
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     friend class GStorage;
@@ -165,6 +165,6 @@ struct _GPipelineStorage : public CStruct {
     UThreadPoolConfig thread_pool_config_ {};                 // 记录线程池配置信息
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSTORAGEDEFINE_H
+#endif //DAOGRAPH_GSTORAGEDEFINE_H

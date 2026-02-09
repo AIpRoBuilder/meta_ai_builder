@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GELEMENTSORTER_H
-#define CGRAPH_GELEMENTSORTER_H
+#ifndef DAOGRAPH_GELEMENTSORTER_H
+#define DAOGRAPH_GELEMENTSORTER_H
 
 #include <set>
 
 #include "GElement.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElementSorter : public CStruct {
 public:
@@ -30,6 +30,6 @@ public:
 
 using GSortedGElementPtrSet = std::set<GElementPtr, GElementSorter>;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GELEMENTSORTER_H
+#endif //DAOGRAPH_GELEMENTSORTER_H

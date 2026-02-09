@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPERFDEFINE_H
-#define CGRAPH_GPERFDEFINE_H
+#ifndef DAOGRAPH_GPERFDEFINE_H
+#define DAOGRAPH_GPERFDEFINE_H
 
 #include "../../GraphDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 struct GPerfInfo : public CStruct {
     CUInt loop_ = 0;                       // 循环数
@@ -22,6 +22,6 @@ struct GPerfInfo : public CStruct {
 
 using GPerfInfoPtr = GPerfInfo *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPERFDEFINE_H
+#endif //DAOGRAPH_GPERFDEFINE_H

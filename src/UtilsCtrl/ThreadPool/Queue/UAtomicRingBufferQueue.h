@@ -5,8 +5,8 @@
 @Desc: 本 queue 仅支持单入单出模式
 ***************************/
 
-#ifndef CGRAPH_UATOMICRINGBUFFERQUEUE_H
-#define CGRAPH_UATOMICRINGBUFFERQUEUE_H
+#ifndef DAOGRAPH_UATOMICRINGBUFFERQUEUE_H
+#define DAOGRAPH_UATOMICRINGBUFFERQUEUE_H
 
 #include <vector>
 #include <atomic>
@@ -15,9 +15,9 @@
 
 #include "UQueueObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-template<typename T, CUInt capacity = CGRAPH_DEFAULT_RINGBUFFER_SIZE>
+template<typename T, CUInt capacity = DAOGRAPH_DEFAULT_RINGBUFFER_SIZE>
 class UAtomicRingBufferQueue : public UQueueObject {
 public:
     explicit UAtomicRingBufferQueue() {
@@ -61,7 +61,7 @@ public:
     template<class TImpl = T>
     CVoid push(const std::shared_ptr<TImpl>& value, URingBufferPushStrategy strategy) {
         {
-            CGRAPH_UNIQUE_LOCK lk(mutex_);
+            DAOGRAPH_UNIQUE_LOCK lk(mutex_);
             if (isFull()) {
                 switch (strategy) {
                     case URingBufferPushStrategy::WAIT:
@@ -90,14 +90,14 @@ public:
      */
     template<class TImpl = T>
     CStatus waitPopWithTimeout(std::shared_ptr<TImpl>& value, CMSec timeout) {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         {
-            CGRAPH_UNIQUE_LOCK lk(mutex_);
+            DAOGRAPH_UNIQUE_LOCK lk(mutex_);
             if (isEmpty()
                 && !pop_cv_.wait_for(lk, std::chrono::milliseconds(timeout),
                                      [this] { return !isEmpty(); })) {
                 // 如果timeout的时间内，等不到消息，则返回错误信息
-                CGRAPH_RETURN_ERROR_STATUS("receive message timeout.")
+                DAOGRAPH_RETURN_ERROR_STATUS("receive message timeout.")
             }
 
             /**
@@ -108,7 +108,7 @@ public:
             head_ = (head_ + 1) % capacity_;
         }
         push_cv_.notify_one();
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -116,11 +116,11 @@ public:
      * @return
      */
     CStatus clear() {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         ring_buffer_queue_.resize(0);
         head_ = 0;
         tail_ = 0;
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
 protected:
@@ -141,7 +141,7 @@ protected:
         return head_ == tail_;
     }
 
-    CGRAPH_NO_ALLOWED_COPY(UAtomicRingBufferQueue)
+    DAOGRAPH_NO_ALLOWED_COPY(UAtomicRingBufferQueue)
 
 private:
     CUInt head_;                                                    // 头结点位置
@@ -154,6 +154,6 @@ private:
     std::vector<std::shared_ptr<T> > ring_buffer_queue_;            // 环形缓冲区
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UATOMICRINGBUFFERQUEUE_H
+#endif //DAOGRAPH_UATOMICRINGBUFFERQUEUE_H

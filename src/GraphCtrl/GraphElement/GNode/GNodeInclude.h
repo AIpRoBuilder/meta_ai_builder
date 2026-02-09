@@ -5,11 +5,11 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GNODEINCLUDE_H
-#define CGRAPH_GNODEINCLUDE_H
+#ifndef DAOGRAPH_GNODEINCLUDE_H
+#define DAOGRAPH_GNODEINCLUDE_H
 
 #include "GNodeDefine.h"
 #include "GNode.h"
 #include "GTemplateNode.h"
 
-#endif //CGRAPH_GNODEINCLUDE_H
+#endif //DAOGRAPH_GNODEINCLUDE_H

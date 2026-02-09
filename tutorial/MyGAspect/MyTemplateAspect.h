@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYTEMPLATEASPECT_H
-#define CGRAPH_MYTEMPLATEASPECT_H
+#ifndef DAOGRAPH_MYTEMPLATEASPECT_H
+#define DAOGRAPH_MYTEMPLATEASPECT_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 template<class ...Args>
-class MyTemplateAspect : public CGraph::GTemplateAspect<Args...> {
+class MyTemplateAspect : public DaoGraph::GTemplateAspect<Args...> {
 public:
     explicit MyTemplateAspect(int age, double score) {
         age_ = age;
@@ -19,7 +19,7 @@ public:
     }
 
     CStatus beginInit() override {
-        CGraph::CGRAPH_ECHO("----> [MyTemplateAspect] [%s] input age is [%d], score is [%lf]",
+        DaoGraph::DAOGRAPH_ECHO("----> [MyTemplateAspect] [%s] input age is [%d], score is [%lf]",
                             this->getName().c_str(), age_, score_);
         return CStatus();
     }
@@ -29,4 +29,4 @@ private:
     double score_;
 };
 
-#endif //CGRAPH_MYTEMPLATEASPECT_H
+#endif //DAOGRAPH_MYTEMPLATEASPECT_H

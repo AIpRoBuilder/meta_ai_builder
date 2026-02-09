@@ -8,7 +8,7 @@
 from datetime import datetime
 import time
 
-from pycgraph import GNode, CStatus
+from pydaograph import GNode, CStatus
 
 class MyNode1(GNode):
     def run(self):

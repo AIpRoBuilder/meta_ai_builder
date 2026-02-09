@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSEPARATEOPTIMIZER_H
-#define CGRAPH_GSEPARATEOPTIMIZER_H
+#ifndef DAOGRAPH_GSEPARATEOPTIMIZER_H
+#define DAOGRAPH_GSEPARATEOPTIMIZER_H
 
 #include <algorithm>
 
 #include "GOptimizer.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GSeparateOptimizer : public GOptimizer {
 protected:
@@ -84,6 +84,6 @@ protected:
     friend class GRegion;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSEPARATEOPTIMIZER_H
+#endif //DAOGRAPH_GSEPARATEOPTIMIZER_H

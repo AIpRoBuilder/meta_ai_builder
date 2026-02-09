@@ -5,17 +5,17 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GTEMPLATEDAEMON_H
-#define CGRAPH_GTEMPLATEDAEMON_H
+#ifndef DAOGRAPH_GTEMPLATEDAEMON_H
+#define DAOGRAPH_GTEMPLATEDAEMON_H
 
 #include "GDaemon.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<class ...Args>
 class GTemplateDaemon : public GDaemon {
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GTEMPLATEDAEMON_H
+#endif //DAOGRAPH_GTEMPLATEDAEMON_H

@@ -12,7 +12,7 @@
 #include "MyGNode/MyReadParamNode.h"
 #include "MyGNode/MyWriteParamNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void tutorial_condition() {
     CStatus status;
@@ -43,7 +43,7 @@ void tutorial_condition() {
 
     for (int i = 0; i < 3; i++) {
         status += pipeline->run();
-        std::cout << "[CGraph] tutorial_condition, loop : " << i + 1 << ", and run status = " << status.getCode() << std::endl;
+        std::cout << "[DaoGraph] tutorial_condition, loop : " << i + 1 << ", and run status = " << status.getCode() << std::endl;
     }
 
     status = pipeline->destroy();

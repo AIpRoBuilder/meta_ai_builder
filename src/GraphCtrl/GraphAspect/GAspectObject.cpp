@@ -8,21 +8,21 @@
 #include "GAspectObject.h"
 #include "../GraphElement/GElementInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GAspectObject::GAspectObject() {
-    session_ = URandom<>::generateSession(CGRAPH_STR_ASPECT);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_ASPECT);
 }
 
 
 const std::string& GAspectObject::getName() const {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(belong_);
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(belong_);
     return belong_->getName();
 }
 
 
 GAspectObject::~GAspectObject() {
-    CGRAPH_DELETE_PTR(param_)
+    DAOGRAPH_DELETE_PTR(param_)
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

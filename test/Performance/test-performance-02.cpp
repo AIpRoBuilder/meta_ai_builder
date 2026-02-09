@@ -7,7 +7,7 @@
 
 #include "../_Materials/TestInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void test_performance_02() {
     // 串行执行32次，对应第二个例子，1thread，32串行，100w次

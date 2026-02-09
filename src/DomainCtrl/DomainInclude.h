@@ -5,9 +5,9 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_DOMAININCLUDE_H
-#define CGRAPH_DOMAININCLUDE_H
+#ifndef DAOGRAPH_DOMAININCLUDE_H
+#define DAOGRAPH_DOMAININCLUDE_H
 
 #include "Ann/DAnnInclude.h"
 
-#endif //CGRAPH_DOMAININCLUDE_H
+#endif //DAOGRAPH_DOMAININCLUDE_H

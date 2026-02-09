@@ -9,16 +9,16 @@ import glob
 from setuptools import setup, Extension, find_packages
 import pybind11
 
-__PYCGRAPH_NAME__ = "pycgraph"
-__PYCGRAPH_VERSION__ = "3.5.1"
-__PYCGRAPH_AUTHOR__ = "peterxie"
-__PYCGRAPH_AUTHOR_EMAIL__ = "peterxcx@gmail.com"
-__PYCGRAPH_DESCRIPTION__ = "CGraph with python api wrapper by pybind11"
-__PYCGRAPH_URL__ = "https://github.com/peterxie/CGraph"
-__PYCGRAPH_LICENSE__ = "MIT"
-__PYCGRAPH_LONG_DESCRIPTION__ = 'You can get everything in CGraph github main page : [CGraph](https://github.com/peterxie/CGraph)'
-__PYCGRAPH_KEYWORDS__ = [__PYCGRAPH_NAME__,
-                         "CGraph",
+__PYDAOGRAPH_NAME__ = "pydaograph"
+__PYDAOGRAPH_VERSION__ = "0.1.0"
+__PYDAOGRAPH_AUTHOR__ = "peterxie"
+__PYDAOGRAPH_AUTHOR_EMAIL__ = "peterxcx@gmail.com"
+__PYDAOGRAPH_DESCRIPTION__ = "DaoGraph with python api wrapper by pybind11"
+__PYDAOGRAPH_URL__ = "https://github.com/peterxie/DaoGraph"
+__PYDAOGRAPH_LICENSE__ = "MIT"
+__PYDAOGRAPH_LONG_DESCRIPTION__ = 'You can get everything in DaoGraph github main page : [DaoGraph](https://github.com/peterxie/DaoGraph)'
+__PYDAOGRAPH_KEYWORDS__ = [__PYDAOGRAPH_NAME__,
+                         "DaoGraph",
                          "dag",
                          "parallel",
                          "airflow",
@@ -26,7 +26,7 @@ __PYCGRAPH_KEYWORDS__ = [__PYCGRAPH_NAME__,
                          "workflow",
                          "pybind11"]
 
-_sources = ['PyCGraph.cpp'] + glob.glob("../src/**/*.cpp", recursive=True)
+_sources = ['PyDaoGraph.cpp'] + glob.glob("../src/**/*.cpp", recursive=True)
 _extra_compile_args = ["-pthread",
                        "-std=c++11",
                        "-fvisibility=hidden"]
@@ -34,7 +34,7 @@ _include_dirs = [pybind11.get_include(),
                  "../src"]
 _ext_modules = [
     Extension(
-        name=f"{__PYCGRAPH_NAME__}._core",
+        name=f"{__PYDAOGRAPH_NAME__}._core",
         sources=_sources,
         extra_compile_args=_extra_compile_args,
         include_dirs=_include_dirs,
@@ -42,25 +42,25 @@ _ext_modules = [
 ]
 
 _packages = find_packages(where=".",
-                          include=["pycgraph", "pycgraph.*", "pycgraph_tools"],
+                          include=["pydaograph", "pydaograph.*"],
                           exclude=["build*", "dist*", "*.egg-info", "__pycache__"])
 
 setup(
-    name=__PYCGRAPH_NAME__,
-    version=__PYCGRAPH_VERSION__,
-    author=__PYCGRAPH_AUTHOR__,
-    author_email=__PYCGRAPH_AUTHOR_EMAIL__,
-    description=__PYCGRAPH_DESCRIPTION__,
-    url=__PYCGRAPH_URL__,
-    license=__PYCGRAPH_LICENSE__,
+    name=__PYDAOGRAPH_NAME__,
+    version=__PYDAOGRAPH_VERSION__,
+    author=__PYDAOGRAPH_AUTHOR__,
+    author_email=__PYDAOGRAPH_AUTHOR_EMAIL__,
+    description=__PYDAOGRAPH_DESCRIPTION__,
+    url=__PYDAOGRAPH_URL__,
+    license=__PYDAOGRAPH_LICENSE__,
     ext_modules=_ext_modules,
     packages=_packages,
     package_dir={"": "."},
     zip_safe=False,
-    long_description=__PYCGRAPH_LONG_DESCRIPTION__,
+    long_description=__PYDAOGRAPH_LONG_DESCRIPTION__,
     long_description_content_type="text/markdown",
     python_requires=">=3.8",
-    keywords=__PYCGRAPH_KEYWORDS__,
+    keywords=__PYDAOGRAPH_KEYWORDS__,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

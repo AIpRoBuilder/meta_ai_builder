@@ -5,12 +5,12 @@
 @Desc: 实现在多个element中，选择一个执行的功能
 ***************************/
 
-#ifndef CGRAPH_GCONDITION_H
-#define CGRAPH_GCONDITION_H
+#ifndef DAOGRAPH_GCONDITION_H
+#define DAOGRAPH_GCONDITION_H
 
 #include "../GGroup.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GCondition : public GGroup {
 protected:
@@ -37,6 +37,6 @@ private:
 
 using GConditionPtr = GCondition *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GCONDITION_H
+#endif //DAOGRAPH_GCONDITION_H

@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPASSEDPARAM_H
-#define CGRAPH_GPASSEDPARAM_H
+#ifndef DAOGRAPH_GPASSEDPARAM_H
+#define DAOGRAPH_GPASSEDPARAM_H
 
 #include <unordered_map>
 
 #include "GParamObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPassedParam : public GParamObject {
 public:
@@ -43,6 +43,6 @@ using GStageParamPtr = GStageParam *;
 
 using GElementParamMap = std::unordered_map<std::string, GElementParamPtr>;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPASSEDPARAM_H
+#endif //DAOGRAPH_GPASSEDPARAM_H

@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTHREADOBJECT_H
-#define CGRAPH_UTHREADOBJECT_H
+#ifndef DAOGRAPH_UTHREADOBJECT_H
+#define DAOGRAPH_UTHREADOBJECT_H
 
 #include "../UtilsObject.h"
 #include "UThreadPoolDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UThreadObject : public UtilsObject {
 protected:
@@ -20,10 +20,10 @@ protected:
      * @return
      */
     CStatus run() override {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTHREADOBJECT_H
+#endif //DAOGRAPH_UTHREADOBJECT_H

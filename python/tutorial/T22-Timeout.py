@@ -5,7 +5,7 @@
 @Desc: 
 """
 
-from pycgraph import GPipeline, CStatus
+from pydaograph import GPipeline, CStatus
 
 from MyGNode.MyNode1 import MyNode1
 from MyGNode.MyNode2 import MyNode2

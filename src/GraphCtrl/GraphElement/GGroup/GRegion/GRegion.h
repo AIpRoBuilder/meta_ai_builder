@@ -6,13 +6,13 @@
 ***************************/
 
 
-#ifndef CGRAPH_GREGION_H
-#define CGRAPH_GREGION_H
+#ifndef DAOGRAPH_GREGION_H
+#define DAOGRAPH_GREGION_H
 
 #include "../GGroup.h"
 #include "../../GElementManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GRegion : public GGroup {
 public:
@@ -51,7 +51,7 @@ private:
 private:
     GElementManagerPtr manager_ = nullptr;    // region 内部通过 manager来管理其中的 element 信息
 
-    CGRAPH_NO_ALLOWED_COPY(GRegion)
+    DAOGRAPH_NO_ALLOWED_COPY(GRegion)
 
     friend class GPipeline;
     friend class CAllocator;
@@ -61,6 +61,6 @@ private:
 
 using GRegionPtr = GRegion *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GREGION_H
+#endif //DAOGRAPH_GREGION_H

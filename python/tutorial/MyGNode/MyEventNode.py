@@ -7,7 +7,7 @@
 
 from datetime import datetime
 
-from pycgraph import GNode, CStatus, GEventType
+from pydaograph import GNode, CStatus, GEventType
 
 class MyEventNode(GNode):
     def run(self):

@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGPASSEDPARAM_H
-#define CGRAPH_PYWGPASSEDPARAM_H
+#ifndef DAOGRAPH_PYWGPASSEDPARAM_H
+#define DAOGRAPH_PYWGPASSEDPARAM_H
 
 #include <pybind11/pybind11.h>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class PywGPassedParam : public CGraph::GPassedParam {
+class PywGPassedParam : public DaoGraph::GPassedParam {
 public:
     explicit PywGPassedParam() = default;
     ~PywGPassedParam() override = default;
@@ -23,4 +23,4 @@ protected:
     }
 };
 
-#endif //CGRAPH_PYWGPASSEDPARAM_H
+#endif //DAOGRAPH_PYWGPASSEDPARAM_H

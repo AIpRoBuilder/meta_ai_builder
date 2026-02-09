@@ -5,10 +5,10 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UQUEUEDEFINE_H
-#define CGRAPH_UQUEUEDEFINE_H
+#ifndef DAOGRAPH_UQUEUEDEFINE_H
+#define DAOGRAPH_UQUEUEDEFINE_H
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 /** 当环形队列满的时候，写入信息时候的策略 */
 enum class URingBufferPushStrategy {
@@ -17,6 +17,6 @@ enum class URingBufferPushStrategy {
     DROP = 3,                 // 丢弃当前信息
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UQUEUEDEFINE_H
+#endif //DAOGRAPH_UQUEUEDEFINE_H

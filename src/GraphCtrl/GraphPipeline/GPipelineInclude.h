@@ -5,11 +5,11 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPIPELINEINCLUDE_H
-#define CGRAPH_GPIPELINEINCLUDE_H
+#ifndef DAOGRAPH_GPIPELINEINCLUDE_H
+#define DAOGRAPH_GPIPELINEINCLUDE_H
 
 #include "GPipeline.h"
 #include "GPipelineFactory.h"
 #include "GPipelineManager.h"
 
-#endif //CGRAPH_GPIPELINEINCLUDE_H
+#endif //DAOGRAPH_GPIPELINEINCLUDE_H

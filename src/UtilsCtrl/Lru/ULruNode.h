@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_ULRUNODE_H
-#define CGRAPH_ULRUNODE_H
+#ifndef DAOGRAPH_ULRUNODE_H
+#define DAOGRAPH_ULRUNODE_H
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename K, typename V>
 struct ULruNode : public UtilsObject {
@@ -23,6 +23,6 @@ struct ULruNode : public UtilsObject {
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_ULRUNODE_H
+#endif //DAOGRAPH_ULRUNODE_H

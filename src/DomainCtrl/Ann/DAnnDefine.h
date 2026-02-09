@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_DANNDEFINE_H
-#define CGRAPH_DANNDEFINE_H
+#ifndef DAOGRAPH_DANNDEFINE_H
+#define DAOGRAPH_DANNDEFINE_H
 
 #include "DAnnObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 enum class D_ANN_FUNC_TYPE {
     ANN_PREPARE_ERROR = 0,   // 参数处理错误
@@ -25,8 +25,8 @@ enum class D_ANN_FUNC_TYPE {
     ANN_MAX_SIZE = 9         // 标记大小使用，无实意
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-using DAnnFuncType = CGraph::D_ANN_FUNC_TYPE;
+using DAnnFuncType = DaoGraph::D_ANN_FUNC_TYPE;
 
-#endif //CGRAPH_DANNDEFINE_H
+#endif //DAOGRAPH_DANNDEFINE_H

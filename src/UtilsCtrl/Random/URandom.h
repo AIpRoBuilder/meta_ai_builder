@@ -5,19 +5,19 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_URANDOM_H
-#define CGRAPH_URANDOM_H
+#ifndef DAOGRAPH_URANDOM_H
+#define DAOGRAPH_URANDOM_H
 
 #include <random>
 
 #include "../UtilsObject.h"
 #include "URandomDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T = CFloat,
-        CInt SEED = CGRAPH_REAL_RANDOM,    /** 当传入的seed为 CGRAPH_REAL_RANDOM 的时候，表示完全随机。其他值为固定随机值 */
-        typename TEngine = CGRAPH_RANDOM_MT19937>
+        CInt SEED = DAOGRAPH_REAL_RANDOM,    /** 当传入的seed为 DAOGRAPH_REAL_RANDOM 的时候，表示完全随机。其他值为固定随机值 */
+        typename TEngine = DAOGRAPH_RANDOM_MT19937>
 class URandom : public UtilsObject {
 public:
     /**
@@ -32,7 +32,7 @@ public:
     static CStatus generate(std::vector<T>& data, CSize dim,
                             const T& minValue, const T& maxValue) {
         std::random_device rd;
-        TEngine eng(CGRAPH_REAL_RANDOM == SEED ? rd() : SEED);
+        TEngine eng(DAOGRAPH_REAL_RANDOM == SEED ? rd() : SEED);
         std::uniform_real_distribution<T> urd(minValue, maxValue);
 
         data.clear();
@@ -56,7 +56,7 @@ public:
     static CStatus generate(std::vector<std::vector<T> >& data, CSize height, CSize column,
                             const T& minValue, const T& maxValue) {
         std::random_device rd;
-        TEngine eng(CGRAPH_REAL_RANDOM == SEED ? rd() : SEED);
+        TEngine eng(DAOGRAPH_REAL_RANDOM == SEED ? rd() : SEED);
         std::uniform_real_distribution<T> urd(minValue, maxValue);
 
         data.clear();
@@ -80,7 +80,7 @@ public:
      * @param size
      * @return
      */
-    static std::string generateSession(const std::string& key = CGRAPH_UNKNOWN, CSize size = 3) {
+    static std::string generateSession(const std::string& key = DAOGRAPH_UNKNOWN, CSize size = 3) {
         std::string session;    // 形式是 a-b-c-key，其中 a表示6位随机数字
         std::vector<CFloat> vec;
         URandom<CFloat>::generate(vec, size, 100000, 999999);
@@ -93,6 +93,6 @@ public:
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_URANDOM_H
+#endif //DAOGRAPH_URANDOM_H

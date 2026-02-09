@@ -5,8 +5,8 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GPIPELINE_H
-#define CGRAPH_GPIPELINE_H
+#ifndef DAOGRAPH_GPIPELINE_H
+#define DAOGRAPH_GPIPELINE_H
 
 #include <vector>
 #include <memory>
@@ -23,7 +23,7 @@
 #include "../GraphEvent/GEventInclude.h"
 #include "../GraphStage/GStageInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPipeline : public GPipelineObject,
                   public CDescInfo {
@@ -39,7 +39,7 @@ public:
      * @param runTimes
      * @return
      */
-    CStatus process(CSize runTimes = CGRAPH_DEFAULT_LOOP_TIMES);
+    CStatus process(CSize runTimes = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 异步执行pipeline的run流程
@@ -54,7 +54,7 @@ public:
      * @param policy
      * @return
      */
-    std::future<CStatus> asyncProcess(CSize runTimes = CGRAPH_DEFAULT_LOOP_TIMES,
+    std::future<CStatus> asyncProcess(CSize runTimes = DAOGRAPH_DEFAULT_LOOP_TIMES,
                                       std::launch policy = std::launch::async);
 
     /**
@@ -119,8 +119,8 @@ public:
     template<typename TNode, typename ...Args,
             c_enable_if_t<std::is_base_of<GNode, TNode>::value, int> = 0>
     TNode* createGNode(const GElementPtrSet& dependence = std::initializer_list<GElementPtr>(),
-                       const std::string& name = CGRAPH_EMPTY,
-                       CSize loop = CGRAPH_DEFAULT_LOOP_TIMES,
+                       const std::string& name = DAOGRAPH_EMPTY,
+                       CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES,
                        Args&&... args);
 
     /**
@@ -136,8 +136,8 @@ public:
             c_enable_if_t<std::is_base_of<GGroup, TGroup>::value, int> = 0>
     TGroup* createGGroup(const GElementPtrArr &elements,
                          const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                         const std::string &name = CGRAPH_EMPTY,
-                         CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                         const std::string &name = DAOGRAPH_EMPTY,
+                         CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 在图中注册一个 GElement信息
@@ -154,8 +154,8 @@ public:
             c_enable_if_t<std::is_base_of<GElement, T>::value, int> = 0>
     CStatus registerGElement(GElementPPtr elementRef,
                              const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                             const std::string &name = CGRAPH_EMPTY,
-                             CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                             const std::string &name = DAOGRAPH_EMPTY,
+                             CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 在图中注册一个模板Element信息
@@ -182,8 +182,8 @@ public:
     template<typename TNode,
             c_enable_if_t<std::is_base_of<GNode, TNode>::value, int> = 0>
     TNode* registerGNode(const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                         const std::string &name = CGRAPH_EMPTY,
-                         CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                         const std::string &name = DAOGRAPH_EMPTY,
+                         CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 注册一个 node
@@ -208,8 +208,8 @@ public:
      */
     CStatus registerGNode(GElementPPtr nodeRef,
                           const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                          const std::string &name = CGRAPH_EMPTY,
-                          CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                          const std::string &name = DAOGRAPH_EMPTY,
+                          CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     CStatus buildFromJson(const std::string& jsonPath);
 
@@ -223,16 +223,16 @@ public:
      */
     CStatus registerGGroup(GElementPPtr groupRef,
                            const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                           const std::string &name = CGRAPH_EMPTY,
-                           CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                           const std::string &name = DAOGRAPH_EMPTY,
+                           CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
         /**
          * 直接传入已创建的 element 指针注册
          */
         CStatus registerGElement(GElementPtr currentElement,
                                                          const GElementPtrSet& dependsSet = std::initializer_list<GElementPtr>(),
-                                                         const std::string& name = CGRAPH_EMPTY,
-                                                         CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                                                         const std::string& name = DAOGRAPH_EMPTY,
+                                                         CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 注册function类型的内容，模板特化
@@ -246,8 +246,8 @@ public:
     template<typename GFunction>
     CStatus registerGElement(GFunctionPPtr functionRef,
                              const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                             const std::string &name = CGRAPH_EMPTY,
-                             CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                             const std::string &name = DAOGRAPH_EMPTY,
+                             CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 注册fence类型的内容，模板特化
@@ -261,8 +261,8 @@ public:
     template<typename GFence>
     CStatus registerGElement(GFencePPtr fenceRef,
                              const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                             const std::string &name = CGRAPH_EMPTY,
-                             CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                             const std::string &name = DAOGRAPH_EMPTY,
+                             CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 注册GCoordinator类型的内容，模板特化
@@ -277,8 +277,8 @@ public:
     template<typename GCoordinator, CInt SIZE>
     CStatus registerGElement(GCoordinatorPPtr<SIZE> coordinatorRef,
                              const GElementPtrSet &depends = std::initializer_list<GElementPtr>(),
-                             const std::string &name = CGRAPH_EMPTY,
-                             CSize loop = CGRAPH_DEFAULT_LOOP_TIMES);
+                             const std::string &name = DAOGRAPH_EMPTY,
+                             CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     /**
      * 添加切面
@@ -421,7 +421,7 @@ public:
      * 注册GParam 交互类集合
      * @return
      */
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
 
 protected:
     explicit GPipeline();
@@ -446,7 +446,7 @@ private:
                           const std::string &name, CSize loop);
 
     /** 不允许外部赋值和构造 */
-    CGRAPH_NO_ALLOWED_COPY(GPipeline)
+    DAOGRAPH_NO_ALLOWED_COPY(GPipeline)
 
 private:
     GElementManagerPtr element_manager_ = nullptr;              // 节点管理类（管理所有注册过的element信息）
@@ -476,8 +476,8 @@ public:
 using GPipelinePtr = GPipeline *;
 using GPipelinePtrList = std::list<GPipelinePtr>;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GPipeline.inl"
 
-#endif //CGRAPH_GPIPELINE_H
+#endif //DAOGRAPH_GPIPELINE_H

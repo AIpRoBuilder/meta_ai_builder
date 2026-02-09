@@ -5,25 +5,25 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYRECVMESSAGENODE_H
-#define CGRAPH_MYRECVMESSAGENODE_H
+#ifndef DAOGRAPH_MYRECVMESSAGENODE_H
+#define DAOGRAPH_MYRECVMESSAGENODE_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 #include "../MyParams/MyMessageParam.h"
 
-class MyRecvMessageNode : public CGraph::GNode {
+class MyRecvMessageNode : public DaoGraph::GNode {
 public:
     CStatus run() override {
         std::shared_ptr<MyMessageParam> mp = nullptr;    // 接收一个消息
-        CStatus status = CGRAPH_RECV_MPARAM(MyMessageParam, "send-recv", mp);
+        CStatus status = DAOGRAPH_RECV_MPARAM(MyMessageParam, "send-recv", mp);
         if (!status.isOK()) {
-            CGraph::CGRAPH_ECHO("MySubMessageNode sub message error");
+            DaoGraph::DAOGRAPH_ECHO("MySubMessageNode sub message error");
             return status;
         }
 
-        CGraph::CGRAPH_ECHO("num = [%d], info = [%s]", mp->num, mp->info.c_str());
+        DaoGraph::DAOGRAPH_ECHO("num = [%d], info = [%s]", mp->num, mp->info.c_str());
         return status;
     }
 };
 
-#endif //CGRAPH_MYRECVMESSAGENODE_H
+#endif //DAOGRAPH_MYRECVMESSAGENODE_H

@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GRAPHMANAGER_H
-#define CGRAPH_GRAPHMANAGER_H
+#ifndef DAOGRAPH_GRAPHMANAGER_H
+#define DAOGRAPH_GRAPHMANAGER_H
 
 
 #include <string>
@@ -14,7 +14,7 @@
 #include "../CBasic/CBasicInclude.h"
 #include "GraphObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T,
         c_enable_if_t<std::is_base_of<GraphObject, T>::value, int> = 0>
@@ -26,7 +26,7 @@ protected:
      * @return
      */
     virtual CStatus add(T* object) {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
     /**
@@ -35,7 +35,7 @@ protected:
      * @return
      */
     virtual CStatus remove(T* object) {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
     /**
@@ -53,7 +53,7 @@ protected:
      * @return
      */
     virtual CStatus create(const std::string& key) {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
     /**
@@ -70,7 +70,7 @@ protected:
      * @return
      */
     virtual CStatus reset() {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 
     /**
@@ -92,10 +92,10 @@ protected:
      * @return
      */
     CStatus run() override {
-        CGRAPH_NO_SUPPORT
+        DAOGRAPH_NO_SUPPORT
     }
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GRAPHMANAGER_H
+#endif //DAOGRAPH_GRAPHMANAGER_H

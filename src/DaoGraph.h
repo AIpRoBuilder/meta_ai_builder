@@ -1,12 +1,12 @@
 /***************************
 
-@File: CGraph.h
+@File: DaoGraph.h
 @Time: 2021/9/18 10:20 下午
-@Desc: 包含了CGraph项目中，所有可用的头文件信息
+@Desc: 包含了DaoGraph项目中，所有可用的头文件信息
 ***************************/
 
-#ifndef CGRAPH_CGRAPH_H
-#define CGRAPH_CGRAPH_H
+#ifndef DAOGRAPH_DAOGRAPH_H
+#define DAOGRAPH_DAOGRAPH_H
 
 #include "CBasic/CBasicInclude.h"
 #include "GraphCtrl/GraphInclude.h"
@@ -14,4 +14,4 @@
 #include "nlohmann/json.hpp"
 #include "DomainCtrl/DomainInclude.h"
 
-#endif //CGRAPH_CGRAPH_H
+#endif //DAOGRAPH_DAOGRAPH_H

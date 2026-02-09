@@ -5,10 +5,10 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GCONDITIONINCLUDE_H
-#define CGRAPH_GCONDITIONINCLUDE_H
+#ifndef DAOGRAPH_GCONDITIONINCLUDE_H
+#define DAOGRAPH_GCONDITIONINCLUDE_H
 
 #include "GCondition.h"
 #include "GMultiCondition.h"
 
-#endif //CGRAPH_GCONDITIONINCLUDE_H
+#endif //DAOGRAPH_GCONDITIONINCLUDE_H

@@ -10,7 +10,7 @@
 #include "MyGNode/MyPubMessageNode.h"
 #include "MyGNode/MySubMessageNode.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void pub_message() {
     CStatus status;
@@ -31,7 +31,7 @@ void sub_message() {
     GTemplateNodePtr<int> subNode;
     GPipelinePtr subPipeline = GPipelineFactory::create();
     // 每次调用bind方法的时候，会返回不同的 connId信息
-    int connId = CGRAPH_BIND_MESSAGE_TOPIC(MyMessageParam, "pub-sub", 1024)
+    int connId = DAOGRAPH_BIND_MESSAGE_TOPIC(MyMessageParam, "pub-sub", 1024)
 
     // 注册用于 订阅 的pipeline
     status += subPipeline->registerGElement<MyNode2>(&node2, {}, "myNode2");
@@ -54,7 +54,7 @@ void tutorial_message_pub_sub() {
     subThd2.join();
     subThd3.join();
 
-    CGRAPH_CLEAR_MESSAGES()
+    DAOGRAPH_CLEAR_MESSAGES()
     GPipelineFactory::clear();
 }
 

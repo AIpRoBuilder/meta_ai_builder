@@ -5,10 +5,10 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_UTHREADINCLUDE_H
-#define CGRAPH_UTHREADINCLUDE_H
+#ifndef DAOGRAPH_UTHREADINCLUDE_H
+#define DAOGRAPH_UTHREADINCLUDE_H
 
 #include "UThreadPrimary.h"
 #include "UThreadSecondary.h"
 
-#endif //CGRAPH_UTHREADINCLUDE_H
+#endif //DAOGRAPH_UTHREADINCLUDE_H

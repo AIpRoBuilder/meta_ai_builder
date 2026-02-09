@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_MYCONDITION_H
-#define CGRAPH_MYCONDITION_H
+#ifndef DAOGRAPH_MYCONDITION_H
+#define DAOGRAPH_MYCONDITION_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-class MyCondition : public CGraph::GCondition {
+class MyCondition : public DaoGraph::GCondition {
 public:
     /**
      * 表示在condition中，需要执行第几个。
@@ -24,4 +24,4 @@ public:
     }
 };
 
-#endif // CGRAPH_MYCONDITION_H
+#endif // DAOGRAPH_MYCONDITION_H

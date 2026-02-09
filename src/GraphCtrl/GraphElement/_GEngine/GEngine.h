@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GENGINE_H
-#define CGRAPH_GENGINE_H
+#ifndef DAOGRAPH_GENGINE_H
+#define DAOGRAPH_GENGINE_H
 
 #include <vector>
 #include <queue>
@@ -15,7 +15,7 @@
 #include "../GElementObject.h"
 #include "../GElementSorter.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GEngine : public GElementObject {
 protected:
@@ -119,6 +119,6 @@ protected:
 
 using GEnginePtr = GEngine *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GENGINE_H
+#endif //DAOGRAPH_GENGINE_H

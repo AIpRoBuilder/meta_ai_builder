@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_USINGLETON_H
-#define CGRAPH_USINGLETON_H
+#ifndef DAOGRAPH_USINGLETON_H
+#define DAOGRAPH_USINGLETON_H
 
 #include "USingletonDefine.h"
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename T,
         USingletonType type = USingletonType::HUNGRY,
@@ -48,21 +48,21 @@ public:
 
 protected:
     CStatus init() override {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
 
         // 如果传入的是CObject类型的对象的话，则调用其init接口
         if (std::is_base_of<CObject, T>::value) {
             status = this->get()->init();
         }
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     CStatus destroy() override {
-        CGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_FUNCTION_BEGIN
         if (std::is_base_of<CObject, T>::value) {
             status = this->get()->destroy();
         }
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
     /**
@@ -71,9 +71,9 @@ protected:
      */
     CVoid create() {
         if (unlikely(nullptr == handle_)) {
-            CGRAPH_LOCK_GUARD lock(lock_);
+            DAOGRAPH_LOCK_GUARD lock(lock_);
             if (nullptr == handle_) {
-                handle_ = CGRAPH_SAFE_MALLOC_COBJECT(T)
+                handle_ = DAOGRAPH_SAFE_MALLOC_COBJECT(T)
             }
         }
     }
@@ -83,19 +83,19 @@ protected:
      * @return
      */
     CStatus clear() {
-        CGRAPH_FUNCTION_BEGIN
-        CGRAPH_LOCK_GUARD lock(lock_);
-        CGRAPH_DELETE_PTR(handle_)
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_LOCK_GUARD lock(lock_);
+        DAOGRAPH_DELETE_PTR(handle_)
+        DAOGRAPH_FUNCTION_END
     }
 
-    CGRAPH_NO_ALLOWED_COPY(USingleton);
+    DAOGRAPH_NO_ALLOWED_COPY(USingleton);
 
 private:
     T* handle_ { nullptr };             // 对应的单例句柄信息
     std::mutex lock_;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_USINGLETON_H
+#endif //DAOGRAPH_USINGLETON_H

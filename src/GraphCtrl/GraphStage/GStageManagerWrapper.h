@@ -5,25 +5,25 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTAGEMANAGERWRAPPER_H
-#define CGRAPH_GSTAGEMANAGERWRAPPER_H
+#ifndef DAOGRAPH_GSTAGEMANAGERWRAPPER_H
+#define DAOGRAPH_GSTAGEMANAGERWRAPPER_H
 
 #include "GStage.h"
 #include "GStageManager.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-#define CGRAPH_DECLARE_GSTAGE_MANAGER_WRAPPER_WITH_MEMBER             \
+#define DAOGRAPH_DECLARE_GSTAGE_MANAGER_WRAPPER_WITH_MEMBER             \
 protected:                                                           \
     /**
      * 进入特定阶段，等待同步
      * @param key
      */                                                              \
     CStatus enterStage(const std::string& key) {                     \
-        CGRAPH_FUNCTION_BEGIN                                        \
-        CGRAPH_ASSERT_NOT_NULL(stage_manager_);                      \
+        DAOGRAPH_FUNCTION_BEGIN                                        \
+        DAOGRAPH_ASSERT_NOT_NULL(stage_manager_);                      \
         status = stage_manager_->waitForReady(key);                  \
-        CGRAPH_FUNCTION_END                                          \
+        DAOGRAPH_FUNCTION_END                                          \
     }                                                                \
                                                                      \
 private:                                                             \
@@ -36,6 +36,6 @@ private:                                                             \
     GStageManagerPtr stage_manager_ { nullptr };                     \
                                                                      \
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSTAGEMANAGERWRAPPER_H
+#endif //DAOGRAPH_GSTAGEMANAGERWRAPPER_H

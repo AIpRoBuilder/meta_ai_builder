@@ -8,14 +8,14 @@
 
 #include "../_Materials/TestInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void test_functional_04() {
     const int halfArrSize = 32;
     const int runTimes = 100000;
-    CGRAPH_CREATE_MESSAGE_TOPIC(TestGMessageParam, g_test_message_key, 100)
+    DAOGRAPH_CREATE_MESSAGE_TOPIC(TestGMessageParam, g_test_message_key, 100)
     std::shared_ptr<TestGMessageParam> mp(new TestGMessageParam());
-    CGRAPH_SEND_MPARAM(TestGMessageParam, g_test_message_key, mp, GMessagePushStrategy::WAIT)
+    DAOGRAPH_SEND_MPARAM(TestGMessageParam, g_test_message_key, mp, GMessagePushStrategy::WAIT)
 
     GPipelinePtr pipeline = GPipelineFactory::create();
     GElementPtr arr[halfArrSize * 2];    // 前面一半是串行的，后面一半是并行的
@@ -37,12 +37,12 @@ void test_functional_04() {
         status += pipeline->process(runTimes);
     }
 
-    status += CGRAPH_RECV_MPARAM_WITH_TIMEOUT(TestGMessageParam, g_test_message_key, mp, 1500)
+    status += DAOGRAPH_RECV_MPARAM_WITH_TIMEOUT(TestGMessageParam, g_test_message_key, mp, 1500)
     if (mp->num_ != halfArrSize * runTimes * 2) {
-        CGRAPH_ECHO("result num is wrong, num is [%lu]", mp->num_);
+        DAOGRAPH_ECHO("result num is wrong, num is [%lu]", mp->num_);
     }
 
-    CGRAPH_CLEAR_MESSAGES()
+    DAOGRAPH_CLEAR_MESSAGES()
     GPipelineFactory::clear();
 }
 

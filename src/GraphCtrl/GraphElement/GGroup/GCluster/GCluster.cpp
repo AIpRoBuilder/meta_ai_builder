@@ -7,22 +7,22 @@
 
 #include "GCluster.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GCluster::GCluster() {
     element_type_ = GElementType::CLUSTER;
-    session_ = URandom<>::generateSession(CGRAPH_STR_CLUSTER);
+    session_ = URandom<>::generateSession(DAOGRAPH_STR_CLUSTER);
 }
 
 
 CStatus GCluster::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     for (GElementPtr element : this->group_elements_arr_) {
         status = element->fatProcessor(CFunctionType::RUN);
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -56,4 +56,4 @@ CBool GCluster::isSeparate(GElementCPtr a, GElementCPtr b) const {
     return true;
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

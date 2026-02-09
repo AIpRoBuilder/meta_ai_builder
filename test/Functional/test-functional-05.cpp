@@ -8,7 +8,7 @@
 
 #include "../_Materials/TestInclude.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 void test_functional_05() {
     CStatus status;
@@ -47,7 +47,7 @@ void test_functional_05() {
 
     auto p = pipeline->getGParam<TestAdd1GParam>(g_add1_by_param_key);
     if (37 != p->cnt_) {
-        CGRAPH_ECHO("test-functional-05 run error, cnt is [%d]", p->cnt_);
+        DAOGRAPH_ECHO("test-functional-05 run error, cnt is [%d]", p->cnt_);
     }
 
     pipeline->destroy();

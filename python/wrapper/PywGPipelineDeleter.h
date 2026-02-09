@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_PYWGPIPELINEDELETER_H
-#define CGRAPH_PYWGPIPELINEDELETER_H
+#ifndef DAOGRAPH_PYWGPIPELINEDELETER_H
+#define DAOGRAPH_PYWGPIPELINEDELETER_H
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
 struct PywGPipelineDeleter {
-    void operator()(CGraph::GPipelinePtr ptr) {
-        CGraph::GPipelineFactory::remove(ptr);
+    void operator()(DaoGraph::GPipelinePtr ptr) {
+        DaoGraph::GPipelineFactory::remove(ptr);
     }
 };
 
-#endif //CGRAPH_PYWGPIPELINEDELETER_H
+#endif //DAOGRAPH_PYWGPIPELINEDELETER_H

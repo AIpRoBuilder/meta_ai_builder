@@ -8,9 +8,9 @@
 #include <random>
 #include <vector>
 
-#include "CGraph.h"
+#include "DaoGraph.h"
 
-using namespace CGraph;
+using namespace DaoGraph;
 
 static const int MAP_SIZE = 4;
 static const int NUMS_PER_MAP = 1000000;
@@ -26,13 +26,13 @@ struct NumsGParam : public GParam {
 class GenerateGNode : public GNode {
 public:
     CStatus init() override {
-        auto status = CGRAPH_CREATE_GPARAM(NumsGParam, PARAM_KEY);
+        auto status = DAOGRAPH_CREATE_GPARAM(NumsGParam, PARAM_KEY);
         return status;
     }
 
     CStatus run() override {
         std::mt19937 generator;
-        auto param = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(NumsGParam, PARAM_KEY);
+        auto param = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(NumsGParam, PARAM_KEY);
 
         std::uniform_int_distribution<int> distribution(0, MAX_NUM - 1);
         for (int i = 0; i < MAP_SIZE * NUMS_PER_MAP; i++) {
@@ -49,7 +49,7 @@ template<int MAP_TAG>
 class MapGNode : public GNode {
 public:
     CStatus run() override {
-        auto param = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(NumsGParam, PARAM_KEY);
+        auto param = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(NumsGParam, PARAM_KEY);
         for (int i = 0; i < NUMS_PER_MAP; i++) {
             int num = param->random_nums_[MAP_TAG * NUMS_PER_MAP + i];
             param->map_results_[MAP_TAG][num]++;    // 实际上是线程安全的
@@ -63,7 +63,7 @@ class ReduceGNode : public GNode {
 public:
     CStatus run() override {
         int total = 0;
-        auto param = CGRAPH_GET_GPARAM_WITH_NO_EMPTY(NumsGParam, PARAM_KEY);
+        auto param = DAOGRAPH_GET_GPARAM_WITH_NO_EMPTY(NumsGParam, PARAM_KEY);
         for (int j = 0; j < MAX_NUM; j++) {
             int num = 0;
             for (int i = 0; i < MAP_SIZE; i++) {
@@ -93,7 +93,7 @@ void example_map_reduce() {
 
     status += pipeline->process();
     if (status.isErr()) {
-        CGRAPH_ECHO("example_map_reduce error info is : %s", status.getInfo().c_str());
+        DAOGRAPH_ECHO("example_map_reduce error info is : %s", status.getInfo().c_str());
     }
 
     GPipelineFactory::clear();

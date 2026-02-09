@@ -8,65 +8,65 @@
 #include "GElementManager.h"
 #include "_GOptimizer/GOptimizerInclude.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 GElementManager::~GElementManager() {
     /**
      * manager中的节点，在析构的时候不需要释放。
      * 所有的节点信息在GPipeLine类中统一申请和释放
      */
-    CGRAPH_DELETE_PTR(engine_)
+    DAOGRAPH_DELETE_PTR(engine_)
 }
 
 
 CStatus GElementManager::init() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (auto element : manager_elements_) {
-        CGRAPH_ASSERT_NOT_NULL(element)
+        DAOGRAPH_ASSERT_NOT_NULL(element)
     }
 
     status = initEngine();
-    CGRAPH_FUNCTION_CHECK_STATUS
+    DAOGRAPH_FUNCTION_CHECK_STATUS
 
     for (GElementPtr element : manager_elements_) {
         status = element->fatProcessor(CFunctionType::INIT);
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
         element->is_init_ = true;
     }
 
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementManager::destroy() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     for (GElementPtr element : manager_elements_) {
         status = element->fatProcessor(CFunctionType::DESTROY);
-        CGRAPH_FUNCTION_CHECK_STATUS
+        DAOGRAPH_FUNCTION_CHECK_STATUS
         element->is_init_ = false;
     }
 
-    CGRAPH_DELETE_PTR(engine_)
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_DELETE_PTR(engine_)
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementManager::run() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
 
     status = engine_->run();    // 通过引擎来执行全部的逻辑
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementManager::add(GElementPtr element) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element)
 
     this->manager_elements_.emplace(element);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -80,21 +80,21 @@ CBool GElementManager::find(GElementPtr element) const {
 
 
 CStatus GElementManager::remove(GElementPtr element) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(element)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(element)
 
     manager_elements_.erase(element);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 CStatus GElementManager::clear() {
-    CGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_FUNCTION_BEGIN
     for (auto* element : manager_elements_) {
-        CGRAPH_DELETE_PTR(element)
+        DAOGRAPH_DELETE_PTR(element)
     }
     manager_elements_.clear();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -105,31 +105,31 @@ GElementManagerPtr GElementManager::setEngineType(GEngineType engineType) {
 
 
 CStatus GElementManager::initEngine() {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_DELETE_PTR(engine_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_DELETE_PTR(engine_)
 
     switch (engine_type_) {
-        case GEngineType::DYNAMIC : engine_ = CGRAPH_SAFE_MALLOC_COBJECT(GDynamicEngine) break;
-        case GEngineType::TOPO: engine_ = CGRAPH_SAFE_MALLOC_COBJECT(GTopoEngine) break;
-        case GEngineType::STATIC: engine_ = CGRAPH_SAFE_MALLOC_COBJECT(GStaticEngine) break;
-        default: CGRAPH_RETURN_ERROR_STATUS("unknown engine type")
+        case GEngineType::DYNAMIC : engine_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GDynamicEngine) break;
+        case GEngineType::TOPO: engine_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GTopoEngine) break;
+        case GEngineType::STATIC: engine_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GStaticEngine) break;
+        default: DAOGRAPH_RETURN_ERROR_STATUS("unknown engine type")
     }
 
     engine_->thread_pool_ = thread_pool_;
     status = engine_->setup(manager_elements_);
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
 
 GElementManagerPtr GElementManager::setThreadPool(UThreadPoolPtr ptr) {
-    CGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
+    DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
     this->thread_pool_ = ptr;
     return this;
 }
 
 
 CSize GElementManager::calcMaxParaSize() {
-    CGRAPH_THROW_EXCEPTION_BY_CONDITION(!GMaxParaOptimizer::match(manager_elements_),
+    DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(!GMaxParaOptimizer::match(manager_elements_),
                                         "cannot calculate max parallel size within groups")
     return GMaxParaOptimizer::getMaxParaSize(manager_elements_);
 }
@@ -174,13 +174,13 @@ CSize GElementManager::trim() {
 
 
 CStatus GElementManager::process(const GSortedGElementPtrSet& elements) {
-    CGRAPH_FUNCTION_BEGIN
-    CGRAPH_ASSERT_NOT_NULL(engine_)
+    DAOGRAPH_FUNCTION_BEGIN
+    DAOGRAPH_ASSERT_NOT_NULL(engine_)
 
     // 主要是给 mutable 使用
     status += engine_->setup(elements);
     status += run();
-    CGRAPH_FUNCTION_END
+    DAOGRAPH_FUNCTION_END
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END

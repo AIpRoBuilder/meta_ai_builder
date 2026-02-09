@@ -5,12 +5,12 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_UTHREADPOOL_INL
-#define CGRAPH_UTHREADPOOL_INL
+#ifndef DAOGRAPH_UTHREADPOOL_INL
+#define DAOGRAPH_UTHREADPOOL_INL
 
 #include "UThreadPool.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<typename FunctionType>
 auto UThreadPool::commit(const FunctionType& func, CIndex index)
@@ -59,8 +59,8 @@ CVoid UThreadPool::execute(FunctionType&& task, CIndex index) {
     CIndex realIndex = dispatch(index);
     if (realIndex >= 0 && realIndex < config_.default_thread_size_) {
         primary_threads_[realIndex]->pushTask(std::forward<FunctionType>(task));
-    } else if (CGRAPH_LONG_TIME_TASK_STRATEGY == realIndex) {
-        priority_task_queue_.push(std::forward<FunctionType>(task), CGRAPH_LONG_TIME_TASK_STRATEGY);
+    } else if (DAOGRAPH_LONG_TIME_TASK_STRATEGY == realIndex) {
+        priority_task_queue_.push(std::forward<FunctionType>(task), DAOGRAPH_LONG_TIME_TASK_STRATEGY);
     } else {
         task_queue_.push(std::forward<FunctionType>(task));
     }
@@ -77,6 +77,6 @@ CVoid UThreadPool::executeWithTid(FunctionType&& task, CIndex tid, CBool enable,
     }
 }
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif    // CGRAPH_UTHREADPOOL_INL
+#endif    // DAOGRAPH_UTHREADPOOL_INL

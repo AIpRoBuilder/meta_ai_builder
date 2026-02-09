@@ -5,15 +5,15 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_USERIALUNIQUEARRAY_H
-#define CGRAPH_USERIALUNIQUEARRAY_H
+#ifndef DAOGRAPH_USERIALUNIQUEARRAY_H
+#define DAOGRAPH_USERIALUNIQUEARRAY_H
 
 #include <vector>
 #include <set>
 
 #include "../UtilsObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<class T>
 class USerialUniqueArray : public UtilsObject {
@@ -60,6 +60,6 @@ private:
     std::vector<T> inner_array_;          // 内部array，最终提供的排序不重复内容
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_USERIALUNIQUEARRAY_H
+#endif //DAOGRAPH_USERIALUNIQUEARRAY_H

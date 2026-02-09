@@ -5,36 +5,36 @@
 @Desc: 核心线程，处理任务中
 ***************************/
 
-#ifndef CGRAPH_UTHREADPRIMARY_H
-#define CGRAPH_UTHREADPRIMARY_H
+#ifndef DAOGRAPH_UTHREADPRIMARY_H
+#define DAOGRAPH_UTHREADPRIMARY_H
 
 #include <vector>
 #include <mutex>
 
 #include "UThreadBase.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class UThreadPrimary : public UThreadBase {
 protected:
     explicit UThreadPrimary() {
-        index_ = CGRAPH_SECONDARY_THREAD_COMMON_ID;
+        index_ = DAOGRAPH_SECONDARY_THREAD_COMMON_ID;
         pool_threads_ = nullptr;
-        type_ = CGRAPH_THREAD_TYPE_PRIMARY;
+        type_ = DAOGRAPH_THREAD_TYPE_PRIMARY;
     }
 
 
     CStatus init() override {
-        CGRAPH_FUNCTION_BEGIN
-        CGRAPH_ASSERT_INIT(false)
-        CGRAPH_ASSERT_NOT_NULL(config_)
+        DAOGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_ASSERT_INIT(false)
+        DAOGRAPH_ASSERT_NOT_NULL(config_)
 
         is_init_ = true;
         buildStealTargets();
         thread_ = std::thread(&UThreadPrimary::run, this);
         setSchedParam();
         setAffinity(index_);
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
 
@@ -49,15 +49,15 @@ protected:
                               UAtomicQueue<UTask>* poolTaskQueue,
                               std::vector<UThreadPrimary *>* poolThreads,
                               UThreadPoolConfigPtr config) {
-        CGRAPH_FUNCTION_BEGIN
-        CGRAPH_ASSERT_INIT(false)    // 初始化之前，设置参数
-        CGRAPH_ASSERT_NOT_NULL(poolTaskQueue, poolThreads, config)
+        DAOGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_ASSERT_INIT(false)    // 初始化之前，设置参数
+        DAOGRAPH_ASSERT_NOT_NULL(poolTaskQueue, poolThreads, config)
 
         this->index_ = index;
         this->pool_task_queue_ = poolTaskQueue;
         this->pool_threads_ = poolThreads;
         this->config_ = config;
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
 
@@ -66,9 +66,9 @@ protected:
      * @return
      */
     CStatus run() final {
-        CGRAPH_FUNCTION_BEGIN
-        CGRAPH_ASSERT_INIT(true)
-        CGRAPH_ASSERT_NOT_NULL(pool_threads_)
+        DAOGRAPH_FUNCTION_BEGIN
+        DAOGRAPH_ASSERT_INIT(true)
+        DAOGRAPH_ASSERT_NOT_NULL(pool_threads_)
 
         /**
          * 线程池中任何一个primary线程为null都不可以执行
@@ -79,11 +79,11 @@ protected:
                         [](UThreadPrimary* thd) {
                             return nullptr == thd;
                         })) {
-            CGRAPH_RETURN_ERROR_STATUS("primary thread is null")
+            DAOGRAPH_RETURN_ERROR_STATUS("primary thread is null")
         }
 
         loopProcess();
-        CGRAPH_FUNCTION_END
+        DAOGRAPH_FUNCTION_END
     }
 
 
@@ -114,9 +114,9 @@ protected:
      */
     CVoid fatWait() {
         cur_empty_epoch_++;
-        CGRAPH_YIELD();
+        DAOGRAPH_YIELD();
         if (cur_empty_epoch_ >= config_->primary_thread_busy_epoch_) {
-            CGRAPH_UNIQUE_LOCK lk(mutex_);
+            DAOGRAPH_UNIQUE_LOCK lk(mutex_);
             cv_.wait_for(lk, std::chrono::milliseconds(config_->primary_thread_empty_interval_));
             cur_empty_epoch_ = 0;
         }
@@ -131,7 +131,7 @@ protected:
     CVoid pushTask(UTask&& task) {
         while (!(primary_queue_.tryPush(std::move(task))
                  || secondary_queue_.tryPush(std::move(task)))) {
-            CGRAPH_YIELD();
+            DAOGRAPH_YIELD();
         }
         cur_empty_epoch_ = 0;
         cv_.notify_one();
@@ -280,6 +280,6 @@ private:
 
 using UThreadPrimaryPtr = UThreadPrimary *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_UTHREADPRIMARY_H
+#endif //DAOGRAPH_UTHREADPRIMARY_H

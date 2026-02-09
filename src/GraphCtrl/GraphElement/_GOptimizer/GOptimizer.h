@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GOPTIMIZER_H
-#define CGRAPH_GOPTIMIZER_H
+#ifndef DAOGRAPH_GOPTIMIZER_H
+#define DAOGRAPH_GOPTIMIZER_H
 
 #include <vector>
 
 #include "../GElementObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GOptimizer : public GElementObject {
 protected:
@@ -90,6 +90,6 @@ protected:
     friend class GPerf;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GOPTIMIZER_H
+#endif //DAOGRAPH_GOPTIMIZER_H

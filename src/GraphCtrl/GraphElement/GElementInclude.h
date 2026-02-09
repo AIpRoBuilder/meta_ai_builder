@@ -6,8 +6,8 @@
 ***************************/
 
 
-#ifndef CGRAPH_GELEMENTINCLUDE_H
-#define CGRAPH_GELEMENTINCLUDE_H
+#ifndef DAOGRAPH_GELEMENTINCLUDE_H
+#define DAOGRAPH_GELEMENTINCLUDE_H
 
 #include "GElement.h"
 #include "GElementRepository.h"
@@ -15,4 +15,4 @@
 #include "GGroup/GGroupInclude.h"
 #include "GAdapter/GAdapterInclude.h"
 
-#endif //CGRAPH_GELEMENTINCLUDE_H
+#endif //DAOGRAPH_GELEMENTINCLUDE_H

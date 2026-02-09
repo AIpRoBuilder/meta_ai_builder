@@ -5,20 +5,20 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_TESTGPARAMS_H
-#define CGRAPH_TESTGPARAMS_H
+#ifndef DAOGRAPH_TESTGPARAMS_H
+#define DAOGRAPH_TESTGPARAMS_H
 
 #include "TestCommonDefine.h"
 
-class TestGMessageParam : public CGraph::GMessageParam {
+class TestGMessageParam : public DaoGraph::GMessageParam {
 public:
     unsigned int num_ {0};
 };
 
 
-class TestAdd1GParam : public CGraph::GParam {
+class TestAdd1GParam : public DaoGraph::GParam {
 public:
     int cnt_ = 0;
 };
 
-#endif //CGRAPH_TESTGPARAMS_H
+#endif //DAOGRAPH_TESTGPARAMS_H

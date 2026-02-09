@@ -5,13 +5,13 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GEVENTDEFINE_H
-#define CGRAPH_GEVENTDEFINE_H
+#ifndef DAOGRAPH_GEVENTDEFINE_H
+#define DAOGRAPH_GEVENTDEFINE_H
 
 #include "../GraphDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
-CGRAPH_INTERNAL_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_INTERNAL_NAMESPACE_BEGIN
 
 /**
  * 执行模式
@@ -31,11 +31,11 @@ enum class GEVENT_ASYNC_STRATEGY {
     NO_WAIT = 2,                          // 不等待
 };
 
-CGRAPH_INTERNAL_NAMESPACE_END
-CGRAPH_NAMESPACE_END
+DAOGRAPH_INTERNAL_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 // 方便外部引用
-using GEventType = CGraph::internal::GEVENT_TYPE;
-using GEventAsyncStrategy = CGraph::internal::GEVENT_ASYNC_STRATEGY;
+using GEventType = DaoGraph::internal::GEVENT_TYPE;
+using GEventAsyncStrategy = DaoGraph::internal::GEVENT_ASYNC_STRATEGY;
 
-#endif //CGRAPH_GEVENTDEFINE_H
+#endif //DAOGRAPH_GEVENTDEFINE_H

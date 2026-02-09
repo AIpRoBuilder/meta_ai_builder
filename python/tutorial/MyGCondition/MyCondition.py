@@ -5,7 +5,7 @@
 @Desc: 
 """
 
-from pycgraph import GCondition
+from pydaograph import GCondition
 
 class MyCondition(GCondition):
     def choose(self):

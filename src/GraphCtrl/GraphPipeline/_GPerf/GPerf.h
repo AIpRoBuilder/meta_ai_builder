@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPERF_H
-#define CGRAPH_GPERF_H
+#ifndef DAOGRAPH_GPERF_H
+#define DAOGRAPH_GPERF_H
 
 #include "../../GraphObject.h"
 #include "GPerfAspect.h"
 #include "GPerfDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GPipeline;
 
@@ -49,6 +49,6 @@ protected:
     friend class GPipeline;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GPERF_H
+#endif //DAOGRAPH_GPERF_H

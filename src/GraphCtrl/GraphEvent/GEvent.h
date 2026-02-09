@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GEVENT_H
-#define CGRAPH_GEVENT_H
+#ifndef DAOGRAPH_GEVENT_H
+#define DAOGRAPH_GEVENT_H
 
 #include <vector>
 #include <future>
@@ -15,7 +15,7 @@
 #include "GEventObject.h"
 #include "GEventDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GEvent : public GEventObject {
 protected:
@@ -30,7 +30,7 @@ protected:
 
     ~GEvent() override;
 
-    CGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
+    DAOGRAPH_DECLARE_GPARAM_MANAGER_WRAPPER
 
 private:
     /**
@@ -82,7 +82,7 @@ private:
 
 using GEventPtr = GEvent *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 
-#endif //CGRAPH_GEVENT_H
+#endif //DAOGRAPH_GEVENT_H

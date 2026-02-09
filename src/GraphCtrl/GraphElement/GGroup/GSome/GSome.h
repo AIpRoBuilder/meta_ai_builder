@@ -5,8 +5,8 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSOME_H
-#define CGRAPH_GSOME_H
+#ifndef DAOGRAPH_GSOME_H
+#define DAOGRAPH_GSOME_H
 
 #include <memory>
 #include <mutex>
@@ -14,7 +14,7 @@
 
 #include "../GGroup.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 template<CInt TriggerNum = 1>
 class GSome : public GGroup {
@@ -31,7 +31,7 @@ protected:
 
     CStatus checkSuitable() final;
 
-    CGRAPH_NO_ALLOWED_COPY(GSome)
+    DAOGRAPH_NO_ALLOWED_COPY(GSome)
 
 private:
     CStatus addElementEx(GElementPtr element) final;
@@ -49,8 +49,8 @@ private:
     friend class GStorageFactory;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
 #include "GSome.inl"
 
-#endif //CGRAPH_GSOME_H
+#endif //DAOGRAPH_GSOME_H

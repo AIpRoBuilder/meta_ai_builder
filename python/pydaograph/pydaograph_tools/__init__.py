@@ -1,5 +1,5 @@
 """
-CGraph Python Tools packaged under pycgraph.
+DaoGraph Python Tools packaged under pydaograph.
 """
 from .auto_register import register, register_class
 

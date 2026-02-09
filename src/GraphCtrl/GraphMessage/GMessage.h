@@ -5,17 +5,17 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GMESSAGE_H
-#define CGRAPH_GMESSAGE_H
+#ifndef DAOGRAPH_GMESSAGE_H
+#define DAOGRAPH_GMESSAGE_H
 
 #include <memory>
 
 #include "GMessageObject.h"
 #include "GMessageDefine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
-template<typename T, CUInt capacity = CGRAPH_DEFAULT_RINGBUFFER_SIZE,
+template<typename T, CUInt capacity = DAOGRAPH_DEFAULT_RINGBUFFER_SIZE,
         c_enable_if_t<std::is_base_of<GMessageParam, T>::value, int> = 0>
 class GMessage : public GMessageObject {
 public:
@@ -69,9 +69,9 @@ private:
 };
 
 
-template<typename T, CUInt capacity = CGRAPH_DEFAULT_RINGBUFFER_SIZE>
+template<typename T, CUInt capacity = DAOGRAPH_DEFAULT_RINGBUFFER_SIZE>
 using GMessagePtr = GMessage<T, capacity> *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GMESSAGE_H
+#endif //DAOGRAPH_GMESSAGE_H

@@ -5,14 +5,14 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GELEMENTRELATION_H
-#define CGRAPH_GELEMENTRELATION_H
+#ifndef DAOGRAPH_GELEMENTRELATION_H
+#define DAOGRAPH_GELEMENTRELATION_H
 
 #include <vector>
 
 #include "GElementObject.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GElement;
 
@@ -24,6 +24,6 @@ public:
     GElement* belong_ = nullptr;                    // 从属信息。如果从属于group，则为该group的值；如果从属于pipeline，则为nullptr
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GELEMENTRELATION_H
+#endif //DAOGRAPH_GELEMENTRELATION_H

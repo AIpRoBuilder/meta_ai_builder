@@ -5,12 +5,12 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GSTATICENGINE_H
-#define CGRAPH_GSTATICENGINE_H
+#ifndef DAOGRAPH_GSTATICENGINE_H
+#define DAOGRAPH_GSTATICENGINE_H
 
 #include "../GEngine.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GStaticEngine : public GEngine {
 protected:
@@ -27,6 +27,6 @@ private:
     friend class GElementManager;
 };
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GSTATICENGINE_H
+#endif //DAOGRAPH_GSTATICENGINE_H

@@ -5,9 +5,9 @@
 @Desc: 
 ***************************/
 
-#ifndef CGRAPH_GPERFINCLUDE_H
-#define CGRAPH_GPERFINCLUDE_H
+#ifndef DAOGRAPH_GPERFINCLUDE_H
+#define DAOGRAPH_GPERFINCLUDE_H
 
 #include "GPerf.h"
 
-#endif //CGRAPH_GPERFINCLUDE_H
+#endif //DAOGRAPH_GPERFINCLUDE_H

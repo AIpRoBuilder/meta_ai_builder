@@ -8,7 +8,7 @@
 import time
 from datetime import datetime
 
-from pycgraph import GNode, CStatus
+from pydaograph import GNode, CStatus
 
 
 class MyStageNode(GNode):

@@ -5,12 +5,12 @@
 @Desc:
 ***************************/
 
-#ifndef CGRAPH_GADAPTER_H
-#define CGRAPH_GADAPTER_H
+#ifndef DAOGRAPH_GADAPTER_H
+#define DAOGRAPH_GADAPTER_H
 
 #include "../GElement.h"
 
-CGRAPH_NAMESPACE_BEGIN
+DAOGRAPH_NAMESPACE_BEGIN
 
 class GAdapter : public GElement {
 protected:
@@ -23,6 +23,6 @@ protected:
 
 using GAdapterPtr = GAdapter *;
 
-CGRAPH_NAMESPACE_END
+DAOGRAPH_NAMESPACE_END
 
-#endif //CGRAPH_GADAPTER_H
+#endif //DAOGRAPH_GADAPTER_H
