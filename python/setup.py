@@ -10,7 +10,7 @@ from setuptools import setup, Extension, find_packages
 import pybind11
 
 __PYDAOGRAPH_NAME__ = "pydaograph"
-__PYDAOGRAPH_VERSION__ = "0.1.0"
+__PYDAOGRAPH_VERSION__ = "0.2.0"
 __PYDAOGRAPH_AUTHOR__ = "peterxie"
 __PYDAOGRAPH_AUTHOR_EMAIL__ = "peterxcx@gmail.com"
 __PYDAOGRAPH_DESCRIPTION__ = "DaoGraph with python api wrapper by pybind11"

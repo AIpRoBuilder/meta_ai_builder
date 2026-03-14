@@ -183,6 +183,9 @@ PYBIND11_MODULE(_core, cg) {
         .def("buildFromJson", &GPipeline::buildFromJson,
              py::arg("jsonPath"),
              py::call_guard<py::gil_scoped_release>())
+        .def("buildFromJsonStr", &GPipeline::buildFromJsonStr,
+             py::arg("jsonStr"),
+             py::call_guard<py::gil_scoped_release>())
         .def("setGEngineType", &GPipeline::setGEngineType,
              py::arg("type"))
         .def("run", &GPipeline::run,

@@ -212,6 +212,7 @@ public:
                           CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     CStatus buildFromJson(const std::string& jsonPath);
+        CStatus buildFromJsonStr(const std::string& jsonStr);
 
     /**
      * 注册一个组信息（推荐使用）

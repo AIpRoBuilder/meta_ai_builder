@@ -14,6 +14,64 @@
 
 DAOGRAPH_NAMESPACE_BEGIN
 
+namespace {
+CStatus buildPipelineFromGraphJson(GPipeline* pipeline, const nlohmann::json& graphJson) {
+    if (!graphJson.contains("nodes") || !graphJson["nodes"].is_array()) {
+        return CStatus("JSON must contain array 'nodes'");
+    }
+
+    std::unordered_map<std::string, GElementPtr> created;
+
+    // 1) 创建全部节点实例
+    for (const auto& node : graphJson["nodes"]) {
+        const std::string name = node.value("name", "");
+        const std::string type = node.value("type", "");
+        const CSize loop = node.value("loop", (CSize)1);
+
+        if (name.empty() || type.empty()) {
+            return CStatus("node missing name or type");
+        }
+
+        if (created.count(name)) {
+            return CStatus("duplicate node name: " + name);
+        }
+
+        GElementPtr element = GElement::create(type);
+        if (!element) {
+            return CStatus("factory create failed: " + type);
+        }
+
+        created[name] = element;
+        created[name]->setName(name)->setLoop(loop);
+    }
+
+    // 2) 注册到 pipeline，处理依赖
+    for (const auto& node : graphJson["nodes"]) {
+        const std::string name = node.value("name", "");
+        GElementPtr element = created[name];
+
+        GElementPtrSet depends;
+        if (node.contains("depends")) {
+            for (const auto& depName : node["depends"]) {
+                const std::string dep = depName.get<std::string>();
+                auto it = created.find(dep);
+                if (it == created.end()) {
+                    return CStatus("depend not found: " + dep);
+                }
+                depends.insert(it->second);
+            }
+        }
+
+        CStatus status = pipeline->registerGElement(element, depends, name, element->getLoop());
+        if (status.isErr()) {
+            return status;
+        }
+    }
+
+    return CStatus();
+}
+}  // namespace
+
 GPipeline::GPipeline() {
     session_ = URandom<>::generateSession(DAOGRAPH_STR_PIPELINE);
     element_manager_ = DAOGRAPH_SAFE_MALLOC_COBJECT(GElementManager)
@@ -186,8 +244,6 @@ std::future<CStatus> GPipeline::asyncRun(std::launch policy) {
 }
 
 CStatus GPipeline::buildFromJson(const std::string& jsonPath) {
-    CStatus status;
-
     // Read and parse the JSON file
     std::ifstream jsonFile(jsonPath);
     if (!jsonFile.is_open()) {
@@ -203,74 +259,20 @@ CStatus GPipeline::buildFromJson(const std::string& jsonPath) {
         return CStatus("Error parsing JSON");
     }
 
-    /**
-     * 支持的 JSON 结构示例：
-     * {
-     *   "nodes": [
-     *     {"name":"A", "type":"MyNode", "enable":true, "loop":1, "depends":["B","C"]},
-     *     {"name":"B", "type":"Other", "enable":true}
-     *   ]
-     * }
-     * type 对应 GElement 注册的类名，name 是实例名。
-     */
-
-    if (!graphJson.contains("nodes") || !graphJson["nodes"].is_array()) {
-        return CStatus("JSON must contain array 'nodes'");
-    }
-
-    std::unordered_map<std::string, GElementPtr> created;
-
-    // 1) 创建全部节点实例
-    for (const auto& node : graphJson["nodes"]) {
-
-        const std::string name = node.value("name", "");
-        const std::string type = node.value("type", "");
-        const CSize loop = node.value("loop", (CSize)1);
-
-        if (name.empty() || type.empty()) {
-            return CStatus("node missing name or type");
-        }
-
-        if (created.count(name)) {
-            return CStatus("duplicate node name: " + name);
-        }
-
-        GElementPtr element = GElement::create(type);
-        if (!element) {
-            return CStatus("factory create failed: " + type);
-        }
-
-        created[name] = element;
-        created[name]->setName(name)->setLoop(loop);
-    }
-
-    // 2) 注册到 pipeline，处理依赖
-    for (const auto& node : graphJson["nodes"]) {
-
-        const std::string name = node.value("name", "");
-        GElementPtr element = created[name];
-
-        GElementPtrSet depends;
-        if (node.contains("depends")) {
-            for (const auto& depName : node["depends"]) {
-                const std::string dep = depName.get<std::string>();
-                auto it = created.find(dep);
-                if (it == created.end()) {
-                    return CStatus("depend not found: " + dep);
-                }
-                depends.insert(it->second);
-            }
-        }
-
-        status = this->registerGElement(element, depends, name, element->getLoop());
-        if (status.isErr()) {
-            return status;
-        }
-    }
-
-    return status;
+    return buildPipelineFromGraphJson(this, graphJson);
 }
 
+CStatus GPipeline::buildFromJsonStr(const std::string& jsonStr) {
+    nlohmann::json graphJson;
+    try {
+        graphJson = nlohmann::json::parse(jsonStr);
+    } catch (const std::exception& e) {
+        std::cerr << "Error parsing JSON string: " << e.what() << std::endl;
+        return CStatus("Error parsing JSON string");
+    }
+
+    return buildPipelineFromGraphJson(this, graphJson);
+}
 
 std::future<CStatus> GPipeline::asyncProcess(CSize runTimes, std::launch policy) {
     DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)

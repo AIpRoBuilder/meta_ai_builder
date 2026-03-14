@@ -1,34 +1,38 @@
 JSON Workflow Building (Python)
 --------------------------------
 
-You can build a DaoGraph pipeline from JSON (or Python dict) using the new `buildFromJson` method on `GPipeline`.
+`GPipeline` supports two JSON-loading APIs:
+
+- `buildFromJson(jsonPath)`: load and parse from a JSON file path.
+- `buildFromJsonStr(jsonStr)`: parse directly from a JSON string.
 
 Example:
 
-```
-from pydaograph import GPipeline, GFunction
-
-def run_a(param):
-    print('run A')
-
-def run_b(param):
-    print('run B')
+```python
+from pydaograph import GPipeline
 
 pipeline = GPipeline()
-spec = {
-    'elements': [
-        {'name': 'nodeA', 'type': 'GFunction', 'func': run_a},
-        {'name': 'nodeB', 'type': 'GFunction', 'depends': ['nodeA'], 'func': run_b}
+
+graph_json_str = '''
+{
+    "nodes": [
+        {"name": "A", "type": "MyNode", "loop": 1},
+        {"name": "B", "type": "MyNode", "depends": ["A"], "loop": 1}
     ]
 }
-pipeline.buildFromJson(spec)
+'''
+
+# Parse from JSON string
+pipeline.buildFromJsonStr(graph_json_str)
+
+# Or parse from JSON file path
+# pipeline.buildFromJson("/path/to/graph.json")
+
 pipeline.process()
 ```
 
 Notes:
-- `buildFromJson` accepts JSON strings or Python dictionaries.
-- `type` may be a class name exposed in the `pydaograph` module (e.g. `GFunction`) or a dotted Python path to a class (e.g. `tutorial.MyGNode.HelloDaoGraphNode.HelloDaoGraphNode`).
-- `func` in `GFunction` can be a Python callable or module path string referencing a callable.
-C++ JSON support:
-- To use `GPipeline::loadFromJsonString` (C++ side), enable `DAOGRAPH_USE_NLOHMANN_JSON` in CMake and ensure `nlohmann_json` is available on the system. The C++ loader parses JSON strings and tries to construct C++ pipeline elements. This is best when `clz` values are `typeid(T).name()` for registered types.
+- JSON root must contain a `nodes` array.
+- Each node requires `name` and `type`.
+- Optional fields include `loop` and `depends`.
 
