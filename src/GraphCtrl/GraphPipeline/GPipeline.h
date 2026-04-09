@@ -69,11 +69,23 @@ public:
       */
      CStatus suspend();
 
+        /**
+         * 打断当前pipeline执行（语义等同 suspend）
+         * @return
+         */
+        CStatus disrupt();
+
      /**
       * 恢复当前pipeline的执行，多用于异步执行流程中
       * @return
       */
      CStatus resume();
+
+        /**
+         * 从打断状态继续执行（语义等同 resume）
+         * @return
+         */
+        CStatus proceed();
 
     /**
      * 生成图可视化 graphviz 信息
@@ -212,7 +224,7 @@ public:
                           CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
     CStatus buildFromJson(const std::string& jsonPath);
-        CStatus buildFromJsonStr(const std::string& jsonStr);
+    CStatus buildFromJsonStr(const std::string& jsonStr);
 
     /**
      * 注册一个组信息（推荐使用）

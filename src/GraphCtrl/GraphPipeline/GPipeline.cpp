@@ -295,10 +295,20 @@ CStatus GPipeline::suspend() {
 }
 
 
+CStatus GPipeline::disrupt() {
+    return suspend();
+}
+
+
 CStatus GPipeline::resume() {
     // 直接恢复正常状态好了
     DAOGRAPH_ASSERT_INIT(true)
     return repository_.pushAllState(GElementState::NORMAL);
+}
+
+
+CStatus GPipeline::proceed() {
+    return resume();
 }
 
 

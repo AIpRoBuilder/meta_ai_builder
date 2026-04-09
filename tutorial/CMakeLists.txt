@@ -31,6 +31,7 @@ set(DAOGRAPH_TUTORIAL_LIST
          T27-Trim
          T28-Stage
          T29-Storage
+         T30-InputWait
         )
 
 

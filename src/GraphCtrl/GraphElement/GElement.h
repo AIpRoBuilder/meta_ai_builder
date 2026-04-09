@@ -32,6 +32,8 @@ struct GPerfInfo;
 class GElement : public GElementObject,
                  public CDescInfo {
 public:
+    using GInputHandler = std::function<CStatus(const std::string&)>;
+
     /**
      * 实现添加切面的逻辑
      * @tparam TAspect
@@ -128,6 +130,27 @@ public:
      * @return
      */
     GElement* setMacro(CBool macro);
+
+    /**
+     * 设定当前element在run前是否等待用户输入
+     * @param enable
+     * @return
+     */
+    GElement* setWaitForInput(CBool enable = true);
+
+    /**
+     * 设定当前element等待输入时的提示信息
+     * @param prompt
+     * @return
+     */
+    GElement* setInputPrompt(const std::string& prompt);
+
+    /**
+     * 设定当前element处理输入的回调
+     * @param handler
+     * @return
+     */
+    GElement* setInputHandler(const GInputHandler& handler);
 
     /**
      * 当前element是否是一个 group逻辑
@@ -256,6 +279,20 @@ protected:
      * @notice 不建议在异步element中使用
      */
     virtual CStatus checkRunResult();
+
+    /**
+     * 当前element收到输入后的处理逻辑，默认不做处理
+     * @param input
+     * @return
+     */
+    virtual CStatus onInput(const std::string& input);
+
+    /**
+     * 当前element收到多输入后的处理逻辑，默认逐个调用 onInput
+     * @param inputs
+     * @return
+     */
+    virtual CStatus onInputs(const std::vector<std::string>& inputs);
 
     /**
      * 是否持续进行
@@ -396,6 +433,12 @@ private:
     CStatus fatProcessor(const CFunctionType& type);
 
     /**
+     * 如果配置了输入等待，则阻塞等待输入并处理
+     * @return
+     */
+    CStatus waitForInput();
+
+    /**
      * 设置线程池信息
      * @param ptr
      * @return
@@ -524,6 +567,9 @@ private:
     CMSec timeout_ { DAOGRAPH_DEFAULT_ELEMENT_TIMEOUT };                        // 超时时间信息（0表示不计算超时）
     GElementTimeoutStrategy timeout_strategy_ { GElementTimeoutStrategy::AS_ERROR };    // 判定超时的情况下，是否返回错误
     CBool is_marco_ { false };                                                // 微任务
+    CBool wait_for_input_ { false };                                          // 是否在run前等待用户输入
+    std::string input_prompt_ {};                                             // 等待输入时提示信息
+    GInputHandler input_handler_ { nullptr };                                 // 输入处理回调
 
     /** 执行期间相关信息 */
     GElementParamMap local_params_;                                           // 用于记录当前element的内部参数

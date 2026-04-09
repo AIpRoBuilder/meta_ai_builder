@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "name": "handler_gate",
+      "type": "HandlerGateNode",
+      "loop": 1
+    },
+    {
+      "name": "node_b",
+      "type": "DownstreamNode",
+      "loop": 1,
+      "depends": ["handler_gate"]
+    }
+  ]
+}

@@ -218,7 +218,11 @@ PYBIND11_MODULE(_core, cg) {
             py::call_guard<py::gil_scoped_release>())
         .def("suspend", &GPipeline::suspend,
              py::call_guard<py::gil_scoped_release>())
+        .def("disrupt", &GPipeline::disrupt,
+             py::call_guard<py::gil_scoped_release>())
         .def("resume", &GPipeline::resume,
+             py::call_guard<py::gil_scoped_release>())
+        .def("proceed", &GPipeline::proceed,
              py::call_guard<py::gil_scoped_release>())
         .def("perf", &GPipeline::__perf_4py,
              py::call_guard<py::gil_scoped_release>())
@@ -300,6 +304,12 @@ PYBIND11_MODULE(_core, cg) {
              py::arg("visible"))
         .def("setMacro", &GElement::setMacro,
              py::arg("macro"))
+        .def("setWaitForInput", &GElement::setWaitForInput,
+             py::arg("enable") = true)
+        .def("setInputPrompt", &GElement::setInputPrompt,
+             py::arg("prompt"))
+        .def("setInputHandler", &GElement::setInputHandler,
+             py::arg("handler"))
         .def("setTimeout", &GElement::setTimeout,
              py::arg("timeout"),
              py::arg("strategy") = GElementTimeoutStrategy::AS_ERROR)

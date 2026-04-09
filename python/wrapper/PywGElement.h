@@ -18,6 +18,14 @@ protected:
         PYBIND11_OVERLOAD_PURE(CStatus, GElement, run);
     }
 
+    CStatus onInput(const std::string& input) override {
+        PYBIND11_OVERLOAD(CStatus, GElement, onInput, input);
+    }
+
+    CStatus onInputs(const std::vector<std::string>& inputs) override {
+        PYBIND11_OVERLOAD(CStatus, GElement, onInputs, inputs);
+    }
+
     std::string getClassName() const override {
         return this->getName();
     }
