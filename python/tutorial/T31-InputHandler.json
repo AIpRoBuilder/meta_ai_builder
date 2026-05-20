@@ -1,15 +1,21 @@
 {
   "nodes": [
     {
-      "name": "handler_gate",
+      "name": "HandlerGateNode",
       "type": "HandlerGateNode",
       "loop": 1
     },
     {
-      "name": "node_b",
+      "name": "DownstreamNode",
       "type": "DownstreamNode",
       "loop": 1,
-      "depends": ["handler_gate"]
+      "depends": ["HandlerGateNode"]
+    },
+    {
+      "name": "DownstreamNode1",
+      "type": "DownstreamNode1",
+      "loop": 1,
+      "depends": ["HandlerGateNode"]
     }
   ]
 }

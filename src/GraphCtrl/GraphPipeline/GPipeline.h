@@ -14,6 +14,8 @@
 #include <thread>
 #include <future>
 #include <sstream>
+#include <string>
+#include <unordered_map>
 
 #include "GPipelineObject.h"
 #include "_GSchedule/GScheduleInclude.h"
@@ -225,6 +227,28 @@ public:
 
     CStatus buildFromJson(const std::string& jsonPath);
     CStatus buildFromJsonStr(const std::string& jsonStr);
+
+    /**
+     * Parse the graph JSON file at @jsonPath and populate @childrenMap with
+     * each node's direct child nodes.  A node C is considered a child of P
+     * when C lists P in its "depends" array.
+     *
+     * @param jsonPath     Path to the graph JSON file.
+     * @param childrenMap  Output: node name -> vector of child node names.
+     * @return CStatus
+     */
+    CStatus collectNodeChildren(const std::string& jsonPath,
+                                std::unordered_map<std::string, std::vector<std::string>>& childrenMap);
+
+    /**
+     * Same as collectNodeChildren but accepts a raw JSON string instead of a file path.
+     *
+     * @param jsonStr      Raw JSON string.
+     * @param childrenMap  Output: node name -> vector of child node names.
+     * @return CStatus
+     */
+    CStatus collectNodeChildrenFromStr(const std::string& jsonStr,
+                                       std::unordered_map<std::string, std::vector<std::string>>& childrenMap);
 
     /**
      * 注册一个组信息（推荐使用）

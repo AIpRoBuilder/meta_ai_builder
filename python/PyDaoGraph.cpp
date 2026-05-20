@@ -186,6 +186,28 @@ PYBIND11_MODULE(_core, cg) {
         .def("buildFromJsonStr", &GPipeline::buildFromJsonStr,
              py::arg("jsonStr"),
              py::call_guard<py::gil_scoped_release>())
+        .def("collectNodeChildren",
+             [](GPipeline& self, const std::string& jsonPath)
+             -> std::pair<CStatus, std::unordered_map<std::string, std::vector<std::string>>> {
+                 std::unordered_map<std::string, std::vector<std::string>> childrenMap;
+                 CStatus s = self.collectNodeChildren(jsonPath, childrenMap);
+                 return {s, childrenMap};
+             },
+             py::arg("jsonPath"),
+             py::call_guard<py::gil_scoped_release>(),
+             "Parse a graph JSON file, return (CStatus, dict[str, list[str]]) "
+             "mapping each node name to its direct child node names.")
+        .def("collectNodeChildrenFromStr",
+             [](GPipeline& self, const std::string& jsonStr)
+             -> std::pair<CStatus, std::unordered_map<std::string, std::vector<std::string>>> {
+                 std::unordered_map<std::string, std::vector<std::string>> childrenMap;
+                 CStatus s = self.collectNodeChildrenFromStr(jsonStr, childrenMap);
+                 return {s, childrenMap};
+             },
+             py::arg("jsonStr"),
+             py::call_guard<py::gil_scoped_release>(),
+             "Parse a graph JSON string, return (CStatus, dict[str, list[str]]) "
+             "mapping each node name to its direct child node names.")
         .def("setGEngineType", &GPipeline::setGEngineType,
              py::arg("type"))
         .def("run", &GPipeline::run,
@@ -361,7 +383,16 @@ PYBIND11_MODULE(_core, cg) {
     PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GRegion);
     PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GRegionInterface);
 
-    PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GCondition);
+    py::class_<GCondition, PywGCondition, GElement, std::unique_ptr<GCondition, py::nodelete> >(cg, "GCondition")
+        .def(py::init<const GElementPtrArr&>(),
+             py::arg("elements") = GElementPtrArr{},
+             py::keep_alive<1, 2>())
+        .def("addGElements", &PywGCondition::__addGElements_4py,
+             py::arg("elements"),
+             py::keep_alive<1, 2>())
+        .def("choose", [](GCondition& self) {
+             return static_cast<PywGCondition&>(self).choose();
+         });
     PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GConditionInterface);
 
     PYDAOGRAPH_DECLARE_GGROUP_PYBIND11_FUNCTIONS(GSerialMultiCondition);
