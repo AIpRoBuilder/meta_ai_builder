@@ -23,7 +23,7 @@ class UTask : public CStruct {
         virtual ~TaskBased() = default;
     };
 
-    // 退化以获得实际类型，修改思路参考：https://github.com/ChunelFeng/CThreadPool/pull/3
+    // 退化以获得实际类型，修改思路参考：https://github.com/Xiechuxi/CThreadPool/pull/3
     template<typename F, typename T = typename std::decay<F>::type>
     struct TaskDerided : TaskBased {
         T func_;

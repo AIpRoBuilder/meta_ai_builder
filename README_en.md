@@ -1,38 +1,10 @@
-<p align="left">
-  <a href="https://github.com/ChunelFeng/DaoGraph"><img src="https://badgen.net/badge/langs/C++,Python/cyan?list=1" alt="languages"></a>
-  <a href="https://github.com/ChunelFeng/DaoGraph"><img src="https://badgen.net/badge/os/MacOS,Linux,Windows/cyan?list=1" alt="os"></a>
-  <a href="https://github.com/ChunelFeng/DaoGraph/stargazers"><img src="https://badgen.net/github/stars/ChunelFeng/DaoGraph?color=cyan" alt="stars"></a>
-  <a href="https://github.com/ChunelFeng/DaoGraph/network/members"><img src="https://badgen.net/github/forks/ChunelFeng/DaoGraph?color=cyan" alt="forks"></a>
-  <a href="https://badge.fury.io/py/pydaograph"><img src="https://badge.fury.io/py/pydaograph.svg" alt="pypi"></a>
-  <a href="https://pepy.tech/projects/pydaograph"><img src="https://static.pepy.tech/personalized-badge/pydaograph?period=total&units=INTERNATIONAL_SYSTEM&left_color=GRAY&right_color=GREEN&left_text=pypi+downloads" alt="PyPI Downloads"></a>
-  <a href="https://www.codefactor.io/repository/github/chunelfeng/daograph/overview/main"><img src="https://www.codefactor.io/repository/github/chunelfeng/daograph/badge/main" alt="CodeFactor" /></a>
-</p>
+[中文](README.md) | English Readme
 
-[![awesome-cpp](https://badgen.net/badge/icon/awesome-cpp/purple?icon=awesome&label&color)](https://github.com/fffaraz/awesome-cpp)
-[![HelloGithub](https://badgen.net/badge/icon/HelloGithub/purple?icon=awesome&label&color)](https://github.com/521xueweihan/HelloGitHub/blob/master/content/HelloGitHub70.md)
+# DaoGraph README
 
-[中文](README.md) | English Readme | [deepwiki](https://deepwiki.com/ChunelFeng/DaoGraph)
+## 1. Examples
 
-<h1 align="center">
-  DaoGraph Readme
-</h1>
-
-## 1. Introduction
-
-DaoGraph, short for <b>C</b>olor <b>Graph</b>, is a cross-platform DAG computing framework. It is written by C++11 without any third-party dependencies, Python APIs are also supported.
-
-With the scheduling via `GPipeline`, the purpose of sequential and concurrent executing elements is realized. You only need to inherit `GNode` class, implement the `run()` method in the subclass, and set the dependencies as needed to achieve the graphical execution of tasks.
-
-At the same time, you can also control the graph conditional judgment, loop or concurrent execution logic by setting various `GGroup`s, which containing multi-node information by themselves.
-
-You can transfer your params in many scenes. It is also possible to extend the functions of the above elements horizontally by adding `GAspect`, to enhance the functions of individual nodes by introducing various `GAdapter`, or to enrich pipeline schedule by `GEvent`.
-
-![DaoGraph Skeleton](https://github.com/ChunelFeng/DaoGraph/blob/main/doc/image/DaoGraph%20Skeleton.jpg)
-<br>
-
-## 2. Demo
-
-> C++ version
+### C++ example
 
 ```cpp
 #include "DaoGraph.h"
@@ -75,11 +47,12 @@ int main() {
 }
 ```
 
-![DaoGraph Demo](https://github.com/ChunelFeng/DaoGraph/blob/main/doc/image/DaoGraph%20Demo.jpg)
-<br>
-As is shown on the picture, run `a` firstly. Then, run `b` and `c` parallelized. Run `d` at last after `b` and `c` finished.
+![DaoGraph Demo](https://github.com/Xiechuxi/DaoGraph/blob/main/doc/image/DaoGraph%20Demo.jpg)
 
-> Python version
+As shown above, `a` runs first. Then `b` and `c` run in parallel. `d` runs after both `b` and `c` finish.
+
+### Python example
+
 ```python
 import time
 from datetime import datetime
@@ -111,3 +84,20 @@ if __name__ == '__main__':
 
     pipeline.process()
 ```
+
+### Python JSON workflow example
+
+You can build a pipeline from JSON definitions. See [python/tutorial/json_examples/example1.json](python/tutorial/json_examples/example1.json) and [python/tutorial/T30-JSON.py](python/tutorial/T30-JSON.py).
+
+```bash
+cd python
+python tutorial/T30-JSON.py
+```
+
+## 2. Guide
+
+1. Read [COMPILE.md](COMPILE.md) for build, install, and environment setup.
+2. Run `./DaoGraph-run-tutorials.sh` to walk through the C++ tutorials in [tutorial](tutorial).
+3. Run `./DaoGraph-run-examples.sh` to inspect the larger examples in [example](example).
+4. For Python usage, open [python/README.md](python/README.md) and run `./pydaograph-run-tutorials.sh` inside [python](python).
+5. Start from [src/DaoGraph.h](src/DaoGraph.h) when you want the public C++ entry point.

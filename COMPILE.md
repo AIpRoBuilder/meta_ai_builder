@@ -10,14 +10,14 @@
 
 * Windows环境中，使用`Visual Studio`(2013版或以上版本)作为IDE的开发者，安装cmake之后，输入以下指令，即可生成`DaoGraph.sln`文件
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph
   $ cmake . -Bbuild    # 在 build 文件夹下，生成对应的 DaoGraph.sln 文件
   ```
 
 * MacOS环境中，使用`Xcode`作为IDE的开发者，安装cmake之后，输入以下指令，即可生成`DaoGraph.xcodeproj`文件
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph
   $ mkdir build && cd build
   $ cmake .. -G Xcode    # 在 build 文件夹下，生成对应的 DaoGraph.xcodeproj 文件
@@ -25,7 +25,7 @@
 
 * Cmake编译方式(Linux/MacOS/Windows)
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph
   $ cmake . -Bbuild
   $ cd build && make -j8
@@ -34,7 +34,7 @@
 
 * Bazel编译方式(Linux/MacOS/Windows)
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph
   $ bazel build //tutorial/...              # 编译 tutorial路径下的所有targets
   $ bazel run //tutorial:T00-HelloDaoGraph    # 运行 T00-HelloDaoGraph
@@ -42,13 +42,13 @@
 
 * Xmake编译方式(Linux/MacOS/Windows)
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph
   $ xmake build                             # 编译 tutorial 中的所有项目
   $ xmake run T00-HelloDaoGraph               # 运行 T00-HelloDaoGraph
   ```
 
-* 提供online版本的编译调试环境，点击进入页面：[DaoGraph env online](https://gitpod.io/#/github.com/ChunelFeng/DaoGraph) ，通过github账号登录。进入后，输入以下指令，即可编译通过，并查看执行结果
+* 提供online版本的编译调试环境，点击进入页面：[DaoGraph env online](https://gitpod.io/#/github.com/Xiechuxi/DaoGraph) ，通过github账号登录。进入后，输入以下指令，即可编译通过，并查看执行结果
   ```shell
   $ sudo apt-get install cmake -y           # 安装cmake
   $ ./DaoGraph-build.sh                       # 编译DaoGraph工程，生成的内容在同级/build/文件夹中
@@ -67,7 +67,7 @@
   Include(FetchContent)
   FetchContent_Declare(
     DaoGraph
-    GIT_REPOSITORY https://github.com/ChunelFeng/DaoGraph.git
+    GIT_REPOSITORY https://github.com/Xiechuxi/DaoGraph.git
     GIT_TAG main
     GIT_SHALLOW true
   )
@@ -89,7 +89,7 @@
 * 通过源码安装(Linux/MacOS/Windows)，使用前需要提前安装`python3` `pybind11`和`setuptools`
   * 通过生成`.whl`文件安装（推荐）
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph/python                       # 进入对应文件夹
   $ python3 setup.py bdist_wheel           # 生成 *.whl 安装包
   $ pip3 install dist/pydaograph-xxx.whl     # 安装 *.whl 安装包，xxx 信息与版本和系统有关
@@ -97,7 +97,7 @@
   ```
   * 本地直接安装
   ```shell
-  $ git clone https://github.com/ChunelFeng/DaoGraph.git
+  $ git clone https://github.com/Xiechuxi/DaoGraph.git
   $ cd DaoGraph/python                       # 进入对应文件夹
   $ python3 setup.py install               # 安装 pydaograph
   $ python3 tutorial/T00-HelloDaoGraph.py    # 运行T00-HelloDaoGraph.py，并且在终端输出 Hello, pydaograph.
@@ -107,6 +107,6 @@
   ```shell
   $ uv init daograph_env              # 通过uv 创建一个名为 daograph_env 的环境
   $ cd daograph_env 
-  $ uv add "pydaograph @ git+https://github.com/ChunelFeng/DaoGraph.git@main#subdirectory=python" --marker "sys_platform == 'linux'"    # 添加 pydaograph 依赖
+  $ uv add "pydaograph @ git+https://github.com/Xiechuxi/DaoGraph.git@main#subdirectory=python" --marker "sys_platform == 'linux'"    # 添加 pydaograph 依赖
   $ python3 -c "import pydaograph"    # 验证 pydaograph 成功安装
   ```
