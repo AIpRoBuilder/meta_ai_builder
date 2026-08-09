@@ -1,4 +1,50 @@
-# PyDaoGraph JSON Workflow
+# PyDaoGraph
+
+## Install
+
+`pydaograph` is the Python wrapper for DaoGraph and is built from the sources in this repository.
+
+### Prerequisites
+
+- Python 3.8 or newer
+- `pip`
+- A C++ build toolchain
+
+Common toolchains:
+
+- macOS: Xcode Command Line Tools
+- Linux: `gcc` and `g++`
+- Windows: Visual Studio Build Tools
+
+### Install From Source
+
+From the repository root:
+
+```bash
+cd python
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install .
+```
+
+For development, install the package in editable mode instead:
+
+```bash
+cd python
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -e .
+```
+
+### Verify The Installation
+
+```bash
+python -c "from pydaograph import GPipeline; print('pydaograph installed')"
+```
+
+## JSON Workflow
 
 ## Example
 
