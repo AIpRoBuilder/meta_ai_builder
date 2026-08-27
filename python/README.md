@@ -7,35 +7,72 @@
 ### Prerequisites
 
 - Python 3.8 or newer
-- `pip`
+- `pip`, `uv`, or `poetry`
 - A C++ build toolchain
+- The matching CPython development headers for the interpreter that will build the extension
 
 Common toolchains:
 
 - macOS: Xcode Command Line Tools
-- Linux: `gcc` and `g++`
+- Linux: `gcc`, `g++`, and the Python development package for your interpreter such as `python3-devel` or `python3-dev`
 - Windows: Visual Studio Build Tools
 
-### Install From Source
+On Linux, the Python headers must match the interpreter version that is building the extension. For example, if you install with Python 3.11, make sure `Python.h` is provided by the corresponding system package before running `pip install`.
 
-From the repository root:
+### Install With pip
+
+Install directly from this repository:
 
 ```bash
-cd python
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install --upgrade pip
-python3 -m pip install .
+python3 -m pip install "git+https://github.com/AIpRoBuilder/meta_ai_builder.git@main#subdirectory=python"
+```
+
+Install from a local clone:
+
+```bash
+git clone https://github.com/AIpRoBuilder/meta_ai_builder.git
+cd meta_ai_builder
+python3 -m pip install ./python
 ```
 
 For development, install the package in editable mode instead:
 
 ```bash
-cd python
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install --upgrade pip
-python3 -m pip install -e .
+git clone https://github.com/AIpRoBuilder/meta_ai_builder.git
+cd meta_ai_builder
+python3 -m pip install -e ./python
+```
+
+### Install With uv
+
+Add `pydaograph` to an existing `uv` project:
+
+```bash
+uv add "pydaograph @ git+https://github.com/AIpRoBuilder/meta_ai_builder.git@main#subdirectory=python"
+```
+
+Install from a local clone into the active environment:
+
+```bash
+git clone https://github.com/AIpRoBuilder/meta_ai_builder.git
+cd meta_ai_builder
+uv pip install ./python
+```
+
+### Install With poetry
+
+Add `pydaograph` as a Poetry dependency:
+
+```bash
+poetry add "git+https://github.com/AIpRoBuilder/meta_ai_builder.git#subdirectory=python"
+```
+
+Install from a local clone:
+
+```bash
+git clone https://github.com/AIpRoBuilder/meta_ai_builder.git
+cd meta_ai_builder
+poetry add ./python
 ```
 
 ### Verify The Installation
@@ -89,15 +126,14 @@ pipeline.process()
 
 ## Guide
 
-1. Run the example from the `python` directory:
-
-```bash
-python tutorial/T30-JSON.py
-```
-
-2. Example files are available in [tutorial/json_examples/example1.json](tutorial/json_examples/example1.json) and [tutorial/T30-JSON.py](tutorial/T30-JSON.py).
+1. Load a JSON file with `buildFromJson` or a JSON string with `buildFromJsonStr`, as shown above.
+2. A sample JSON file is available in [tutorial/example.json](tutorial/example.json).
 3. The JSON root must contain a `nodes` array.
 4. Each node requires `name` and `type`.
 5. Optional fields include `meta_type`, `loop`, and `depends`.
 6. `meta_type` defaults to `GNode` when omitted.
 7. When `meta_type` is `GCondition`, `connect_elements` is required and should be an array of internal branch elements.
+
+## License
+
+`pydaograph` is released under the Apache License 2.0. See [../LICENSE](../LICENSE).

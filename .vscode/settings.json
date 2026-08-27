@@ -20,5 +20,6 @@
     },
     "python.analysis.extraPaths": [
         "./python/llm/gpt_"
-    ]
+    ],
+    "python-envs.defaultEnvManager": "ms-python.python:system"
 }
