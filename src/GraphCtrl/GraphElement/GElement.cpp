@@ -9,10 +9,6 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#if !defined(_WIN32)
-#include <sys/select.h>
-#include <unistd.h>
-#endif
 
 #include "GElement.h"
 #include "../GraphPipeline/_GPerf/GPerfInclude.h"
@@ -20,21 +16,7 @@
 DAOGRAPH_NAMESPACE_BEGIN
 
 namespace {
-std::mutex DAOGRAPH_G_INPUT_MUTEX;
-
-CBool hasStdinInputReady() {
-#if defined(_WIN32)
-    auto* buf = std::cin.rdbuf();
-    return buf && buf->in_avail() > 0;
-#else
-    fd_set read_fds;
-    FD_ZERO(&read_fds);
-    FD_SET(STDIN_FILENO, &read_fds);
-    timeval timeout { 0, 0 };
-    CInt ready = select(STDIN_FILENO + 1, &read_fds, nullptr, nullptr, &timeout);
-    return ready > 0 && FD_ISSET(STDIN_FILENO, &read_fds);
-#endif
-}
+const CMSec WAIT_FUNC_POLL_INTERVAL_MS = 10;
 }
 
 GElement::~GElement() {
@@ -124,23 +106,9 @@ GElementPtr GElement::setMacro(CBool macro) {
 }
 
 
-GElementPtr GElement::setWaitForInput(CBool enable) {
+GElementPtr GElement::setWaitFunc(const GWaitFunc& func) {
     DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    wait_for_input_ = enable;
-    return this;
-}
-
-
-GElementPtr GElement::setInputPrompt(const std::string& prompt) {
-    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    input_prompt_ = prompt;
-    return this;
-}
-
-
-GElementPtr GElement::setInputHandler(const GInputHandler& handler) {
-    DAOGRAPH_ASSERT_INIT_THROW_ERROR(false)
-    input_handler_ = handler;
+    wait_func_ = func;
     return this;
 }
 
@@ -290,7 +258,7 @@ CStatus GElement::fatProcessor(const CFunctionType& type) {
 
                 for (CSize i = 0; i < this->loop_ && status.isOK() && GElementState::NORMAL == this->getCurState(); i++) {
                     checkSuspend();
-                    status = waitForInput();
+                    status = waitForFunc();
                     DAOGRAPH_FUNCTION_CHECK_STATUS
 
                     /** 执行带切面的run方法 */
@@ -346,22 +314,6 @@ CStatus GElement::prepareRun() {
 
 CStatus GElement::checkRunResult() {
     DAOGRAPH_EMPTY_FUNCTION
-}
-
-
-CStatus GElement::onInput(const std::string& input) {
-    (void) input;
-    DAOGRAPH_EMPTY_FUNCTION
-}
-
-
-CStatus GElement::onInputs(const std::vector<std::string>& inputs) {
-    DAOGRAPH_FUNCTION_BEGIN
-    for (const auto& input : inputs) {
-        status += onInput(input);
-        DAOGRAPH_FUNCTION_CHECK_STATUS
-    }
-    DAOGRAPH_FUNCTION_END
 }
 
 
@@ -648,53 +600,31 @@ CStatus GElement::checkSuitable() {
 }
 
 
-CStatus GElement::waitForInput() {
+CStatus GElement::waitForFunc() {
     DAOGRAPH_FUNCTION_BEGIN
-    if (!wait_for_input_) {
+    if (!wait_func_) {
         DAOGRAPH_FUNCTION_END
     }
 
-    DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(GElementState::CANCEL == getCurState(),
-                                              "[" + this->getName() + "] canceled before waiting input")
-
-    const std::string prompt = input_prompt_.empty()
-                               ? "[DaoGraph] input for [" + this->getName() + "]: "
-                               : input_prompt_;
-    CBool prompt_printed = false;
-    std::string input;
-
     while (true) {
         DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(GElementState::CANCEL == getCurState(),
-                                                  "[" + this->getName() + "] canceled while waiting input")
+                                                  "[" + this->getName() + "] canceled while waiting")
 
         checkSuspend();
 
-        CBool has_input = false;
-        input.clear();
-
-        std::lock_guard<std::mutex> lock(DAOGRAPH_G_INPUT_MUTEX);
-        if (!prompt_printed) {
-            std::cout << prompt << std::flush;
-            prompt_printed = true;
+        CBool ready = false;
+        try {
+            ready = wait_func_();
+        } catch (const std::exception& ex) {
+            // 用户函数(如 python 回调)的异常不一定继承自 CException，统一转成错误状态
+            DAOGRAPH_RETURN_ERROR_STATUS("[" + this->getName() + "] wait func error: " + ex.what())
         }
 
-        if (hasStdinInputReady()) {
-            DAOGRAPH_RETURN_ERROR_STATUS_BY_CONDITION(!std::getline(std::cin, input),
-                                                      "[" + this->getName() + "] read user input failed")
-            has_input = true;
-        }
-
-        if (has_input) {
+        if (ready) {
             break;
         }
 
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
-    }
-
-    if (input_handler_) {
-        status = input_handler_(input);
-    } else {
-        status = onInput(input);
+        std::this_thread::sleep_for(std::chrono::milliseconds(WAIT_FUNC_POLL_INTERVAL_MS));
     }
 
     DAOGRAPH_FUNCTION_END

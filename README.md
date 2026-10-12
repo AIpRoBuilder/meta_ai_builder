@@ -136,7 +136,7 @@ if __name__ == '__main__':
 ## 三. 使用指引
 
 1. 阅读 [COMPILE.md](COMPILE.md) 查看 C++ 构建、集成与环境准备。
-2. 运行 `./DaoGraph-run-tutorials.sh`，按顺序查看 [tutorial](tutorial) 下的 `T00` 到 `T30` 教程示例。
+2. 运行 `./DaoGraph-run-tutorials.sh`，按顺序查看 [tutorial](tutorial) 下的 `T00` 到 `T31` 教程示例。
 3. 运行 `./DaoGraph-run-examples.sh`，查看 [example](example) 下的 `E01` 到 `E05` 示例。
 4. 使用 Python 接口时，进入 [python](python) 目录，阅读 [python/README.md](python/README.md)，并运行 `./pydaograph-run-tutorials.sh`。
 5. 需要查看核心接口时，可从 [src/DaoGraph.h](src/DaoGraph.h) 和 [src](src) 开始。

@@ -30,14 +30,6 @@
         PYBIND11_OVERLOAD(CStatus, PCGE, checkRunResult);   \
     }                                                       \
                                                             \
-    CStatus onInput(const std::string& input) override {    \
-        PYBIND11_OVERLOAD(CStatus, PCGE, onInput, input);   \
-    }                                                       \
-                                                            \
-    CStatus onInputs(const std::vector<std::string>& inputs) override {   \
-        PYBIND11_OVERLOAD(CStatus, PCGE, onInputs, inputs); \
-    }                                                       \
-                                                            \
     std::string getClassName() const override {             \
         const auto& n = this->getName();                    \
         if (!n.empty()) {                                   \

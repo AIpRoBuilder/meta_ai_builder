@@ -32,7 +32,7 @@ struct GPerfInfo;
 class GElement : public GElementObject,
                  public CDescInfo {
 public:
-    using GInputHandler = std::function<CStatus(const std::string&)>;
+    using GWaitFunc = std::function<CBool()>;
 
     /**
      * 实现添加切面的逻辑
@@ -132,25 +132,12 @@ public:
     GElement* setMacro(CBool macro);
 
     /**
-     * 设定当前element在run前是否等待用户输入
-     * @param enable
+     * 设定当前element每次run前等待的函数，轮询该函数直到返回 true 才继续执行
+     * @param func 传入 nullptr 表示不等待
      * @return
+     * @notice 等待期间支持 cancel 和 suspend。func 抛出异常时，element 返回错误状态
      */
-    GElement* setWaitForInput(CBool enable = true);
-
-    /**
-     * 设定当前element等待输入时的提示信息
-     * @param prompt
-     * @return
-     */
-    GElement* setInputPrompt(const std::string& prompt);
-
-    /**
-     * 设定当前element处理输入的回调
-     * @param handler
-     * @return
-     */
-    GElement* setInputHandler(const GInputHandler& handler);
+    GElement* setWaitFunc(const GWaitFunc& func);
 
     /**
      * 当前element是否是一个 group逻辑
@@ -279,20 +266,6 @@ protected:
      * @notice 不建议在异步element中使用
      */
     virtual CStatus checkRunResult();
-
-    /**
-     * 当前element收到输入后的处理逻辑，默认不做处理
-     * @param input
-     * @return
-     */
-    virtual CStatus onInput(const std::string& input);
-
-    /**
-     * 当前element收到多输入后的处理逻辑，默认逐个调用 onInput
-     * @param inputs
-     * @return
-     */
-    virtual CStatus onInputs(const std::vector<std::string>& inputs);
 
     /**
      * 是否持续进行
@@ -433,10 +406,10 @@ private:
     CStatus fatProcessor(const CFunctionType& type);
 
     /**
-     * 如果配置了输入等待，则阻塞等待输入并处理
+     * 如果配置了等待函数，则阻塞轮询，直到该函数返回 true
      * @return
      */
-    CStatus waitForInput();
+    CStatus waitForFunc();
 
     /**
      * 设置线程池信息
@@ -567,9 +540,7 @@ private:
     CMSec timeout_ { DAOGRAPH_DEFAULT_ELEMENT_TIMEOUT };                        // 超时时间信息（0表示不计算超时）
     GElementTimeoutStrategy timeout_strategy_ { GElementTimeoutStrategy::AS_ERROR };    // 判定超时的情况下，是否返回错误
     CBool is_marco_ { false };                                                // 微任务
-    CBool wait_for_input_ { false };                                          // 是否在run前等待用户输入
-    std::string input_prompt_ {};                                             // 等待输入时提示信息
-    GInputHandler input_handler_ { nullptr };                                 // 输入处理回调
+    GWaitFunc wait_func_ { nullptr };                                         // run前轮询的等待函数，返回true才继续执行
 
     /** 执行期间相关信息 */
     GElementParamMap local_params_;                                           // 用于记录当前element的内部参数

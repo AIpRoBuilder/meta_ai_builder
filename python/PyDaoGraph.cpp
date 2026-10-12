@@ -326,12 +326,8 @@ PYBIND11_MODULE(_core, cg) {
              py::arg("visible"))
         .def("setMacro", &GElement::setMacro,
              py::arg("macro"))
-        .def("setWaitForInput", &GElement::setWaitForInput,
-             py::arg("enable") = true)
-        .def("setInputPrompt", &GElement::setInputPrompt,
-             py::arg("prompt"))
-        .def("setInputHandler", &GElement::setInputHandler,
-             py::arg("handler"))
+        .def("setWaitFunc", &GElement::setWaitFunc,
+             py::arg("func"))
         .def("setTimeout", &GElement::setTimeout,
              py::arg("timeout"),
              py::arg("strategy") = GElementTimeoutStrategy::AS_ERROR)

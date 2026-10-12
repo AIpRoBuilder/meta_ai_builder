@@ -2,15 +2,20 @@
 
 @File: test-functional-06.cpp
 @Time: 2026/4/8
-@Desc: 验证 setWaitForInput 接口可配置并正常继续执行
+@Desc: 验证 setWaitFunc 接口可配置，等待函数返回true后正常继续执行
 ***************************/
+
+#include <atomic>
 
 #include "../_Materials/TestInclude.h"
 
 using namespace DaoGraph;
 
 namespace {
+const int WAIT_TRUE_AT_CALL = 3;
+std::atomic<int> g_wait_calls { 0 };
 CBool g_image_node_ran = false;
+CBool g_ran_after_wait = false;
 CBool g_downstream_ran = false;
 }
 
@@ -18,6 +23,7 @@ class TestImageUploadNode : public GNode {
 public:
     CStatus run() override {
         g_image_node_ran = true;
+        g_ran_after_wait = g_wait_calls.load() >= WAIT_TRUE_AT_CALL;
         return CStatus();
     }
 };
@@ -31,7 +37,9 @@ public:
 };
 
 void test_functional_06() {
+    g_wait_calls = 0;
     g_image_node_ran = false;
+    g_ran_after_wait = false;
     g_downstream_ran = false;
 
     CStatus status;
@@ -48,16 +56,19 @@ void test_functional_06() {
         return;
     }
 
-    upload_node->setWaitForInput(false);
+    upload_node->setWaitFunc([] {
+        return ++g_wait_calls >= WAIT_TRUE_AT_CALL;
+    });
 
     status = pipeline->process();
     if (status.isErr()) {
         DAOGRAPH_ECHO("test-functional-06 process failed, err = [%s]", status.getInfo().c_str());
     }
 
-    if (!g_image_node_ran || !g_downstream_ran) {
-        DAOGRAPH_ECHO("test-functional-06 failed, image node ran = [%d], downstream ran = [%d]",
+    if (!g_image_node_ran || !g_ran_after_wait || !g_downstream_ran) {
+        DAOGRAPH_ECHO("test-functional-06 failed, image node ran = [%d], ran after wait = [%d], downstream ran = [%d]",
                       g_image_node_ran,
+                      g_ran_after_wait,
                       g_downstream_ran);
     }
 

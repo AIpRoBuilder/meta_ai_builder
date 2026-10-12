@@ -15,25 +15,11 @@ DAOGRAPH_NAMESPACE_BEGIN
 class GNode : public GElement {
 public:
     /**
-     * 开启/关闭run前等待输入
-     * @param enable
+     * 设置run前等待的函数，返回 true 才继续执行
+     * @param func
      * @return
      */
-    GNode* setWaitForInput(CBool enable = true);
-
-    /**
-     * 设置等待输入提示信息
-     * @param prompt
-     * @return
-     */
-    GNode* setInputPrompt(const std::string& prompt);
-
-    /**
-     * 设置输入处理回调
-     * @param handler
-     * @return
-     */
-    GNode* setInputHandler(const GInputHandler& handler);
+    GNode* setWaitFunc(const GWaitFunc& func);
 
 protected:
     /**
@@ -55,13 +41,6 @@ protected:
      * @return
      */
     CStatus spawn(const UTaskGroup& tasks, CMSec ttl = DAOGRAPH_MAX_BLOCK_TTL);
-
-    /**
-     * 子类可重载，定义收到输入后的处理逻辑
-     * @param input
-     * @return
-     */
-    CStatus onInput(const std::string& input) override;
 
 private:
     GNodeType node_type_ { GNodeType::BASIC };                    // 节点类型

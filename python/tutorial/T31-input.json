@@ -1,1 +1,15 @@
-skip
+{"nodes": [
+        {"name": "writeNodeA",  "type": "WriteParamNode",  "loop": 1},
+        {"name": "conditionB",  "type": "MyCondition",     "meta_type": "GCondition",
+         "depends": ["writeNodeA"]},
+        {"name": "b0",          "type": "BranchNode",      "depends": ["conditionB"]},
+        {"name": "b1",          "type": "BranchNode",      "depends": ["conditionB"]},
+        {"name": "b2",          "type": "BranchNode",      "depends": ["conditionB"]},
+        {"name": "readNodeC",   "type": "ReadParamNode",   "depends": ["conditionB"]},
+        {"name": "conditionD",  "type": "MyCondition",     "meta_type": "GCondition",
+         "depends": ["readNodeC"]},
+        {"name": "d0",          "type": "BranchNode",      "depends": ["conditionD"]},
+        {"name": "d1",          "type": "BranchNode",      "depends": ["conditionD"]},
+        {"name": "d2",          "type": "BranchNode",      "depends": ["conditionD"]},
+    ]
+}

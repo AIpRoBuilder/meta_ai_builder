@@ -1,0 +1,15 @@
+{
+    "nodes": [
+        {
+            "name": "double_values",
+            "type": "ConcurrentRequestDoubleNode",
+            "loop": 1
+        },
+        {
+            "name": "build_response",
+            "type": "ConcurrentRequestResultNode",
+            "depends": ["double_values"],
+            "loop": 1
+        }
+    ]
+}

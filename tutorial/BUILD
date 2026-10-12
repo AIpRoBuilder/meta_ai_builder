@@ -42,6 +42,7 @@ DAOGRAPH_TUTORIAL_LIST = [
          "T28-Stage",
          "T29-Storage",
          "T30-InputWait",
+         "T31-Debug",
         ]
 
 [

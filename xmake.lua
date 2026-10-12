@@ -47,6 +47,7 @@ tutorial_list = {
     "T28-Stage",
     "T29-Storage",
     "T30-InputWait",
+    "T31-Debug",
 }
 
 -- add tutorial target one by one

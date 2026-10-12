@@ -21,20 +21,8 @@ GNodePtr GNode::setType(const GNodeType& type) {
 }
 
 
-GNodePtr GNode::setWaitForInput(CBool enable) {
-    GElement::setWaitForInput(enable);
-    return this;
-}
-
-
-GNodePtr GNode::setInputPrompt(const std::string& prompt) {
-    GElement::setInputPrompt(prompt);
-    return this;
-}
-
-
-GNodePtr GNode::setInputHandler(const GInputHandler& handler) {
-    GElement::setInputHandler(handler);
+GNodePtr GNode::setWaitFunc(const GWaitFunc& func) {
+    GElement::setWaitFunc(func);
     return this;
 }
 
@@ -46,11 +34,6 @@ CStatus GNode::spawn(const UTaskGroup& tasks, CMSec ttl) {
 
     status = thread_pool_->submit(tasks, ttl);
     DAOGRAPH_FUNCTION_END
-}
-
-
-CStatus GNode::onInput(const std::string& input) {
-    return GElement::onInput(input);
 }
 
 DAOGRAPH_NAMESPACE_END
