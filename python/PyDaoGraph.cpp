@@ -15,6 +15,57 @@
 using namespace DaoGraph;
 namespace py = pybind11;
 
+namespace {
+void retainOwnedJsonNodes(GPipeline& pipeline, const py::list& candidates) {
+     py::list ownedNodes;
+     for (const auto& node : candidates) {
+          if (pipeline.__ownsGElement_4py(node.cast<GElementPtr>())) {
+               ownedNodes.append(node);
+          }
+     }
+     if (py::len(ownedNodes) != 0) {
+          py::detail::keep_alive_impl(py::cast(&pipeline, py::return_value_policy::reference), ownedNodes);
+     }
+}
+
+CStatus buildJsonWithNodeClasses(GPipeline& pipeline, const std::string& source,
+                                         const py::dict& nodeClasses, bool fromFile) {
+     GPipeline::GNodeClassMap constructors;
+     py::list nodes;
+     for (const auto& entry : nodeClasses) {
+          const std::string name = py::cast<std::string>(entry.first);
+          py::object nodeClass = py::reinterpret_borrow<py::object>(entry.second);
+          if (!PyCallable_Check(nodeClass.ptr())) {
+               throw py::type_error("nodeClasses['" + name + "'] must be a class or callable");
+          }
+          constructors.emplace(name, [nodeClass, nodes, name]() mutable -> GElementPtr {
+               py::gil_scoped_acquire acquire;
+               py::object node = nodeClass();
+               if (!py::isinstance<GElement>(node)) {
+                    throw py::type_error("nodeClasses['" + name + "'] must construct a GElement");
+               }
+               // Retain the actual Python instances, not just their classes, so
+               // trampoline overrides survive after the constructor returns.
+               nodes.append(node);
+               return node.cast<GElementPtr>();
+          });
+     }
+     CStatus result;
+     try {
+          py::gil_scoped_release release;
+          result = fromFile ? pipeline.buildFromJson(source, constructors)
+                            : pipeline.buildFromJsonStr(source, constructors);
+     } catch (...) {
+          retainOwnedJsonNodes(pipeline, nodes);
+          throw;
+     }
+     // Retain accepted nodes even on a build error, but never foreign nodes
+     // rejected by C++: their owner's deletion must not leave a stale wrapper.
+     retainOwnedJsonNodes(pipeline, nodes);
+     return result;
+}
+}  // namespace
+
 PYBIND11_MODULE(_core, cg) {
     cg.doc() = "DaoGraph with python api";
     py::class_<UThreadPoolConfig>(cg, "UThreadPoolConfig")
@@ -180,12 +231,22 @@ PYBIND11_MODULE(_core, cg) {
              py::arg("ptr"),
              py::call_guard<py::gil_scoped_release>(),
              py::keep_alive<1, 2>())
-        .def("buildFromJson", &GPipeline::buildFromJson,
+     .def("buildFromJson", static_cast<CStatus (GPipeline::*)(const std::string&)>(&GPipeline::buildFromJson),
              py::arg("jsonPath"),
              py::call_guard<py::gil_scoped_release>())
-        .def("buildFromJsonStr", &GPipeline::buildFromJsonStr,
+        .def("buildFromJson", [](GPipeline& self, const std::string& jsonPath,
+                                 const py::dict& nodeClasses) {
+                 return buildJsonWithNodeClasses(self, jsonPath, nodeClasses, true);
+             }, py::arg("jsonPath"), py::arg("nodeClasses"),
+             "Build from a JSON file and a dict mapping node names to classes or zero-argument factories.")
+     .def("buildFromJsonStr", static_cast<CStatus (GPipeline::*)(const std::string&)>(&GPipeline::buildFromJsonStr),
              py::arg("jsonStr"),
              py::call_guard<py::gil_scoped_release>())
+        .def("buildFromJsonStr", [](GPipeline& self, const std::string& jsonStr,
+                                    const py::dict& nodeClasses) {
+                 return buildJsonWithNodeClasses(self, jsonStr, nodeClasses, false);
+             }, py::arg("jsonStr"), py::arg("nodeClasses"),
+             "Build from JSON text and a dict mapping node names to classes or zero-argument factories.")
         .def("collectNodeChildren",
              [](GPipeline& self, const std::string& jsonPath)
              -> std::pair<CStatus, std::unordered_map<std::string, std::vector<std::string>>> {

@@ -30,6 +30,8 @@ DAOGRAPH_NAMESPACE_BEGIN
 class GPipeline : public GPipelineObject,
                   public CDescInfo {
 public:
+        using GNodeClassMap = std::unordered_map<std::string, GElement::GElementCreator>;
+
     CStatus init() override;
 
     CStatus run() override;
@@ -225,8 +227,22 @@ public:
                           const std::string &name = DAOGRAPH_EMPTY,
                           CSize loop = DAOGRAPH_DEFAULT_LOOP_TIMES);
 
-    CStatus buildFromJson(const std::string& jsonPath);
-    CStatus buildFromJsonStr(const std::string& jsonStr);
+        /** Load a JSON file using the global registry and each node's "type". */
+        CStatus buildFromJson(const std::string& jsonPath);
+
+        /**
+         * Load a JSON file using node name -> constructor mappings.
+         * Each constructor must return a fresh element; ownership transfers to this
+         * pipeline. Every JSON node must have a mapping, including condition groups
+         * and their branches. The JSON "type" field is not required in this mode.
+         */
+        CStatus buildFromJson(const std::string& jsonPath, const GNodeClassMap& nodeClasses);
+
+        /** Parse a JSON string using the global registry and each node's "type". */
+        CStatus buildFromJsonStr(const std::string& jsonStr);
+
+        /** Same as buildFromJson(jsonPath, nodeClasses), but accepts JSON text. */
+        CStatus buildFromJsonStr(const std::string& jsonStr, const GNodeClassMap& nodeClasses);
 
     /**
      * Parse the graph JSON file at @jsonPath and populate @childrenMap with
@@ -465,6 +481,8 @@ protected:
     ~GPipeline() override;
 
 private:
+        CStatus buildFromJsonImpl(const std::string& jsonStr, const GNodeClassMap* nodeClasses);
+
     /**
      * 初始化环境信息，包括线程池 等
      * @return
@@ -503,6 +521,7 @@ private:
 public:
     CStatus __registerGElement_4py(GElementPtr element, const GElementPtrSet &depends,
                                    const std::string &name, CSize loop);
+        CBool __ownsGElement_4py(GElementPtr element) const;
     GPipeline* __addGEvent_4py(GEventPtr event, const std::string& key);
     GPipeline* __addGDaemon_4py(GDaemonPtr daemon, CMSec ms);
     GPipeline* __addGStage_4py(GStagePtr stage, const std::string& key, CInt threshold);

@@ -83,56 +83,80 @@ python -c "from pydaograph import GPipeline; print('pydaograph installed')"
 
 ## JSON Workflow
 
-## Example
+### Example
 
 `GPipeline` supports two JSON-loading APIs:
 
-- `buildFromJson(jsonPath)`: load and parse from a JSON file path.
-- `buildFromJsonStr(jsonStr)`: parse directly from a JSON string.
+- `buildFromJsonStr(jsonStr, nodeClasses)`: parse a JSON string and construct nodes
+  from a dictionary mapping **JSON node names** to Python classes.
+- `buildFromJson(jsonPath, nodeClasses)`: load a JSON file with the same dictionary.
+
+Classes are called with no arguments. Each call must create a fresh `GElement`
+(normally a `GNode` or `GCondition` subclass). Use a zero-argument factory such as
+`lambda: MyNode(config)` when constructor arguments are needed. Neither global
+registration nor `clone()` is required. The pipeline retains the Python node
+instances for its lifetime, including their overrides and instance attributes.
 
 ```python
-from pydaograph import GPipeline
+import json
+from pydaograph import CStatus, GNode, GPipeline
+
+class MyNode(GNode):
+    def run(self):
+        print(self.getName())
+        return CStatus()
+
+graph_json_str = json.dumps({
+    "nodes": [
+        {"name": "A"},
+        {"name": "B", "depends": ["A"], "loop": 2}
+    ]
+})
+node_classes = {"A": MyNode, "B": MyNode}
 
 pipeline = GPipeline()
+status = pipeline.buildFromJsonStr(graph_json_str, node_classes)
+if status.isErr():
+    raise RuntimeError(status.getInfo())
 
-graph_json_str = '''
-{
-    "nodes": [
-        {"name": "A", "type": "MyNode", "meta_type": "GNode", "loop": 1},
-        {
-            "name": "conditionB",
-            "type": "MyCondition",
-            "meta_type": "GCondition",
-            "depends": ["A"],
-            "loop": 1,
-            "connect_elements": [
-                {"name": "conditionNodeB0", "type": "MyNode1", "loop": 1},
-                {"name": "conditionNodeB1", "type": "MyNode2", "loop": 1},
-                {"name": "conditionNodeB2", "type": "MyNode1", "loop": 1}
-            ]
-        },
-        {"name": "C", "type": "MyNode", "meta_type": "GNode", "depends": ["conditionB"], "loop": 1}
-    ]
-}
-'''
-
-pipeline.buildFromJsonStr(graph_json_str)
-
-# Or parse from a JSON file path.
-# pipeline.buildFromJson("/path/to/graph.json")
-
-pipeline.process()
+status = pipeline.process()  # init, run, destroy
+if status.isErr():
+    raise RuntimeError(status.getInfo())
 ```
 
-## Guide
+See [tutorial/TBuildFromJsonWithNodeClasses.py](tutorial/TBuildFromJsonWithNodeClasses.py)
+and its [JSON graph](tutorial/TBuildFromJsonWithNodeClasses.json) for a runnable
+example of both string and file loading.
+
+For asynchronous full-lifecycle execution, use `pipeline.asyncProcess()` and
+check the `CStatus` returned by the future's `get()` method. This initializes,
+runs, and destroys the pipeline, just like `process()`; do not call `destroy()`
+again. `asyncRun()` only runs an already initialized pipeline: call `init()`
+first, retrieve the result with `future.get()`, then call `destroy()` when no
+more runs are needed. Keep the pipeline alive until the future completes.
+
+The one-argument forms remain supported for existing code: `buildFromJson(jsonPath)`
+and `buildFromJsonStr(jsonStr)` resolve each node's `type` through the global
+`GElement` registry. Supplying a dictionary uses only that dictionary; it does
+not modify or fall back to the registry, and JSON `type` values are ignored.
+
+### Guide
 
 1. Load a JSON file with `buildFromJson` or a JSON string with `buildFromJsonStr`, as shown above.
-2. A sample JSON file is available in [tutorial/example.json](tutorial/example.json).
+2. Supply a class or factory for every node name, including condition groups and branches.
 3. The JSON root must contain a `nodes` array.
-4. Each node requires `name` and `type`.
+4. Each node requires a unique, nonempty `name`. `type` is required only for the legacy one-argument APIs.
 5. Optional fields include `meta_type`, `loop`, and `depends`.
 6. `meta_type` defaults to `GNode` when omitted.
-7. When `meta_type` is `GCondition`, `connect_elements` is required and should be an array of internal branch elements.
+7. When `meta_type` is `GCondition`, map its name to a `GCondition` subclass. Its
+   internal branches are other nodes whose `depends` arrays list the group's
+   name, in JSON declaration order. Downstream dependencies on a branch are
+   promoted to its owning condition group; branches are not run independently.
+
+The C++ overloads take `GPipeline::GNodeClassMap`, an
+`std::unordered_map<std::string, GElement::GElementCreator>`. Map node names to
+constructors such as `[]() -> GElement* { return new MyNode(); }`. The pipeline
+owns the resulting fresh elements, including those created before a build error.
 
 ### Concurrent Requests From One JSON Graph
 

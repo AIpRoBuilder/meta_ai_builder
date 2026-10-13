@@ -28,6 +28,7 @@ DAOGRAPH_NAMESPACE_BEGIN
 
 enum class GMultiConditionType;
 struct GPerfInfo;
+class GElementRepository;
 
 class GElement : public GElementObject,
                  public CDescInfo {
@@ -554,6 +555,7 @@ private:
     USmallVector<GElement *> run_before_ {};                                  // 被依赖的节点（后继）
     USmallVector<GElement *> dependence_ {};                                  // 依赖的节点信息（前驱）
     GElement* belong_ { nullptr };                                            // 从属的element 信息，如为nullptr，则表示从属于 pipeline
+    GElementRepository* owner_repository_ { nullptr };                       // 所属pipeline仓库（包含未注册的节点）
 
     /** 异步执行相关信息 */
     std::future<CStatus> async_result_;                                       // 用于记录当前节点的异步执行情况

@@ -13,7 +13,10 @@ DAOGRAPH_NAMESPACE_BEGIN
 
 CVoid GElementRepository::insert(GElementPtr ptr) {
     DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(ptr)
+    DAOGRAPH_THROW_EXCEPTION_BY_CONDITION(ptr->owner_repository_ && ptr->owner_repository_ != this,
+                                         "element already belongs to another pipeline")
     elements_.insert(ptr);
+    ptr->owner_repository_ = this;
 }
 
 
@@ -90,7 +93,7 @@ CVoid GElementRepository::fetchAll(GElementManagerCPtr em) {
 
 
 CVoid GElementRepository::fetch(GElementPtr element) {
-    elements_.insert(element);
+    insert(element);
     if (element->isGGroup()) {
         auto group = dynamic_cast<GGroupPtr>(element);
         DAOGRAPH_ASSERT_NOT_NULL_THROW_ERROR(group)

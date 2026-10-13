@@ -1,0 +1,7 @@
+{
+    "nodes": [
+        {"name": "start"},
+        {"name": "repeat", "depends": ["start"], "loop": 2},
+        {"name": "finish", "depends": ["repeat"]}
+    ]
+}
